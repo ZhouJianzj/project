@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zj.dao.UserDao">
+<mapper namespace="com.zj.dao.SysDao">
     <select id="userSelect" resultType="com.zj.entity.User">
     select id ,username,realname as realName,password,salt,
     avatar,birthday,sex,email,phone,

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
  * @author zhoujian
  */
 @Repository
-public interface UserDao {
+public interface SysDao {
     /**
      * 根据username和password查询用户
      */

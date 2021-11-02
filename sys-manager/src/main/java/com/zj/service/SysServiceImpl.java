@@ -1,10 +1,9 @@
 package com.zj.service;
 
-import com.zj.dao.UserDao;
+import com.zj.dao.SysDao;
 import com.zj.entity.User;
 import com.zj.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +16,9 @@ import java.security.NoSuchAlgorithmException;
  * @author zhoujian
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class SysServiceImpl implements SysService {
     @Autowired
-    private UserDao userDao;
+    private SysDao userDao;
 
     /**
      * 用户登录

@@ -34,7 +34,7 @@ public class User implements Serializable {
     private String workNo;
     private String post;
 
-    private String token;
+
 
 
 }

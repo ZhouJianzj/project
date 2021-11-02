@@ -2,7 +2,7 @@ package com.zj.web;
 
 import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.User;
-import com.zj.service.UserService;
+import com.zj.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("sys")
 
-public class UserController {
+public class SysController {
     @Autowired
-    private UserService userService;
+    private SysService userService;
 
     /**
      * 测试网关

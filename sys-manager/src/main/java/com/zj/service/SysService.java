@@ -7,6 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author zhoujian
  */
-public interface UserService {
+public interface SysService {
      User userLogin(User user, HttpServletRequest request);
 }
