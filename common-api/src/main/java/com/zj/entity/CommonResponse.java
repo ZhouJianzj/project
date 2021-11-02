@@ -1,4 +1,4 @@
-package com.zj.entities;
+package com.zj.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

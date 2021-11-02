@@ -1,6 +1,6 @@
 package com.zj.dao;
 
-import com.zj.entities.Log;
+import com.zj.entity.Log;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
