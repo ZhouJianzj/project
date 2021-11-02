@@ -5,8 +5,6 @@ import com.zj.entity.User;
 import com.zj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -14,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("sys")
-@IgnoreResponseAdvice
+
 public class UserController {
     @Autowired
     private UserService userService;
@@ -23,6 +21,7 @@ public class UserController {
      * 测试网关
      * @return
      */
+    @IgnoreResponseAdvice
     @RequestMapping("test")
     public String test(){
         return "test";

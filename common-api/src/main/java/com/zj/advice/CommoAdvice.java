@@ -3,22 +3,22 @@ package com.zj.advice;
 import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.dao.LogDao;
 import com.zj.entity.CommonResponse;
-import com.zj.entity.Log;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Date;
 
+;
 
+/**
+ * 设置统一的响应对象
+ */
 @RestControllerAdvice
 public class CommoAdvice implements ResponseBodyAdvice<Object> {
     @Resource
@@ -41,17 +41,30 @@ public class CommoAdvice implements ResponseBodyAdvice<Object> {
     }
 
     @Override
-    public Object beforeBodyWrite(Object body,
+    public Object beforeBodyWrite(Object o,
                                   MethodParameter methodParameter,
                                   MediaType mediaType,
                                   Class<? extends HttpMessageConverter<?>> aClass,
                                   ServerHttpRequest serverHttpRequest,
                                   ServerHttpResponse serverHttpResponse) {
 
-
-
-//
-//        System.out.println("========================已经进入advice");
+        System.out.println("========================已经进入advice");
+        //默认的响应对象
+        CommonResponse<Object> response = new CommonResponse<Object>(200,"");
+        if (null == o){
+            //没有就执行响应一个初始的响应
+            response.setMsg("没有响应参数");
+            return  response;
+        }else if ( o instanceof ResponseBody){
+            response.setMsg("success");
+            //如有已经是一个统一的响应对象了就转一下
+            response = (CommonResponse<Object>) o;
+        }else {
+            //如果是一个普通的数据对象，就传入统一响应对象中去
+            response.setMsg("success");
+            response.setData(o);
+        }
+        return response;
 //        ServletServerHttpRequest request = (ServletServerHttpRequest) serverHttpRequest;
 //        HttpServletRequest res = request.getServletRequest();
 //        //获取登录之后的共享用户对象的名字，（redis session 实现）
@@ -72,7 +85,7 @@ public class CommoAdvice implements ResponseBodyAdvice<Object> {
 
 //        ResponseEntity<Object> objectResponseEntity = new ResponseEntity<Object>(body,HttpStatus.ACCEPTED);
 //        return objectResponseEntity;
-        return body;
+//        return body;
     }
 
     /**
