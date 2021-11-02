@@ -12,6 +12,6 @@ public class UserManager implements Serializable {
     String password;
     String salt;
     String phone;
-    List<Role> roles;
     Organize o;
+    List<Role> roles;
 }

@@ -2,9 +2,14 @@ package com.zj.web;
 
 import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.User;
+import com.zj.entity.UserManager;
 import com.zj.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -32,7 +37,7 @@ public class SysController {
      * @return
      */
     @PostMapping("login")
-    public User userLoginController(@RequestBody User user, HttpServletRequest request){
+    public UserManager userLoginController(@RequestBody User user, HttpServletRequest request){
         System.out.println(user.toString());
         return userService.userLogin(user,request);
     }

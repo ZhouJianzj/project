@@ -1,6 +1,7 @@
 package com.zj.dao;
 
 import com.zj.entity.User;
+import com.zj.entity.UserManager;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,5 +12,5 @@ public interface SysDao {
     /**
      * 根据username和password查询用户
      */
-    User userSelect(User user);
+    UserManager userSelect(User user);
 }
