@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="10883b94-3334-43b4-8354-51cf1c7374fa" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="20LKSGxfJsajjY1oyncme9QYBhU" />
+  <component name="ProjectViewState">
+    <option name="abbreviatePackageNames" value="true" />
+    <option name="flattenModules" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../common-api" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RubyModuleManagerSettings">
+    <option name="blackListedRootsPaths">
+      <list>
+        <option value="$PROJECT_DIR$/../common-api" />
+        <option value="$PROJECT_DIR$/../gateway" />
+        <option value="$PROJECT_DIR$" />
+        <option value="$PROJECT_DIR$/../sys-manager" />
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.SysApplication">
+    <configuration name="GatewagApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.zj.gateway.GatewagApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SysApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="sys-manager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.zj.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.zj.SysApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.SysApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="10883b94-3334-43b4-8354-51cf1c7374fa" name="Default Changelist" comment="" />
+      <created>1635818425092</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635818425092</updated>
+      <workItem from="1635818426710" duration="988000" />
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="549" y="131" key="FileChooserDialogImpl" timestamp="1635818966658">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="549" y="131" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1635818966658" />
+    <state width="1493" height="160" key="GridCell.Tab.0.bottom" timestamp="1635819413793">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="160" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
+    <state width="1493" height="160" key="GridCell.Tab.0.center" timestamp="1635819413793">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="160" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
+    <state width="1493" height="160" key="GridCell.Tab.0.left" timestamp="1635819413793">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="160" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
+    <state width="1493" height="160" key="GridCell.Tab.0.right" timestamp="1635819413793">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="160" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
+    <state width="1493" height="160" key="GridCell.Tab.1.bottom" timestamp="1635819413793">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="160" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
+    <state width="1493" height="160" key="GridCell.Tab.1.center" timestamp="1635819413793">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="160" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
+    <state width="1493" height="160" key="GridCell.Tab.1.left" timestamp="1635819413793">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="160" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
+    <state width="1493" height="160" key="GridCell.Tab.1.right" timestamp="1635819413793">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="160" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
+    <state x="408" y="50" key="NewModule_or_Project.wizard" timestamp="1635818967861">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="408" y="50" key="NewModule_or_Project.wizard/0.0.1536.864@0.0.1536.864" timestamp="1635818967861" />
+    <state x="249" y="7" key="SettingsEditor" timestamp="1635819042038">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="249" y="7" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1635819042038" />
+  </component>
+</project>
