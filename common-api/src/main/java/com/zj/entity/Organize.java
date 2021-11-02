@@ -31,5 +31,7 @@ public class Organize implements Serializable {
     
     private String ext;
 
+    private OrgaType orgaType;
+
 
 }

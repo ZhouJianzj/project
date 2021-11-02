@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * (TUser)实体类
  *
- * @author makejava
+ * @author zhoujian
  * @since 2021-11-02 22:08:03
  */
 @Data

@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * (TPerms)实体类
  *
- * @author makejava
+ * @author zhoujian
  * @since 2021-11-02 22:30:59
  */
 

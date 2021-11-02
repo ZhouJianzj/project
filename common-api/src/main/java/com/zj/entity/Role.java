@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * (TRole)实体类
  *
- * @author makejava
+ * @author zhoujian
  * @since 2021-11-02 22:06:51
  */
 @Data

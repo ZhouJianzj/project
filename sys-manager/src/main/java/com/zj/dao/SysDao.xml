@@ -47,4 +47,9 @@
         where
             u.username = #{username} and  u.password= #{password}
     </select>
+
+<!--    机构查询根据机构名称模糊查询，支持分页，page-->
+    <select id="organizeSelect" resultType="com.zj.entity.Organize">
+
+    </select>
 </mapper>
