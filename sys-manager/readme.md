@@ -12,23 +12,46 @@
 >
 >   响应：
     ```{
-                  "status": 200,
-                  "msg": "success",
-                  "data": {
-                      "id": "e9ca23d68d884d4ebb19d07889727dae",
-                      "username": "admin",
-                      "realName": "管理员",
-                      "password": "ICy5YqxZB1uWSwcVLSNLcA==",
-                      "salt": "RCGTeGiH",
-                      "avatar": "http://minio.jeecg.com/otatest/temp/lgo33_1583397323099.png",
-                      "birthday": "2018-12-04T16:00:00.000+0000",
-                      "sex": true,
-                      "email": "jeecg@163.com",
-                      "phone": "18611111111",
-                      "orgCode": "A01",
-                      "workNo": "00001",
-                      "post": "总经理",
-                      "token": null
+                  {
+                      "status": 200,
+                      "msg": "success",
+                      "data": {
+                          "id": 1,
+                          "username": "admin",
+                          "password": "123",
+                          "salt": null,
+                          "phone": "13999999912",
+                          "o": {
+                              "id": 1,
+                              "name": null,
+                              "parentId": null,
+                              "typeId": null,
+                              "location": null,
+                              "orgaNumber": null,
+                              "ext": null
+                          },
+                          "roles": [
+                              {
+                                  "id": null,
+                                  "name": "superManager",
+                                  "ext": "超级管理员",
+                                  "perms": [
+                                      {
+                                          "id": null,
+                                          "name": "sys:*:*"
+                                      },
+                                      {
+                                          "id": null,
+                                          "name": "work:*:*"
+                                      },
+                                      {
+                                          "id": null,
+                                          "name": "model:*:*"
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
                   }
     }```
 
