@@ -1,6 +1,7 @@
 package com.zj.dao;
 
 import com.zj.entity.Organize;
+import com.zj.entity.Role;
 import com.zj.entity.User;
 import com.zj.entity.UserManager;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,10 @@ public interface SysDao {
      * @return
      */
     boolean organizeInsert(Organize organize);
+
+    /**
+     * 查询角色，支持模糊查询
+     * @return
+     */
+    List<Role> roleSelect();
 }

@@ -85,4 +85,9 @@
         values
         (#{name},#{parentId},#{typeId},#{location},#{orgaNumber},#{ext})
     </insert>
+
+<!--    查询角色-->
+    <select id="roleSelect" >
+
+    </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.zj.service;
 import com.github.pagehelper.PageHelper;
 import com.zj.dao.SysDao;
 import com.zj.entity.Organize;
+import com.zj.entity.Role;
 import com.zj.entity.User;
 import com.zj.entity.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +68,10 @@ public class SysServiceImpl implements SysService {
     @Override
     public boolean addOrganizeService(Organize organize) {
         return sysDao.organizeInsert(organize);
+    }
+
+    @Override
+    public List<Role> findRoleService() {
+        return sysDao.roleSelect();
     }
 }

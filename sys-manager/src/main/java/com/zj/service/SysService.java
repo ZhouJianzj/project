@@ -1,6 +1,7 @@
 package com.zj.service;
 
 import com.zj.entity.Organize;
+import com.zj.entity.Role;
 import com.zj.entity.User;
 import com.zj.entity.UserManager;
 
@@ -16,4 +17,6 @@ public interface SysService {
      List<Organize> findOrganzieService(String pageNo, String pageSize, String orgName);
 
     boolean addOrganizeService(Organize organize);
+
+    List<Role> findRoleService();
 }

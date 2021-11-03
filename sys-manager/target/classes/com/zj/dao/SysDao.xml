@@ -4,12 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.dao.SysDao">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <select id="userSelect" resultType="com.zj.entity.User">
     select id ,username,realname as realName,password,salt,
     avatar,birthday,sex,email,phone,
     org_code as orgCode,work_no as workNo,post
     from sys_user where username = #{username} and password = #{password}
 =======
+=======
+<!--    用户登录sql-->
+>>>>>>> 7d165e3c73b5e8a4400df30682b638b29bb77c39
     <resultMap id="user_map" type="com.zj.entity.UserManager">
 <!--        用户信息-->
         <id column="id" property="id"/>
@@ -54,4 +58,42 @@
             u.username = #{username} and  u.password= #{password}
 >>>>>>> 41fb7b8879d00dd530b7ffd5f0a57d89590d94dc
     </select>
+
+<!--    机构查询根据机构名称模糊查询，支持分页，page-->
+    <resultMap id="orga_type_map" type="com.zj.entity.Organize">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+<!--        公司的父公司-->
+        <result column="parentorganame" property="parentName"/>
+       <result column="location" property="location"/>
+        <result column="organum" property="orgaNumber"/>
+        <result column="ext" property="ext"/>
+<!--        公司的类型-->
+        <association property="orgaType" javaType="com.zj.entity.OrgaType">
+            <result column="orgatypename" property="name"/>
+        </association>
+    </resultMap>
+    <select id="organizeSelect" resultMap="orga_type_map" >
+    SELECT
+        o1.id,
+        o1.name,
+        o2.name as parentorganame,
+        ot.name as orgatypename,
+        o1.location,
+        o1.orga_number as organum,
+        o1.ext
+    FROM
+        organize o1
+        JOIN orga_type ot ON ot.id = o1.id
+        left join organize o2 on o2.id = o1.parent_id
+	where o1.name like concat(#{orgName},'%')
+    </select>
+
+<!--    机构插入-->
+    <insert id="organizeInsert" >
+        insert  into organize
+        (name , parent_id, type_id, location, orga_number, ext)
+        values
+        (#{name},#{parentId},#{typeId},#{location},#{orgaNumber},#{ext})
+    </insert>
 </mapper>
