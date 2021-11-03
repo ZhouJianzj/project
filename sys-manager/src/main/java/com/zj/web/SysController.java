@@ -121,6 +121,9 @@ public class SysController {
 
     }
 
-
+    @GetMapping("user/id")
+    public UserManager findUserIdController(String id){
+        return sysService.findUserIdService(id);
+    }
 
 }

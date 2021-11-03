@@ -63,8 +63,11 @@ public interface SysDao {
     boolean rolePermInsert(String roleId, String permId);
 
     /**
-     *
+     *查询用户通过关键字
      * @param key
      */
     List<UserManager> userKeySelect(String key);
+
+
+    UserManager userIdSelect(String id);
 }

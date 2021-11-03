@@ -28,4 +28,6 @@ public interface SysService {
     CommonResponse<Object> addRolePermService(String roleId, String permId);
 
     List<UserManager> finUserService(String key);
+
+    UserManager findUserIdService(String id);
 }

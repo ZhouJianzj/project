@@ -173,5 +173,10 @@ public class SysServiceImpl implements SysService {
         return sysDao.userKeySelect(key);
     }
 
+    @Override
+    public UserManager findUserIdService(String id) {
+        return sysDao.userIdSelect(id);
+    }
+
 
 }
