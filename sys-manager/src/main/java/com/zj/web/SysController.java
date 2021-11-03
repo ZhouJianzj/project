@@ -3,10 +3,13 @@ package com.zj.web;
 import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.*;
 import com.zj.service.SysService;
+import com.zj.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
