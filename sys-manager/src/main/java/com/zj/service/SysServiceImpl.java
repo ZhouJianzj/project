@@ -171,6 +171,11 @@ public class SysServiceImpl implements SysService {
         return sysDao.userKeySelect(key);
     }
 
+    /**
+     * 根据id查询所哟个用户
+     * @param id
+     * @return
+     */
     @Override
     public UserManager findUserIdService(String id) {
         return sysDao.userIdSelect(id);
