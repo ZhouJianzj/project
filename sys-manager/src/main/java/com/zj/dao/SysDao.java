@@ -5,6 +5,8 @@ import com.zj.entity.User;
 import com.zj.entity.UserManager;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author zhoujian
  */
@@ -19,5 +21,12 @@ public interface SysDao {
      *
      * 根据公司的名字模糊查询，使用到分页
      */
-    Organize organizeSelect(String pageNo,String orgName);
+    List<Organize> organizeSelect(String orgName);
+
+    /**
+     * 机构插入
+     * @param organize
+     * @return
+     */
+    boolean organizeInsert(Organize organize);
 }

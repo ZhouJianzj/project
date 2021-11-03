@@ -32,11 +32,7 @@ public class Md5 {
      * @throws UnsupportedEncodingException
      */
     public static boolean checkpassword(String newpasswd,String oldpasswd) throws NoSuchAlgorithmException, UnsupportedEncodingException{
-        if(EncoderByMd5(newpasswd).equals(oldpasswd))
-            return true;
-        else {
-            return false;
-        }
+        return EncoderByMd5(newpasswd).equals(oldpasswd);
     }
 
 

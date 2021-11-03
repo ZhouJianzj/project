@@ -55,7 +55,7 @@ public class CommoAdvice implements ResponseBodyAdvice<Object> {
             //没有就执行响应一个初始的响应
             response.setMsg("没有响应参数");
             return  response;
-        }else if ( o instanceof ResponseBody){
+        }else if ( o instanceof ResponseBody || o instanceof  CommonResponse){
             response.setMsg("success");
             //如有已经是一个统一的响应对象了就转一下
             response = (CommonResponse<Object>) o;

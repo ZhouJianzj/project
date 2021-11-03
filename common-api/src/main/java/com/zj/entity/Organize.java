@@ -22,6 +22,8 @@ public class Organize implements Serializable {
     private String name;
     
     private Integer parentId;
+
+    private String parentName;
     
     private Integer typeId;
     

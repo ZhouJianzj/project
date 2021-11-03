@@ -8,9 +8,15 @@
 >
 >   地址：localhost:9000/sys/login
 >
->   参数：User对象,username和password不为空的
->
->   响应：
+>   | 字段名   | 类型     | 说明         |
+>  | -------- | -------- | ------------ |
+>   | user     | 用户对象 | User         |
+    | username | String   | 用户名，必填 |
+    | password | String   | 密码，必填   |
+    
+    参数：User对象,username和password不为空的
+    
+    响应：
     ```json
          {
                       "status": 200,

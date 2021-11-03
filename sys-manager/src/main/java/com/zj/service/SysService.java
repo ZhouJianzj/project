@@ -5,6 +5,7 @@ import com.zj.entity.User;
 import com.zj.entity.UserManager;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author zhoujian
@@ -12,5 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface SysService {
      UserManager userLoginService(User user, HttpServletRequest request);
 
-     Organize findOrganzieService(String pageNo,String orgName);
+     List<Organize> findOrganzieService(String pageNo, String pageSize, String orgName);
+
+    boolean addOrganizeService(Organize organize);
 }
