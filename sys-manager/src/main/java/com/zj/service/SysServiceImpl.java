@@ -1,15 +1,14 @@
 package com.zj.service;
 
 import com.zj.dao.SysDao;
+import com.zj.entity.Organize;
 import com.zj.entity.User;
-import com.zj.util.Md5;
+import com.zj.entity.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 
 
 /**
@@ -18,30 +17,35 @@ import java.security.NoSuchAlgorithmException;
 @Service
 public class SysServiceImpl implements SysService {
     @Autowired
-    private SysDao userDao;
+    private SysDao sysDao;
 
     /**
      * 用户登录
      */
     @Override
-    public User userLogin(User user, HttpServletRequest request) {
+    public UserManager userLoginService(User user, HttpServletRequest request) {
         String password = user.getPassword();
-        try {
-            String ps = Md5.EncoderByMd5(password);
-            user.setPassword(ps);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+//        //md5加密
+//        try {
+//            String ps = Md5.EncoderByMd5(password);
+//            user.setPassword(ps);
+//        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
         //查询
-        User dbUser = userDao.userSelect(user);
+        UserManager userManager = sysDao.userSelect(user);
         //正确的用户放入redissession
-        if (null != dbUser){
+        if (null != userManager){
             HttpSession session = request.getSession();
-            session.setAttribute("user",dbUser);
+            session.setAttribute("user",userManager);
 
         }
-        return dbUser;
+        return userManager;
+    }
+
+    @Override
+    public Organize findOrganzieService(String pageNo,String orgName) {
+//        PageHelper.startPage(1,2);
+        return sysDao.organizeSelect(pageNo,orgName);
     }
 }

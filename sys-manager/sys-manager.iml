@@ -7,9 +7,6 @@
     <facet type="web" name="Web">
       <configuration>
         <webroots />
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/java" />
-        </sourceRoots>
       </configuration>
     </facet>
   </component>
@@ -23,6 +20,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:5.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:4.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.2.5.RELEASE" level="project" />
@@ -141,5 +140,7 @@
     <orderEntry type="library" name="Maven: org.springframework.session:spring-session-data-redis:2.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.session:spring-session-core:2.2.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.2.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:5.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:4.0" level="project" />
   </component>
 </module>

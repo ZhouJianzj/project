@@ -5,30 +5,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * (TUser)实体类
+ * (TRole)实体类
  *
  * @author zhoujian
- * @since 2021-11-02 22:08:03
+ * @since 2021-11-02 22:06:51
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
-
+public class Role implements Serializable {
     
     private Integer id;
     
-    private String username;
+    private String name;
     
-    private String password;
-    
-    private String salt;
-    
-    private String phone;
-    
-    private Integer orgaId;
+    private String ext;
+
+    private List<Perm> perms;
 
 
 }

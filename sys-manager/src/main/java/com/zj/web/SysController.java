@@ -1,10 +1,13 @@
 package com.zj.web;
 
 import com.zj.annotation.IgnoreResponseAdvice;
+import com.zj.entity.Organize;
 import com.zj.entity.User;
+import com.zj.entity.UserManager;
 import com.zj.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -15,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class SysController {
     @Autowired
-    private SysService userService;
+    private SysService sysService;
 
     /**
      * 测试网关
@@ -32,9 +35,12 @@ public class SysController {
      * @return
      */
     @PostMapping("login")
-    public User userLoginController(@RequestBody User user, HttpServletRequest request){
-        System.out.println(user.toString());
-        return userService.userLogin(user,request);
+    public UserManager userLoginController(@RequestBody User user, HttpServletRequest request){
+        return sysService.userLoginService(user,request);
     }
 
+    @GetMapping("orga")
+    public Organize findOrganizeController(String pageNo,String orgName){
+        return sysService.findOrganzieService(pageNo,orgName);
+    }
 }
