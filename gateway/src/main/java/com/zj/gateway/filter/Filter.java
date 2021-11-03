@@ -11,9 +11,11 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 /**
  * @author zhoujian
@@ -47,6 +49,7 @@ public class Filter implements GlobalFilter, Ordered {
         }
         // 登录之后就放行,获取共享的session，有就放行，没有实现
         else if (true) {
+
             return chain.filter(exchange);
         }
         //   什么都没有则返回友好提示页面
@@ -66,6 +69,18 @@ public class Filter implements GlobalFilter, Ordered {
             }
             return response.writeWith(Mono.just(buffer));
         }
+
+//        Map<String, Object> sessionMap = new HashMap<>();
+//        sessionMap.put("param", "Hi, I am the value from cloud gateway");
+//        Mono<WebSession> webSessionMono = exchange.getSession()
+//                .doOnNext(new Consumer<WebSession>() {
+//                    @Override
+//                    public void accept(WebSession webSession) {
+//                        webSession.getAttributes().putAll(sessionMap);
+//                    }
+//                });
+
+
     }
 
 }
