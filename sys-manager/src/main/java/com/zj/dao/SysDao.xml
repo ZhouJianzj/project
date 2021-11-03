@@ -90,4 +90,16 @@
     <select id="roleSelect" >
 
     </select>
+
+    <delete id="roleDelete">
+        DELETE t_role,
+            t_role_perms,
+            t_user_role
+        FROM
+	    t_role
+	        INNER JOIN t_role_perms ON t_role_perms.role_id = t_role.id
+	        INNER JOIN t_user_role ON t_user_role.roleid = t_role.id
+        WHERE
+	        t_role.id = #{id}
+    </delete>
 </mapper>

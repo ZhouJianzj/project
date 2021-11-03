@@ -6,11 +6,14 @@ import com.zj.entity.Organize;
 import com.zj.entity.Role;
 import com.zj.entity.User;
 import com.zj.entity.UserManager;
+import com.zj.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 
@@ -28,13 +31,13 @@ public class SysServiceImpl implements SysService {
     @Override
     public UserManager userLoginService(User user, HttpServletRequest request) {
         String password = user.getPassword();
-//        //md5加密
-//        try {
-//            String ps = Md5.EncoderByMd5(password);
-//            user.setPassword(ps);
-//        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
+        //md5加密
+        try {
+            String ps = Md5.EncoderByMd5(password);
+            user.setPassword(ps);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         //查询
         UserManager userManager = sysDao.userSelect(user);
         //正确的用户放入redissession
@@ -43,6 +46,7 @@ public class SysServiceImpl implements SysService {
             session.setAttribute("user",userManager);
 
         }
+
         return userManager;
     }
 
@@ -73,5 +77,13 @@ public class SysServiceImpl implements SysService {
     @Override
     public List<Role> findRoleService() {
         return sysDao.roleSelect();
+    }
+
+    /**
+     * 角色删除
+     * */
+    @Override
+    public boolean deleteRoleService(int id) {
+        return sysDao.roleDelete(id);
     }
 }

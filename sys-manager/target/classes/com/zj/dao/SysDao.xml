@@ -3,17 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.dao.SysDao">
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <select id="userSelect" resultType="com.zj.entity.User">
-    select id ,username,realname as realName,password,salt,
-    avatar,birthday,sex,email,phone,
-    org_code as orgCode,work_no as workNo,post
-    from sys_user where username = #{username} and password = #{password}
-=======
-=======
 <!--    用户登录sql-->
->>>>>>> 7d165e3c73b5e8a4400df30682b638b29bb77c39
     <resultMap id="user_map" type="com.zj.entity.UserManager">
 <!--        用户信息-->
         <id column="id" property="id"/>
@@ -56,7 +46,6 @@
             LEFT JOIN t_perms p ON p.id = rp.perm_id
         where
             u.username = #{username} and  u.password= #{password}
->>>>>>> 41fb7b8879d00dd530b7ffd5f0a57d89590d94dc
     </select>
 
 <!--    机构查询根据机构名称模糊查询，支持分页，page-->
@@ -96,4 +85,9 @@
         values
         (#{name},#{parentId},#{typeId},#{location},#{orgaNumber},#{ext})
     </insert>
+
+<!--    查询角色-->
+    <select id="roleSelect" >
+
+    </select>
 </mapper>

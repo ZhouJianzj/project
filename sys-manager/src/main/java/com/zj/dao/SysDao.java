@@ -36,4 +36,9 @@ public interface SysDao {
      * @return
      */
     List<Role> roleSelect();
+
+    /**
+     * 根据id删除角色
+     */
+    boolean roleDelete(int id);
 }

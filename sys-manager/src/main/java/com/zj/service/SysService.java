@@ -19,4 +19,6 @@ public interface SysService {
     boolean addOrganizeService(Organize organize);
 
     List<Role> findRoleService();
+
+    boolean deleteRoleService(int id);
 }
