@@ -21,7 +21,7 @@ public class SysController {
 
     /**
      * 测试网关
-     * @return
+     * @return 测试网关
      */
     @IgnoreResponseAdvice
     @RequestMapping("test")
@@ -31,7 +31,7 @@ public class SysController {
 
     /**
      * 用户登录
-     * @return
+     * @return 用户对象
      */
     @PostMapping("login")
     public UserManager userLoginController(@RequestBody User user, HttpServletRequest request){
@@ -40,10 +40,10 @@ public class SysController {
 
     /**
      * 公司查询，支持模糊查询和分页
-     * @param pageNo
-     * @param pageSize
-     * @param orgName
-     * @return
+     * @param pageNo 页码
+     * @param pageSize 页面数据量
+     * @param orgName 查询关键字
+     * @return 结果集
      */
     @GetMapping("orga")
     public List<Organize> findOrganizeController(String pageNo,String pageSize,String orgName){
@@ -52,21 +52,29 @@ public class SysController {
 
     /**
      * 添加机构
-     * @param organize
-     * @return
+     * @param organize 插入参数
+     * @return 插入是否成功
      */
     @PostMapping("orga")
     public CommonResponse<Object> addOrganizeController(@RequestBody Organize organize){
-        CommonResponse<Object> response = new CommonResponse<>();
-       if (sysService.addOrganizeService(organize)){
-             response.setMsg("添加成功！") ;
-       }else {
-            response.setMsg("添加失败");
-       }
-        return  response;
+        return  sysService.addOrganizeService(organize);
     }
 
+    /**
+     * 角色查询
+     * @param pageNo 页码
+     * @param pageSize 每一个展示的数据
+     * @param roleName 查询关键字
+     * @return role结果集
+     */
+    @GetMapping("role")
     public List<Role> findRoleController(String pageNo,String pageSize,String roleName){
-        return sysService.findRoleService();
+        return sysService.findRoleService( pageNo, pageSize, roleName);
     }
+
+    @PostMapping("role")
+    public CommonResponse<Object> addRoleController( @RequestBody Role role){
+        return sysService.addRoleService(role);
+    }
+
 }

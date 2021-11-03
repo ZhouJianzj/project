@@ -87,7 +87,17 @@
     </insert>
 
 <!--    查询角色-->
-    <select id="roleSelect" >
-
+    <select id="roleSelect" resultType="com.zj.entity.Role">
+        select
+        id,name,ext from t_role
+        where name like concat(#{roleName},'%')
     </select>
+
+<!--    新增角色-->
+    <insert id="RoleInsert" >
+        insert into t_role
+        (name,ext)
+        values
+        (#{name},#{ext})
+    </insert>
 </mapper>

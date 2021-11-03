@@ -35,5 +35,7 @@ public interface SysDao {
      * 查询角色，支持模糊查询
      * @return
      */
-    List<Role> roleSelect();
+    List<Role> roleSelect(String roleName);
+
+    boolean RoleInsert(Role role);
 }
