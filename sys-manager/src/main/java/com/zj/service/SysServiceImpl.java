@@ -5,6 +5,7 @@ import com.zj.dao.SysDao;
 import com.zj.entity.*;
 import com.zj.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -100,9 +101,11 @@ public class SysServiceImpl implements SysService {
     public CommonResponse<Object> addRoleService(Role role) {
         CommonResponse<Object> response = new CommonResponse<>();
         if (sysDao.roleInsert(role)){
+            response.setStatus(200);
             response.setMsg("添加成功！");
             return response;
         }else {
+            response.setStatus(400);
             response.setMsg("添加失败！");
             return  response;
         }
@@ -115,6 +118,26 @@ public class SysServiceImpl implements SysService {
     @Override
     public List<Perm> findPermService() {
         return sysDao.permSelect();
+    }
+
+    /**
+     * 给角色添加权限
+     * @param roleId
+     * @param permId
+     * @return
+     */
+    @Override
+    public CommonResponse<Object> addRolePermService(String roleId, String permId) {
+        CommonResponse<Object> response = new CommonResponse<>();
+        if (sysDao.rolePermInsert(roleId,permId)){
+            response.setStatus(200);
+            response.setMsg("添加成功！");
+            return response;
+        }else {
+            response.setStatus(400);
+            response.setMsg("添加失败！");
+            return response;
+        }
     }
 
 
