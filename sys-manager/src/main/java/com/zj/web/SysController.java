@@ -3,11 +3,13 @@ package com.zj.web;
 import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.*;
 import com.zj.service.SysService;
-import org.apache.ibatis.annotations.Delete;
+import com.zj.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -39,7 +41,7 @@ public class SysController {
     }
 
     /**
-     * 机构查询，支持模糊查询和分页
+     * 公司查询，支持模糊查询和分页
      * @param pageNo 页码
      * @param pageSize 页面数据量
      * @param orgName 查询关键字
@@ -126,4 +128,23 @@ public class SysController {
         return sysService.findUserIdService(id);
     }
 
+    /**
+     * 新增用户
+     * @param userManager
+     * @return
+     * */
+    @PostMapping("user")
+    public CommonResponse<UserManager> addUserManagerController(@RequestBody UserManager userManager){
+        return sysService.addUserManagerService(userManager);
+    }
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     * */
+    @DeleteMapping("user")
+    public CommonResponse<Boolean> deleteUserManagerController(int id){
+        return sysService.deleteUserManagerService(id);
+    }
 }

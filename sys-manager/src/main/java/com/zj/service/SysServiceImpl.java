@@ -178,5 +178,49 @@ public class SysServiceImpl implements SysService {
         return sysDao.userIdSelect(id);
     }
 
+    /**
+     * 用户添加
+     * @param userManager
+     * @return
+     * */
+    @Override
+    public CommonResponse<UserManager> addUserManagerService(UserManager userManager) {
+        CommonResponse<UserManager> response = new CommonResponse<>();
+        try {
+            String password = userManager.getPassword();
+            userManager.setPassword(Md5.EncoderByMd5(password));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if (sysDao.userManagerInsert(userManager)){
+            response.setMsg("添加成功");
+            response.setStatus(200);
+        }else {
+            response.setStatus(400);
+            response.setMsg("添加失败");
+        }
+        return response;
+    }
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     * */
+    @Override
+    public CommonResponse<Boolean> deleteUserManagerService(int id) {
+        CommonResponse response = new CommonResponse();
+        if (sysDao.userManagerDelete(id)){
+            response.setMsg("删除成功");
+            response.setStatus(200);
+        }else {
+            response.setStatus(400);
+            response.setMsg("删除失败");
+        }
+        return response;
+    }
+
 
 }
