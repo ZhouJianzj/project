@@ -85,16 +85,13 @@ public class SysController {
         return sysService.addRoleService(role);
     }
 
+    /**
+     * 删除角色
+     * */
     @DeleteMapping("role/{id}")
     public CommonResponse<Boolean> deleteRoleController(@PathVariable("id") int id)throws Exception{
-        CommonResponse<Boolean> response = new CommonResponse<>();
-        boolean flag = sysService.deleteRoleService(id);
-        if (flag != false){
-            response.setMsg("删除成功1");
-        }else {
-            response.setMsg("删除错误！");
-        }
-        return response;
+
+        return sysService.deleteRoleService(id);
     }
     /**
      * 权限查询

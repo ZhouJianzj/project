@@ -5,7 +5,6 @@ import com.zj.dao.SysDao;
 import com.zj.entity.*;
 import com.zj.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -85,9 +84,21 @@ public class SysServiceImpl implements SysService {
         return null;
     }
 
+    /**
+     * 角色删除
+     * @param id 角色id
+     * @return 结果集
+     * */
     @Override
-    public boolean deleteRoleService(int id) {
-        return sysDao.roleDelete(id);
+    public CommonResponse<Boolean> deleteRoleService(int id) {
+        CommonResponse<Boolean> response = new CommonResponse<>();
+        boolean b = sysDao.roleDelete(id);
+        if (b == false){
+            response.setMsg("删除失败");
+        }else {
+            response.setMsg("删除成功");
+        }
+        return response;
     }
 
     /**
