@@ -1,5 +1,6 @@
 package com.zj.web;
 
+import com.github.pagehelper.PageInfo;
 import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.*;
 import com.zj.service.SysService;
@@ -45,8 +46,8 @@ public class SysController {
      * @return 结果集
      */
     @GetMapping("orga")
-    public List<Organize> findOrganizeController(String pageNo,String pageSize,String orgName){
-        return sysService.findOrganzieService(pageNo,pageSize,orgName);
+    public PageInfo findOrganizeController(String orgName,String pageNo,String pageSize){
+        return sysService.findOrganzieService(orgName,pageNo,pageSize);
     }
 
     /**
@@ -67,8 +68,8 @@ public class SysController {
      * @return role结果集
      */
     @GetMapping("role")
-    public List<Role> findRoleController(String pageNo,String pageSize,String roleName){
-        return sysService.findRoleService( pageNo, pageSize, roleName);
+    public PageInfo findRoleController(String roleName,String pageNo,String pageSize){
+        return sysService.findRoleService( roleName,pageNo, pageSize);
     }
 
     /**
@@ -93,15 +94,15 @@ public class SysController {
      * @return 权限结果集
      */
     @GetMapping("perm")
-    public List<Perm> findPermController(){
-        return sysService.findPermService();
+    public PageInfo findPermController(String pageNo,String pageSize){
+        return sysService.findPermService(pageNo,pageSize);
     }
 
     /**
      * 角色分配权限
-     * @param roleId
-     * @param permId
-     * @return
+     * @param roleId 角色id
+     * @param permId 权限id
+     * @return 统一响应体
      */
     @PostMapping("role/perm")
     public CommonResponse<Object> addRolePermController(String roleId,String permId){
@@ -115,15 +116,14 @@ public class SysController {
      * @return
      */
     @GetMapping("user/key")
-    public List<UserManager> findUserController(String key){
-        return sysService.finUserService(key);
-
+    public PageInfo findUserController(String key,String pageNo,String pageSize){
+        return sysService.finUserService(key,pageNo,pageSize);
     }
 
     /**
      * 根据id查询用户
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return 结果集
      */
     @GetMapping("user/id")
     public UserManager findUserIdController(String id){
@@ -132,8 +132,8 @@ public class SysController {
 
     /**
      * 新增用户
-     * @param userManager
-     * @return
+     * @param userManager 参数对象
+     * @return 统一响应体
      * */
     @PostMapping("user")
     public CommonResponse<UserManager> addUserManagerController(@RequestBody UserManager userManager){
@@ -142,11 +142,22 @@ public class SysController {
 
     /**
      * 删除用户
-     * @param id
-     * @return
+     * @param id 用户地
+     * @return 统一响应体
      * */
     @DeleteMapping("user")
     public CommonResponse<Boolean> deleteUserManagerController(int id){
         return sysService.deleteUserManagerService(id);
+    }
+
+    /**
+     * 查询日志
+     * @param pageNo  页码
+     * @param pageSize 单页面数据量
+     * @return  数据
+     */
+    @GetMapping("log")
+    public PageInfo findLogController(String pageNo, String pageSize){
+         return sysService.findLogService(pageNo,pageSize);
     }
 }

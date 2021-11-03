@@ -10,7 +10,6 @@ import org.springframework.session.data.redis.config.annotation.web.server.Enabl
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableRedisWebSession
 public class GatewayApplication {
 
     public static void main(String[] args) {

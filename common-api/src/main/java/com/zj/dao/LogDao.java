@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface LogDao {
 
-    @Insert("insert into log(username, url, module, starttime,oper) values(#{username},#{url},#{module},#{starttime},#{oper})")
+    @Insert("insert into log(username, operType, moduleName, result, operTimer, operContent) values(#{username},#{operType},#{moduleName},#{result},#{operTimer},#{operContent})")
     void logInsert(Log log);
 }

@@ -1,6 +1,7 @@
 package com.zj.service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zj.dao.SysDao;
 import com.zj.entity.*;
 import com.zj.util.Md5;
@@ -55,11 +56,13 @@ public class SysServiceImpl implements SysService {
      * @return
      */
     @Override
-    public List<Organize> findOrganzieService(String pageNo, String pageSize, String orgName) {
+    public PageInfo findOrganzieService( String orgName,String pageNo, String pageSize) {
         Integer num = Integer.valueOf(pageNo);
         Integer size = Integer.valueOf(pageSize);
-        PageHelper.startPage((num-1)*size,size);
-        return sysDao.organizeSelect(orgName);
+        List<Organize> organizes = sysDao.organizeSelect(orgName);
+        PageHelper.startPage(num,size);
+        PageInfo pageInfo = new PageInfo(organizes);
+        return pageInfo ;
     }
 
     /**
@@ -109,8 +112,12 @@ public class SysServiceImpl implements SysService {
      * @return 结果集
      */
     @Override
-    public List<Role> findRoleService(String pageNo,String pageSize,String roleName) {
-        return sysDao.roleSelect(roleName);
+    public PageInfo findRoleService(String roleName,String pageNo,String pageSize) {
+        Integer no = Integer.valueOf(pageNo);
+        Integer size = Integer.valueOf(pageSize);
+        PageHelper.startPage(no,size);
+        List<Role> roles = sysDao.roleSelect(roleName);
+        return new PageInfo<>(roles);
     }
 
     /**
@@ -137,8 +144,12 @@ public class SysServiceImpl implements SysService {
      * @return 权限结果集
      */
     @Override
-    public List<Perm> findPermService() {
-        return sysDao.permSelect();
+    public PageInfo findPermService(String pageNo,String pageSize) {
+        List<Perm> perms = sysDao.permSelect();
+        Integer no = Integer.valueOf(pageNo);
+        Integer size = Integer.valueOf(pageSize);
+        PageHelper.startPage(no,size);
+        return new PageInfo(perms) ;
     }
 
     /**
@@ -167,12 +178,16 @@ public class SysServiceImpl implements SysService {
      * @return
      */
     @Override
-    public List<UserManager> finUserService(String key) {
-        return sysDao.userKeySelect(key);
+    public PageInfo finUserService(String key,String pageNo,String pageSize) {
+        List<UserManager> userManagers = sysDao.userKeySelect(key);
+        Integer no = Integer.valueOf(pageNo);
+        Integer size = Integer.valueOf(pageSize);
+        PageHelper.startPage(no,size);
+        return new PageInfo(userManagers) ;
     }
 
     /**
-     * 根据id查询所哟个用户
+     * 根据id查询用户
      * @param id
      * @return
      */
@@ -183,8 +198,8 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 用户添加
-     * @param userManager
-     * @return
+     * @param userManager 参数
+     * @return 返回值
      * */
     @Override
     public CommonResponse<UserManager> addUserManagerService(UserManager userManager) {
@@ -223,6 +238,22 @@ public class SysServiceImpl implements SysService {
             response.setMsg("删除失败");
         }
         return response;
+    }
+
+    /**
+     * 实现log分页查询
+     * @param pageNo 页码
+     * @param pageSize 但一面数据量
+     * @return 结果集合
+     */
+    @Override
+    public PageInfo findLogService(String pageNo,String pageSize) {
+        Integer no = Integer.valueOf(pageNo);
+        Integer size = Integer.valueOf(pageSize);
+        PageHelper.startPage(no,size);
+        List<Log> logs = sysDao.logSelect();
+        PageInfo pageInfo = new PageInfo(logs);
+        return  pageInfo;
     }
 
 

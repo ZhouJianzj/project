@@ -184,4 +184,16 @@
         inner join t_user_role on t_user_role.userid = t_user.id
         where t_user.id = #{id}
     </delete>
+
+    <select id="logSelect" resultType="com.zj.entity.Log">
+        select
+        id,
+        username,
+        operType,
+        moduleName,
+        result,
+        operTimer,
+        operContent
+        from log
+    </select>
 </mapper>

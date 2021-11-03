@@ -89,4 +89,6 @@ public interface SysDao {
      * @return
      */
     UserManager userIdSelect(String id);
+
+    List<Log> logSelect();
 }

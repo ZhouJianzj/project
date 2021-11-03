@@ -21,7 +21,8 @@ import java.util.function.Consumer;
  * @author zhoujian
  * 全局的过滤器实现权限验证
  */
-@Component
+//先不使用全局过滤器来，后面项目完成的差不了使用安全框架
+//@Component
 public class Filter implements GlobalFilter, Ordered {
     private static final String PATH = "/sys/login";
     private static final String CHARSET_NAME = "utf-8";
