@@ -1,10 +1,7 @@
 package com.zj.web;
 
 import com.zj.annotation.IgnoreResponseAdvice;
-import com.zj.entity.CommonResponse;
-import com.zj.entity.Organize;
-import com.zj.entity.User;
-import com.zj.entity.UserManager;
+import com.zj.entity.*;
 import com.zj.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -67,6 +64,9 @@ public class SysController {
             response.setMsg("添加失败");
        }
         return  response;
+    }
 
+    public List<Role> findRoleController(String pageNo,String pageSize,String roleName){
+        return sysService.findRoleService();
     }
 }
