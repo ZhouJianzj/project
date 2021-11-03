@@ -65,6 +65,7 @@ public class CommoAdvice implements ResponseBodyAdvice<Object> {
             response.setData(o);
         }
         return response;
+
 //        ServletServerHttpRequest request = (ServletServerHttpRequest) serverHttpRequest;
 //        HttpServletRequest res = request.getServletRequest();
 //        //获取登录之后的共享用户对象的名字，（redis session 实现）
@@ -80,12 +81,7 @@ public class CommoAdvice implements ResponseBodyAdvice<Object> {
 //
 //        //日志
 //        logDao.logInsert(new Log(username,requestURI,module,new Date(),method));
-//        //设置统一响应体
-//        CommonResponse<Object> o = new CommonResponse<Object>(200,method,body);
 
-//        ResponseEntity<Object> objectResponseEntity = new ResponseEntity<Object>(body,HttpStatus.ACCEPTED);
-//        return objectResponseEntity;
-//        return body;
     }
 
     /**

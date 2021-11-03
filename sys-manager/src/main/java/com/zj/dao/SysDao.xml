@@ -94,7 +94,7 @@
     </select>
 
 <!--    新增角色-->
-    <insert id="RoleInsert" >
+    <insert id="roleInsert" >
         insert into t_role
         (name,ext)
         values

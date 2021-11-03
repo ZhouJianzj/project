@@ -83,5 +83,10 @@ public interface SysDao {
     List<UserManager> userKeySelect(String key);
 
 
+    /**
+     * 查询用户根据id
+     * @param id
+     * @return
+     */
     UserManager userIdSelect(String id);
 }

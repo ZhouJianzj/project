@@ -70,19 +70,17 @@ public class SysServiceImpl implements SysService {
     public CommonResponse<Object> addOrganizeService(Organize organize) {
         CommonResponse<Object> response = new CommonResponse<>();
         if (sysDao.organizeInsert(organize)){
+            response.setStatus(200);
             response.setMsg("添加成功！");
             return response;
         }else {
+            response.setStatus(400);
             response.setMsg("添加失败！");
             return  response;
         }
 
     }
 
-    @Override
-    public List<Role> findRoleService() {
-        return null;
-    }
 
     /**
      * 删除角色
