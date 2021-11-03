@@ -80,6 +80,16 @@ public class SysServiceImpl implements SysService {
 
     }
 
+    @Override
+    public List<Role> findRoleService() {
+        return null;
+    }
+
+    @Override
+    public boolean deleteRoleService(int id) {
+        return sysDao.roleDelete(id);
+    }
+
     /**
      * 角色查询
      * @param pageNo 页码
