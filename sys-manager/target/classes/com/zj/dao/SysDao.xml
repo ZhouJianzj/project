@@ -98,7 +98,7 @@
     </select>
 
 <!--    新增角色-->
-    <insert id="RoleInsert" >
+    <insert id="roleInsert" parameterType="com.zj.entity.Role">
         insert into t_role
         (name,ext)
         values
@@ -110,4 +110,11 @@
         select id,name from t_perms
 >>>>>>> 0491714528170b9f844022b2a18bca62910ba1c4
     </select>
+
+<!--    角色权限添加-->
+    <insert id="rolePermInsert" >
+        insert into t_role_perms
+        (role_id,perm_id)
+        values (#{roleId},#{permId})
+    </insert>
 </mapper>

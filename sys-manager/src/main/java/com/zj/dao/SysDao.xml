@@ -106,6 +106,13 @@
         select id,name from t_perms
     </select>
 
+<!--    角色权限添加-->
+    <insert id="rolePermInsert" >
+        insert into t_role_perms
+        (role_id,perm_id)
+        values (#{roleId},#{permId})
+    </insert>
+
     <delete id="roleDelete">
         DELETE t_role,
             t_role_perms,

@@ -52,4 +52,6 @@ public interface SysDao {
      * @return 返回结果集
      */
     List<Perm> permSelect();
+
+    boolean rolePermInsert(String roleId, String permId);
 }

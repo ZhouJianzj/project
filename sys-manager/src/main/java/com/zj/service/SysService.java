@@ -23,4 +23,6 @@ public interface SysService {
     CommonResponse<Object> addRoleService(Role role);
 
     List<Perm> findPermService();
+
+    CommonResponse<Object> addRolePermService(String roleId, String permId);
 }

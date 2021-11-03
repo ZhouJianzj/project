@@ -81,7 +81,7 @@ public class SysController {
      * @return 返回结果
      */
     @PostMapping("role")
-    public CommonResponse<Object> addRoleController( @RequestBody Role role){
+    public CommonResponse<Object> addRoleController(@RequestBody Role role){
         return sysService.addRoleService(role);
     }
 
@@ -105,5 +105,9 @@ public class SysController {
         return sysService.findPermService();
     }
 
+    @PostMapping("role/perm")
+    public CommonResponse<Object> addRolePermController(String roleId,String permId){
+        return sysService.addRolePermService(roleId,permId);
+    }
 
 }
