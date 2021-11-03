@@ -113,6 +113,7 @@
         values (#{roleId},#{permId})
     </insert>
 
+<!--    删除角色-->
     <delete id="roleDelete">
         DELETE t_role,
             t_role_perms,

@@ -87,10 +87,6 @@
     </insert>
 
 <!--    查询角色-->
-<<<<<<< HEAD
-    <select id="roleSelect" >
-
-=======
     <select id="roleSelect" resultType="com.zj.entity.Role">
         select
         id,name,ext from t_role
@@ -98,7 +94,7 @@
     </select>
 
 <!--    新增角色-->
-    <insert id="roleInsert" parameterType="com.zj.entity.Role">
+    <insert id="RoleInsert" >
         insert into t_role
         (name,ext)
         values
@@ -108,7 +104,6 @@
 <!--    查询所用的权限-->
     <select id="permSelect" resultType="com.zj.entity.Perm">
         select id,name from t_perms
->>>>>>> 0491714528170b9f844022b2a18bca62910ba1c4
     </select>
 
 <!--    角色权限添加-->
@@ -117,4 +112,17 @@
         (role_id,perm_id)
         values (#{roleId},#{permId})
     </insert>
+
+<!--    删除角色-->
+    <delete id="roleDelete">
+        DELETE t_role,
+            t_role_perms,
+            t_user_role
+        FROM
+	    t_role
+	        INNER JOIN t_role_perms ON t_role_perms.role_id = t_role.id
+	        INNER JOIN t_user_role ON t_user_role.roleid = t_role.id
+        WHERE
+	        t_role.id = #{id}
+    </delete>
 </mapper>

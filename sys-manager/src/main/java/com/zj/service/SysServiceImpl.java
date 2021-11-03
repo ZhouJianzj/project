@@ -85,17 +85,19 @@ public class SysServiceImpl implements SysService {
     }
 
     /**
-     * 角色删除
-     * @param id 角色id
-     * @return 结果集
-     * */
+     * 删除角色
+     * @param id
+     * @return
+     */
     @Override
     public CommonResponse<Boolean> deleteRoleService(int id) {
         CommonResponse<Boolean> response = new CommonResponse<>();
         boolean b = sysDao.roleDelete(id);
         if (b == false){
+            response.setStatus(400);
             response.setMsg("删除失败");
         }else {
+            response.setStatus(200);
             response.setMsg("删除成功");
         }
         return response;

@@ -3,13 +3,11 @@ package com.zj.web;
 import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.*;
 import com.zj.service.SysService;
-import com.zj.util.Md5;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -42,7 +40,7 @@ public class SysController {
     }
 
     /**
-     * 公司查询，支持模糊查询和分页
+     * 机构查询，支持模糊查询和分页
      * @param pageNo 页码
      * @param pageSize 页面数据量
      * @param orgName 查询关键字
@@ -88,9 +86,8 @@ public class SysController {
     /**
      * 删除角色
      * */
-    @DeleteMapping("role/{id}")
-    public CommonResponse<Boolean> deleteRoleController(@PathVariable("id") int id)throws Exception{
-
+    @DeleteMapping("role")
+    public CommonResponse<Boolean> deleteRoleController( int id){
         return sysService.deleteRoleService(id);
     }
     /**
@@ -102,6 +99,12 @@ public class SysController {
         return sysService.findPermService();
     }
 
+    /**
+     * 角色分配权限
+     * @param roleId
+     * @param permId
+     * @return
+     */
     @PostMapping("role/perm")
     public CommonResponse<Object> addRolePermController(String roleId,String permId){
         return sysService.addRolePermService(roleId,permId);

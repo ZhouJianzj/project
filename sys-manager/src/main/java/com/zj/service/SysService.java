@@ -18,6 +18,7 @@ public interface SysService {
     List<Role> findRoleService();
 
     CommonResponse<Boolean> deleteRoleService(int id);
+
     List<Role> findRoleService(String pageNo,String pageSize,String roleName);
 
     CommonResponse<Object> addRoleService(Role role);
