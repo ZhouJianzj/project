@@ -108,8 +108,14 @@ public class SysServiceImpl implements SysService {
         }
     }
 
+    /**
+     * 查询所有权限
+     * @return 权限结果集
+     */
     @Override
     public List<Perm> findPermService() {
         return sysDao.permSelect();
     }
+
+
 }

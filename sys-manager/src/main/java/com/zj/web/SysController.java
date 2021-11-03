@@ -85,8 +85,14 @@ public class SysController {
         return sysService.addRoleService(role);
     }
 
+    /**
+     * 权限查询
+     * @return 权限结果集
+     */
     @GetMapping("perm")
     public List<Perm> findPermController(){
         return sysService.findPermService();
     }
+
+
 }
