@@ -1,9 +1,6 @@
 package com.zj.dao;
 
-import com.zj.entity.Organize;
-import com.zj.entity.Role;
-import com.zj.entity.User;
-import com.zj.entity.UserManager;
+import com.zj.entity.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,4 +38,18 @@ public interface SysDao {
      * 根据id删除角色
      */
     boolean roleDelete(int id);
+    List<Role> roleSelect(String roleName);
+
+    /**
+     * 角色插入
+     * @param role 插入参数
+     * @return 返回结果
+     */
+    boolean roleInsert(Role role);
+
+    /**
+     * 查询所有的权限
+     * @return 返回结果集
+     */
+    List<Perm> permSelect();
 }

@@ -6,6 +6,7 @@ import com.zj.entity.Organize;
 import com.zj.entity.Role;
 import com.zj.entity.User;
 import com.zj.entity.UserManager;
+import com.zj.entity.*;
 import com.zj.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,7 @@ public class SysServiceImpl implements SysService {
         //md5加密
         try {
             String ps = Md5.EncoderByMd5(password);
+            System.out.println(ps);
             user.setPassword(ps);
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -66,17 +68,63 @@ public class SysServiceImpl implements SysService {
     }
 
     /**
-     * 机构的增减
+     * 添加机构
      * @return
      */
     @Override
-    public boolean addOrganizeService(Organize organize) {
-        return sysDao.organizeInsert(organize);
+    public CommonResponse<Object> addOrganizeService(Organize organize) {
+        CommonResponse<Object> response = new CommonResponse<>();
+        if (sysDao.organizeInsert(organize)){
+            response.setMsg("添加成功！");
+            return response;
+        }else {
+            response.setMsg("添加失败！");
+            return  response;
+        }
+
     }
 
     @Override
     public List<Role> findRoleService() {
-        return sysDao.roleSelect();
+        return null;
+    }
+
+    /**
+     * 角色查询
+     * @param pageNo 页码
+     * @param pageSize 每一=页数据量
+     * @param roleName 角色字段
+     * @return 结果集
+     */
+    @Override
+    public List<Role> findRoleService(String pageNo,String pageSize,String roleName) {
+        return sysDao.roleSelect(roleName);
+    }
+
+    /**
+     * 角色添加
+     * @param role 参数
+     * @return 返回结果
+     */
+    @Override
+    public CommonResponse<Object> addRoleService(Role role) {
+        CommonResponse<Object> response = new CommonResponse<>();
+        if (sysDao.roleInsert(role)){
+            response.setMsg("添加成功！");
+            return response;
+        }else {
+            response.setMsg("添加失败！");
+            return  response;
+        }
+    }
+
+    /**
+     * 查询所有权限
+     * @return 权限结果集
+     */
+    @Override
+    public List<Perm> findPermService() {
+        return sysDao.permSelect();
     }
 
     /**

@@ -14,7 +14,7 @@
 <!--        用户所在的公司-->
         <association property="o" javaType="com.zj.entity.Organize">
             <id column="id" property="id"/>
-            <result column="orgname" property="name"/>
+            <result column="organame" property="name"/>
         </association>
 <!--       用户____> 角色表____>角色实体集 -->
         <collection property="roles" ofType="com.zj.entity.Role">
@@ -87,8 +87,23 @@
     </insert>
 
 <!--    查询角色-->
-    <select id="roleSelect" >
+    <select id="roleSelect" resultType="com.zj.entity.Role">
+        select
+        id,name,ext from t_role
+        where name like concat(#{roleName},'%')
+    </select>
 
+<!--    新增角色-->
+    <insert id="RoleInsert" >
+        insert into t_role
+        (name,ext)
+        values
+        (#{name},#{ext})
+    </insert>
+
+<!--    查询所用的权限-->
+    <select id="permSelect" resultType="com.zj.entity.Perm">
+        select id,name from t_perms
     </select>
 
     <delete id="roleDelete">
