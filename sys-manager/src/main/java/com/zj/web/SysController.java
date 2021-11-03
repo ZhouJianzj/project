@@ -75,9 +75,18 @@ public class SysController {
         return sysService.findRoleService( pageNo, pageSize, roleName);
     }
 
+    /**
+     * 添加角色
+     * @param role 添加对象参数
+     * @return 返回结果
+     */
     @PostMapping("role")
     public CommonResponse<Object> addRoleController( @RequestBody Role role){
         return sysService.addRoleService(role);
     }
 
+    @GetMapping("perm")
+    public List<Perm> findPermController(){
+        return sysService.findPermService();
+    }
 }

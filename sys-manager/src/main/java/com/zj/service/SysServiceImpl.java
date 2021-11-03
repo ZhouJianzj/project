@@ -99,12 +99,17 @@ public class SysServiceImpl implements SysService {
     @Override
     public CommonResponse<Object> addRoleService(Role role) {
         CommonResponse<Object> response = new CommonResponse<>();
-        if (sysDao.RoleInsert(role)){
+        if (sysDao.roleInsert(role)){
             response.setMsg("添加成功！");
             return response;
         }else {
             response.setMsg("添加失败！");
             return  response;
         }
+    }
+
+    @Override
+    public List<Perm> findPermService() {
+        return sysDao.permSelect();
     }
 }

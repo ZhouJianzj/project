@@ -100,4 +100,9 @@
         values
         (#{name},#{ext})
     </insert>
+
+<!--    查询所用的权限-->
+    <select id="permSelect" resultType="com.zj.entity.Perm">
+        select id,name from t_perms
+    </select>
 </mapper>
