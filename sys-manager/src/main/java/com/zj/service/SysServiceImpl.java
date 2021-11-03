@@ -163,5 +163,15 @@ public class SysServiceImpl implements SysService {
         }
     }
 
+    /**
+     * 查询用户，支持模糊查询，查询关键字可以是手机号或者是用户名
+     * @param key
+     * @return
+     */
+    @Override
+    public List<UserManager> finUserService(String key) {
+        return sysDao.userKeySelect(key);
+    }
+
 
 }

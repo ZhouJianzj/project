@@ -15,7 +15,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("sys")
-
 public class SysController {
     @Autowired
     private SysService sysService;
@@ -109,5 +108,19 @@ public class SysController {
     public CommonResponse<Object> addRolePermController(String roleId,String permId){
         return sysService.addRolePermService(roleId,permId);
     }
+
+
+    /**
+     * 查询所有的用户
+     * @param key 手机号 或者 手机号
+     * @return
+     */
+    @GetMapping("user/key")
+    public List<UserManager> findUserController(String key){
+        return sysService.finUserService(key);
+
+    }
+
+
 
 }

@@ -61,4 +61,10 @@ public interface SysDao {
     List<Perm> permSelect();
 
     boolean rolePermInsert(String roleId, String permId);
+
+    /**
+     *
+     * @param key
+     */
+    List<UserManager> userKeySelect(String key);
 }
