@@ -14,18 +14,14 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Log {
+
     private Integer id;
     private String username;
-    private String url;
-    private String module;
-    private Date starttime;
-    private String oper;
+    private String operType;
+    private String moduleName;
+    private String result;
+    private Date operTimer;
+    private String operContent;
 
-    public Log(String username, String url, String module, Date starttime,String oper) {
-        this.username = username;
-        this.url = url;
-        this.module = module;
-        this.starttime = starttime;
-        this.oper = oper;
-    }
+
 }
