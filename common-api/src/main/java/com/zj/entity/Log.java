@@ -19,7 +19,7 @@ public class Log {
     private String username;
     private String operType;
     private String moduleName;
-    private String result;
+    private boolean result;
     private Date operTimer;
     private String operContent;
 

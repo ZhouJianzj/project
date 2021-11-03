@@ -2,30 +2,21 @@ package com.zj.gateway.filter;
 
 
 import com.alibaba.fastjson.JSON;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.server.RequestPath;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
-import org.springframework.session.data.redis.RedisSessionRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.net.URI;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author zhoujian
@@ -47,7 +38,12 @@ public class Filter implements GlobalFilter, Ordered {
 
         //获取session
         ServerHttpRequest request = exchange.getRequest();
+        Mono<WebSession> session = exchange.getSession();
+
         ServerHttpResponse response = exchange.getResponse();
+        System.out.println("================================================");
+        System.out.println(session);
+
 
         // 获取请求路径
         String path = request.getPath().toString();
@@ -79,6 +75,11 @@ public class Filter implements GlobalFilter, Ordered {
             }
             return response.writeWith(Mono.just(buffer));
         }
+
+    }
+
+    public void getMySession(HttpServletRequest request){
+        System.out.println(request.getSession());
 
     }
 }

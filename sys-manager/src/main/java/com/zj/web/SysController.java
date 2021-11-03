@@ -123,6 +123,11 @@ public class SysController {
 
     }
 
+    /**
+     * 根据id查询用户
+     * @param id
+     * @return
+     */
     @GetMapping("user/id")
     public UserManager findUserIdController(String id){
         return sysService.findUserIdService(id);

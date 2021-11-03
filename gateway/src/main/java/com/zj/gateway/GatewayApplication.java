@@ -11,10 +11,11 @@ import org.springframework.session.data.redis.config.annotation.web.server.Enabl
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-public class GatewagApplication {
+@EnableRedisWebSession
+public class GatewayApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GatewagApplication.class, args);
+        SpringApplication.run(GatewayApplication.class, args);
     }
 
 }
