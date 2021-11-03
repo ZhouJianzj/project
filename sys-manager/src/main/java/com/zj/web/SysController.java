@@ -1,6 +1,7 @@
 package com.zj.web;
 
 import com.zj.annotation.IgnoreResponseAdvice;
+import com.zj.entity.CommonResponse;
 import com.zj.entity.Organize;
 import com.zj.entity.User;
 import com.zj.entity.UserManager;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author zhoujian
@@ -39,8 +41,32 @@ public class SysController {
         return sysService.userLoginService(user,request);
     }
 
+    /**
+     * 公司查询，支持模糊查询和分页
+     * @param pageNo
+     * @param pageSize
+     * @param orgName
+     * @return
+     */
     @GetMapping("orga")
-    public Organize findOrganizeController(String pageNo,String orgName){
-        return sysService.findOrganzieService(pageNo,orgName);
+    public List<Organize> findOrganizeController(String pageNo,String pageSize,String orgName){
+        return sysService.findOrganzieService(pageNo,pageSize,orgName);
+    }
+
+    /**
+     * 添加机构
+     * @param organize
+     * @return
+     */
+    @PostMapping("orga")
+    public CommonResponse<Object> addOrganizeController(@RequestBody Organize organize){
+        CommonResponse<Object> response = new CommonResponse<>();
+       if (sysService.addOrganizeService(organize)){
+             response.setMsg("添加成功！") ;
+       }else {
+            response.setMsg("添加失败");
+       }
+        return  response;
+
     }
 }
