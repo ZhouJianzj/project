@@ -174,6 +174,12 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
             case "perm":
                 content="权限操作";
                 break;
+            case "item":
+                content = "项目操作";
+                break;
+            case "log":
+                content = "日志操作";
+                break;
         }
         log.setOperContent(content);
 
@@ -195,6 +201,7 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
                 break;
             case "PUT":
                 operType="修改";
+                break;
             case "GET":
                 operType="查询";
         }

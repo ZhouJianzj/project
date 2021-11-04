@@ -16,7 +16,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 //        默认的没填写会拦截所有的，**表示的是当前目录下的所有以及之后的子路径，使用*表示的当前所有路径不包含子路径
         String[] addPathPatterns = {
-                "/sys/**"
+                "/**/**"
         };
 //        没有放行登录的path的时候会出现第一次正常拦截，再一次请求的时候会出现成功
         String[] excludePatterns = {
