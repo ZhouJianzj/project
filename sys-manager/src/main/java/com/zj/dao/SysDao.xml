@@ -90,7 +90,7 @@
     <select id="roleSelect" resultType="com.zj.entity.Role">
         select
         id,name,ext from t_role
-        where name like concat(#{roleName},'%')
+        where name like concat('%',#{roleName},'%')
     </select>
 
 <!--    新增角色-->
