@@ -12,21 +12,21 @@ import java.util.List;
 public interface SysService {
      UserManager userLoginService(User user, HttpServletRequest request);
 
-    PageInfo findOrganzieService( String orgName,String pageNo, String pageSize);
+    List<Organize> findOrganzieService( String orgName);
 
     CommonResponse<Object> addOrganizeService(Organize organize);
 
     CommonResponse<Boolean> deleteRoleService(int id);
 
-    PageInfo<Role> findRoleService(String roleName,String pageNo,String pageSize);
+    List<Role> findRoleService(String roleName);
 
     CommonResponse<Object> addRoleService(Role role);
 
-    PageInfo<Perm> findPermService( String pageNo,String pageSize);
+    List<Perm> findPermService();
 
     CommonResponse<Object> addRolePermService(String roleId, String permId);
 
-    PageInfo<UserManager> finUserService(String key,String pageNo,String pageSize);
+    List<UserManager> finUserService(String key);
 
     UserManager findUserIdService(String id);
 
@@ -34,5 +34,5 @@ public interface SysService {
 
     CommonResponse<Boolean> deleteUserManagerService(int id);
 
-    PageInfo<Log> findLogService(String pageNo, String pageSize);
+    List<Log> findLogService();
 }

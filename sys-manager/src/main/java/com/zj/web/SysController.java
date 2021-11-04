@@ -1,5 +1,6 @@
 package com.zj.web;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.*;
@@ -46,8 +47,10 @@ public class SysController {
      * @return 结果集
      */
     @GetMapping("orga")
-    public PageInfo findOrganizeController(String orgName,String pageNo,String pageSize){
-        return sysService.findOrganzieService(orgName,pageNo,pageSize);
+    public PageInfo<Organize> findOrganizeController(String orgName,String pageNo,String pageSize){
+        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
+
+        return new PageInfo<Organize>(sysService.findOrganzieService(orgName)) ;
     }
 
     /**
@@ -69,7 +72,8 @@ public class SysController {
      */
     @GetMapping("role")
     public PageInfo<Role> findRoleController(String roleName,String pageNo,String pageSize){
-        return sysService.findRoleService( roleName,pageNo, pageSize);
+        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
+        return new PageInfo<>(sysService.findRoleService( roleName));
     }
 
     /**
@@ -94,8 +98,10 @@ public class SysController {
      * @return 权限结果集
      */
     @GetMapping("perm")
-    public PageInfo<Perm>findPermController(@RequestParam("pageNo") String pageNo,@RequestParam("pageSize") String pageSize){
-        return sysService.findPermService(pageNo,pageSize);
+    public PageInfo<Perm> findPermController(@RequestParam("pageNo") String pageNo,@RequestParam("pageSize") String pageSize){
+        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
+        return  new PageInfo<Perm>(sysService.findPermService());
+
     }
 
     /**
@@ -117,7 +123,8 @@ public class SysController {
      */
     @GetMapping("user/key")
     public PageInfo<UserManager> findUserController(String key,String pageNo,String pageSize){
-        return sysService.finUserService(key,pageNo,pageSize);
+        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
+        return new PageInfo<UserManager>(sysService.finUserService(key));
     }
 
     /**
@@ -157,7 +164,9 @@ public class SysController {
      * @return  数据
      */
     @GetMapping("log")
-    public PageInfo findLogController(String pageNo, String pageSize){
-         return sysService.findLogService(pageNo,pageSize);
+    public PageInfo<Log> findLogController(String pageNo, String pageSize){
+        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
+
+         return new PageInfo<Log>(sysService.findLogService()) ;
     }
 }

@@ -52,19 +52,14 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 机构查询
-     * @param pageNo
-     * @param pageSize
+     *
      * @param orgName
      * @return
      */
     @Override
-    public PageInfo findOrganzieService( String orgName,String pageNo, String pageSize) {
-        Integer num = Integer.valueOf(pageNo);
-        Integer size = Integer.valueOf(pageSize);
-        List<Organize> organizes = sysDao.organizeSelect(orgName);
-        PageHelper.startPage(num,size);
-        PageInfo pageInfo = new PageInfo(organizes);
-        return pageInfo ;
+    public List<Organize> findOrganzieService(String orgName) {
+
+        return sysDao.organizeSelect(orgName);
     }
 
     /**
@@ -108,18 +103,12 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 角色查询
-     * @param pageNo 页码
-     * @param pageSize 每一=页数据量
      * @param roleName 角色字段
      * @return 结果集
      */
     @Override
-    public PageInfo<Role> findRoleService(String roleName,String pageNo,String pageSize) {
-        Integer no = Integer.valueOf(pageNo);
-        Integer size = Integer.valueOf(pageSize);
-        PageHelper.startPage(no,size);
-        List<Role> roles = sysDao.roleSelect(roleName);
-        return new PageInfo<Role>(roles);
+    public List<Role> findRoleService(String roleName) {
+        return sysDao.roleSelect(roleName);
     }
 
     /**
@@ -146,12 +135,9 @@ public class SysServiceImpl implements SysService {
      * @return 权限结果集
      */
     @Override
-    public PageInfo<Perm> findPermService(String pageNo,String pageSize) {
+    public List<Perm> findPermService() {
         List<Perm> perms = sysDao.permSelect();
-        int no = Integer.parseInt(pageNo);
-        int size = Integer.parseInt(pageSize);
-        PageHelper.startPage(no,size);
-        return new PageInfo<Perm>(perms) ;
+        return perms;
     }
 
     /**
@@ -176,16 +162,13 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 查询用户，支持模糊查询，查询关键字可以是手机号或者是用户名
-     * @param key
-     * @return
+     *
      */
     @Override
-    public PageInfo<UserManager> finUserService(String key,String pageNo,String pageSize) {
+    public List<UserManager> finUserService(String key) {
         List<UserManager> userManagers = sysDao.userKeySelect(key);
-        Integer no = Integer.valueOf(pageNo);
-        Integer size = Integer.valueOf(pageSize);
-        PageHelper.startPage(no,size);
-        return new PageInfo<UserManager>(userManagers) ;
+
+        return userManagers ;
     }
 
     /**
@@ -244,18 +227,14 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 实现log分页查询
-     * @param pageNo 页码
-     * @param pageSize 但一面数据量
+     *
      * @return 结果集合
      */
     @Override
-    public PageInfo<Log> findLogService(String pageNo,String pageSize) {
-        Integer no = Integer.valueOf(pageNo);
-        Integer size = Integer.valueOf(pageSize);
-        PageHelper.startPage(no,size);
-        List<Log> logs = sysDao.logSelect();
-        PageInfo<Log> pageInfo = new PageInfo<>(logs);
-        return  pageInfo;
+    public List<Log> findLogService() {
+
+        return sysDao.logSelect();
+
     }
 
 
