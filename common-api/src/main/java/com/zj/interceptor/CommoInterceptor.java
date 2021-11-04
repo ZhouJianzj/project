@@ -24,7 +24,6 @@ public class CommoInterceptor implements HandlerInterceptor {
         if ( session == null){
 
             // 响应结果，响应数据为JSON数据
-
             response.setCharacterEncoding("utf-8");
             response.setContentType("json; charset=utf-8");
             JSONObject o = new JSONObject();
@@ -35,8 +34,19 @@ public class CommoInterceptor implements HandlerInterceptor {
 
 
            return false;
-       }else {
+       }else if (null == session.getAttribute("user")) {
+            // 响应结果，响应数据为JSON数据
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("json; charset=utf-8");
+            JSONObject o = new JSONObject();
+            PrintWriter writer = response.getWriter();
+            o.put("stuts","400");
+            o.put("msg","没有登录！");
+            writer.print(o);
 
+
+            return false;
+        }else {
             return true;
         }
 
