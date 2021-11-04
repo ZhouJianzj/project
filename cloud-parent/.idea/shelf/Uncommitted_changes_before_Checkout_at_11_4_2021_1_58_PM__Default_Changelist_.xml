@@ -1,0 +1,29 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_11_4_2021_1_58_PM_[Default_Changelist]" date="1636005502591" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_4_2021_1_58_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 11/4/2021 1:58 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="../sys-manager/target/classes/com/zj/service/SysServiceImpl.class" />
+    <option name="AFTER_PATH" value="../sys-manager/target/classes/com/zj/service/SysServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_4_2021_1_58_PM_[Default_Changelist]/SysServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../sys-manager/target/classes/com/zj/web/SysController.class" />
+    <option name="AFTER_PATH" value="../sys-manager/target/classes/com/zj/web/SysController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_4_2021_1_58_PM_[Default_Changelist]/SysController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../sys-manager/target/classes/com/zj/service/SysService.class" />
+    <option name="AFTER_PATH" value="../sys-manager/target/classes/com/zj/service/SysService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_4_2021_1_58_PM_[Default_Changelist]/SysService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../common-api/target/classes/com/zj/interceptor/CommoInterceptor.class" />
+    <option name="AFTER_PATH" value="../common-api/target/classes/com/zj/interceptor/CommoInterceptor.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_4_2021_1_58_PM_[Default_Changelist]/CommoInterceptor.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../common-api/target/classes/com/zj/advice/CommoResAdvice.class" />
+    <option name="AFTER_PATH" value="../common-api/target/classes/com/zj/advice/CommoResAdvice.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_4_2021_1_58_PM_[Default_Changelist]/CommoResAdvice.class" />
+  </binary>
+</changelist>
