@@ -237,5 +237,15 @@ public class SysServiceImpl implements SysService {
 
     }
 
+    @Override
+    public CommonResponse<Object> signOutService(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (null != session){
+            session.removeAttribute("user");
+            return new CommonResponse<>(200,"用户退出登录！");
+        }
+        return new CommonResponse<>(401,"退出登录失败！");
+    }
+
 
 }

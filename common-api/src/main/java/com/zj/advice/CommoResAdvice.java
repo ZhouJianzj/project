@@ -88,7 +88,10 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
 
         //确认用户
         UserManager user = (UserManager) session.getAttribute("user");
-        username =user.getUsername();
+        if (null != user){
+            username =user.getUsername();
+        }
+
         log.setUsername(username);
 
         //确认模块

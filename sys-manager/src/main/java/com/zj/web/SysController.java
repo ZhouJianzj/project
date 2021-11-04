@@ -169,4 +169,13 @@ public class SysController {
 
          return new PageInfo<Log>(sysService.findLogService()) ;
     }
+
+    /**
+     * 退出登录
+     */
+    @GetMapping("logout")
+    public CommonResponse<Object> signOutController(HttpServletRequest request){
+        return sysService.signOutService(request);
+
+    }
 }

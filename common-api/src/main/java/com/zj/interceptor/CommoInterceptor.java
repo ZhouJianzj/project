@@ -30,13 +30,13 @@ public class CommoInterceptor implements HandlerInterceptor {
             JSONObject o = new JSONObject();
             PrintWriter writer = response.getWriter();
             o.put("stuts","400");
-            o.put("msg","没用登录！");
+            o.put("msg","没有登录！");
             writer.print(o);
 
 
            return false;
        }else {
-            UserManager user = (UserManager) session.getAttribute("user");
+
             return true;
         }
 

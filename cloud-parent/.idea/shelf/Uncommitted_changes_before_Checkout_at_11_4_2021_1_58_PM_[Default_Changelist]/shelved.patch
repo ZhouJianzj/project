@@ -1,0 +1,158 @@
+Index: ../sys-manager/src/main/java/com/zj/service/SysService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.zj.service;\r\n\r\nimport com.github.pagehelper.PageInfo;\r\nimport com.zj.entity.*;\r\n\r\nimport javax.servlet.http.HttpServletRequest;\r\nimport java.util.List;\r\n\r\n/**\r\n * @author zhoujian\r\n */\r\npublic interface SysService {\r\n     UserManager userLoginService(User user, HttpServletRequest request);\r\n\r\n    List<Organize> findOrganzieService( String orgName);\r\n\r\n    CommonResponse<Object> addOrganizeService(Organize organize);\r\n\r\n    CommonResponse<Boolean> deleteRoleService(int id);\r\n\r\n    List<Role> findRoleService(String roleName);\r\n\r\n    CommonResponse<Object> addRoleService(Role role);\r\n\r\n    List<Perm> findPermService();\r\n\r\n    CommonResponse<Object> addRolePermService(String roleId, String permId);\r\n\r\n    List<UserManager> finUserService(String key);\r\n\r\n    UserManager findUserIdService(String id);\r\n\r\n    CommonResponse<UserManager> addUserManagerService(UserManager userManager);\r\n\r\n    CommonResponse<Boolean> deleteUserManagerService(int id);\r\n\r\n    List<Log> findLogService();\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../sys-manager/src/main/java/com/zj/service/SysService.java	(revision ddf9eeafbc1868fc01954bc100fa3943d69438f8)
++++ ../sys-manager/src/main/java/com/zj/service/SysService.java	(date 1636004754033)
+@@ -35,4 +35,6 @@
+     CommonResponse<Boolean> deleteUserManagerService(int id);
+ 
+     List<Log> findLogService();
++
++    CommonResponse<Object> signOutService(HttpServletRequest request);
+ }
+Index: ../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.zj.service;\r\n\r\nimport com.github.pagehelper.PageHelper;\r\nimport com.github.pagehelper.PageInfo;\r\nimport com.zj.dao.SysDao;\r\nimport com.zj.entity.*;\r\nimport com.zj.util.Md5;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Service;\r\nimport org.springframework.transaction.annotation.Transactional;\r\n\r\nimport javax.servlet.http.HttpServletRequest;\r\nimport javax.servlet.http.HttpSession;\r\nimport java.io.UnsupportedEncodingException;\r\nimport java.security.NoSuchAlgorithmException;\r\nimport java.util.List;\r\n\r\n\r\n/**\r\n * @author zhoujian\r\n */\r\n@Service\r\n@Transactional\r\npublic class SysServiceImpl implements SysService {\r\n    @Autowired\r\n    private SysDao sysDao;\r\n\r\n    /**\r\n     * 用户登录\r\n     */\r\n    @Override\r\n    public UserManager userLoginService(User user, HttpServletRequest request) {\r\n        String password = user.getPassword();\r\n        //md5加密\r\n        try {\r\n            String ps = Md5.EncoderByMd5(password);\r\n            System.out.println(ps);\r\n            user.setPassword(ps);\r\n        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {\r\n            e.printStackTrace();\r\n        }\r\n        //查询\r\n        UserManager userManager = sysDao.userSelect(user);\r\n        //正确的用户放入redissession\r\n        if (null != userManager){\r\n            HttpSession session = request.getSession();\r\n            session.setAttribute(\"user\",userManager);\r\n\r\n        }\r\n        return userManager;\r\n    }\r\n\r\n    /**\r\n     * 机构查询\r\n     *\r\n     * @param orgName\r\n     * @return\r\n     */\r\n    @Override\r\n    public List<Organize> findOrganzieService(String orgName) {\r\n\r\n        return sysDao.organizeSelect(orgName);\r\n    }\r\n\r\n    /**\r\n     * 添加机构\r\n     * @return\r\n     */\r\n    @Override\r\n    public CommonResponse<Object> addOrganizeService(Organize organize) {\r\n        CommonResponse<Object> response = new CommonResponse<>();\r\n        if (sysDao.organizeInsert(organize)){\r\n            response.setStatus(200);\r\n            response.setMsg(\"添加成功！\");\r\n            return response;\r\n        }else {\r\n            response.setStatus(400);\r\n            response.setMsg(\"添加失败！\");\r\n            return  response;\r\n        }\r\n\r\n    }\r\n\r\n\r\n    /**\r\n     * 删除角色\r\n     * @param id\r\n     * @return\r\n     */\r\n    @Override\r\n    public CommonResponse<Boolean> deleteRoleService(int id) {\r\n        CommonResponse<Boolean> response = new CommonResponse<>();\r\n        boolean b = sysDao.roleDelete(id);\r\n        if (b == false){\r\n            response.setStatus(400);\r\n            response.setMsg(\"删除失败\");\r\n        }else {\r\n            response.setStatus(200);\r\n            response.setMsg(\"删除成功\");\r\n        }\r\n        return response;\r\n    }\r\n\r\n    /**\r\n     * 角色查询\r\n     * @param roleName 角色字段\r\n     * @return 结果集\r\n     */\r\n    @Override\r\n    public List<Role> findRoleService(String roleName) {\r\n        return sysDao.roleSelect(roleName);\r\n    }\r\n\r\n    /**\r\n     * 角色添加\r\n     * @param role 参数\r\n     * @return 返回结果\r\n     */\r\n    @Override\r\n    public CommonResponse<Object> addRoleService(Role role) {\r\n        CommonResponse<Object> response = new CommonResponse<>();\r\n        if (sysDao.roleInsert(role)){\r\n            response.setStatus(200);\r\n            response.setMsg(\"添加成功！\");\r\n            return response;\r\n        }else {\r\n            response.setStatus(400);\r\n            response.setMsg(\"添加失败！\");\r\n            return  response;\r\n        }\r\n    }\r\n\r\n    /**\r\n     * 查询所有权限\r\n     * @return 权限结果集\r\n     */\r\n    @Override\r\n    public List<Perm> findPermService() {\r\n        List<Perm> perms = sysDao.permSelect();\r\n        return perms;\r\n    }\r\n\r\n    /**\r\n     * 给角色添加权限\r\n     * @param roleId\r\n     * @param permId\r\n     * @return\r\n     */\r\n    @Override\r\n    public CommonResponse<Object> addRolePermService(String roleId, String permId) {\r\n        CommonResponse<Object> response = new CommonResponse<>();\r\n        if (sysDao.rolePermInsert(roleId,permId)){\r\n            response.setStatus(200);\r\n            response.setMsg(\"添加成功！\");\r\n            return response;\r\n        }else {\r\n            response.setStatus(400);\r\n            response.setMsg(\"添加失败！\");\r\n            return response;\r\n        }\r\n    }\r\n\r\n    /**\r\n     * 查询用户，支持模糊查询，查询关键字可以是手机号或者是用户名\r\n     *\r\n     */\r\n    @Override\r\n    public List<UserManager> finUserService(String key) {\r\n        List<UserManager> userManagers = sysDao.userKeySelect(key);\r\n\r\n        return userManagers ;\r\n    }\r\n\r\n    /**\r\n     * 根据id查询用户\r\n     * @param id\r\n     * @return\r\n     */\r\n    @Override\r\n    public UserManager findUserIdService(String id) {\r\n        return sysDao.userIdSelect(id);\r\n    }\r\n\r\n    /**\r\n     * 用户添加\r\n     * @param userManager 参数\r\n     * @return 返回值\r\n     * */\r\n    @Override\r\n    public CommonResponse<UserManager> addUserManagerService(UserManager userManager) {\r\n        CommonResponse<UserManager> response = new CommonResponse<>();\r\n        try {\r\n            String password = userManager.getPassword();\r\n            userManager.setPassword(Md5.EncoderByMd5(password));\r\n        } catch (NoSuchAlgorithmException e) {\r\n            e.printStackTrace();\r\n        } catch (UnsupportedEncodingException e) {\r\n            e.printStackTrace();\r\n        }\r\n        if (sysDao.userManagerInsert(userManager)){\r\n            response.setMsg(\"添加成功\");\r\n            response.setStatus(200);\r\n        }else {\r\n            response.setStatus(400);\r\n            response.setMsg(\"添加失败\");\r\n        }\r\n        return response;\r\n    }\r\n\r\n    /**\r\n     * 删除用户\r\n     * @param id\r\n     * @return\r\n     * */\r\n    @Override\r\n    public CommonResponse<Boolean> deleteUserManagerService(int id) {\r\n        CommonResponse response = new CommonResponse();\r\n        if (sysDao.userManagerDelete(id)){\r\n            response.setMsg(\"删除成功\");\r\n            response.setStatus(200);\r\n        }else {\r\n            response.setStatus(400);\r\n            response.setMsg(\"删除失败\");\r\n        }\r\n        return response;\r\n    }\r\n\r\n    /**\r\n     * 实现log分页查询\r\n     *\r\n     * @return 结果集合\r\n     */\r\n    @Override\r\n    public List<Log> findLogService() {\r\n\r\n        return sysDao.logSelect();\r\n\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java	(revision ddf9eeafbc1868fc01954bc100fa3943d69438f8)
++++ ../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java	(date 1636004754042)
+@@ -237,5 +237,15 @@
+ 
+     }
+ 
++    @Override
++    public CommonResponse<Object> signOutService(HttpServletRequest request) {
++        HttpSession session = request.getSession(false);
++        if (null != session){
++            session.removeAttribute("user");
++            return new CommonResponse<>(200,"用户退出登录！");
++        }
++        return new CommonResponse<>(401,"退出登录失败！");
++    }
++
+ 
+ }
+Index: ../item-manger/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=sys-manager\r\nserver.port=8001\r\n\r\nspring.datasource.driver-class-name=com.mysql.jdbc.Driver\r\nspring.datasource.url=jdbc:mysql://localhost:3306/iot?serverTimezone=UTC\r\nspring.datasource.type=com.alibaba.druid.pool.DruidDataSource\r\nspring.datasource.username=root\r\nspring.datasource.password=123321\r\n#项目完成之后不需要调试sql日志信息了\r\n#mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl\r\n#配置使用哪种数据库语言\r\npagehelper.helper-dialect=mysql\r\n#配置分页参数合理化功能\r\npagehelper.reasonable=true\r\n#支持通过Mapper接口参数来传递分页参数\r\npagehelper.support-methods-arguments=true\r\n\r\nspring.cloud.nacos.server-addr=localhost:8848\r\n\r\nspring.redis.host=localhost\r\nspring.redis.port=6379\r\n\r\n#开启监视器的配置\r\n#spring.cloud.sentinel.transport.port=8719\r\n#spring.cloud.sentinel.transport.dashboard=localhost:8080
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../item-manger/src/main/resources/application.properties	(revision ddf9eeafbc1868fc01954bc100fa3943d69438f8)
++++ ../item-manger/src/main/resources/application.properties	(date 1636004035386)
+@@ -1,13 +1,14 @@
+-spring.application.name=sys-manager
+-server.port=8001
++spring.application.name=item-manager
++server.port=8002
+ 
+ spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+ spring.datasource.url=jdbc:mysql://localhost:3306/iot?serverTimezone=UTC
+ spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
+ spring.datasource.username=root
+ spring.datasource.password=123321
++
+ #项目完成之后不需要调试sql日志信息了
+-#mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
++mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
+ #配置使用哪种数据库语言
+ pagehelper.helper-dialect=mysql
+ #配置分页参数合理化功能
+Index: ../sys-manager/src/main/java/com/zj/web/SysController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.zj.web;\r\n\r\nimport com.github.pagehelper.PageHelper;\r\nimport com.github.pagehelper.PageInfo;\r\nimport com.zj.annotation.IgnoreResponseAdvice;\r\nimport com.zj.entity.*;\r\nimport com.zj.service.SysService;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport javax.servlet.http.HttpServletRequest;\r\nimport java.util.List;\r\n\r\n/**\r\n * @author zhoujian\r\n */\r\n@RestController\r\n@RequestMapping(\"sys\")\r\npublic class SysController {\r\n    @Autowired\r\n    private SysService sysService;\r\n\r\n    /**\r\n     * 测试网关\r\n     * @return 测试网关\r\n     */\r\n    @IgnoreResponseAdvice\r\n    @RequestMapping(\"test\")\r\n    public String test(){\r\n        return \"test\";\r\n    }\r\n\r\n    /**\r\n     * 用户登录\r\n     * @return 用户对象\r\n     */\r\n    @PostMapping(\"login\")\r\n    public UserManager userLoginController(@RequestBody User user, HttpServletRequest request){\r\n        return sysService.userLoginService(user,request);\r\n    }\r\n\r\n    /**\r\n     * 公司查询，支持模糊查询和分页\r\n     * @param pageNo 页码\r\n     * @param pageSize 页面数据量\r\n     * @param orgName 查询关键字\r\n     * @return 结果集\r\n     */\r\n    @GetMapping(\"orga\")\r\n    public PageInfo<Organize> findOrganizeController(String orgName,String pageNo,String pageSize){\r\n        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));\r\n\r\n        return new PageInfo<Organize>(sysService.findOrganzieService(orgName)) ;\r\n    }\r\n\r\n    /**\r\n     * 添加机构\r\n     * @param organize 插入参数\r\n     * @return 插入是否成功\r\n     */\r\n    @PostMapping(\"orga\")\r\n    public CommonResponse<Object> addOrganizeController(@RequestBody Organize organize){\r\n        return  sysService.addOrganizeService(organize);\r\n    }\r\n\r\n    /**\r\n     * 角色查询\r\n     * @param pageNo 页码\r\n     * @param pageSize 每一个展示的数据\r\n     * @param roleName 查询关键字\r\n     * @return role结果集\r\n     */\r\n    @GetMapping(\"role\")\r\n    public PageInfo<Role> findRoleController(String roleName,String pageNo,String pageSize){\r\n        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));\r\n        return new PageInfo<>(sysService.findRoleService( roleName));\r\n    }\r\n\r\n    /**\r\n     * 添加角色\r\n     * @param role 添加对象参数\r\n     * @return 返回结果\r\n     */\r\n    @PostMapping(\"role\")\r\n    public CommonResponse<Object> addRoleController(@RequestBody Role role){\r\n        return sysService.addRoleService(role);\r\n    }\r\n\r\n    /**\r\n     * 删除角色\r\n     * */\r\n    @DeleteMapping(\"role\")\r\n    public CommonResponse<Boolean> deleteRoleController( int id){\r\n        return sysService.deleteRoleService(id);\r\n    }\r\n    /**\r\n     * 权限查询\r\n     * @return 权限结果集\r\n     */\r\n    @GetMapping(\"perm\")\r\n    public PageInfo<Perm> findPermController(@RequestParam(\"pageNo\") String pageNo,@RequestParam(\"pageSize\") String pageSize){\r\n        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));\r\n        return  new PageInfo<Perm>(sysService.findPermService());\r\n\r\n    }\r\n\r\n    /**\r\n     * 角色分配权限\r\n     * @param roleId 角色id\r\n     * @param permId 权限id\r\n     * @return 统一响应体\r\n     */\r\n    @PostMapping(\"role/perm\")\r\n    public CommonResponse<Object> addRolePermController(String roleId,String permId){\r\n        return sysService.addRolePermService(roleId,permId);\r\n    }\r\n\r\n\r\n    /**\r\n     * 查询所有的用户\r\n     * @param key 手机号 或者 手机号\r\n     * @return\r\n     */\r\n    @GetMapping(\"user/key\")\r\n    public PageInfo<UserManager> findUserController(String key,String pageNo,String pageSize){\r\n        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));\r\n        return new PageInfo<UserManager>(sysService.finUserService(key));\r\n    }\r\n\r\n    /**\r\n     * 根据id查询用户\r\n     * @param id 用户id\r\n     * @return 结果集\r\n     */\r\n    @GetMapping(\"user/id\")\r\n    public UserManager findUserIdController(String id){\r\n        return sysService.findUserIdService(id);\r\n    }\r\n\r\n    /**\r\n     * 新增用户\r\n     * @param userManager 参数对象\r\n     * @return 统一响应体\r\n     * */\r\n    @PostMapping(\"user\")\r\n    public CommonResponse<UserManager> addUserManagerController(@RequestBody UserManager userManager){\r\n        return sysService.addUserManagerService(userManager);\r\n    }\r\n\r\n    /**\r\n     * 删除用户\r\n     * @param id 用户地\r\n     * @return 统一响应体\r\n     * */\r\n    @DeleteMapping(\"user\")\r\n    public CommonResponse<Boolean> deleteUserManagerController(int id){\r\n        return sysService.deleteUserManagerService(id);\r\n    }\r\n\r\n    /**\r\n     * 查询日志\r\n     * @param pageNo  页码\r\n     * @param pageSize 单页面数据量\r\n     * @return  数据\r\n     */\r\n    @GetMapping(\"log\")\r\n    public PageInfo<Log> findLogController(String pageNo, String pageSize){\r\n        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));\r\n\r\n         return new PageInfo<Log>(sysService.findLogService()) ;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../sys-manager/src/main/java/com/zj/web/SysController.java	(revision ddf9eeafbc1868fc01954bc100fa3943d69438f8)
++++ ../sys-manager/src/main/java/com/zj/web/SysController.java	(date 1636004909680)
+@@ -169,4 +169,13 @@
+ 
+          return new PageInfo<Log>(sysService.findLogService()) ;
+     }
++
++    /**
++     * 退出登录
++     */
++    @GetMapping("logout")
++    public CommonResponse<Object> signOutController(HttpServletRequest request){
++        return sysService.signOutService(request);
++
++    }
+ }
+\ No newline at end of file
+Index: ../common-api/src/main/java/com/zj/interceptor/CommoInterceptor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.zj.interceptor;\r\n\r\nimport com.alibaba.fastjson.JSON;\r\nimport com.alibaba.fastjson.JSONObject;\r\nimport com.zj.entity.UserManager;\r\nimport org.springframework.core.io.buffer.DataBuffer;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.web.servlet.HandlerInterceptor;\r\nimport org.springframework.web.servlet.ModelAndView;\r\n\r\nimport javax.servlet.http.HttpServletRequest;\r\nimport javax.servlet.http.HttpServletResponse;\r\nimport javax.servlet.http.HttpSession;\r\nimport java.io.PrintWriter;\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\npublic class CommoInterceptor implements HandlerInterceptor {\r\n\r\n    @Override\r\n    public boolean preHandle(HttpServletRequest request, HttpServletResponse response,\r\n                             Object handler) throws Exception {\r\n        HttpSession session = request.getSession(false);\r\n        if ( session == null){\r\n\r\n            // 响应结果，响应数据为JSON数据\r\n\r\n            response.setCharacterEncoding(\"utf-8\");\r\n            response.setContentType(\"json; charset=utf-8\");\r\n            JSONObject o = new JSONObject();\r\n            PrintWriter writer = response.getWriter();\r\n            o.put(\"stuts\",\"400\");\r\n            o.put(\"msg\",\"没用登录！\");\r\n            writer.print(o);\r\n\r\n\r\n           return false;\r\n       }else {\r\n            UserManager user = (UserManager) session.getAttribute(\"user\");\r\n            return true;\r\n        }\r\n\r\n    }\r\n\r\n    @Override\r\n    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {\r\n\r\n\r\n    }\r\n\r\n    @Override\r\n    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../common-api/src/main/java/com/zj/interceptor/CommoInterceptor.java	(revision ddf9eeafbc1868fc01954bc100fa3943d69438f8)
++++ ../common-api/src/main/java/com/zj/interceptor/CommoInterceptor.java	(date 1636005253653)
+@@ -30,13 +30,13 @@
+             JSONObject o = new JSONObject();
+             PrintWriter writer = response.getWriter();
+             o.put("stuts","400");
+-            o.put("msg","没用登录！");
++            o.put("msg","没有登录！");
+             writer.print(o);
+ 
+ 
+            return false;
+        }else {
+-            UserManager user = (UserManager) session.getAttribute("user");
++
+             return true;
+         }
+ 
+Index: ../common-api/src/main/java/com/zj/advice/CommoResAdvice.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.zj.advice;\r\n\r\nimport com.zj.annotation.IgnoreResponseAdvice;\r\nimport com.zj.dao.LogDao;\r\nimport com.zj.entity.CommonResponse;\r\nimport com.zj.entity.Log;\r\nimport com.zj.entity.UserManager;\r\nimport org.springframework.core.MethodParameter;\r\nimport org.springframework.http.MediaType;\r\nimport org.springframework.http.converter.HttpMessageConverter;\r\nimport org.springframework.http.server.ServerHttpRequest;\r\nimport org.springframework.http.server.ServerHttpResponse;\r\nimport org.springframework.http.server.ServletServerHttpRequest;\r\nimport org.springframework.web.bind.annotation.ResponseBody;\r\nimport org.springframework.web.bind.annotation.RestControllerAdvice;\r\nimport org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;\r\n\r\nimport javax.annotation.Resource;\r\nimport javax.servlet.http.HttpServletRequest;\r\nimport javax.servlet.http.HttpSession;\r\nimport javax.xml.crypto.Data;\r\n\r\n;import java.util.ArrayList;\r\nimport java.util.Date;\r\n\r\n/**\r\n * 设置统一的响应对象\r\n */\r\n@RestControllerAdvice\r\npublic class CommoResAdvice implements ResponseBodyAdvice<Object> {\r\n    @Resource\r\n    private LogDao logDao;\r\n\r\n    //默认的响应对象\r\n    CommonResponse<Object> response = new CommonResponse<Object>();\r\n\r\n    @Override\r\n    public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {\r\n        //判断请求对象是否使用我们自己的自定义注解，是就忽略增强\r\n        //获取使用在类上面的自定义注解\r\n        if (methodParameter.getDeclaringClass().isAnnotationPresent(\r\n                IgnoreResponseAdvice.class)){\r\n            return false;\r\n        }\r\n        //获取使用在方法上面的注解\r\n        if (methodParameter.getMethod().isAnnotationPresent(\r\n                IgnoreResponseAdvice.class)){\r\n            return false;\r\n        }\r\n        return true;\r\n    }\r\n\r\n    @Override\r\n    public Object beforeBodyWrite(Object o,\r\n                                  MethodParameter methodParameter,\r\n                                  MediaType mediaType,\r\n                                  Class<? extends HttpMessageConverter<?>> aClass,\r\n                                  ServerHttpRequest serverHttpRequest,\r\n                                  ServerHttpResponse serverHttpResponse) {\r\n\r\n        System.out.println(\"========================已经进入advice\");\r\n        //转换\r\n        ServletServerHttpRequest request = (ServletServerHttpRequest) serverHttpRequest;\r\n        HttpServletRequest res = request.getServletRequest();\r\n        //获取登录之后的共享用户对象的名字，（redis session 实现）\r\n        HttpSession session = res.getSession(false);\r\n         if (null == o){\r\n            //没有就执行响应一个初始的响应\r\n            response.setStatus(200);\r\n            response.setMsg(\"没有响应参数\");\r\n\r\n        }else if ( o instanceof ResponseBody || o instanceof  CommonResponse){\r\n            response.setStatus(200);\r\n            response.setMsg(\"success\");\r\n            //如有已经是一个统一的响应对象了就转一下\r\n            response = (CommonResponse<Object>) o;\r\n        }else {\r\n            //如果是一个普通的数据对象，就传入统一响应对象中去\r\n            response.setStatus(200);\r\n            response.setMsg(\"success\");\r\n            response.setData(o);\r\n        }\r\n\r\n\r\n        Log log = new Log();\r\n        //获取当前登录的用户名称\r\n        String username = \"\";\r\n\r\n        //确认用户\r\n        UserManager user = (UserManager) session.getAttribute(\"user\");\r\n        username =user.getUsername();\r\n        log.setUsername(username);\r\n\r\n        //确认模块\r\n         verifyModule(res.getRequestURI(),log);\r\n        //确认操作类型\r\n         verifyOPerType(res,log);\r\n        //确认操作是否成功\r\n         verifyResult(log);\r\n         //确认时间\r\n         log.setOperTimer(new Date());\r\n\r\n         logDao.logInsert(log);\r\n\r\n        return response;\r\n    }\r\n\r\n    /**\r\n     * 模块确认\r\n     */\r\n    void verifyModule(String requestURI,Log log ){\r\n\r\n        String substring = null;\r\n        int end = 0;\r\n        int last = 0 ;\r\n        boolean falg = true;\r\n        ArrayList<String> array = new ArrayList<>();\r\n        while (falg){\r\n             last = end;\r\n             end = requestURI.indexOf('/', 1 + end);\r\n\r\n            if (end == -1){\r\n                 array.add(requestURI.substring(last + 1));\r\n                falg = false;\r\n                break;\r\n            }\r\n            substring = requestURI.substring(1, end);\r\n\r\n            array.add(substring);\r\n\r\n            substring = null;\r\n\r\n        }\r\n\r\n        int size = array.size();\r\n        int i = 0;\r\n        String module = null;\r\n        // 示例：/sys/role,获取sys字符串\r\n        switch (array.get(i++)){\r\n            case \"sys\":\r\n                module=\"系统管理\";\r\n                break;\r\n            case \"item\":\r\n                module=\"项目管理\";\r\n                break;\r\n            case \"user\":\r\n                module=\"用户管理\";\r\n                break;\r\n            case \"dev\":\r\n                module=\"资产管理\";\r\n                break;\r\n            case \"alarm\":\r\n                module=\"报警管理\";\r\n        }\r\n        log.setModuleName(module);\r\n\r\n        String content = null;\r\n        if (i >= size) return;\r\n        switch (array.get(i++)){\r\n            case \"login\":\r\n                content=\"登录操作\";\r\n                break;\r\n            case \"orga\":\r\n                content=\"公司操作\";\r\n                break;\r\n            case \"role\":\r\n                content=\"角色操作\";\r\n                break;\r\n            case \"perm\":\r\n                content=\"权限操作\";\r\n                break;\r\n        }\r\n        log.setOperContent(content);\r\n\r\n    }\r\n\r\n    /**\r\n     * 解析操作类型\r\n     */\r\n    void verifyOPerType(HttpServletRequest req,Log log){\r\n\r\n        String operType=null;\r\n\r\n        switch (req.getMethod()){\r\n            case \"POST\":\r\n                operType=\"添加\";\r\n                break;\r\n            case \"DELETE\":\r\n                operType=\"删除\";\r\n                break;\r\n            case \"PUT\":\r\n                operType=\"修改\";\r\n            case \"GET\":\r\n                operType=\"查询\";\r\n        }\r\n        log.setOperType(operType);\r\n    }\r\n\r\n    /**\r\n     *解析操作是否成功\r\n     */\r\n    void verifyResult(Log log){\r\n        boolean rs=false;\r\n        if (200 == response.getStatus()){\r\n            rs = true;\r\n        }\r\n        log.setResult(rs);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../common-api/src/main/java/com/zj/advice/CommoResAdvice.java	(revision ddf9eeafbc1868fc01954bc100fa3943d69438f8)
++++ ../common-api/src/main/java/com/zj/advice/CommoResAdvice.java	(date 1636005253663)
+@@ -88,7 +88,10 @@
+ 
+         //确认用户
+         UserManager user = (UserManager) session.getAttribute("user");
+-        username =user.getUsername();
++        if (null != user){
++            username =user.getUsername();
++        }
++
+         log.setUsername(username);
+ 
+         //确认模块
+Index: ../sys-manager/target/classes/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=sys-manager\r\nserver.port=8001\r\n\r\nspring.datasource.driver-class-name=com.mysql.jdbc.Driver\r\nspring.datasource.url=jdbc:mysql://localhost:3306/iot?serverTimezone=UTC\r\nspring.datasource.type=com.alibaba.druid.pool.DruidDataSource\r\nspring.datasource.username=root\r\nspring.datasource.password=123321\r\n\r\nmybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl\r\n#配置使用哪种数据库语言\r\npagehelper.helper-dialect=mysql\r\n#配置分页参数合理化功能\r\npagehelper.reasonable=true\r\n#支持通过Mapper接口参数来传递分页参数\r\npagehelper.support-methods-arguments=true\r\n\r\nspring.cloud.nacos.server-addr=localhost:8848\r\n\r\nspring.redis.host=localhost\r\nspring.redis.port=6379\r\n\r\n#开启监视器的配置\r\n#spring.cloud.sentinel.transport.port=8719\r\n#spring.cloud.sentinel.transport.dashboard=localhost:8080
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../sys-manager/target/classes/application.properties	(revision ddf9eeafbc1868fc01954bc100fa3943d69438f8)
++++ ../sys-manager/target/classes/application.properties	(date 1636003807112)
+@@ -6,8 +6,8 @@
+ spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
+ spring.datasource.username=root
+ spring.datasource.password=123321
+-
+-mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
++#项目完成之后不需要调试sql日志信息了
++#mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
+ #配置使用哪种数据库语言
+ pagehelper.helper-dialect=mysql
+ #配置分页参数合理化功能

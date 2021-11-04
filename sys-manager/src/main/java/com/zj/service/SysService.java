@@ -35,4 +35,6 @@ public interface SysService {
     CommonResponse<Boolean> deleteUserManagerService(int id);
 
     List<Log> findLogService();
+
+    CommonResponse<Object> signOutService(HttpServletRequest request);
 }
