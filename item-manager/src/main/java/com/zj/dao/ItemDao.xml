@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.dao.ItemDao">
+<!--    <resultMap id="item_orga" type="com.zj.entity.Item">-->
+<!--        <id column="id" property="id"/>-->
+<!--        <result column="name" property="name" />-->
+<!--        <result column="number" property="number"/>-->
+<!--        <result/>-->
+<!--        -->
+<!--        <result column="addr" property="addr" />-->
+<!--        <result column="phone" property="phone" />-->
+<!--        <result column="createTime" property="createTime" />-->
+<!--    </resultMap>-->
+    <select id="itemSelect" resultType="com.zj.entity.Item" >
+    select *
+    from t_item
+        join organize on organize.id = t_item.orga_id
+    where t_item.name like concat('%',#{key},'%')
+        or t_item.addr like concat('%',#{key},'%')
+        or organize.name like concat('%',#{key},'%')
+        or organize.location like concat('%',#{key},'%')
+    </select>
+
+</mapper>

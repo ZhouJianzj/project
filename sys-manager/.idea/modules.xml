@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/../cloud-parent/cloud-parent.iml" filepath="$PROJECT_DIR$/../cloud-parent/cloud-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/../common-api/common-api.iml" filepath="$PROJECT_DIR$/../common-api/common-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/../gateway/gatewag.iml" filepath="$PROJECT_DIR$/../gateway/gatewag.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../item-manager/item-manager.iml" filepath="$PROJECT_DIR$/../item-manager/item-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/sys-manager.iml" filepath="$PROJECT_DIR$/sys-manager.iml" />
     </modules>
   </component>
