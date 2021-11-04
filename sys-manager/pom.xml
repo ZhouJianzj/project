@@ -48,6 +48,30 @@
             <version>2.0.4.RELEASE</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <!--       是为了找到mapper 的映射文件-->
+        <resources>
+            <!--            编译指定的文件-->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 
 </project>
