@@ -23,6 +23,8 @@ public class Item implements Serializable {
 
     private String number;
 
+    private int orgaId;
+
     private Organize organize;
 
     private String addr;

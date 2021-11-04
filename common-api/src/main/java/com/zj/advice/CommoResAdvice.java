@@ -158,7 +158,9 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
         log.setModuleName(module);
 
         String content = null;
-        if (i >= size) return;
+        if (i >= size) {
+            return;
+        }
         switch (array.get(i++)){
             case "login":
                 content="登录操作";

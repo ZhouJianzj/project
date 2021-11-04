@@ -1,6 +1,7 @@
 package com.zj.dao;
 
 import com.zj.entity.Item;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,5 +13,23 @@ import java.util.List;
  */
 @Repository
 public interface ItemDao {
+    /**
+     * 查询项目
+     * */
     List<Item> itemSelect(String key);
+
+    /**
+     * 删除项目
+     * */
+    boolean itemDelete(int id);
+
+    /**
+     * 新增项目
+     * */
+    boolean itemInsert(Item item);
+
+    /**
+     * 修改项目
+     * */
+    boolean itemModify(Item item);
 }
