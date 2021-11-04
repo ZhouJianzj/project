@@ -7,6 +7,7 @@ import com.zj.entity.*;
 import com.zj.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import java.util.List;
  * @author zhoujian
  */
 @Service
+@Transactional
 public class SysServiceImpl implements SysService {
     @Autowired
     private SysDao sysDao;
@@ -112,12 +114,12 @@ public class SysServiceImpl implements SysService {
      * @return 结果集
      */
     @Override
-    public PageInfo findRoleService(String roleName,String pageNo,String pageSize) {
+    public PageInfo<Role> findRoleService(String roleName,String pageNo,String pageSize) {
         Integer no = Integer.valueOf(pageNo);
         Integer size = Integer.valueOf(pageSize);
         PageHelper.startPage(no,size);
         List<Role> roles = sysDao.roleSelect(roleName);
-        return new PageInfo<>(roles);
+        return new PageInfo<Role>(roles);
     }
 
     /**
@@ -144,12 +146,12 @@ public class SysServiceImpl implements SysService {
      * @return 权限结果集
      */
     @Override
-    public PageInfo findPermService(String pageNo,String pageSize) {
+    public PageInfo<Perm> findPermService(String pageNo,String pageSize) {
         List<Perm> perms = sysDao.permSelect();
-        Integer no = Integer.valueOf(pageNo);
-        Integer size = Integer.valueOf(pageSize);
+        int no = Integer.parseInt(pageNo);
+        int size = Integer.parseInt(pageSize);
         PageHelper.startPage(no,size);
-        return new PageInfo(perms) ;
+        return new PageInfo<Perm>(perms) ;
     }
 
     /**
@@ -178,12 +180,12 @@ public class SysServiceImpl implements SysService {
      * @return
      */
     @Override
-    public PageInfo finUserService(String key,String pageNo,String pageSize) {
+    public PageInfo<UserManager> finUserService(String key,String pageNo,String pageSize) {
         List<UserManager> userManagers = sysDao.userKeySelect(key);
         Integer no = Integer.valueOf(pageNo);
         Integer size = Integer.valueOf(pageSize);
         PageHelper.startPage(no,size);
-        return new PageInfo(userManagers) ;
+        return new PageInfo<UserManager>(userManagers) ;
     }
 
     /**
@@ -247,12 +249,12 @@ public class SysServiceImpl implements SysService {
      * @return 结果集合
      */
     @Override
-    public PageInfo findLogService(String pageNo,String pageSize) {
+    public PageInfo<Log> findLogService(String pageNo,String pageSize) {
         Integer no = Integer.valueOf(pageNo);
         Integer size = Integer.valueOf(pageSize);
         PageHelper.startPage(no,size);
         List<Log> logs = sysDao.logSelect();
-        PageInfo pageInfo = new PageInfo(logs);
+        PageInfo<Log> pageInfo = new PageInfo<>(logs);
         return  pageInfo;
     }
 

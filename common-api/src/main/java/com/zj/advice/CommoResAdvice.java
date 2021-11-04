@@ -27,7 +27,7 @@ import java.util.Date;
  * 设置统一的响应对象
  */
 @RestControllerAdvice
-public class CommoAdvice implements ResponseBodyAdvice<Object> {
+public class CommoResAdvice implements ResponseBodyAdvice<Object> {
     @Resource
     private LogDao logDao;
 
@@ -64,16 +64,11 @@ public class CommoAdvice implements ResponseBodyAdvice<Object> {
         HttpServletRequest res = request.getServletRequest();
         //获取登录之后的共享用户对象的名字，（redis session 实现）
         HttpSession session = res.getSession(false);
-
-        if (null == session){
-            response.setStatus(400);
-            response.setMsg("没用登录！");
-            return response;
-        }else if (null == o){
+         if (null == o){
             //没有就执行响应一个初始的响应
             response.setStatus(200);
             response.setMsg("没有响应参数");
-            return  response;
+
         }else if ( o instanceof ResponseBody || o instanceof  CommonResponse){
             response.setStatus(200);
             response.setMsg("success");

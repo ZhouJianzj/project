@@ -18,15 +18,15 @@ public interface SysService {
 
     CommonResponse<Boolean> deleteRoleService(int id);
 
-    PageInfo findRoleService(String roleName,String pageNo,String pageSize);
+    PageInfo<Role> findRoleService(String roleName,String pageNo,String pageSize);
 
     CommonResponse<Object> addRoleService(Role role);
 
-    PageInfo findPermService( String pageNo,String pageSize);
+    PageInfo<Perm> findPermService( String pageNo,String pageSize);
 
     CommonResponse<Object> addRolePermService(String roleId, String permId);
 
-    PageInfo finUserService(String key,String pageNo,String pageSize);
+    PageInfo<UserManager> finUserService(String key,String pageNo,String pageSize);
 
     UserManager findUserIdService(String id);
 
@@ -34,5 +34,5 @@ public interface SysService {
 
     CommonResponse<Boolean> deleteUserManagerService(int id);
 
-    PageInfo findLogService(String pageNo, String pageSize);
+    PageInfo<Log> findLogService(String pageNo, String pageSize);
 }

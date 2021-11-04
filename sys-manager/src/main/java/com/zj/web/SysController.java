@@ -68,7 +68,7 @@ public class SysController {
      * @return role结果集
      */
     @GetMapping("role")
-    public PageInfo findRoleController(String roleName,String pageNo,String pageSize){
+    public PageInfo<Role> findRoleController(String roleName,String pageNo,String pageSize){
         return sysService.findRoleService( roleName,pageNo, pageSize);
     }
 
@@ -94,7 +94,7 @@ public class SysController {
      * @return 权限结果集
      */
     @GetMapping("perm")
-    public PageInfo findPermController(String pageNo,String pageSize){
+    public PageInfo<Perm>findPermController(@RequestParam("pageNo") String pageNo,@RequestParam("pageSize") String pageSize){
         return sysService.findPermService(pageNo,pageSize);
     }
 
@@ -116,7 +116,7 @@ public class SysController {
      * @return
      */
     @GetMapping("user/key")
-    public PageInfo findUserController(String key,String pageNo,String pageSize){
+    public PageInfo<UserManager> findUserController(String key,String pageNo,String pageSize){
         return sysService.finUserService(key,pageNo,pageSize);
     }
 
