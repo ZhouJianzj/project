@@ -151,7 +151,7 @@
   {
       "success": true,
       "msg": "添加成功",
-      "obj": null
+      "data": null
   }
   ```
 
