@@ -13,6 +13,7 @@ public class CorsConfig {
         corsConfiguration.addAllowedOrigin("*"); //允许任何域名使用
         corsConfiguration.addAllowedHeader("*"); //运行任何头
         corsConfiguration.addAllowedMethod("*"); //允许任何方法
+        corsConfiguration.setAllowCredentials(true); // 允许cookies跨域
         return corsConfiguration;
     }
     @Bean
