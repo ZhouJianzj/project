@@ -149,7 +149,7 @@
 
   ```
   {
-      "success": true,
+      "status": 200,
       "msg": "添加成功",
       "data": null
   }
@@ -227,9 +227,9 @@
 
   ```
   {
-      "success": true,
+      "status": 200,
       "msg": "添加成功",
-      "obj": null
+      "data": null
   }
   ```
 
@@ -249,9 +249,9 @@
 
   ```
   {
-      "success": true,
+      "status": 200,
       "msg": "删除成功",
-      "obj": null
+      "data": null
   }
   ```
 
@@ -321,9 +321,9 @@
 
   ```
   {
-      "success": true,
+      "status": 200,
       "msg": "给角色添加权限成功",
-      "obj": null
+      "data": null
   }
   ```
 
@@ -623,9 +623,9 @@
 
   ```
   {
-      "success": true,
-      "msg": null,
-      "obj": {
+      "status": 200,
+      "msg": "success",
+      "data": {
           "total": 3,
           "list": [
               {
