@@ -10,12 +10,14 @@
         <module name="sys-manager" />
         <module name="common-api" />
         <module name="gateway" />
+        <module name="item-manger" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="cloud-parent" target="1.8" />
       <module name="common-api" target="1.8" />
       <module name="gateway" target="1.8" />
+      <module name="item-manger" target="1.8" />
       <module name="sys-manager" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -23,6 +25,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common-api" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="item-manger" options="-parameters" />
       <module name="sys-manager" options="-parameters" />
     </option>
   </component>

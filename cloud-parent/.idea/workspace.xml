@@ -21,12 +21,24 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:project" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:project/main" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:project/sys" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10883b94-3334-43b4-8354-51cf1c7374fa" name="Default Changelist" comment="" />
+    <list default="true" id="10883b94-3334-43b4-8354-51cf1c7374fa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../item-manger/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../common-api/src/main/java/com/zj/advice/CommoResAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/../common-api/src/main/java/com/zj/advice/CommoResAdvice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../common-api/src/main/java/com/zj/interceptor/CommoInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../common-api/src/main/java/com/zj/interceptor/CommoInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../common-api/target/classes/com/zj/interceptor/CommoInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/../common-api/target/classes/com/zj/interceptor/CommoInterceptor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/web/SysController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/web/SysController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/service/SysService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/service/SysService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/service/SysServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/service/SysServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/web/SysController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/web/SysController.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,6 +59,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="git@github.com:ZhouJianzj/project.git" />
+      </set>
+    </option>
+  </component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="common-api/invalid/Web" />
+    </ignored-facets>
+  </component>
   <component name="ProjectId" id="20LKSGxfJsajjY1oyncme9QYBhU" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -59,11 +83,12 @@
     <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../common-api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../item-manger/src/main/resources" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -74,6 +99,9 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zhoujian\Desktop\pipe\item-manger\src\main\resources" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.zj.config" />
       <recent name="com.zj.interceptor" />
@@ -92,7 +120,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.GatewayApplication">
+  <component name="RunManager" selected="Spring Boot.SysApplication">
     <configuration name="GatewagApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.zj.gateway.GatewagApplication" />
@@ -150,7 +178,7 @@
       <workItem from="1635935068265" duration="8772000" />
       <workItem from="1635944666438" duration="12815000" />
       <workItem from="1635957590361" duration="584000" />
-      <workItem from="1635983189184" duration="8634000" />
+      <workItem from="1635983189184" duration="14924000" />
     </task>
     <task id="LOCAL-00001" summary="修改角色删除操作失败问题">
       <created>1635909715017</created>
@@ -250,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635991118596</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="item模块的搭建">
+      <created>1636003826267</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1636003826267</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -264,7 +299,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="project/main" />
+                        <option value="project/sys" />
                       </list>
                     </value>
                   </entry>
@@ -289,7 +324,8 @@
     <MESSAGE value="数据分页加gateway修复权限验证" />
     <MESSAGE value="拦截器的使用，分页bug发现" />
     <MESSAGE value="完成sys模块" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成sys模块" />
+    <MESSAGE value="item模块的搭建" />
+    <option name="LAST_COMMIT_MESSAGE" value="item模块的搭建" />
   </component>
   <component name="WindowStateProjectService">
     <state x="649" y="268" key="#Notifications" timestamp="1635909399013">
@@ -300,58 +336,58 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1635943381550" />
-    <state x="574" y="136" key="#com.intellij.ide.util.MemberChooser" timestamp="1635985953199">
+    <state x="574" y="136" key="#com.intellij.ide.util.MemberChooser" timestamp="1636004409875">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="574" y="136" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1635985953199" />
+    <state x="574" y="136" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1636004409875" />
     <state x="246" y="348" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1635986101364">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="246" y="348" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.864@0.0.1536.864" timestamp="1635986101364" />
-    <state x="273" y="54" width="832" height="780" key="CommitChangelistDialog2" timestamp="1635991118078">
+    <state x="273" y="54" width="832" height="780" key="CommitChangelistDialog2" timestamp="1636003825691">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="273" y="54" width="832" height="780" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1635991118078" />
-    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1635931047724">
+    <state x="273" y="54" width="832" height="780" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1636003825691" />
+    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1635995161972">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog/0.0.1536.864@0.0.1536.864" timestamp="1635931047724" />
+    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog/0.0.1536.864@0.0.1536.864" timestamp="1635995161972" />
     <state x="549" y="131" key="FileChooserDialogImpl" timestamp="1635818966658">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="131" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1635818966658" />
-    <state width="1493" height="684" key="GridCell.Tab.0.bottom" timestamp="1635991718452">
+    <state width="1493" height="518" key="GridCell.Tab.0.bottom" timestamp="1636005131016">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="684" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
-    <state width="1493" height="684" key="GridCell.Tab.0.center" timestamp="1635991718452">
+    <state width="1493" height="518" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1636005131016" />
+    <state width="1493" height="518" key="GridCell.Tab.0.center" timestamp="1636005131016">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="684" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
-    <state width="1493" height="684" key="GridCell.Tab.0.left" timestamp="1635991718452">
+    <state width="1493" height="518" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1636005131016" />
+    <state width="1493" height="518" key="GridCell.Tab.0.left" timestamp="1636005131016">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="684" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
-    <state width="1493" height="684" key="GridCell.Tab.0.right" timestamp="1635991718452">
+    <state width="1493" height="518" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1636005131016" />
+    <state width="1493" height="518" key="GridCell.Tab.0.right" timestamp="1636005131016">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="684" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
-    <state width="1493" height="684" key="GridCell.Tab.1.bottom" timestamp="1635991718452">
+    <state width="1493" height="518" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1636005131016" />
+    <state width="1493" height="518" key="GridCell.Tab.1.bottom" timestamp="1636005131016">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="684" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
-    <state width="1493" height="684" key="GridCell.Tab.1.center" timestamp="1635991718452">
+    <state width="1493" height="518" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1636005131016" />
+    <state width="1493" height="518" key="GridCell.Tab.1.center" timestamp="1636005131016">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="684" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
-    <state width="1493" height="684" key="GridCell.Tab.1.left" timestamp="1635991718452">
+    <state width="1493" height="518" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1636005131016" />
+    <state width="1493" height="518" key="GridCell.Tab.1.left" timestamp="1636005131016">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="684" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
-    <state width="1493" height="684" key="GridCell.Tab.1.right" timestamp="1635991718452">
+    <state width="1493" height="518" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1636005131016" />
+    <state width="1493" height="518" key="GridCell.Tab.1.right" timestamp="1636005131016">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="684" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
+    <state width="1493" height="518" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1636005131016" />
     <state width="1493" height="342" key="GridCell.Tab.2.bottom" timestamp="1635987319716">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -388,10 +424,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="249" y="7" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1635942885203" />
-    <state x="361" y="161" key="Vcs.Push.Dialog.v2" timestamp="1635991654050">
+    <state x="361" y="161" key="Vcs.Push.Dialog.v2" timestamp="1636003833896">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="161" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1635991654050" />
+    <state x="361" y="161" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1636003833896" />
     <state x="792" y="295" width="516" height="289" key="coderead.maven.search" timestamp="1635987561159">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -400,18 +436,22 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="562" y="342" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1635991607265" />
-    <state x="550" y="211" key="git4idea.merge.GitMergeDialog" timestamp="1635991828884">
+    <state x="550" y="211" key="git4idea.merge.GitMergeDialog" timestamp="1635994810943">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="550" y="211" key="git4idea.merge.GitMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1635991828884" />
+    <state x="550" y="211" key="git4idea.merge.GitMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1635994810943" />
     <state x="571" y="265" key="git4idea.ui.GitTagDialog" timestamp="1635991816810">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="571" y="265" key="git4idea.ui.GitTagDialog/0.0.1536.864@0.0.1536.864" timestamp="1635991816810" />
-    <state x="425" y="197" key="run.anything.popup" timestamp="1635913856774">
+    <state x="178" y="7" key="new project wizard" timestamp="1636002970098">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="425" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1635913856774" />
+    <state x="178" y="7" key="new project wizard/0.0.1536.864@0.0.1536.864" timestamp="1636002970098" />
+    <state x="425" y="197" key="run.anything.popup" timestamp="1635994779508">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="425" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1635994779508" />
     <state x="425" y="85" width="672" height="676" key="search.everywhere.popup" timestamp="1635945788677">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -421,19 +461,24 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../common-api/src/main/java/com/zj/advice/CommoResAdvice.java</url>
-          <line>143</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../common-api/src/main/java/com/zj/advice/CommoResAdvice.java</url>
-          <line>109</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java</url>
           <line>139</line>
           <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../common-api/src/main/java/com/zj/interceptor/CommoInterceptor.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java</url>
+          <line>243</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../common-api/src/main/java/com/zj/advice/CommoResAdvice.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
