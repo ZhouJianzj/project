@@ -13,7 +13,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableDiscoveryClient
 @EnableRedisHttpSession
 @MapperScan("com.zj.dao")
-public class ItemManagerApplication {
+public class  ItemManagerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ItemManagerApplication.class, args);

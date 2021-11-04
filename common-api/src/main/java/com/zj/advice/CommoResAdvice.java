@@ -58,7 +58,7 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
                                   ServerHttpRequest serverHttpRequest,
                                   ServerHttpResponse serverHttpResponse) {
 
-        System.out.println("========================已经进入advice");
+        System.out.println("========================已经进入advice====================");
         //转换
         ServletServerHttpRequest request = (ServletServerHttpRequest) serverHttpRequest;
         HttpServletRequest res = request.getServletRequest();
@@ -102,7 +102,7 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
          verifyResult(log);
          //确认时间
          log.setOperTimer(new Date());
-
+         //记录日志
          logDao.logInsert(log);
 
         return response;
@@ -112,29 +112,37 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
      * 模块确认
      */
     void verifyModule(String requestURI,Log log ){
-
+        //初始的地址去除/的字段
         String substring = null;
+        //不算第一个/出现/的第一个下标
         int end = 0;
+        //记录end，方便获取url最后一个字段
         int last = 0 ;
+        //布尔标志
         boolean falg = true;
+        //存储字段
         ArrayList<String> array = new ArrayList<>();
         while (falg){
              last = end;
+             //除去开头/第一次出现/前的字段
              end = requestURI.indexOf('/', 1 + end);
-
+             //获取不到/之后会返回值
             if (end == -1){
+                //此时拿取最后一个字段，存储起来
                  array.add(requestURI.substring(last + 1));
+                 //终止循环
                 falg = false;
                 break;
             }
+            //截取
             substring = requestURI.substring(1, end);
-
+            //装载
             array.add(substring);
 
             substring = null;
 
         }
-
+        //list大小
         int size = array.size();
         int i = 0;
         String module = null;
@@ -163,6 +171,9 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
         }
         switch (array.get(i++)){
             case "login":
+                content="登录操作";
+                break;
+            case "logout":
                 content="登录操作";
                 break;
             case "orga":
