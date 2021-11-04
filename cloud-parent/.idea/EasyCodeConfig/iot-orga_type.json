@@ -1,0 +1,27 @@
+{
+  "name" : "OrgaType",
+  "originTableName" : "orga_type",
+  "comment" : null,
+  "fullColumn" : [ {
+    "name" : "id",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "ktShortType" : "Int",
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "name",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "ktShortType" : "String",
+    "custom" : false,
+    "ext" : { }
+  } ],
+  "pkColumn" : null,
+  "otherColumn" : null,
+  "savePackageName" : "com.zj",
+  "savePath" : "C:/Users/zhoujian/Desktop/pipe/common-api/src/main/java/com/zj",
+  "saveModelName" : "common-api"
+}

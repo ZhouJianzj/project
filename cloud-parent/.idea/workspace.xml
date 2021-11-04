@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:project" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:project" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:project/main" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="10883b94-3334-43b4-8354-51cf1c7374fa" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -7,7 +32,25 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="sys" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="20LKSGxfJsajjY1oyncme9QYBhU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="abbreviatePackageNames" value="true" />
     <option name="flattenModules" value="true" />
@@ -24,6 +67,20 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="vcs.Subversion.SSH" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.zj.config" />
+      <recent name="com.zj.interceptor" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zhoujian\Desktop\pipe\common-api\src\main\java\com\zj\advice" />
+    </key>
   </component>
   <component name="RubyModuleManagerSettings">
     <option name="blackListedRootsPaths">
@@ -35,10 +92,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.SysApplication">
+  <component name="RunManager" selected="Spring Boot.GatewayApplication">
     <configuration name="GatewagApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.zj.gateway.GatewagApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="gateway" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.zj.gateway.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.zj.gateway.GatewayApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -59,6 +129,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.SysApplication" />
+        <item itemvalue="Spring Boot.GatewayApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -66,7 +137,7 @@
     <option name="myEncoding" value="UTF-8" />
   </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\zhoujian\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -76,53 +147,295 @@
       <option name="presentableId" value="Default" />
       <updated>1635818425092</updated>
       <workItem from="1635818426710" duration="988000" />
+      <workItem from="1635935068265" duration="8772000" />
+      <workItem from="1635944666438" duration="12815000" />
+      <workItem from="1635957590361" duration="584000" />
+      <workItem from="1635983189184" duration="8634000" />
     </task>
+    <task id="LOCAL-00001" summary="修改角色删除操作失败问题">
+      <created>1635909715017</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1635909715017</updated>
+    </task>
+    <task id="LOCAL-00002" summary="根据用户名或者是手机号模糊查询用户">
+      <created>1635911628837</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1635911628837</updated>
+    </task>
+    <task id="LOCAL-00003" summary="查询根据用户id">
+      <created>1635912476522</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1635912476522</updated>
+    </task>
+    <task id="LOCAL-00004" summary="修改日志实体">
+      <created>1635912718485</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1635912718485</updated>
+    </task>
+    <task id="LOCAL-00005" summary="网关的修改">
+      <created>1635923197781</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1635923197781</updated>
+    </task>
+    <task id="LOCAL-00006" summary="网关再次修改">
+      <created>1635937732121</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1635937732121</updated>
+    </task>
+    <task id="LOCAL-00007" summary="修改胡兴杰的角色删除问题">
+      <created>1635938241911</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1635938241911</updated>
+    </task>
+    <task id="LOCAL-00008" summary="解决跨域问题">
+      <created>1635942734736</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1635942734736</updated>
+    </task>
+    <task id="LOCAL-00009" summary="数据分页加gateway修复权限验证">
+      <created>1635957462413</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1635957462413</updated>
+    </task>
+    <task id="LOCAL-00010" summary="拦截器的使用，分页bug发现">
+      <created>1635986823700</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1635986823700</updated>
+    </task>
+    <task id="LOCAL-00011" summary="完成sys模块">
+      <created>1635990083825</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1635990083825</updated>
+    </task>
+    <task id="LOCAL-00012" summary="完成sys模块">
+      <created>1635990609689</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1635990609689</updated>
+    </task>
+    <task id="LOCAL-00013" summary="完成sys模块">
+      <created>1635990866466</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1635990866466</updated>
+    </task>
+    <task id="LOCAL-00014" summary="完成sys模块">
+      <created>1635991118596</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1635991118596</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="project/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="修改角色删除操作失败问题" />
+    <MESSAGE value="根据用户名或者是手机号模糊查询用户" />
+    <MESSAGE value="查询根据用户id" />
+    <MESSAGE value="修改日志实体" />
+    <MESSAGE value="网关的修改" />
+    <MESSAGE value="网关再次修改" />
+    <MESSAGE value="修改胡兴杰的角色删除问题" />
+    <MESSAGE value="解决跨域问题" />
+    <MESSAGE value="数据分页加gateway修复权限验证" />
+    <MESSAGE value="拦截器的使用，分页bug发现" />
+    <MESSAGE value="完成sys模块" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成sys模块" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="649" y="268" key="#Notifications" timestamp="1635909399013">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="649" y="268" key="#Notifications/0.0.1536.864@0.0.1536.864" timestamp="1635909399013" />
+    <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1635943381550">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1635943381550" />
+    <state x="574" y="136" key="#com.intellij.ide.util.MemberChooser" timestamp="1635985953199">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="574" y="136" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1635985953199" />
+    <state x="246" y="348" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1635986101364">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="246" y="348" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.864@0.0.1536.864" timestamp="1635986101364" />
+    <state x="273" y="54" width="832" height="780" key="CommitChangelistDialog2" timestamp="1635991118078">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="273" y="54" width="832" height="780" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1635991118078" />
+    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1635931047724">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog/0.0.1536.864@0.0.1536.864" timestamp="1635931047724" />
     <state x="549" y="131" key="FileChooserDialogImpl" timestamp="1635818966658">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="131" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1635818966658" />
-    <state width="1493" height="160" key="GridCell.Tab.0.bottom" timestamp="1635819413793">
+    <state width="1493" height="684" key="GridCell.Tab.0.bottom" timestamp="1635991718452">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
-    <state width="1493" height="160" key="GridCell.Tab.0.center" timestamp="1635819413793">
+    <state width="1493" height="684" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
+    <state width="1493" height="684" key="GridCell.Tab.0.center" timestamp="1635991718452">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
-    <state width="1493" height="160" key="GridCell.Tab.0.left" timestamp="1635819413793">
+    <state width="1493" height="684" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
+    <state width="1493" height="684" key="GridCell.Tab.0.left" timestamp="1635991718452">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
-    <state width="1493" height="160" key="GridCell.Tab.0.right" timestamp="1635819413793">
+    <state width="1493" height="684" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
+    <state width="1493" height="684" key="GridCell.Tab.0.right" timestamp="1635991718452">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
-    <state width="1493" height="160" key="GridCell.Tab.1.bottom" timestamp="1635819413793">
+    <state width="1493" height="684" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
+    <state width="1493" height="684" key="GridCell.Tab.1.bottom" timestamp="1635991718452">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
-    <state width="1493" height="160" key="GridCell.Tab.1.center" timestamp="1635819413793">
+    <state width="1493" height="684" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
+    <state width="1493" height="684" key="GridCell.Tab.1.center" timestamp="1635991718452">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
-    <state width="1493" height="160" key="GridCell.Tab.1.left" timestamp="1635819413793">
+    <state width="1493" height="684" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
+    <state width="1493" height="684" key="GridCell.Tab.1.left" timestamp="1635991718452">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
-    <state width="1493" height="160" key="GridCell.Tab.1.right" timestamp="1635819413793">
+    <state width="1493" height="684" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
+    <state width="1493" height="684" key="GridCell.Tab.1.right" timestamp="1635991718452">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1635819413793" />
+    <state width="1493" height="684" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1635991718452" />
+    <state width="1493" height="342" key="GridCell.Tab.2.bottom" timestamp="1635987319716">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="342" key="GridCell.Tab.2.bottom/0.0.1536.864@0.0.1536.864" timestamp="1635987319716" />
+    <state width="1493" height="342" key="GridCell.Tab.2.center" timestamp="1635987319716">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="342" key="GridCell.Tab.2.center/0.0.1536.864@0.0.1536.864" timestamp="1635987319716" />
+    <state width="1493" height="342" key="GridCell.Tab.2.left" timestamp="1635987319716">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="342" key="GridCell.Tab.2.left/0.0.1536.864@0.0.1536.864" timestamp="1635987319716" />
+    <state width="1493" height="342" key="GridCell.Tab.2.right" timestamp="1635987319716">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="342" key="GridCell.Tab.2.right/0.0.1536.864@0.0.1536.864" timestamp="1635987319716" />
+    <state x="349" y="167" key="IDE.errors.dialog" timestamp="1635939297403">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="349" y="167" key="IDE.errors.dialog/0.0.1536.864@0.0.1536.864" timestamp="1635939297403" />
+    <state x="299" y="87" key="Maven.ArtifactSearchDialog" timestamp="1635989933292">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="299" y="87" key="Maven.ArtifactSearchDialog/0.0.1536.864@0.0.1536.864" timestamp="1635989933292" />
     <state x="408" y="50" key="NewModule_or_Project.wizard" timestamp="1635818967861">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="408" y="50" key="NewModule_or_Project.wizard/0.0.1536.864@0.0.1536.864" timestamp="1635818967861" />
-    <state x="249" y="7" key="SettingsEditor" timestamp="1635819042038">
+    <state x="507" y="69" key="RollbackChangesDialog" timestamp="1635930181046">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="249" y="7" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1635819042038" />
+    <state x="507" y="69" key="RollbackChangesDialog/0.0.1536.864@0.0.1536.864" timestamp="1635930181046" />
+    <state x="249" y="7" key="SettingsEditor" timestamp="1635942885203">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="249" y="7" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1635942885203" />
+    <state x="361" y="161" key="Vcs.Push.Dialog.v2" timestamp="1635991654050">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="361" y="161" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1635991654050" />
+    <state x="792" y="295" width="516" height="289" key="coderead.maven.search" timestamp="1635987561159">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="792" y="295" width="516" height="289" key="coderead.maven.search/0.0.1536.864@0.0.1536.864" timestamp="1635987561159" />
+    <state x="562" y="342" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1635991607265">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="562" y="342" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1635991607265" />
+    <state x="550" y="211" key="git4idea.merge.GitMergeDialog" timestamp="1635991828884">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="550" y="211" key="git4idea.merge.GitMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1635991828884" />
+    <state x="571" y="265" key="git4idea.ui.GitTagDialog" timestamp="1635991816810">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="571" y="265" key="git4idea.ui.GitTagDialog/0.0.1536.864@0.0.1536.864" timestamp="1635991816810" />
+    <state x="425" y="197" key="run.anything.popup" timestamp="1635913856774">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="425" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1635913856774" />
+    <state x="425" y="85" width="672" height="676" key="search.everywhere.popup" timestamp="1635945788677">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="425" y="85" width="672" height="676" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1635945788677" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../common-api/src/main/java/com/zj/advice/CommoResAdvice.java</url>
+          <line>143</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../common-api/src/main/java/com/zj/advice/CommoResAdvice.java</url>
+          <line>109</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java</url>
+          <line>139</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
