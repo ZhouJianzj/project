@@ -27,7 +27,7 @@ public class ItemController {
      * @return item
      * */
     @GetMapping("item")
-    public PageInfo<Item> selectItemController(String pageNo, String pageSize, String key){
+    public PageInfo<Item> findItemController(String pageNo, String pageSize, String key){
 
         PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
         return new PageInfo<Item>(itemService.selectItemSelect(key));
@@ -49,7 +49,7 @@ public class ItemController {
      * @return item
      * */
     @PostMapping("item")
-    public CommonResponse<Item> insertItemController(@RequestBody Item item){
+    public CommonResponse<Item> addItemController(@RequestBody Item item){
         return itemService.insertItemService(item);
     }
 
