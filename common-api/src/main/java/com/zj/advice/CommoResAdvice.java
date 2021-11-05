@@ -157,11 +157,15 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
             case "user":
                 module="用户管理";
                 break;
-            case "dev":
+            case "asset":
                 module="资产管理";
                 break;
             case "alarm":
                 module="报警管理";
+                break;
+
+            case "model":
+                module="模型管理";
         }
         log.setModuleName(module);
 
