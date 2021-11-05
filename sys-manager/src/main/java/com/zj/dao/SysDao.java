@@ -1,6 +1,7 @@
 package com.zj.dao;
 
 import com.zj.entity.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -78,10 +79,9 @@ public interface SysDao {
 
     /**
      *查询用户通过关键字
-     * @param key
      */
     List<UserManager> userKeySelect(String key);
-
+    //List<UserManager> userKeySelect(@Param("id") Integer id, @Param("username") String username,@Param("phone") String phone);
 
     /**
      * 查询用户根据id
@@ -91,4 +91,9 @@ public interface SysDao {
     UserManager userIdSelect(String id);
 
     List<Log> logSelect();
+
+/**
+ * 查询所有用户
+ * */
+    List<UserManager> allUserSelect();
 }

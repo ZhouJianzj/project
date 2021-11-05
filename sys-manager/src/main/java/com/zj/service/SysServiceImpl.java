@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
@@ -161,10 +162,18 @@ public class SysServiceImpl implements SysService {
     /**
      * 查询用户，支持模糊查询，查询关键字可以是手机号或者是用户名
      *
+     * @param Key
      */
     @Override
-    public List<UserManager> finUserService(String key) {
-        List<UserManager> userManagers = sysDao.userKeySelect(key);
+    public List<UserManager> finUserService(String Key) {
+        List<UserManager> userManagers = null;
+        if (Key == null || Key == ""){
+            userManagers = sysDao.allUserSelect();
+        }
+        else {
+            userManagers = sysDao.userKeySelect(Key);
+        }
+
 
         return userManagers ;
     }
