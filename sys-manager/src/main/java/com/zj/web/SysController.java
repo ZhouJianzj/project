@@ -118,7 +118,7 @@ public class SysController {
 
     /**
      * 查询所有的用户
-     * @param key 手机号 或者 手机号
+     * @param key 手机号 或者 用户名
      * @return
      */
     @GetMapping("user/key")
