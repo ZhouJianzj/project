@@ -1,7 +1,5 @@
 package com.zj.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.zj.dao.SysDao;
 import com.zj.entity.*;
 import com.zj.util.Md5;
