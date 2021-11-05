@@ -1,6 +1,7 @@
 package com.zj.dao;
 
 import com.zj.entity.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -92,5 +93,8 @@ public interface SysDao {
 
     List<Log> logSelect();
 
-    List<UserManager> userAllSelect();
+/**
+ * 查询所有用户
+ * */
+    List<UserManager> allUserSelect();
 }

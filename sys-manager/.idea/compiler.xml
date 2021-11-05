@@ -11,6 +11,7 @@
         <module name="common-api" />
         <module name="sys-manager" />
         <module name="item-manager" />
+        <module name="model-manager" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,6 +20,7 @@
       <module name="gatewag" target="1.8" />
       <module name="item-manager" target="1.8" />
       <module name="item-manger" target="1.8" />
+      <module name="model-manager" target="1.8" />
       <module name="sys-manager" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -28,6 +30,7 @@
       <module name="gatewag" options="-parameters" />
       <module name="item-manager" options="-parameters" />
       <module name="item-manger" options="-parameters" />
+      <module name="model-manager" options="-parameters" />
       <module name="sys-manager" options="-parameters" />
     </option>
   </component>

@@ -145,12 +145,7 @@
             LEFT JOIN t_role r ON r.id = ur.roleid
             LEFT JOIN t_role_perms rp ON rp.role_id = r.id
             LEFT JOIN t_perms p ON p.id = rp.perm_id
-
-            where u.username like concat('%',#{key},'%')
-            or u.phone like concat('%',#{key},'%')
-
-
-
+        where u.username like concat(concat('%',#{key}),'%') or u.phone like concat(concat('%',#{key}),'%')
     </select>
 
 <!--    根据id查询用户-->
@@ -175,8 +170,8 @@
         where
            u.id = #{id}
     </select>
-<!--查询所用户-->
-    <select id="userAllSelect" resultMap="user_map">
+
+    <select id="allUserSelect" resultMap="user_map">
         SELECT
             u.id,
             u.username,
