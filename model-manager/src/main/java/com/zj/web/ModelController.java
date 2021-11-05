@@ -56,5 +56,10 @@ public class ModelController {
     @Autowired
     private ModelService modelService;
 
+    //管道模型管理
+
+
+    //传感器莫模型管理
+
 
 }
