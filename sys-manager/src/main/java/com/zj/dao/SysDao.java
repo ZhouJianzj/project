@@ -91,4 +91,6 @@ public interface SysDao {
     UserManager userIdSelect(String id);
 
     List<Log> logSelect();
+
+    List<UserManager> userAllSelect();
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.zip.DeflaterOutputStream;
 
 /**
  * @author zhoujian
@@ -118,14 +119,20 @@ public class SysController {
 
 
     /**
-     * 查询所有的用户
-     * @param key 手机号 或者 用户名
+     * 根据用户的手机号 或者 用户名模糊查询
+     * @param key
      * @return
      */
     @GetMapping("user/key")
     public PageInfo<UserManager> findUserController(String key,String pageNo,String pageSize){
-        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
+        PageHelper.startPage(Integer.parseInt(pageNo),Integer.parseInt(pageSize));
         return new PageInfo<UserManager>(sysService.finUserService(key));
+    }
+
+    @GetMapping("user/all")
+    public PageInfo<UserManager> findUserAllController(String pageNo,String pageSize){
+        PageHelper.startPage(Integer.parseInt(pageNo),Integer.parseInt(pageSize));
+       return new PageInfo<UserManager>(sysService.findUserAllService()) ;
     }
 
     /**

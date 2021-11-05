@@ -165,7 +165,6 @@ public class SysServiceImpl implements SysService {
     @Override
     public List<UserManager> finUserService(String key) {
         List<UserManager> userManagers = sysDao.userKeySelect(key);
-
         return userManagers ;
     }
 
@@ -243,6 +242,12 @@ public class SysServiceImpl implements SysService {
             return new CommonResponse<>(200,"用户退出登录！");
         }
         return new CommonResponse<>(401,"退出登录失败！");
+    }
+
+    @Override
+    public List<UserManager> findUserAllService() {
+        List<UserManager> userManagers = sysDao.userAllSelect();
+        return userManagers;
     }
 
 
