@@ -18,10 +18,12 @@
         </association>
 <!--       用户____> 角色表____>角色实体集 -->
         <collection property="roles" ofType="com.zj.entity.Role">
+            <id column="id" property="id"/>
             <result column="rolename" property="name"/>
             <result column="ext" property="ext"/>
 <!--         角色表____>权限表_____>权限实体集-->
             <collection  property="perms" ofType="com.zj.entity.Perm">
+                <id column="id" property="id"/>
                 <result column="permname" property="name"/>
             </collection>
         </collection>
@@ -34,8 +36,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
+            r.id ,
             r.NAME AS rolename,
             r.ext,
+            p.id,
             p.NAME AS permname
         FROM
             t_user u
@@ -129,17 +133,6 @@
     <delete id="roleDelete">
         delete from t_role where id = #{id}
     </delete>
-<!--    <delete id="roleUserPermDelete">-->
-<!--        DELETE t_role,-->
-<!--            t_role_perms,-->
-<!--            t_user_role-->
-<!--        FROM-->
-<!--	    t_role-->
-<!--	        INNER JOIN t_role_perms ON t_role_perms.role_id = t_role.id-->
-<!--	        INNER JOIN t_user_role ON t_user_role.roleid = t_role.id-->
-<!--        WHERE-->
-<!--	        t_role.id = #{id}-->
-<!--    </delete>-->
 
 <!--    根据手机号或者是用户name模糊查询用户-->
     <select id="userKeySelect" resultMap="user_map">
@@ -150,8 +143,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
+            r.id,
             r.NAME AS rolename,
             r.ext,
+            p.id,
             p.NAME AS permname
         FROM
             t_user u
@@ -239,6 +234,8 @@
     <delete id="userDelete">
         delete from t_user where id = #{id}
     </delete>
+
+<!--    删除用户-->
     <delete id="userManagerDelete">
         delete t_user,t_user_role
         from t_user
