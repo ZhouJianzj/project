@@ -12,14 +12,16 @@
 
     <artifactId>common-api</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
 <dependencies>
-    <!--会通过注解自动生成setter/getter/toString方法,直接在类上添加@Getter，@Setter，@ToString，@EqualsAndHashCode-->
+
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
         <version>1.16.18</version>
     </dependency>
+
     <dependency>
         <groupId>org.mybatis.spring.boot</groupId>
         <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -34,16 +36,19 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+
     <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
         <version>1.2.71</version>
         <scope>compile</scope>
     </dependency>
+
     <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpcore</artifactId>
     </dependency>
+
 </dependencies>
 
 </project>

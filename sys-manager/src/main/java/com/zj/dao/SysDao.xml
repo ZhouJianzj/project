@@ -13,17 +13,17 @@
         <result column="phone" property="phone"/>
 <!--        用户所在的公司-->
         <association property="o" javaType="com.zj.entity.Organize">
-            <id column="id" property="id"/>
+
             <result column="organame" property="name"/>
         </association>
 <!--       用户____> 角色表____>角色实体集 -->
         <collection property="roles" ofType="com.zj.entity.Role">
-            <id column="id" property="id"/>
+            <id column="rid" property="id"/>
             <result column="rolename" property="name"/>
             <result column="ext" property="ext"/>
 <!--         角色表____>权限表_____>权限实体集-->
             <collection  property="perms" ofType="com.zj.entity.Perm">
-                <id column="id" property="id"/>
+                <id column="pid" property="id"/>
                 <result column="permname" property="name"/>
             </collection>
         </collection>
@@ -36,10 +36,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
-            r.id ,
+            r.id as rId,
             r.NAME AS rolename,
             r.ext,
-            p.id,
+            p.id as pId,
             p.NAME AS permname
         FROM
             t_user u
@@ -143,10 +143,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
-            r.id,
+            r.id as rid,
             r.NAME AS rolename,
             r.ext,
-            p.id,
+            p.id as pid,
             p.NAME AS permname
         FROM
             t_user u
@@ -167,8 +167,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
+            r.id as rid,
             r.NAME AS rolename,
             r.ext,
+            p.id as pid,
             p.NAME AS permname
         FROM
             t_user u
@@ -189,8 +191,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
+            r.id as rid,
             r.NAME AS rolename,
             r.ext,
+            p.id as pid
             p.NAME AS permname
         FROM
             t_user u

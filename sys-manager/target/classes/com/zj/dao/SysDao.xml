@@ -13,17 +13,17 @@
         <result column="phone" property="phone"/>
 <!--        用户所在的公司-->
         <association property="o" javaType="com.zj.entity.Organize">
-            <id column="id" property="id"/>
+
             <result column="organame" property="name"/>
         </association>
 <!--       用户____> 角色表____>角色实体集 -->
         <collection property="roles" ofType="com.zj.entity.Role">
-            <id column="id" property="id"/>
+            <id column="rid" property="id"/>
             <result column="rolename" property="name"/>
             <result column="ext" property="ext"/>
 <!--         角色表____>权限表_____>权限实体集-->
             <collection  property="perms" ofType="com.zj.entity.Perm">
-                <id column="id" property="id"/>
+                <id column="pid" property="id"/>
                 <result column="permname" property="name"/>
             </collection>
         </collection>
@@ -36,10 +36,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
-            r.id ,
+            r.id as rId,
             r.NAME AS rolename,
             r.ext,
-            p.id,
+            p.id as pId,
             p.NAME AS permname
         FROM
             t_user u
@@ -133,17 +133,6 @@
     <delete id="roleDelete">
         delete from t_role where id = #{id}
     </delete>
-<!--    <delete id="roleUserPermDelete">-->
-<!--        DELETE t_role,-->
-<!--            t_role_perms,-->
-<!--            t_user_role-->
-<!--        FROM-->
-<!--	    t_role-->
-<!--	        INNER JOIN t_role_perms ON t_role_perms.role_id = t_role.id-->
-<!--	        INNER JOIN t_user_role ON t_user_role.roleid = t_role.id-->
-<!--        WHERE-->
-<!--	        t_role.id = #{id}-->
-<!--    </delete>-->
 
 <!--    根据手机号或者是用户name模糊查询用户-->
     <select id="userKeySelect" resultMap="user_map">
@@ -154,10 +143,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
-            r.id,
+            r.id as rid,
             r.NAME AS rolename,
             r.ext,
-            p.id,
+            p.id as pid,
             p.NAME AS permname
         FROM
             t_user u
@@ -178,8 +167,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
+            r.id as rid,
             r.NAME AS rolename,
             r.ext,
+            p.id as pid,
             p.NAME AS permname
         FROM
             t_user u
@@ -200,8 +191,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
+            r.id as rid,
             r.NAME AS rolename,
             r.ext,
+            p.id as pid
             p.NAME AS permname
         FROM
             t_user u
@@ -237,16 +230,17 @@
     <insert id="userManagerInsert">
         insert into t_user (username,password,salt,phone) values (#{username},#{password},#{salt},#{phone})
     </insert>
+
+
 <!--    删除用户-->
     <select id="userRoleIdSelect" resultType="com.zj.entity.UserRole">
         select * from t_user_role where userid = #{id}
     </select>
-<!--    删除用户（用户拥有角色）-->
     <delete id="userDelete">
         delete from t_user where id = #{id}
     </delete>
 
-<!--    删除用户-->
+<!--    删除用户（用户拥有角色）-->
     <delete id="userManagerDelete">
         delete t_user,t_user_role
         from t_user

@@ -10,8 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zj</groupId>
     <artifactId>model-manager</artifactId>
+    <packaging>jar</packaging>
 
 
     <dependencies>
