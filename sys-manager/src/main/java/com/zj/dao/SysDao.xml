@@ -226,16 +226,17 @@
     <insert id="userManagerInsert">
         insert into t_user (username,password,salt,phone) values (#{username},#{password},#{salt},#{phone})
     </insert>
+
+
 <!--    删除用户-->
     <select id="userRoleIdSelect" resultType="com.zj.entity.UserRole">
         select * from t_user_role where userid = #{id}
     </select>
-<!--    删除用户（用户拥有角色）-->
     <delete id="userDelete">
         delete from t_user where id = #{id}
     </delete>
 
-<!--    删除用户-->
+<!--    删除用户（用户拥有角色）-->
     <delete id="userManagerDelete">
         delete t_user,t_user_role
         from t_user
