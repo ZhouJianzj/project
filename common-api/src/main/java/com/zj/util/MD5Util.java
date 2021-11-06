@@ -93,11 +93,6 @@ import java.security.NoSuchAlgorithmException;
     // 测试主函数
     public static void main(String args[]) {
 
-        String s = new String("123");
-        System.out.println("原始：" + s);
-        String s1 = addMD5(s);
-        System.out.println("MD5后：" + s1 );
-        System.out.println("解密的：" + solveMD5(solveMD5(s)));
     }
 
 
