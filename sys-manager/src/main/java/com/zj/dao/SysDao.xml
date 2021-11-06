@@ -18,10 +18,12 @@
         </association>
 <!--       用户____> 角色表____>角色实体集 -->
         <collection property="roles" ofType="com.zj.entity.Role">
+            <id column="id" property="id"/>
             <result column="rolename" property="name"/>
             <result column="ext" property="ext"/>
 <!--         角色表____>权限表_____>权限实体集-->
             <collection  property="perms" ofType="com.zj.entity.Perm">
+                <id column="id" property="id"/>
                 <result column="permname" property="name"/>
             </collection>
         </collection>
@@ -34,8 +36,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
+            r.id ,
             r.NAME AS rolename,
             r.ext,
+            p.id,
             p.NAME AS permname
         FROM
             t_user u
@@ -135,8 +139,10 @@
             u.salt,
             u.phone,
             o.NAME AS organame,
+            r.id,
             r.NAME AS rolename,
             r.ext,
+            p.id,
             p.NAME AS permname
         FROM
             t_user u
@@ -217,7 +223,7 @@
         insert into t_user (username,password,salt,phone) values (#{username},#{password},#{salt},#{phone})
     </insert>
 
-<!--    删除角色-->
+<!--    删除用户-->
     <delete id="userManagerDelete">
         delete t_user,t_user_role
         from t_user
