@@ -9,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 
@@ -32,16 +30,16 @@ public class SysServiceImpl implements SysService {
         //md5加密
             //用户传输过来的是123
             String s = MD5Util.addMD5(password);
-            System.out.println(s);
             user.setPassword(s);
-
         //查询
         UserManager userManager = sysDao.userSelect(user);
         //正确的用户放入redissession
         if (null != userManager){
             HttpSession session = request.getSession();
             //获取查询到的用户对密码两次解密
-            userManager.setPassword(MD5Util.solveMD5(MD5Util.solveMD5(userManager.getPassword())));
+            String s1 = MD5Util.solveMD5(MD5Util.solveMD5(password));
+            userManager.setPassword(s1);
+            System.out.println(s1);
             session.setAttribute("user",userManager);
         }
         return userManager;
@@ -166,23 +164,12 @@ public class SysServiceImpl implements SysService {
         List<UserManager> userManagers = null;
         if (Key == null || Key == ""){
             userManagers = sysDao.allUserSelect();
-            //给用户解密
-            for (UserManager userManager :userManagers){
-                userManager.setPassword(MD5Util.solveMD5(MD5Util.solveMD5(userManager.getPassword())));
-            }
         }
         else {
             userManagers = sysDao.userKeySelect(Key);
-            //给用户解密
-            for (UserManager userManager :userManagers){
-                userManager.setPassword(MD5Util.solveMD5(MD5Util.solveMD5(userManager.getPassword())));
-            }
-
         }
         return userManagers ;
     }
-
-
 
     /**
      * 根据id查询用户
@@ -191,10 +178,7 @@ public class SysServiceImpl implements SysService {
      */
     @Override
     public UserManager findUserIdService(String id) {
-        UserManager userManager = sysDao.userIdSelect(id);
-        //给用户解密
-        userManager.setPassword(MD5Util.solveMD5(MD5Util.solveMD5(userManager.getPassword())));
-        return userManager;
+        return sysDao.userIdSelect(id);
     }
 
     /**
@@ -205,8 +189,6 @@ public class SysServiceImpl implements SysService {
     @Override
     public CommonResponse<UserManager> addUserManagerService(UserManager userManager) {
         CommonResponse<UserManager> response = new CommonResponse<>();
-        //获取新增用户密码，转成MD5
-        userManager.setPassword( MD5Util.addMD5(userManager.getPassword()));
         if (sysDao.userManagerInsert(userManager)){
             response.setMsg("添加成功");
             response.setStatus(200);

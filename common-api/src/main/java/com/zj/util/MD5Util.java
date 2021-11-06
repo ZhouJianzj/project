@@ -1,5 +1,8 @@
 package com.zj.util;
 
+import org.apache.http.util.TextUtils;
+import sun.security.provider.MD5;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -8,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
  * MD5加密解密
  */
  public class MD5Util {
-    /***
+    /**
      * MD5加码 生成32位md5码
      */
     public static String addMD5(String inStr) {
@@ -49,6 +52,38 @@ import java.security.NoSuchAlgorithmException;
     }
 
     /**
+     * MD5加盐
+     * <p>
+     * string + key（盐值 key）然后进行 MD5 加密
+     *
+     * @param string 需要加密的数据
+     * @param slat 盐
+     * @return 加密后的数据
+     */
+    public static String encrypt(String string, String slat) {
+        if (TextUtils.isEmpty(string)) {
+            return "";
+        }
+        MessageDigest md5 = null;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+            byte[] bytes = md5.digest((string + slat).getBytes());
+            String result = "";
+            for (byte b : bytes) {
+                String temp = Integer.toHexString(b & 0xff);
+                if (temp.length() == 1) {
+                    temp = "0" + temp;
+                }
+                result += temp;
+            }
+            return result;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
      * 比对密码
      */
     public static boolean checkPassword(String newpasswd,String oldpasswd) {
@@ -57,11 +92,13 @@ import java.security.NoSuchAlgorithmException;
 
     // 测试主函数
     public static void main(String args[]) {
+
         String s = new String("123");
         System.out.println("原始：" + s);
-
-        System.out.println("MD5后：" + addMD5(s));
-        System.out.println("加密的：" + solveMD5(s));
+        String s1 = addMD5(s);
+        System.out.println("MD5后：" + s1 );
         System.out.println("解密的：" + solveMD5(solveMD5(s)));
     }
+
+
 }

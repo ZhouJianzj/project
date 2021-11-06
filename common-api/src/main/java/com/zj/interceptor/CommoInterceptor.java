@@ -1,13 +1,7 @@
 package com.zj.interceptor;
-
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.zj.entity.UserManager;
-import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +14,6 @@ public class CommoInterceptor implements HandlerInterceptor {
                              Object handler) throws Exception {
         HttpSession session = request.getSession(false);
         if ( session == null){
-
             // 响应结果，响应数据为JSON数据
             response.setCharacterEncoding("utf-8");
             response.setContentType("json; charset=utf-8");
@@ -29,9 +22,7 @@ public class CommoInterceptor implements HandlerInterceptor {
             o.put("stuts","400");
             o.put("msg","没有登录！");
             writer.print(o);
-
-
-           return false;
+            return false;
        }else if (null == session.getAttribute("user")) {
             // 响应结果，响应数据为JSON数据
             response.setCharacterEncoding("utf-8");
@@ -41,8 +32,6 @@ public class CommoInterceptor implements HandlerInterceptor {
             o.put("stuts","400");
             o.put("msg","没有登录！");
             writer.print(o);
-
-
             return false;
         }else {
             return true;
