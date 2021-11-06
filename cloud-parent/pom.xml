@@ -7,7 +7,7 @@
         <module>../sys-manager</module>
         <module>../item-manager</module>
         <module>../model-manager</module>
-
+        <module>../common-api</module>
     </modules>
     <parent>
     <groupId>org.springframework.boot</groupId>
@@ -15,7 +15,7 @@
     <version>2.2.5.RELEASE</version>
 </parent>
 
-    <groupId>org.example</groupId>
+    <groupId>com.zj</groupId>
     <artifactId>cloud-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -87,32 +87,5 @@
     </dependencies>
 </dependencyManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.7.RELEASE</version>
-                <executions>
-                    <execution>
-                        <id>repackage</id>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

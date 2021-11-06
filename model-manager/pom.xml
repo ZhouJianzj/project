@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>cloud-parent</artifactId>
-        <groupId>org.example</groupId>
+        <groupId>com.zj</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../cloud-parent/pom.xml</relativePath>
     </parent>
@@ -21,7 +21,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.example</groupId>
+            <groupId>com.zj</groupId>
             <artifactId>common-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
