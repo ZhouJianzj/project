@@ -37,4 +37,5 @@ public interface SysService {
 
     CommonResponse<Object> signOutService(HttpServletRequest request);
 
+    Boolean modifyUserService(User user);
 }

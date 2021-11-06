@@ -1,4 +1,4 @@
-package com.zj.controller;
+package com.zj.web;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -126,6 +126,14 @@ public class SysController {
         return new PageInfo<UserManager>(sysService.finUserService(key));
     }
 
+    /**
+     *
+     * 根据id修改用户username phone
+     */
+    @PutMapping("user/modify")
+    public CommonResponse<Boolean> modifyUserController(User user){
+        return new CommonResponse<>(200,"修改成功！",sysService.modifyUserService(user));
+    }
 
     /**
      * 根据id查询用户

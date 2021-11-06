@@ -235,4 +235,11 @@
         operContent
         from log
     </select>
+
+
+    <update id="userUpdate" parameterType="com.zj.entity.User">
+        update t_user
+            set username = #{username}, phone = #{phone}
+        where id = #{id}
+    </update>
 </mapper>

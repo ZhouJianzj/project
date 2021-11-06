@@ -166,12 +166,23 @@ public class SysServiceImpl implements SysService {
         List<UserManager> userManagers = null;
         if (Key == null || Key == ""){
             userManagers = sysDao.allUserSelect();
+            //给用户解密
+            for (UserManager userManager :userManagers){
+                userManager.setPassword(MD5Util.solveMD5(MD5Util.solveMD5(userManager.getPassword())));
+            }
         }
         else {
             userManagers = sysDao.userKeySelect(Key);
+            //给用户解密
+            for (UserManager userManager :userManagers){
+                userManager.setPassword(MD5Util.solveMD5(MD5Util.solveMD5(userManager.getPassword())));
+            }
+
         }
         return userManagers ;
     }
+
+
 
     /**
      * 根据id查询用户
@@ -180,7 +191,10 @@ public class SysServiceImpl implements SysService {
      */
     @Override
     public UserManager findUserIdService(String id) {
-        return sysDao.userIdSelect(id);
+        UserManager userManager = sysDao.userIdSelect(id);
+        //给用户解密
+        userManager.setPassword(MD5Util.solveMD5(MD5Util.solveMD5(userManager.getPassword())));
+        return userManager;
     }
 
     /**
@@ -191,6 +205,8 @@ public class SysServiceImpl implements SysService {
     @Override
     public CommonResponse<UserManager> addUserManagerService(UserManager userManager) {
         CommonResponse<UserManager> response = new CommonResponse<>();
+        //获取新增用户密码，转成MD5
+        userManager.setPassword( MD5Util.addMD5(userManager.getPassword()));
         if (sysDao.userManagerInsert(userManager)){
             response.setMsg("添加成功");
             response.setStatus(200);
@@ -231,6 +247,9 @@ public class SysServiceImpl implements SysService {
 
     }
 
+    /**
+     * 退出登录
+     */
     @Override
     public CommonResponse<Object> signOutService(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
@@ -239,6 +258,15 @@ public class SysServiceImpl implements SysService {
             return new CommonResponse<>(200,"用户退出登录！");
         }
         return new CommonResponse<>(401,"退出登录失败！");
+    }
+
+    /**
+     * 修改用户
+     * @return
+     */
+    @Override
+    public Boolean modifyUserService(User user) {
+        return sysDao.userUpdate(user);
     }
 
 

@@ -97,4 +97,10 @@ public interface SysDao {
  * 查询所有用户
  * */
     List<UserManager> allUserSelect();
+
+    /**
+     * 修改用户通过id修改name phone
+     * @return
+     */
+    Boolean userUpdate(User user);
 }
