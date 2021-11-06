@@ -6,7 +6,6 @@ import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.*;
 import com.zj.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -145,7 +144,7 @@ public class SysController {
      * 根据id修改用户username phone
      */
     @PutMapping("user/modify")
-    public CommonResponse<Boolean> modifyUserController( User user) {
+    public CommonResponse<Boolean> modifyUserController(@RequestBody User user) {
         Boolean aBoolean = sysService.modifyUserService(user);
         if (aBoolean){
           return   new CommonResponse<>(200, "修改成功！", aBoolean);
