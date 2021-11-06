@@ -142,12 +142,12 @@
             u.password,
             u.salt,
             u.phone,
-            o.NAME AS organame,
+            o.name AS organame,
             r.id as rid,
-            r.NAME AS rolename,
+            r.name AS rolename,
             r.ext,
             p.id as pid,
-            p.NAME AS permname
+            p.name AS permname
         FROM
             t_user u
             LEFT JOIN organize o ON o.id = u.orga_id
@@ -166,12 +166,12 @@
             u.password,
             u.salt,
             u.phone,
-            o.NAME AS organame,
+            o.name AS organame,
             r.id as rid,
-            r.NAME AS rolename,
+            r.name AS rolename,
             r.ext,
             p.id as pid,
-            p.NAME AS permname
+            p.name AS permname
         FROM
             t_user u
             LEFT JOIN organize o ON o.id = u.orga_id
@@ -190,12 +190,12 @@
             u.password,
             u.salt,
             u.phone,
-            o.NAME AS organame,
+            o.name AS organame,
             r.id as rid,
-            r.NAME AS rolename,
+            r.name AS rolename,
             r.ext,
             p.id as pid
-            p.NAME AS permname
+            p.name AS permname
         FROM
             t_user u
             LEFT JOIN organize o ON o.id = u.orga_id
@@ -213,10 +213,10 @@
             u.password,
             u.salt,
             u.phone,
-            o.NAME AS organame,
-            r.NAME AS rolename,
+            o.name AS organame,
+            r.name AS rolename,
             r.ext,
-            p.NAME AS permname
+            p.name AS permname
         FROM
             t_user u
             LEFT JOIN organize o ON o.id = u.orga_id

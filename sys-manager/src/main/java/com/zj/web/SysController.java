@@ -133,7 +133,7 @@ public class SysController {
      * 根据用户的手机号 或者 用户名模糊查询
      */
     @GetMapping("user/key")
-    public PageInfo<UserManager> findUserController(String key,
+    public PageInfo<UserManager> findUserController(@RequestParam(value = "key",defaultValue = "1") String key,
                                                     @RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
                                                     @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
         PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
