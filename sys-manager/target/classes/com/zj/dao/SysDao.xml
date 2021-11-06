@@ -190,6 +190,7 @@
             LEFT JOIN t_role_perms rp ON rp.role_id = r.id
             LEFT JOIN t_perms p ON p.id = rp.perm_id
     </select>
+
 <!--查询所用户-->
     <select id="userAllSelect" resultMap="user_map">
         SELECT
@@ -223,7 +224,7 @@
         inner join t_user_role on t_user_role.userid = t_user.id
         where t_user.id = #{id}
     </delete>
-
+<!--    日志查询-->
     <select id="logSelect" resultType="com.zj.entity.Log">
         select
         id,
@@ -235,8 +236,7 @@
         operContent
         from log
     </select>
-
-
+<!--    更新用户根据id-->
     <update id="userUpdate" parameterType="com.zj.entity.User">
         update t_user
             set username = #{username}, phone = #{phone}
