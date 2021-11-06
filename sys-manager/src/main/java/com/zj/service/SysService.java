@@ -37,5 +37,4 @@ public interface SysService {
 
     CommonResponse<Object> signOutService(HttpServletRequest request);
 
-    List<UserManager> findUserAllService();
 }

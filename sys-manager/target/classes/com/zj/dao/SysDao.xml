@@ -190,6 +190,26 @@
             LEFT JOIN t_role_perms rp ON rp.role_id = r.id
             LEFT JOIN t_perms p ON p.id = rp.perm_id
     </select>
+<!--查询所用户-->
+    <select id="userAllSelect" resultMap="user_map">
+        SELECT
+            u.id,
+            u.username,
+            u.password,
+            u.salt,
+            u.phone,
+            o.NAME AS organame,
+            r.NAME AS rolename,
+            r.ext,
+            p.NAME AS permname
+        FROM
+            t_user u
+            LEFT JOIN organize o ON o.id = u.orga_id
+            LEFT JOIN t_user_role ur ON ur.userid = u.id
+            LEFT JOIN t_role r ON r.id = ur.roleid
+            LEFT JOIN t_role_perms rp ON rp.role_id = r.id
+            LEFT JOIN t_perms p ON p.id = rp.perm_id
+    </select>
 
 <!--   新增角色-->
     <insert id="userManagerInsert">

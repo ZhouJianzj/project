@@ -2,7 +2,7 @@ package com.zj.service;
 
 import com.zj.dao.SysDao;
 import com.zj.entity.*;
-import com.zj.util.Md5;
+import com.zj.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,20 +30,19 @@ public class SysServiceImpl implements SysService {
     public UserManager userLoginService(User user, HttpServletRequest request) {
         String password = user.getPassword();
         //md5加密
-        try {
-            String ps = Md5.EncoderByMd5(password);
-            System.out.println(ps);
-            user.setPassword(ps);
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+            //用户传输过来的是123
+            String s = MD5Util.addMD5(password);
+            System.out.println(s);
+            user.setPassword(s);
+
         //查询
         UserManager userManager = sysDao.userSelect(user);
         //正确的用户放入redissession
         if (null != userManager){
             HttpSession session = request.getSession();
+            //获取查询到的用户对密码两次解密
+            userManager.setPassword(MD5Util.solveMD5(MD5Util.solveMD5(userManager.getPassword())));
             session.setAttribute("user",userManager);
-
         }
         return userManager;
     }
@@ -171,8 +170,6 @@ public class SysServiceImpl implements SysService {
         else {
             userManagers = sysDao.userKeySelect(Key);
         }
-
-
         return userManagers ;
     }
 
@@ -194,14 +191,6 @@ public class SysServiceImpl implements SysService {
     @Override
     public CommonResponse<UserManager> addUserManagerService(UserManager userManager) {
         CommonResponse<UserManager> response = new CommonResponse<>();
-        try {
-            String password = userManager.getPassword();
-            userManager.setPassword(Md5.EncoderByMd5(password));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
         if (sysDao.userManagerInsert(userManager)){
             response.setMsg("添加成功");
             response.setStatus(200);

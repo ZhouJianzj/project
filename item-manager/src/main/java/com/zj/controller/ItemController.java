@@ -1,4 +1,4 @@
-package com.zj.web;
+package com.zj.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

@@ -1,4 +1,4 @@
-package com.zj.web;
+package com.zj.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.zip.DeflaterOutputStream;
 
 /**
  * @author zhoujian
@@ -49,7 +47,7 @@ public class SysController {
      */
     @GetMapping("orga")
     public PageInfo<Organize> findOrganizeController(String orgName,String pageNo,String pageSize){
-        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
+        PageHelper.startPage(Integer.parseInt(pageNo),Integer.parseInt(pageSize));
 
         return new PageInfo<Organize>(sysService.findOrganzieService(orgName)) ;
     }
@@ -120,8 +118,7 @@ public class SysController {
 
     /**
      * 根据用户的手机号 或者 用户名模糊查询
-     * @param key
-     * @return
+     *
      */
     @GetMapping("user/key")
     public PageInfo<UserManager> findUserController(String key,String pageNo,String pageSize){
@@ -129,11 +126,6 @@ public class SysController {
         return new PageInfo<UserManager>(sysService.finUserService(key));
     }
 
-    @GetMapping("user/all")
-    public PageInfo<UserManager> findUserAllController(String pageNo,String pageSize){
-        PageHelper.startPage(Integer.parseInt(pageNo),Integer.parseInt(pageSize));
-       return new PageInfo<UserManager>(sysService.findUserAllService()) ;
-    }
 
     /**
      * 根据id查询用户

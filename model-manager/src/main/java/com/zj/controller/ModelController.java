@@ -1,4 +1,4 @@
-package com.zj.web;
+package com.zj.controller;
 
 import com.zj.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
