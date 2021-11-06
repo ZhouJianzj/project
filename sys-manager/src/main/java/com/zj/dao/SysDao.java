@@ -39,7 +39,7 @@ public interface SysDao {
      * 根据id删除角色
      * @return
      */
-    boolean roleDelete(int id);
+    boolean roleUserPermDelete(int id);
 
     /**
      * 查询角色
@@ -76,6 +76,7 @@ public interface SysDao {
      * @return 返回结果
      * */
     boolean userManagerDelete(int id);
+    boolean userDelete(int id);
 
     /**
      *查询用户通过关键字
@@ -103,4 +104,20 @@ public interface SysDao {
      * @return
      */
     Boolean userUpdate(User user);
+
+    /**
+     * 根据id查询user_role表数据
+     * */
+    UserRole userRoleIdSelect(int id);
+
+
+    Object rolePermSelect(int id);
+
+    Object roleUserSelect(int id);
+
+    boolean roleUserDelete(int id);
+
+    boolean roleDelete(int id);
+
+    boolean rolePermDelete(int id);
 }

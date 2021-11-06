@@ -1,5 +1,6 @@
 package com.zj.service;
 
+import com.alibaba.druid.sql.visitor.functions.If;
 import com.zj.dao.SysDao;
 import com.zj.entity.*;
 import com.zj.util.MD5Util;
@@ -85,13 +86,19 @@ public class SysServiceImpl implements SysService {
     @Override
     public CommonResponse<Boolean> deleteRoleService(int id) {
         CommonResponse<Boolean> response = new CommonResponse<>();
-        boolean b = sysDao.roleDelete(id);
-        if (b == false){
-            response.setStatus(400);
-            response.setMsg("删除失败");
-        }else {
+        if (sysDao.roleDelete(id)){
+            if (sysDao.roleUserSelect(id) != null){
+                sysDao.roleUserDelete(id);
+            }
+            if (sysDao.rolePermSelect(id) != null){
+                sysDao.rolePermDelete(id);
+            }
             response.setStatus(200);
             response.setMsg("删除成功");
+        }else {
+            response.setStatus(400);
+            response.setMsg("删除失败");
+
         }
         return response;
     }
@@ -207,12 +214,22 @@ public class SysServiceImpl implements SysService {
     @Override
     public CommonResponse<Boolean> deleteUserManagerService(int id) {
         CommonResponse response = new CommonResponse();
-        if (sysDao.userManagerDelete(id)){
-            response.setMsg("删除成功");
-            response.setStatus(200);
+        if (sysDao.userRoleIdSelect(id) != null){
+            if (sysDao.userManagerDelete(id)){
+                response.setMsg("删除成功");
+                response.setStatus(200);
+            }else {
+                response.setStatus(400);
+                response.setMsg("删除失败");
+            }
         }else {
-            response.setStatus(400);
-            response.setMsg("删除失败");
+            if (sysDao.userDelete(id)){
+                response.setMsg("删除成功");
+                response.setStatus(200);
+            }else {
+                response.setStatus(400);
+                response.setMsg("删除失败");
+            }
         }
         return response;
     }

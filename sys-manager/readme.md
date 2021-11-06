@@ -12,6 +12,9 @@
 >       - 401：无权限
 >       - 400：失败操作
 #### 二、接口
+
+### 当分页是没传分页数码(pageNo)以及页面容量(pageSize)时，后端默认会将pageNo设为1，pageSize设为8
+
 ##### 1.用户登录接口
 
 ​	地址：localhost:9000/sys/login
@@ -332,6 +335,8 @@
 ##### 9.查询用户
 
 地址：localhost:8001/sys/user/key?key=138&pageNo=1&pageSize=2
+
+*KEY为空时查询所有用户*
 
 请求：GET
 
@@ -677,4 +682,85 @@
 地址：localhost:9000/sys/log
 
 请求：GET
+
+##### 16.修改用户
+
+地址：localhost:9000/sys/user/modify
+
+请求：PUT
+
+请求参数示例：
+
+```
+{
+	"id":1,
+	"username":a22,
+	"phone":12312312311
+}
+```
+
+返回参数示例：
+
+```
+{
+    "status": 200,
+    "msg": "修改成功",
+    "data": null
+}
+```
+
+##### 17.根据id查询用户
+
+地址：localhost:9000/sys/user/id
+
+请求：GET
+
+请求参数：id
+
+返回参数示例：
+
+```
+{
+                  "status": 200,
+                  "msg": "success",
+                  "data": {
+                      "id": 1,
+                      "username": "admin",
+                      "password": "123",
+                      "salt": null,
+                      "phone": "13999999912",
+                      "o": {
+                          "id": 1,
+                          "name": null,
+                          "parentId": null,
+                          "typeId": null,
+                          "location": null,
+                          "orgaNumber": null,
+                          "ext": null
+                      },
+                      "roles": [
+                          {
+                              "id": null,
+                              "name": "superManager",
+                              "ext": "超级管理员",
+                              "perms": [
+                                  {
+                                      "id": null,
+                                      "name": "sys:*:*"
+                                  },
+                                  {
+                                      "id": null,
+                                      "name": "work:*:*"
+                                  },
+                                  {
+                                      "id": null,
+                                      "name": "model:*:*"
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              }
+}
+```
 

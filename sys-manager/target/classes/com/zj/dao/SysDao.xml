@@ -118,17 +118,32 @@
     </insert>
 
 <!--    删除角色-->
-    <delete id="roleDelete">
-        DELETE t_role,
-            t_role_perms,
-            t_user_role
-        FROM
-	    t_role
-	        INNER JOIN t_role_perms ON t_role_perms.role_id = t_role.id
-	        INNER JOIN t_user_role ON t_user_role.roleid = t_role.id
-        WHERE
-	        t_role.id = #{id}
+    <select id="rolePermSelect" resultType="com.zj.entity.RolePerm">
+        select * from t_role_perms where role_id = #{id}
+    </select>
+    <select id="roleUserSelect" resultType="com.zj.entity.UserRole">
+        select * from t_user_role where roleid = #{id}
+    </select>
+    <delete id="rolePermDelete">
+        delete from t_role_perms where role_id = #{id}
     </delete>
+    <delete id="roleUserDelete">
+        delete from t_user_role where roleid = #{id}
+    </delete>
+    <delete id="roleDelete">
+        delete from t_role where id = #{id}
+    </delete>
+<!--    <delete id="roleUserPermDelete">-->
+<!--        DELETE t_role,-->
+<!--            t_role_perms,-->
+<!--            t_user_role-->
+<!--        FROM-->
+<!--	    t_role-->
+<!--	        INNER JOIN t_role_perms ON t_role_perms.role_id = t_role.id-->
+<!--	        INNER JOIN t_user_role ON t_user_role.roleid = t_role.id-->
+<!--        WHERE-->
+<!--	        t_role.id = #{id}-->
+<!--    </delete>-->
 
 <!--    根据手机号或者是用户name模糊查询用户-->
     <select id="userKeySelect" resultMap="user_map">
@@ -222,6 +237,14 @@
     <insert id="userManagerInsert">
         insert into t_user (username,password,salt,phone) values (#{username},#{password},#{salt},#{phone})
     </insert>
+<!--    删除用户-->
+    <select id="userRoleIdSelect" resultType="com.zj.entity.UserRole">
+        select * from t_user_role where userid = #{id}
+    </select>
+<!--    删除用户（用户拥有角色）-->
+    <delete id="userDelete">
+        delete from t_user where id = #{id}
+    </delete>
 
 <!--    删除用户-->
     <delete id="userManagerDelete">
