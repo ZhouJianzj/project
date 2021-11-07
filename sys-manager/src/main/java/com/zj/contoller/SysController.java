@@ -1,4 +1,4 @@
-package com.zj.web;
+package com.zj.contoller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

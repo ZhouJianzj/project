@@ -3,6 +3,7 @@ package com.zj.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
@@ -12,9 +13,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-/**
- * 统一响应体
- */
+@Component
 public class CommonResponse<T>   implements Serializable   {
 
     private Integer status;

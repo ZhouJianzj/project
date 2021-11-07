@@ -11,12 +11,14 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.crypto.Data;
 
@@ -31,8 +33,9 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
     @Resource
     private LogDao logDao;
 
-    //默认的响应对象
-    CommonResponse<Object> response = new CommonResponse<Object>();
+
+    @Resource
+    CommonResponse response;
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
@@ -62,25 +65,36 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
         //转换
         ServletServerHttpRequest request = (ServletServerHttpRequest) serverHttpRequest;
         HttpServletRequest res = request.getServletRequest();
+        //获取状态码
+        ServletServerHttpResponse response1 = (ServletServerHttpResponse) serverHttpResponse;
+        HttpServletResponse resp = response1.getServletResponse();
+        System.out.println("status:" + resp.getStatus());
+
         //获取登录之后的共享用户对象的名字，（redis session 实现）
         HttpSession session = res.getSession(false);
-         if (null == o){
-            //没有就执行响应一个初始的响应
-            response.setStatus(200);
-            response.setMsg("没有响应参数");
 
-        }else if ( o instanceof ResponseBody || o instanceof  CommonResponse){
-            response.setStatus(200);
+        //获取状态码来，不是200的直接返回
+        if ( resp.getStatus() != 200){
+            response.setStatus(resp.getStatus());
+            response.setMsg("操作失败！");
+            response.setData(null);
+            return response;
+        }else if (null == o){
+            //没有就执行响应一个初始的响应
+            response.setStatus(resp.getStatus());
+            response.setMsg("没有响应参数");
+            response.setData(null);
+
+        } else if ( o instanceof  CommonResponse || o instanceof ResponseBody){
+            response.setStatus(resp.getStatus());
             response.setMsg("success");
-            //如有已经是一个统一的响应对象了就转一下
             response = (CommonResponse<Object>) o;
-        }else {
+         }else {
             //如果是一个普通的数据对象，就传入统一响应对象中去
-            response.setStatus(200);
+            response.setStatus(resp.getStatus());
             response.setMsg("success");
             response.setData(o);
         }
-
 
         Log log = new Log();
         //获取当前登录的用户名称
@@ -90,9 +104,8 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
         UserManager user = (UserManager) session.getAttribute("user");
         if (null != user){
             username =user.getUsername();
+            log.setUsername(username);
         }
-
-        log.setUsername(username);
 
         //确认模块
          verifyModule(res.getRequestURI(),log);
