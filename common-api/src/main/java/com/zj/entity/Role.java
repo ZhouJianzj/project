@@ -17,11 +17,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role implements Serializable {
-    
+
     private Integer id;
-    
+
     private String name;
-    
+
     private String ext;
 
     private List<Perm> perms;

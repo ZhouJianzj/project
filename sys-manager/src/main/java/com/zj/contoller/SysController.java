@@ -133,7 +133,7 @@ public class SysController {
      * 根据用户的手机号 或者 用户名模糊查询
      */
     @GetMapping("user/key")
-    public PageInfo<UserManager> findUserController(@RequestParam(value = "key",defaultValue = "1") String key,
+    public PageInfo<UserManager> findUserController(@RequestParam(value = "key", defaultValue = "1") String key,
                                                     @RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
                                                     @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
         PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
@@ -146,10 +146,10 @@ public class SysController {
     @PutMapping("user/modify")
     public CommonResponse<Boolean> modifyUserController(@RequestBody User user) {
         Boolean aBoolean = sysService.modifyUserService(user);
-        if (aBoolean){
-          return   new CommonResponse<>(200, "修改成功！", aBoolean);
+        if (aBoolean) {
+            return new CommonResponse<>(200, "修改成功！", aBoolean);
         }
-        return new CommonResponse<>(400,"修改失败！") ;
+        return new CommonResponse<>(400, "修改失败！");
     }
 
     /**

@@ -1,14 +1,13 @@
 package com.zj.interceptor;
+
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import sun.text.resources.FormatData;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
-import java.text.DateFormat;
 
 public class CommoInterceptor implements HandlerInterceptor {
 
@@ -16,27 +15,27 @@ public class CommoInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
         HttpSession session = request.getSession(false);
-        if ( session == null){
+        if (session == null) {
             // 响应结果，响应数据为JSON数据
             response.setCharacterEncoding("utf-8");
             response.setContentType("json; charset=utf-8");
             JSONObject o = new JSONObject();
             PrintWriter writer = response.getWriter();
-            o.put("stuts","400");
-            o.put("msg","没有登录！");
+            o.put("stuts", "400");
+            o.put("msg", "没有登录！");
             writer.print(o);
             return false;
-       }else if (null == session.getAttribute("user")) {
+        } else if (null == session.getAttribute("user")) {
             // 响应结果，响应数据为JSON数据
             response.setCharacterEncoding("utf-8");
             response.setContentType("json; charset=utf-8");
             JSONObject o = new JSONObject();
             PrintWriter writer = response.getWriter();
-            o.put("stuts","400");
-            o.put("msg","没有登录！");
+            o.put("stuts", "400");
+            o.put("msg", "没有登录！");
             writer.print(o);
             return false;
-        }else {
+        } else {
             return true;
         }
 

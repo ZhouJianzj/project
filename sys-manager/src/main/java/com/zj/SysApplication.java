@@ -17,7 +17,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @MapperScan("com.zj.dao")
 public class SysApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SysApplication.class,args);
+        SpringApplication.run(SysApplication.class, args);
     }
 }
 

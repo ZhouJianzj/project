@@ -19,7 +19,7 @@ import java.io.Serializable;
 public class Perm implements Serializable {
 
     private Integer id;
-    
+
     private String name;
 
 }

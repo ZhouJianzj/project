@@ -1,16 +1,14 @@
 package com.zj.util;
 
 import org.apache.http.util.TextUtils;
-import sun.security.provider.MD5;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
  * MD5加密解密
  */
- public class MD5Util {
+public class MD5Util {
     /**
      * MD5加码 生成32位md5码
      */
@@ -57,7 +55,7 @@ import java.security.NoSuchAlgorithmException;
      * string + key（盐值 key）然后进行 MD5 加密
      *
      * @param string 需要加密的数据
-     * @param slat 盐
+     * @param slat   盐
      * @return 加密后的数据
      */
     public static String encrypt(String string, String slat) {
@@ -86,8 +84,8 @@ import java.security.NoSuchAlgorithmException;
     /**
      * 比对密码
      */
-    public static boolean checkPassword(String newpasswd,String oldpasswd) {
-        return  newpasswd.equals(oldpasswd);
+    public static boolean checkPassword(String newpasswd, String oldpasswd) {
+        return newpasswd.equals(oldpasswd);
     }
 
     // 测试主函数

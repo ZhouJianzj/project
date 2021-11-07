@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class OrgaType implements Serializable {
 
     private Integer id;
-    
+
     private String name;
 
 

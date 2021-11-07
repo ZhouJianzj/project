@@ -9,9 +9,9 @@ import java.util.List;
  * @author zhoujian
  */
 public interface SysService {
-     UserManager userLoginService(User user, HttpServletRequest request);
+    UserManager userLoginService(User user, HttpServletRequest request);
 
-    List<Organize> findOrganzieService( String orgName);
+    List<Organize> findOrganzieService(String orgName);
 
     CommonResponse<Object> addOrganizeService(Organize organize);
 

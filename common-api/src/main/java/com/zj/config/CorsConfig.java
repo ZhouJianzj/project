@@ -16,10 +16,11 @@ public class CorsConfig {
         corsConfiguration.setAllowCredentials(true); // 允许cookies跨域
         return corsConfiguration;
     }
+
     @Bean
-    public CorsFilter corsFilter(){
-        UrlBasedCorsConfigurationSource source= new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**",buildConfig());
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", buildConfig());
         return new CorsFilter(source);
     }
 

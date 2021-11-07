@@ -18,19 +18,19 @@ import java.io.Serializable;
 public class Organize implements Serializable {
 
     private Integer id;
-    
+
     private String name;
-    
+
     private Integer parentId;
 
     private String parentName;
-    
+
     private Integer typeId;
-    
+
     private String location;
-    
+
     private String orgaNumber;
-    
+
     private String ext;
 
     private OrgaType orgaType;
