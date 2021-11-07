@@ -49,7 +49,7 @@ public class SysController {
      * @return 结果集
      */
     @GetMapping("orga")
-    public PageInfo<Organize> findOrganizeController(String orgName,
+    public PageInfo<Organize> findOrganizeController(@RequestParam("orgName") String orgName,
                                                      @RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
                                                      @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
         PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));

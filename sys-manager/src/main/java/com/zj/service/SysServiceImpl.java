@@ -49,8 +49,6 @@ public class SysServiceImpl implements SysService {
     /**
      * 机构查询
      *
-     * @param orgName
-     * @return
      */
     @Override
     public List<Organize> findOrganzieService(String orgName) {

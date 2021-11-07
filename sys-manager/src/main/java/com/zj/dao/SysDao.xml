@@ -77,9 +77,9 @@
         o1.ext
     FROM
         organize o1
-        JOIN orga_type ot ON ot.id = o1.id
+        left JOIN orga_type ot ON ot.id = o1.id
         left join organize o2 on o2.id = o1.parent_id
-	where o1.name like concat('%',#{orgName},'%')
+	where o1.name like concat(#{orgName},'%')
     </select>
 
 <!--    机构插入-->

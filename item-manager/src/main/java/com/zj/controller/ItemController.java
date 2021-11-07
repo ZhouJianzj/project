@@ -27,9 +27,11 @@ public class ItemController {
      * @return item
      * */
     @GetMapping("item")
-    public PageInfo<Item> findItemController(String pageNo, String pageSize, String key){
+    public PageInfo<Item> findItemController(@RequestParam(value = "pageNo",defaultValue = "1") String pageNo,
+                                             @RequestParam(value = "pageSize",defaultValue = "8") String pageSize,
+                                             @RequestParam(value = "key") String key){
 
-        PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
+        PageHelper.startPage(Integer.parseInt(pageNo),Integer.parseInt(pageSize));
         return new PageInfo<Item>(itemService.selectItemSelect(key));
     }
 
@@ -39,7 +41,7 @@ public class ItemController {
      * @return boolean
      * */
     @DeleteMapping("item")
-    public CommonResponse<Boolean> deleteItemController(int id){
+    public CommonResponse<Boolean> deleteItemController(@RequestParam(value = "id") int id){
         return itemService.deleteItemService(id);
     }
 
@@ -53,6 +55,11 @@ public class ItemController {
         return itemService.insertItemService(item);
     }
 
+    /**
+     * 修改item
+     * @param item
+     * @return
+     */
     @PutMapping("item")
     public CommonResponse<Item> modifyItemController(@RequestBody Item item){
         return itemService.modifyItemService(item);
