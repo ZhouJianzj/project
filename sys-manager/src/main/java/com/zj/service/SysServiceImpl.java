@@ -119,7 +119,7 @@ public class SysServiceImpl implements SysService {
     @Override
     public CommonResponse<Object> addRoleService(Role role) {
         CommonResponse<Object> response = new CommonResponse<>();
-        if (sysDao.roleInsert(role)){
+        if (role.getName() != null && role.getExt() != null && sysDao.roleInsert(role) ){
             response.setStatus(200);
             response.setMsg("添加成功！");
             return response;

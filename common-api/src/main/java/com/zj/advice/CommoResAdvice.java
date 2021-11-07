@@ -107,7 +107,7 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
             log.setUsername(username);
         }
 
-        //确认模块
+        //确认模块,和操作内容
          verifyModule(res.getRequestURI(),log);
         //确认操作类型
          verifyOPerType(res,log);
@@ -191,7 +191,7 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
                 content="登录操作";
                 break;
             case "logout":
-                content="登录操作";
+                content="退出操作";
                 break;
             case "orga":
                 content="公司操作";
