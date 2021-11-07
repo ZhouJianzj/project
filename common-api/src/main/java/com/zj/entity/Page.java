@@ -4,13 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Page<T> {
+public class Page<T> implements Serializable {
     private List <T> list;
+    private int total;
     private int pageNo;
     private int pageSize;
+    private int size;
+
+    Page(List<T> list,int pageNo,int pageSize){
+        this.list = list;
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
+    }
 }

@@ -15,7 +15,7 @@ public class test {
         strings.add("five");
         strings.add("six");
 
-        System.out.println(MyPageHelper.myPageHelper(new Page(strings, 1, 7)));
+        System.out.println(MyPageHelper.myPageHelper(new Page<String>(strings, 1, 7)));
 
 
     }

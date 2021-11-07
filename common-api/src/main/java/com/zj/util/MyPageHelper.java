@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class MyPageHelper {
 
-   public static List myPageHelper (Page page) {
+   public static Page myPageHelper (Page page) {
         //list大小
         int size = page.getList().size();
         //开始下标，
@@ -22,11 +22,18 @@ public class MyPageHelper {
         }else
             //如果end 大于size就直接使用size
             if (end > size) {
-
-                return page.getList().subList(start, size);
+                List list = page.getList().subList(start, size);
+                page.setList(list);
+                page.setTotal(size);
+                page.setSize(list.size());
+                return page;
 
             } else {
-                return page.getList().subList(start,end);
+                List list = page.getList().subList(start, end);
+                page.setList(list);
+                page.setTotal(size);
+                page.setSize(list.size());
+                return page;
             }
 
     }
