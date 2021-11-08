@@ -15,6 +15,7 @@ com\zj\dao\LogDao.class
 com\zj\entity\UserRole.class
 com\zj\entity\Item.class
 com\zj\advice\CommoResAdvice.class
+com\zj\config\CorsConfig.class
 com\zj\entity\Perm.class
 com\zj\util\MyUUID.class
 com\zj\annotation\IgnoreResponseAdvice.class

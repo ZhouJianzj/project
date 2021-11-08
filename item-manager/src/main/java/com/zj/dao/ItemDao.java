@@ -1,7 +1,6 @@
 package com.zj.dao;
 
 import com.zj.entity.Item;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

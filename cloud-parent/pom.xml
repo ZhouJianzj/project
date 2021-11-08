@@ -8,6 +8,8 @@
         <module>../item-manager</module>
         <module>../model-manager</module>
         <module>../common-api</module>
+        <module>../asset-manager</module>
+        <module>../alarm-manager</module>
     </modules>
     <parent>
     <groupId>org.springframework.boot</groupId>
