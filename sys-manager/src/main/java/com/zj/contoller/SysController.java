@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.*;
 import com.zj.service.SysService;
+import com.zj.util.MyPageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -133,11 +134,11 @@ public class SysController {
      * 根据用户的手机号 或者 用户名模糊查询
      */
     @GetMapping("user/key")
-    public PageInfo<UserManager> findUserController(@RequestParam(value = "key", defaultValue = "1") String key,
+    public Page findUserController(@RequestParam(value = "key", defaultValue = "1") String key,
                                                     @RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
                                                     @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
-        PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
-        return new PageInfo<UserManager>(sysService.finUserService(key));
+       return MyPageHelper.myPageHelper(new Page(sysService.finUserService(key),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
+
     }
 
     /**

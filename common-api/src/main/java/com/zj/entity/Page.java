@@ -20,7 +20,7 @@ public class Page<T> implements Serializable {
     private int pageSize;
     private int size;
 
-    Page(List<T> list,int pageNo,int pageSize){
+    public Page(List<T> list, int pageNo, int pageSize){
         this.list = list;
         this.pageNo = pageNo;
         this.pageSize = pageSize;
