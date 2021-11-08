@@ -1,5 +1,6 @@
-com\zj\web\SysController.class
 com\zj\service\SysServiceImpl.class
+com\zj\entity\test.class
 com\zj\dao\SysDao.class
 com\zj\service\SysService.class
+com\zj\contoller\SysController.class
 com\zj\SysApplication.class
