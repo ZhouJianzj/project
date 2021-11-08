@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.dao.ItemDao">
+<!--    <resultMap id="item_orga" type="com.zj.entity.Item">-->
+<!--        <id column="id" property="id"/>-->
+<!--        <result column="name" property="name" />-->
+<!--        <result column="number" property="number"/>-->
+<!--        <result/>-->
+<!--        -->
+<!--        <result column="addr" property="addr" />-->
+<!--        <result column="phone" property="phone" />-->
+<!--        <result column="createTime" property="createTime" />-->
+<!--    </resultMap>-->
+<!--    查询项目-->
+    <select id="itemSelect" resultType="com.zj.entity.Item" >
+    select *
+    from t_item
+        join organize on organize.id = t_item.orga_id
+    where t_item.name like concat('%',#{key},'%')
+        or t_item.addr like concat('%',#{key},'%')
+        or organize.name like concat('%',#{key},'%')
+        or organize.location like concat('%',#{key},'%')
+    </select>
+
+<!--    删除项目-->
+    <delete id="itemDelete">
+        delete from t_item where id = #{id}
+    </delete>
+
+<!--    新增项目-->
+    <insert id="itemInsert">
+        insert into t_item (name,number,orga_id,addr,phone)
+        values (#{name},#{number},#{orgaId},#{addr},#{phone})
+    </insert>
+
+<!--    修改项目-->
+    <update id="itemModify">
+        update t_item
+        set name = #{name},number = #{number},orga_id = #{orgaId},addr = #{addr},phone = #{phone}
+        where id = #{id}
+    </update>
+
+</mapper>
