@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../alarm-manager/alarm-manager.iml" filepath="$PROJECT_DIR$/../alarm-manager/alarm-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../asset-manager/asset-manager.iml" filepath="$PROJECT_DIR$/../asset-manager/asset-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-parent.iml" filepath="$PROJECT_DIR$/cloud-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/../common-api/common-api.iml" filepath="$PROJECT_DIR$/../common-api/common-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/../gateway/gateway.iml" filepath="$PROJECT_DIR$/../gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../item-manager/item-manager.iml" filepath="$PROJECT_DIR$/../item-manager/item-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/../item-manger/item-manger.iml" filepath="$PROJECT_DIR$/../item-manger/item-manger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../model-manager/model-manager.iml" filepath="$PROJECT_DIR$/../model-manager/model-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/../sys-manager/sys-manager.iml" filepath="$PROJECT_DIR$/../sys-manager/sys-manager.iml" />
     </modules>
   </component>
