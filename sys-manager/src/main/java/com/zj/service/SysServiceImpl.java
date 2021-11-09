@@ -256,6 +256,23 @@ public class SysServiceImpl implements SysService {
     }
 
     /**
+     * 修改密码
+     * */
+    @Override
+    public CommonResponse<Boolean> modifyPasswordService(int id, String password) {
+        password = MD5Util.addMD5(password);
+        CommonResponse response = new CommonResponse();
+        if (sysDao.passwordModify(id,password)){
+            response.setMsg("修改密码成功");
+            response.setStatus(200);
+        }else {
+            response.setMsg("修改密码失败");
+            response.setStatus(400);
+        }
+        return response;
+    }
+
+    /**
      * 删除用户
      *
      * @param id
@@ -264,22 +281,22 @@ public class SysServiceImpl implements SysService {
     @Override
     public CommonResponse<Boolean> deleteUserManagerService(int id) {
         CommonResponse response = new CommonResponse();
-        if (sysDao.userRoleIdSelect(id) != null) {
-            if (sysDao.userManagerDelete(id)) {
+        if (sysDao.userDelete(id)){
+            if (sysDao.userRoleIdSelect(id) != null){
+                if (sysDao.userManagerDelete(id)){
+                    response.setMsg("删除成功");
+                    response.setStatus(200);
+                }else {
+                    response.setStatus(400);
+                    response.setMsg("删除失败");
+                }
+            }else {
                 response.setMsg("删除成功");
                 response.setStatus(200);
-            } else {
-                response.setStatus(400);
-                response.setMsg("删除失败");
             }
-        } else {
-            if (sysDao.userDelete(id)) {
-                response.setMsg("删除成功");
-                response.setStatus(200);
-            } else {
-                response.setStatus(400);
-                response.setMsg("删除失败");
-            }
+        }else {
+            response.setStatus(400);
+            response.setMsg("删除失败");
         }
         return response;
     }
