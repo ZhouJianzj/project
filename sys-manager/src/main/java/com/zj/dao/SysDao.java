@@ -77,9 +77,9 @@ public interface SysDao {
 
     /**
      * 删除用户
-     *
      */
     boolean userRoleDelete(int id);
+
     boolean userDelete(int id);
 
 
@@ -96,6 +96,7 @@ public interface SysDao {
 
     /**
      * 查询日志
+     *
      * @return 返回log list
      */
     List<Log> logSelect();
@@ -115,13 +116,12 @@ public interface SysDao {
     /**
      * 给用户添加角色
      */
-    Boolean userInsertRole(Integer id,Integer roleId);
+    Boolean userInsertRole(Integer id, Integer roleId);
 
     /**
-     *在插入user——role表前检查是否已经存在
+     * 在插入user——role表前检查是否已经存在
      */
     List<UserRole> userSelectRole(Integer id, Integer roleId);
-
 
 
     Object rolePermSelect(int id);
@@ -144,5 +144,5 @@ public interface SysDao {
     /**
      * 编辑user的组织id
      */
-    Boolean userUpdateOrgaId(Integer id ,Integer orgaId);
+    Boolean userUpdateOrgaId(Integer id, Integer orgaId);
 }

@@ -3,7 +3,6 @@ package com.zj.service;
 import com.zj.dao.SysDao;
 import com.zj.entity.*;
 import com.zj.util.MD5Util;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,8 +45,6 @@ public class SysServiceImpl implements SysService {
     }
 
 
-
-
     /**
      * 机构查询
      */
@@ -76,8 +73,6 @@ public class SysServiceImpl implements SysService {
         }
 
     }
-
-
 
 
     /**
@@ -150,7 +145,6 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 给角色添加权限
-     *
      */
     @Override
     public CommonResponse<Object> addRolePermService(String roleId, String permId) {
@@ -165,10 +159,6 @@ public class SysServiceImpl implements SysService {
             return response;
         }
     }
-
-
-
-
 
 
     /**
@@ -213,8 +203,8 @@ public class SysServiceImpl implements SysService {
             //新增user的自增主键
             int userid = sysDao.useridGet();
             //获取role id 循环添加
-            for (int i = 0;i < roleIdArrays.length;i++){
-                sysDao.userRoleInsert(userid,roleIdArrays[i]);
+            for (int i = 0; i < roleIdArrays.length; i++) {
+                sysDao.userRoleInsert(userid, roleIdArrays[i]);
             }
             response.setMsg("添加成功");
             response.setStatus(200);
@@ -235,7 +225,7 @@ public class SysServiceImpl implements SysService {
     public Boolean modifyUserService(User user) {
 
         //修改user   name 和  phone
-        if (user.getUsername() != null && user.getPhone() != null){
+        if (user.getUsername() != null && user.getPhone() != null) {
             //修改user表
             sysDao.userUpdate(user);
             //修改user的 orgaId，如何传来的是空就表示去除用户的组织
@@ -244,15 +234,15 @@ public class SysServiceImpl implements SysService {
 
         Integer[] roleId = user.getRoleIdArrays();
         //添加user_role表中的对应权限
-        if (roleId.length != 0 ){
+        if (roleId.length != 0) {
             //获取roleId数组长度
             for (int i = 0; i < roleId.length; i++) {
                 //判断user_role中是否已经存在对应的userId和roleId
-                List<UserRole> userRoles = sysDao.userSelectRole(user.getId(),roleId[i]);
+                List<UserRole> userRoles = sysDao.userSelectRole(user.getId(), roleId[i]);
                 //没有对应关系就添加
-                if (userRoles.size() == 0){
+                if (userRoles.size() == 0) {
                     //取决于sql操作
-                    sysDao.userInsertRole(user.getId(),roleId[i]);
+                    sysDao.userInsertRole(user.getId(), roleId[i]);
                 }
             }
 
@@ -263,15 +253,15 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 修改密码
-     * */
+     */
     @Override
     public CommonResponse<Boolean> modifyPasswordService(int id, String password) {
         password = MD5Util.addMD5(password);
         CommonResponse<Boolean> response = new CommonResponse<>();
-        if (sysDao.passwordModify(id,password)){
+        if (sysDao.passwordModify(id, password)) {
             response.setMsg("修改密码成功");
             response.setStatus(200);
-        }else {
+        } else {
             response.setMsg("修改密码失败");
             response.setStatus(400);
         }
@@ -280,27 +270,22 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 删除用户，首先删除用户表，然后根据user的id到user_role表中删除对应的关系
-     *
      */
     @Override
     @Transactional
     public CommonResponse<Boolean> deleteUserManagerService(int id) {
         CommonResponse<Boolean> response = new CommonResponse<>();
         //到user表中删除对应id的user   删除user_role中删除对应的关系
-        if (sysDao.userDelete(id) && sysDao.userRoleDelete(id)){
-             response.setMsg("删除成功");
-             response.setStatus(200);
-        }else {
+        if (sysDao.userDelete(id) && sysDao.userRoleDelete(id)) {
+            response.setMsg("删除成功");
+            response.setStatus(200);
+        } else {
             response.setStatus(400);
             response.setMsg("删除失败");
         }
         return response;
 
     }
-
-
-
-
 
 
     /**
@@ -327,7 +312,6 @@ public class SysServiceImpl implements SysService {
         }
         return new CommonResponse<>(401, "退出登录失败！");
     }
-
 
 
 }

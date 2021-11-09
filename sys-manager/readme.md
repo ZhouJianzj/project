@@ -1,5 +1,3 @@
-
-
 ## 接口API
 
 #### 一、环境配置
@@ -8,16 +6,17 @@
 > - sys-manager模块：8001
 > - 访问网关负载到项目 测试：localhost:9000/sys/test
 > - 错误类型：
->       - 200：响应正常
->       - 401：无权限
->       - 400：失败操作
+    > - 200：响应正常
+    > - 401：无权限
+    > - 400：失败操作
+
 #### 二、接口
 
 ### 当分页是没传分页数码(pageNo)以及页面容量(pageSize)时，后端默认会将pageNo设为1，pageSize设为8
 
 ##### 1.用户登录接口
 
-​	地址：localhost:9000/sys/login
+​ 地址：localhost:9000/sys/login
 
 | 参数名   | 类型     | 说明         |
 | -------- | -------- | ------------ |
@@ -91,49 +90,47 @@
 
 ```json
 {
-    "status": 200,
-    "msg": "success",
-    "data": {
-        "total": 1,
-        "list": [
-            {
-                "id": 1,
-                "name": "南京煤业有限公司",
-                "parentId": null,
-                "parentName": null,
-                "typeId": null,
-                "location": "南京雨花",
-                "orgaNumber": "13339",
-                "ext": null,
-                "orgaType": {
-                    "id": null,
-                    "name": "矿业"
-                }
-            }
-        ],
-        "pageNum": 1,
-        "pageSize": 1,
-        "size": 1,
-        "startRow": 0,
-        "endRow": 0,
-        "pages": 1,
-        "prePage": 0,
-        "nextPage": 0,
-        "isFirstPage": true,
-        "isLastPage": true,
-        "hasPreviousPage": false,
-        "hasNextPage": false,
-        "navigatePages": 8,
-        "navigatepageNums": [
-            1
-        ],
-        "navigateFirstPage": 1,
-        "navigateLastPage": 1
-    }
+  "status": 200,
+  "msg": "success",
+  "data": {
+    "total": 1,
+    "list": [
+      {
+        "id": 1,
+        "name": "南京煤业有限公司",
+        "parentId": null,
+        "parentName": null,
+        "typeId": null,
+        "location": "南京雨花",
+        "orgaNumber": "13339",
+        "ext": null,
+        "orgaType": {
+          "id": null,
+          "name": "矿业"
+        }
+      }
+    ],
+    "pageNum": 1,
+    "pageSize": 1,
+    "size": 1,
+    "startRow": 0,
+    "endRow": 0,
+    "pages": 1,
+    "prePage": 0,
+    "nextPage": 0,
+    "isFirstPage": true,
+    "isLastPage": true,
+    "hasPreviousPage": false,
+    "hasNextPage": false,
+    "navigatePages": 8,
+    "navigatepageNums": [
+      1
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 1
+  }
 }
 ```
-
-
 
 ##### 3.添加机构
 
@@ -240,8 +237,6 @@
 }
 ```
 
-
-
 ##### 6.删除角色
 
 地址：localhost:9000/sys/role/{id}
@@ -261,8 +256,6 @@
     "data": null
 }
 ```
-
-
 
 ##### 7.查询所有权限
 
@@ -439,8 +432,6 @@
 }
 ```
 
-
-
 ##### 10.添加用户
 
 地址：localhost:9000/sys/user
@@ -468,8 +459,6 @@
 }
 ```
 
-
-
 ##### 11.删除用户
 
 地址：localhost:9000/sys/user?id=5
@@ -489,8 +478,6 @@
     "data": null
 }
 ```
-
-
 
 ##### 12.查询单个用户
 
@@ -541,8 +528,6 @@
     }
 }
 ```
-
-
 
 ##### 13.用户登录
 
@@ -610,8 +595,6 @@
     }
 }
 ```
-
-
 
 ##### 14.查询日志
 

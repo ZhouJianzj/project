@@ -135,9 +135,9 @@ public class SysController {
      */
     @GetMapping("user/key")
     public Page findUserController(@RequestParam(value = "key", defaultValue = "1") String key,
-                                                    @RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
-                                                    @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
-       return MyPageHelper.myPageHelper(new Page(sysService.finUserService(key),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
+                                   @RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
+                                   @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
+        return MyPageHelper.myPageHelper(new Page(sysService.finUserService(key), Integer.parseInt(pageNo), Integer.parseInt(pageSize)));
 
     }
 
@@ -206,11 +206,12 @@ public class SysController {
         return sysService.signOutService(request);
 
     }
+
     /**
      * 修改密码
-     * */
+     */
     @GetMapping("user/password")
-    public CommonResponse<Boolean> modifyPasswordController( int id, String password){
-        return sysService.modifyPasswordService(id,password);
+    public CommonResponse<Boolean> modifyPasswordController(int id, String password) {
+        return sysService.modifyPasswordService(id, password);
     }
 }
