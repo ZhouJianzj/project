@@ -205,6 +205,9 @@ public class SysServiceImpl implements SysService {
     @Override
     public CommonResponse<UserManager> addUserManagerService(UserManager userManager) {
         CommonResponse<UserManager> response = new CommonResponse<>();
+//      对新增用户的密码进行加密操作
+        String s = MD5Util.addMD5(userManager.getPassword());
+        userManager.setPassword(s);
         if (sysDao.userManagerInsert(userManager)) {
             response.setMsg("添加成功");
             response.setStatus(200);
