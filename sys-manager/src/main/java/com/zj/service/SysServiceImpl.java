@@ -207,8 +207,14 @@ public class SysServiceImpl implements SysService {
         CommonResponse<UserManager> response = new CommonResponse<>();
 //      对新增用户的密码进行加密操作
         String s = MD5Util.addMD5(userManager.getPassword());
+        List<Role> roles = userManager.getRoles();
         userManager.setPassword(s);
         if (sysDao.userManagerInsert(userManager)) {
+            int userid = sysDao.useridGet();
+            for (int i = 0;i < roles.size();i++){
+                int roleid = roles.get(i).getId();
+                sysDao.userRoleInsert(userid,roleid);
+            }
             response.setMsg("添加成功");
             response.setStatus(200);
         } else {
