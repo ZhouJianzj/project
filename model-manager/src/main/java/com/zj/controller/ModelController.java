@@ -58,11 +58,8 @@ public class ModelController {
     private ModelService modelService;
 
     @PostMapping("upLoad")
-    @ResponseBody
     public CommonResponse<String> fileUploadController(@RequestParam("file") MultipartFile file){
-        if (file.isEmpty()){
-            return new CommonResponse<>(400,"上传文件失败！");
-        }
+
         return modelService.fileUploadService(file);
     }
 

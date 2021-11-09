@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @author zhoujian
@@ -23,6 +25,20 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public CommonResponse<String> fileUploadService(MultipartFile file) {
 
-        return null;
+        if (file.isEmpty()){
+            return new CommonResponse<>(400,"上传文件失败！");
+        }
+        //本地文件地址
+        File hostFile = new File(rootPath + file.getOriginalFilename());
+        if (!hostFile.exists()){
+            hostFile.mkdirs();
+        }
+        //转换
+        try {
+            file.transferTo(hostFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new CommonResponse<>(200,"上传文件成功！");
     }
 }
