@@ -45,6 +45,9 @@ public class SysServiceImpl implements SysService {
         return userManager;
     }
 
+
+
+
     /**
      * 机构查询
      */
@@ -73,6 +76,8 @@ public class SysServiceImpl implements SysService {
         }
 
     }
+
+
 
 
     /**
@@ -161,6 +166,11 @@ public class SysServiceImpl implements SysService {
         }
     }
 
+
+
+
+
+
     /**
      * 查询用户，支持模糊查询，查询关键字可以是手机号或者是用户名
      */
@@ -206,6 +216,43 @@ public class SysServiceImpl implements SysService {
     }
 
     /**
+     * 修改用户 修改user表中的username phone
+     * 先查询user_role中是否已经有对应的关系然后
+     * 添加 user_role 中的对应关系
+     */
+    @Override
+    @Transactional
+    public Boolean modifyUserService(User user) {
+        Boolean aBoolean = false;
+        Boolean aBoolean1 = false;
+        //修改user   name 和 phone
+        if (user.getUsername() != null && user.getPhone() != null){
+            aBoolean = sysDao.userUpdate(user);
+        }
+        //添加user_role表中的对应权限
+        if (user.getRoleId() != null){
+            //判断user_role中是否已经存在
+            List<UserRole> userRoles = sysDao.userSelectRole(user);
+            //没有对应关系
+            if (userRoles.size() == 0){
+                //取决于sql操作
+                aBoolean1 = sysDao.userInsertRole(user);
+            }else {
+                //有对应关系
+                aBoolean1 = true;
+            }
+
+        }
+        //最终判断两个sql的执行结果
+        if (aBoolean1 && aBoolean){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
+    /**
      * 删除用户
      *
      * @param id
@@ -234,6 +281,11 @@ public class SysServiceImpl implements SysService {
         return response;
     }
 
+
+
+
+
+
     /**
      * 实现log分页查询
      *
@@ -259,42 +311,6 @@ public class SysServiceImpl implements SysService {
         return new CommonResponse<>(401, "退出登录失败！");
     }
 
-    /**
-     * 修改用户
-     *
-     * @return
-     */
-    @Override
-    @Transactional
-    public Boolean modifyUserService(User user) {
-        Boolean aBoolean = false;
-        Boolean aBoolean1 = false;
-        //修改user   name 和 phone
-        if (user.getUsername() != null && user.getPhone() != null){
-           aBoolean = sysDao.userUpdate(user);
-        }
-        //添加user_role表中的对应权限
-        if (user.getRoleId() != null){
-            //判断user_role中是否已经存在
-            List<UserRole> userRoles = sysDao.userSelectRole(user);
-            //没有对应关系
-            if (userRoles != null){
-                //取决于sql操作
-                aBoolean1 = sysDao.userInsertRole(user);
-            }else {
-                //有对应关系
-                aBoolean1 = true;
-            }
-
-        }
-        //最终判断两个sql的执行结果
-        if (aBoolean1 && aBoolean){
-            return true;
-        }else {
-            return false;
-        }
-
-    }
 
 
 }
