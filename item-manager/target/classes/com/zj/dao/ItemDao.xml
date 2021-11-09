@@ -16,12 +16,12 @@
 <!--    查询项目-->
     <select id="itemSelect" resultType="com.zj.entity.Item" >
     select *
-    from t_item
-        join organize on organize.id = t_item.orga_id
-    where t_item.name like concat('%',#{key},'%')
-        or t_item.addr like concat('%',#{key},'%')
-        or organize.name like concat('%',#{key},'%')
-        or organize.location like concat('%',#{key},'%')
+        from t_item
+            join organize on organize.id = t_item.orga_id
+        where t_item.name like concat('%',#{key},'%')
+            or t_item.addr like concat('%',#{key},'%')
+            or organize.name like concat('%',#{key},'%')
+            or organize.location like concat('%',#{key},'%')
     </select>
 
 <!--    删除项目-->

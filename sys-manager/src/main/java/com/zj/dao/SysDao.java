@@ -118,12 +118,12 @@ public interface SysDao {
     /**
      * 给用户添加角色
      */
-    Boolean userInsertRole(User user);
+    Boolean userInsertRole(Integer id,Integer roleId);
 
     /**
      *在插入user——role表前检查是否已经存在
      */
-    List<UserRole> userSelectRole(User user);
+    List<UserRole> userSelectRole(Integer id, Integer roleId);
 
     /**
      * 根据id查询user_role表数据

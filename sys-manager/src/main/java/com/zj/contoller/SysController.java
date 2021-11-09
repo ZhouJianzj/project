@@ -142,7 +142,7 @@ public class SysController {
     }
 
     /**
-     * 根据id修改用户username phone
+     * 根据id修改用户username phone roleId
      */
     @PutMapping("user/modify")
     public CommonResponse<Boolean> modifyUserController(@RequestBody User user) {

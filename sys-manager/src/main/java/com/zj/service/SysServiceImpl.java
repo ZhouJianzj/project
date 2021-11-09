@@ -232,26 +232,28 @@ public class SysServiceImpl implements SysService {
         if (user.getUsername() != null && user.getPhone() != null){
             aBoolean = sysDao.userUpdate(user);
         }
+        for (int i = 0; i < user.getRoleIdArrays().length; i++) {
+            Integer[] roleIdArrays = user.getRoleIdArrays();
+            System.out.println(roleIdArrays[i]);
+        }
         //添加user_role表中的对应权限
-        if (user.getRoleId() != null){
-            //判断user_role中是否已经存在
-            List<UserRole> userRoles = sysDao.userSelectRole(user);
-            //没有对应关系
-            if (userRoles.size() == 0){
-                //取决于sql操作
-                aBoolean1 = sysDao.userInsertRole(user);
-            }else {
-                //有对应关系
-                aBoolean1 = true;
+        if (user.getRoleIdArrays().length != 0 ){
+            //获取roleId数组长度
+            int length = user.getRoleIdArrays().length;
+            for (int i = 0; i < length; i++) {
+                //获取roleId数组
+                Integer[] roleId = user.getRoleIdArrays();
+                //判断user_role中是否已经存在对应的userId和roleId
+                List<UserRole> userRoles = sysDao.userSelectRole(user.getId(),roleId[i]);
+                //没有对应关系
+                if (userRoles.size() == 0){
+                    //取决于sql操作
+                    aBoolean1 = sysDao.userInsertRole(user.getId(),roleId[i]);
+                }
             }
 
         }
-        //最终判断两个sql的执行结果
-        if (aBoolean1 && aBoolean){
-            return true;
-        }else {
-            return false;
-        }
+       return aBoolean;
 
     }
 
