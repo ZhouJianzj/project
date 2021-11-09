@@ -29,9 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10883b94-3334-43b4-8354-51cf1c7374fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java" afterDir="false" />
-    </list>
+    <list default="true" id="10883b94-3334-43b4-8354-51cf1c7374fa" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -223,7 +221,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java</url>
-          <line>280</line>
+          <line>281</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -238,13 +236,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java</url>
-          <line>285</line>
+          <line>290</line>
           <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java</url>
-          <line>278</line>
-          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
