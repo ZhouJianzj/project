@@ -259,6 +259,8 @@
         operContent
         from log
     </select>
+
+
 <!--    更新用户根据id-->
     <update id="userUpdate" parameterType="com.zj.entity.User">
         update t_user
@@ -270,4 +272,9 @@
         insert  into t_user_role (userid,roleid)
         values (#{id},#{roleId})
     </insert>
+<!--先查询user_role中是否已经存在关系-->
+    <select id="userSelectRole" parameterType="com.zj.entity.User"  resultType="com.zj.entity.UserRole">
+        select * from t_user_role
+        where userid = #{id} and roleid = #{roleId}
+    </select>
 </mapper>

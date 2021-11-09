@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -16,9 +17,8 @@ import java.util.List;
  * @author zhoujian
  */
 @Service
-@Transactional
 public class SysServiceImpl implements SysService {
-    @Autowired
+    @Resource
     private SysDao sysDao;
 
     /**
@@ -275,8 +275,19 @@ public class SysServiceImpl implements SysService {
         }
         //添加user_role表中的对应权限
         if (user.getRoleId() != null){
-           aBoolean1 = sysDao.userInsertRole(user);
+            //判断user_role中是否已经存在
+            List<UserRole> userRoles = sysDao.userSelectRole(user);
+            //没有对应关系
+            if (userRoles != null){
+                //取决于sql操作
+                aBoolean1 = sysDao.userInsertRole(user);
+            }else {
+                //有对应关系
+                aBoolean1 = true;
+            }
+
         }
+        //最终判断两个sql的执行结果
         if (aBoolean1 && aBoolean){
             return true;
         }else {

@@ -121,9 +121,15 @@ public interface SysDao {
     Boolean userInsertRole(User user);
 
     /**
+     *在插入user——role表前检查是否已经存在
+     */
+    List<UserRole> userSelectRole(User user);
+
+    /**
      * 根据id查询user_role表数据
      */
     UserRole userRoleIdSelect(int id);
+
 
 
     Object rolePermSelect(int id);
