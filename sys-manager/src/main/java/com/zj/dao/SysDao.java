@@ -143,4 +143,8 @@ public interface SysDao {
     boolean rolePermDelete(int id);
 
     Boolean passwordModify(int id, String password);
+
+    boolean userRoleInsert(Integer userid, int roleid);
+
+    int useridGet();
 }
