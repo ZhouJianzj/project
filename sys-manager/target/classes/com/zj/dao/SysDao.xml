@@ -227,8 +227,9 @@
     </select>
 
 <!--   新增角色-->
-    <insert id="userManagerInsert">
-        insert into t_user (username,password,salt,phone) values (#{username},#{password},#{salt},#{phone})
+    <insert id="userManagerInsert" >
+        insert into t_user (username,password,salt,phone)
+         values (#{username},#{password},#{salt},#{phone})
     </insert>
 
 
@@ -274,6 +275,8 @@
         select * from t_user_role
         where userid = #{id} and roleid = #{roleId}
     </select>
+
+
 <!--    修改密码-->
     <update id="passwordModify">
         update t_user set password = #{password} where id = #{id}
