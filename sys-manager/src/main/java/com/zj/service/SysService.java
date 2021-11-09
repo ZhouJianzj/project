@@ -38,4 +38,6 @@ public interface SysService {
     CommonResponse<Object> signOutService(HttpServletRequest request);
 
     Boolean modifyUserService(User user);
+
+    CommonResponse<Boolean> modifyPasswordService(int id, String password);
 }

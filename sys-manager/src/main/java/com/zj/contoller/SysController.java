@@ -207,4 +207,11 @@ public class SysController {
         return sysService.signOutService(request);
 
     }
+    /**
+     * 修改密码
+     * */
+    @GetMapping("user/password")
+    public CommonResponse<Boolean> modifyPasswordController( int id, String password){
+        return sysService.modifyPasswordService(id,password);
+    }
 }
