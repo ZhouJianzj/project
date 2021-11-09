@@ -265,4 +265,9 @@
             set username = #{username}, phone = #{phone}
         where id = #{id}
     </update>
+<!--往user_role表中插入数据-->
+    <insert id="userInsertRole" parameterType="com.zj.entity.User">
+        insert  into t_user_role (userid,roleid)
+        values (#{id},#{roleId})
+    </insert>
 </mapper>

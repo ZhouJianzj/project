@@ -116,6 +116,11 @@ public interface SysDao {
     Boolean userUpdate(User user);
 
     /**
+     * 给用户添加角色
+     */
+    Boolean userInsertRole(User user);
+
+    /**
      * 根据id查询user_role表数据
      */
     UserRole userRoleIdSelect(int id);

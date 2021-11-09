@@ -146,9 +146,6 @@ public class SysServiceImpl implements SysService {
     /**
      * 给角色添加权限
      *
-     * @param roleId
-     * @param permId
-     * @return
      */
     @Override
     public CommonResponse<Object> addRolePermService(String roleId, String permId) {
@@ -268,8 +265,24 @@ public class SysServiceImpl implements SysService {
      * @return
      */
     @Override
+    @Transactional
     public Boolean modifyUserService(User user) {
-        return sysDao.userUpdate(user);
+        Boolean aBoolean = false;
+        Boolean aBoolean1 = false;
+        //修改user   name 和 phone
+        if (user.getUsername() != null && user.getPhone() != null){
+           aBoolean = sysDao.userUpdate(user);
+        }
+        //添加user_role表中的对应权限
+        if (user.getRoleId() != null){
+           aBoolean1 = sysDao.userInsertRole(user);
+        }
+        if (aBoolean1 && aBoolean){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
 
