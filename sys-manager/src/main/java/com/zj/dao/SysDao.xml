@@ -13,7 +13,7 @@
         <result column="phone" property="phone"/>
 <!--        用户所在的公司-->
         <association property="o" javaType="com.zj.entity.Organize">
-
+            <id column="orgaid" property="id"></id>
             <result column="organame" property="name"/>
         </association>
 <!--       用户____> 角色表____>角色实体集 -->
@@ -142,6 +142,7 @@
             u.password,
             u.salt,
             u.phone,
+            o.id as orgaid,
             o.name AS organame,
             r.id as rid,
             r.name AS rolename,
@@ -166,6 +167,7 @@
             u.password,
             u.salt,
             u.phone,
+            o.id as orgaid,
             o.name AS organame,
             r.id as rid,
             r.name AS rolename,
@@ -190,6 +192,7 @@
             u.password,
             u.salt,
             u.phone,
+            o.id as orgaid,
             o.name AS organame,
             r.id as rid,
             r.name AS rolename,
@@ -213,6 +216,7 @@
             u.password,
             u.salt,
             u.phone,
+            o.id as orgaid,
             o.name AS organame,
             r.name AS rolename,
             r.ext,
