@@ -1,9 +1,10 @@
 package com.zj.controller;
 
+import com.zj.entity.CommonResponse;
 import com.zj.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author zhoujian
@@ -55,6 +56,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class ModelController {
     @Autowired
     private ModelService modelService;
+
+    @PostMapping("upLoad")
+    @ResponseBody
+    public CommonResponse<String> fileUploadController(@RequestParam("file") MultipartFile file){
+        if (file.isEmpty()){
+            return new CommonResponse<>(400,"上传文件失败！");
+        }
+        return modelService.fileUploadService(file);
+    }
 
     //管道模型管理
 
