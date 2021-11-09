@@ -70,37 +70,34 @@ public interface SysDao {
     /**
      * 添加用户
      *
-     * @param userManager
+     * @param
      * @return 返回结果
      */
-    boolean userManagerInsert(UserManager userManager);
+    boolean userManagerInsert(User user);
 
     /**
      * 删除用户
      *
-     * @param id
-     * @return 返回结果
      */
-    boolean userManagerDelete(int id);
-
+    boolean userRoleDelete(int id);
     boolean userDelete(int id);
+
 
     /**
      * 查询用户通过关键字
-     *
-     * @param key
      */
     List<UserManager> userKeySelect(String key);
 
 
     /**
      * 查询用户根据id
-     *
-     * @param id
-     * @return
      */
     UserManager userIdSelect(String id);
 
+    /**
+     * 查询日志
+     * @return 返回log list
+     */
     List<Log> logSelect();
 
     /**
@@ -125,16 +122,12 @@ public interface SysDao {
      */
     List<UserRole> userSelectRole(Integer id, Integer roleId);
 
-    /**
-     * 根据id查询user_role表数据
-     */
-    UserRole userRoleIdSelect(int id);
-
 
 
     Object rolePermSelect(int id);
 
     Object roleUserSelect(int id);
+
 
     boolean roleUserDelete(int id);
 
@@ -147,4 +140,9 @@ public interface SysDao {
     boolean userRoleInsert(Integer userid, int roleid);
 
     int useridGet();
+
+    /**
+     * 编辑user的组织id
+     */
+    Boolean userUpdateOrgaId(Integer id ,Integer orgaId);
 }

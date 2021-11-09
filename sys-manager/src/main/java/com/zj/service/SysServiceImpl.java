@@ -198,22 +198,23 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 用户添加
-     *
-     * @param userManager 参数
-     * @return 返回值
      */
     @Override
-    public CommonResponse<UserManager> addUserManagerService(UserManager userManager) {
-        CommonResponse<UserManager> response = new CommonResponse<>();
+    public CommonResponse<Boolean> addUserManagerService(User user) {
+        CommonResponse<Boolean> response = new CommonResponse<>();
 //      对新增用户的密码进行加密操作
-        String s = MD5Util.addMD5(userManager.getPassword());
-        List<Role> roles = userManager.getRoles();
-        userManager.setPassword(s);
-        if (sysDao.userManagerInsert(userManager)) {
+        String s = MD5Util.addMD5(user.getPassword());
+        //密码加密
+        user.setPassword(s);
+        //获取角色id
+        Integer[] roleIdArrays = user.getRoleIdArrays();
+        //user表插入用户
+        if (sysDao.userManagerInsert(user)) {
+            //新增user的自增主键
             int userid = sysDao.useridGet();
-            for (int i = 0;i < roles.size();i++){
-                int roleid = roles.get(i).getId();
-                sysDao.userRoleInsert(userid,roleid);
+            //获取role id 循环添加
+            for (int i = 0;i < roleIdArrays.length;i++){
+                sysDao.userRoleInsert(userid,roleIdArrays[i]);
             }
             response.setMsg("添加成功");
             response.setStatus(200);
@@ -232,34 +233,31 @@ public class SysServiceImpl implements SysService {
     @Override
     @Transactional
     public Boolean modifyUserService(User user) {
-        Boolean aBoolean = false;
-        Boolean aBoolean1 = false;
-        //修改user   name 和 phone
+
+        //修改user   name 和  phone
         if (user.getUsername() != null && user.getPhone() != null){
-            aBoolean = sysDao.userUpdate(user);
+            //修改user表
+            sysDao.userUpdate(user);
+            //修改user的 orgaId，如何传来的是空就表示去除用户的组织
+            sysDao.userUpdateOrgaId(user.getId(), user.getOrgaId());
         }
-        for (int i = 0; i < user.getRoleIdArrays().length; i++) {
-            Integer[] roleIdArrays = user.getRoleIdArrays();
-            System.out.println(roleIdArrays[i]);
-        }
+
+        Integer[] roleId = user.getRoleIdArrays();
         //添加user_role表中的对应权限
-        if (user.getRoleIdArrays().length != 0 ){
+        if (roleId.length != 0 ){
             //获取roleId数组长度
-            int length = user.getRoleIdArrays().length;
-            for (int i = 0; i < length; i++) {
-                //获取roleId数组
-                Integer[] roleId = user.getRoleIdArrays();
+            for (int i = 0; i < roleId.length; i++) {
                 //判断user_role中是否已经存在对应的userId和roleId
                 List<UserRole> userRoles = sysDao.userSelectRole(user.getId(),roleId[i]);
-                //没有对应关系
+                //没有对应关系就添加
                 if (userRoles.size() == 0){
                     //取决于sql操作
-                    aBoolean1 = sysDao.userInsertRole(user.getId(),roleId[i]);
+                    sysDao.userInsertRole(user.getId(),roleId[i]);
                 }
             }
 
         }
-       return aBoolean;
+        return sysDao.userRoleDelete(user.getId());
 
     }
 
@@ -269,7 +267,7 @@ public class SysServiceImpl implements SysService {
     @Override
     public CommonResponse<Boolean> modifyPasswordService(int id, String password) {
         password = MD5Util.addMD5(password);
-        CommonResponse response = new CommonResponse();
+        CommonResponse<Boolean> response = new CommonResponse<>();
         if (sysDao.passwordModify(id,password)){
             response.setMsg("修改密码成功");
             response.setStatus(200);
@@ -281,32 +279,23 @@ public class SysServiceImpl implements SysService {
     }
 
     /**
-     * 删除用户
+     * 删除用户，首先删除用户表，然后根据user的id到user_role表中删除对应的关系
      *
-     * @param id
-     * @return
      */
     @Override
+    @Transactional
     public CommonResponse<Boolean> deleteUserManagerService(int id) {
-        CommonResponse response = new CommonResponse();
-        if (sysDao.userDelete(id)){
-            if (sysDao.userRoleIdSelect(id) != null){
-                if (sysDao.userManagerDelete(id)){
-                    response.setMsg("删除成功");
-                    response.setStatus(200);
-                }else {
-                    response.setStatus(400);
-                    response.setMsg("删除失败");
-                }
-            }else {
-                response.setMsg("删除成功");
-                response.setStatus(200);
-            }
+        CommonResponse<Boolean> response = new CommonResponse<>();
+        //到user表中删除对应id的user   删除user_role中删除对应的关系
+        if (sysDao.userDelete(id) && sysDao.userRoleDelete(id)){
+             response.setMsg("删除成功");
+             response.setStatus(200);
         }else {
             response.setStatus(400);
             response.setMsg("删除失败");
         }
         return response;
+
     }
 
 

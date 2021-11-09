@@ -110,6 +110,9 @@
         select id,name from t_perms
     </select>
 
+
+
+
 <!--    角色权限添加-->
     <insert id="rolePermInsert" >
         insert into t_role_perms
@@ -124,6 +127,7 @@
     <select id="roleUserSelect" resultType="com.zj.entity.UserRole">
         select * from t_user_role where roleid = #{id}
     </select>
+
     <delete id="rolePermDelete">
         delete from t_role_perms where role_id = #{id}
     </delete>
@@ -134,7 +138,7 @@
         delete from t_role where id = #{id}
     </delete>
 
-<!--    根据手机号或者是用户name模糊查询用户-->
+<!--    根据手机号或者是用户name模糊查询用户，key为null的时候会查询所有-->
     <select id="userKeySelect" resultMap="user_map">
         SELECT
             u.id,
@@ -185,6 +189,7 @@
            u.id = #{id}
     </select>
 
+<!--    查询所有的用户-->
     <select id="allUserSelect" resultMap="user_map">
         SELECT
             u.id,
@@ -208,31 +213,10 @@
             LEFT JOIN t_perms p ON p.id = rp.perm_id
     </select>
 
-<!--查询所用户-->
-    <select id="userAllSelect" resultMap="user_map">
-        SELECT
-            u.id,
-            u.username,
-            u.password,
-            u.salt,
-            u.phone,
-            o.id as orgaid,
-            o.name AS organame,
-            r.name AS rolename,
-            r.ext,
-            p.name AS permname
-        FROM
-            t_user u
-            LEFT JOIN organize o ON o.id = u.orga_id
-            LEFT JOIN t_user_role ur ON ur.userid = u.id
-            LEFT JOIN t_role r ON r.id = ur.roleid
-            LEFT JOIN t_role_perms rp ON rp.role_id = r.id
-            LEFT JOIN t_perms p ON p.id = rp.perm_id
-    </select>
 
-<!--   新增用户-->
+<!--    新增用户-->
     <insert id="userManagerInsert">
-        insert into t_user (username,password,salt,phone) values (#{username},#{password},#{salt},#{phone})
+        insert into t_user (username,password,salt,phone,orga_id) values (#{username},#{password},#{salt},#{phone},#{orgaId})
     </insert>
     <select id="useridGet" resultType="Integer">
         SELECT @@IDENTITY
@@ -243,17 +227,15 @@
 
 
 <!--    删除用户-->
-    <select id="userRoleIdSelect" resultType="com.zj.entity.UserRole">
-        select * from t_user_role where userid = #{id}
-    </select>
     <delete id="userDelete">
         delete from t_user where id = #{id}
     </delete>
-
-<!--    删除用户（用户拥有角色）-->
-    <delete id="userManagerDelete">
+    <!-- 删除用户（用户拥有角色）-->
+    <delete id="userRoleDelete">
         delete from t_user_role where userid = #{id}
     </delete>
+
+
 <!--    日志查询-->
     <select id="logSelect" resultType="com.zj.entity.Log">
         select
@@ -268,22 +250,33 @@
     </select>
 
 
+
+
 <!--    更新用户根据id-->
     <update id="userUpdate" parameterType="com.zj.entity.User">
         update t_user
             set username = #{username}, phone = #{phone}
         where id = #{id}
     </update>
-<!--往user_role表中插入数据-->
+<!--   往user_role表中插入数据-->
     <insert id="userInsertRole" parameterType="com.zj.entity.User">
         insert  into t_user_role (userid,roleid)
         values (#{id},#{roleId})
     </insert>
-<!--先查询user_role中是否已经存在关系-->
+<!--   先查询user_role中是否已经存在关系-->
     <select id="userSelectRole" parameterType="com.zj.entity.User"  resultType="com.zj.entity.UserRole">
         select * from t_user_role
         where userid = #{id} and roleid = #{roleId}
     </select>
+
+    <update id="userUpdateOrgaId">
+        update t_user set orga_id = #{orgaId} where id = #{id}
+    </update>
+
+
+
+
+
 <!--    修改密码-->
     <update id="passwordModify">
         update t_user set password = #{password} where id = #{id}

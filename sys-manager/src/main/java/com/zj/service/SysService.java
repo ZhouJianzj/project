@@ -29,7 +29,7 @@ public interface SysService {
 
     UserManager findUserIdService(String id);
 
-    CommonResponse<UserManager> addUserManagerService(UserManager userManager);
+    CommonResponse<Boolean> addUserManagerService(User user);
 
     CommonResponse<Boolean> deleteUserManagerService(int id);
 

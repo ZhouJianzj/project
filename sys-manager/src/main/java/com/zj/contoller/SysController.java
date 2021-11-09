@@ -167,12 +167,11 @@ public class SysController {
     /**
      * 新增用户
      *
-     * @param userManager 参数对象
      * @return 统一响应体
      */
     @PostMapping("user")
-    public CommonResponse<UserManager> addUserManagerController(@RequestBody UserManager userManager) {
-        return sysService.addUserManagerService(userManager);
+    public CommonResponse<Boolean> addUserManagerController(@RequestBody User user) {
+        return sysService.addUserManagerService(user);
     }
 
     /**
