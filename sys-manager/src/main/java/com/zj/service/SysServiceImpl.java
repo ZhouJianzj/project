@@ -241,17 +241,16 @@ public class SysServiceImpl implements SysService {
         Integer[] roleId = user.getRoleIdArrays();
         //添加user_role表中的对应权限
         if (roleId.length != 0) {
-            //获取roleId数组长度
+            //先全部删除
+            sysDao.userRoleDelete(user.getId());
+            Boolean insert = false;
+            //在依次的添加
             for (int i = 0; i < roleId.length; i++) {
-                //判断user_role中是否已经存在对应的userId和roleId
-                List<UserRole> userRoles = sysDao.userSelectRole(user.getId(), roleId[i]);
-                //没有对应关系就添加
-                if (userRoles.size() == 0) {
                     //取决于sql操作
-                    sysDao.userInsertRole(user.getId(), roleId[i]);
-                }
+                insert =  sysDao.userInsertRole(user.getId(), roleId[i]);
+
             }
-            return true;
+            return insert;
 
         }else {
            return sysDao.userRoleDelete(user.getId());
