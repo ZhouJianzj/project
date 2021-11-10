@@ -103,7 +103,7 @@
 
     <!--    查询所用的权限-->
     <select id="permSelect" resultType="com.zj.entity.Perm">
-        select id, name
+        select id, name,parent_id as parentId,path,ext,icon
         from t_perms
     </select>
 
