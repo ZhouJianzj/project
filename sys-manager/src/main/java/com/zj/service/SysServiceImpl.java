@@ -77,18 +77,24 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 删除角色
-     *
+     * 首先删除角色表中的角色，
+     * 然后去role_perm表中删除对应关系
+     * 然后再去user_role中删除对应的关系
      * @param id
      * @return
      */
     @Override
+    @Transactional
     public CommonResponse<Boolean> deleteRoleService(int id) {
         CommonResponse<Boolean> response = new CommonResponse<>();
+        //删除角色表中的对应的角色id
         if (sysDao.roleDelete(id)) {
-            if (sysDao.roleUserSelect(id) != null) {
+            //用户user_role查询，查到就删除
+            if (sysDao.roleUserSelect(id).size() != 0) {
                 sysDao.roleUserDelete(id);
             }
-            if (sysDao.rolePermSelect(id) != null) {
+            // 查询role_perm表中对应的关系，查到就删
+            if (sysDao.rolePermSelect(id).size() != 0) {
                 sysDao.rolePermDelete(id);
             }
             response.setStatus(200);
@@ -245,9 +251,13 @@ public class SysServiceImpl implements SysService {
                     sysDao.userInsertRole(user.getId(), roleId[i]);
                 }
             }
+            return true;
 
+        }else {
+           return sysDao.userRoleDelete(user.getId());
         }
-        return sysDao.userRoleDelete(user.getId());
+
+
 
     }
 

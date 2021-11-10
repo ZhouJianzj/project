@@ -124,9 +124,9 @@ public interface SysDao {
     List<UserRole> userSelectRole(Integer id, Integer roleId);
 
 
-    Object rolePermSelect(int id);
+    List<RolePerm> rolePermSelect(int id);
 
-    Object roleUserSelect(int id);
+    List<UserRole> roleUserSelect(int id);
 
 
     boolean roleUserDelete(int id);

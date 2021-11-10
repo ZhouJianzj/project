@@ -12,6 +12,6 @@ import java.io.Serializable;
 @Data
 public class RolePerm implements Serializable {
     int id;
-    int role_id;
-    int perm_id;
+    int roleId;
+    int permId;
 }

@@ -116,27 +116,31 @@
     </insert>
 
     <!--    删除角色-->
+
     <select id="rolePermSelect" resultType="com.zj.entity.RolePerm">
-        select *
+        select role_id as roleId,perm_id as permId
         from t_role_perms
         where role_id = #{id}
     </select>
+
     <select id="roleUserSelect" resultType="com.zj.entity.UserRole">
-        select *
+        select userid,roleid
         from t_user_role
         where roleid = #{id}
     </select>
-
+<!--删除role_perm表中对应的关系-->
     <delete id="rolePermDelete">
         delete
         from t_role_perms
         where role_id = #{id}
     </delete>
+<!--    删除role_user中对应的关系-->
     <delete id="roleUserDelete">
         delete
         from t_user_role
         where roleid = #{id}
     </delete>
+
     <delete id="roleDelete">
         delete
         from t_role
