@@ -13,7 +13,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableRedisHttpSession
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds=10)
 @MapperScan("com.zj.dao")
 public class SysApplication {
     public static void main(String[] args) {
