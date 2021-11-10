@@ -22,6 +22,7 @@ public class CommoInterceptor implements HandlerInterceptor {
             JSONObject o = new JSONObject();
             PrintWriter writer = response.getWriter();
             o.put("stuts", "402");
+            response.setStatus(402);
             o.put("msg", "请重新登录！");
             o.put("redirct","/login");
             writer.print(o);
@@ -32,7 +33,8 @@ public class CommoInterceptor implements HandlerInterceptor {
             response.setContentType("json; charset=utf-8");
             JSONObject o = new JSONObject();
             PrintWriter writer = response.getWriter();
-            o.put("stuts", "400");
+            o.put("stuts", "401");
+            response.setStatus(401);
             o.put("msg", "没有登录！");
             o.put("redirct","/login");
             writer.print(o);
