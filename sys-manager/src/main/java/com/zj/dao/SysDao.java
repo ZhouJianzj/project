@@ -65,7 +65,7 @@ public interface SysDao {
      */
     List<Perm> permSelect();
 
-    boolean rolePermInsert(String roleId, String permId);
+    boolean rolePermInsert(Integer roleId, Integer permId);
 
     /**
      * 添加用户
@@ -145,4 +145,6 @@ public interface SysDao {
      * 编辑user的组织id
      */
     Boolean userUpdateOrgaId(Integer id, Integer orgaId);
+
+    Boolean deleteRolePerm(int roleId);
 }
