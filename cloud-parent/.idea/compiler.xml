@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="common-api" />
         <module name="sys-manager" />
-        <module name="item-manger" />
         <module name="alarm-manager" />
         <module name="model-manager" />
         <module name="asset-manager" />
@@ -17,17 +16,6 @@
         <module name="gateway" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="alarm-manager" target="1.8" />
-      <module name="asset-manager" target="8" />
-      <module name="cloud-parent" target="1.8" />
-      <module name="common-api" target="1.8" />
-      <module name="gateway" target="1.8" />
-      <module name="item-manager" target="1.8" />
-      <module name="item-manger" target="1.8" />
-      <module name="model-manager" target="1.8" />
-      <module name="sys-manager" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -36,7 +24,6 @@
       <module name="common-api" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="item-manager" options="-parameters" />
-      <module name="item-manger" options="-parameters" />
       <module name="model-manager" options="-parameters" />
       <module name="sys-manager" options="-parameters" />
     </option>
