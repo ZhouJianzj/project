@@ -29,9 +29,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10883b94-3334-43b4-8354-51cf1c7374fa" name="Default Changelist" comment="查询所有权限优化">
+      <change afterPath="$PROJECT_DIR$/../alarm-manager/alarm-manager.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../asset-manager/asset-manager.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloud-parent.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../common-api/common-api.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../item-manager/item-manager.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model-manager/model-manager.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sys-manager/sys-manager.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../common-api/target/classes/com/zj/entity/Perm.class" beforeDir="false" afterPath="$PROJECT_DIR$/../common-api/target/classes/com/zj/entity/Perm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/dao/SysDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/dao/SysDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/contoller/SysController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/contoller/SysController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/dao/SysDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/dao/SysDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/contoller/SysController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/contoller/SysController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/service/SysServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/service/SysServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,8 +92,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../common-api" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="E:/java/hotel3" />
+    <property name="project.structure.last.edited" value="模块" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="show.run.dashboard.notification" value="false" />
@@ -99,17 +112,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.SysApplication">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="AlarmApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="alarm-manager" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.zj.AlarmApplication" />
@@ -183,7 +185,10 @@
       <workItem from="1636383741790" duration="3000" />
       <workItem from="1636422446875" duration="5683000" />
       <workItem from="1636428372790" duration="2837000" />
-      <workItem from="1636518445656" duration="4933000" />
+      <workItem from="1636518445656" duration="5715000" />
+      <workItem from="1636527299960" duration="1330000" />
+      <workItem from="1636528645822" duration="11000" />
+      <workItem from="1636529180625" duration="2872000" />
     </task>
     <task id="LOCAL-00001" summary="给user修改username和password和往user_role插入数据">
       <created>1636428152486</created>
@@ -213,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636520315266</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="查询所有权限优化">
+      <created>1636526322199</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1636526322199</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,46 +266,82 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="147" y="68" key="DiffContextDialog/0.0.1536.864@0.0.1536.864" timestamp="1636525498070" />
-    <state width="1493" height="216" key="GridCell.Tab.0.bottom" timestamp="1636520198808">
+    <state x="549" y="139" key="FileChooserDialogImpl" timestamp="1636528236971">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1636520198808" />
-    <state width="1493" height="216" key="GridCell.Tab.0.center" timestamp="1636520198808">
+    <state x="549" y="139" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1636528236971" />
+    <state width="1493" height="216" key="GridCell.Tab.0.bottom" timestamp="1636531888743">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1636520198808" />
-    <state width="1493" height="216" key="GridCell.Tab.0.left" timestamp="1636520198808">
+    <state width="1493" height="216" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1636531888743" />
+    <state width="1493" height="216" key="GridCell.Tab.0.center" timestamp="1636531888743">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1636520198808" />
-    <state width="1493" height="216" key="GridCell.Tab.0.right" timestamp="1636520198808">
+    <state width="1493" height="216" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1636531888743" />
+    <state width="1493" height="216" key="GridCell.Tab.0.left" timestamp="1636531888742">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1636520198808" />
-    <state width="1493" height="216" key="GridCell.Tab.1.bottom" timestamp="1636520198808">
+    <state width="1493" height="216" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1636531888742" />
+    <state width="1493" height="216" key="GridCell.Tab.0.right" timestamp="1636531888743">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1636520198808" />
-    <state width="1493" height="216" key="GridCell.Tab.1.center" timestamp="1636520198808">
+    <state width="1493" height="216" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1636531888743" />
+    <state width="1493" height="216" key="GridCell.Tab.1.bottom" timestamp="1636531888743">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1636520198808" />
-    <state width="1493" height="216" key="GridCell.Tab.1.left" timestamp="1636520198808">
+    <state width="1493" height="216" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1636531888743" />
+    <state width="1493" height="216" key="GridCell.Tab.1.center" timestamp="1636531888743">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1636520198808" />
-    <state width="1493" height="216" key="GridCell.Tab.1.right" timestamp="1636520198808">
+    <state width="1493" height="216" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1636531888743" />
+    <state width="1493" height="216" key="GridCell.Tab.1.left" timestamp="1636531888743">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1636520198808" />
+    <state width="1493" height="216" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1636531888743" />
+    <state width="1493" height="216" key="GridCell.Tab.1.right" timestamp="1636531888743">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="216" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1636531888743" />
+    <state width="1493" height="268" key="GridCell.Tab.2.bottom" timestamp="1636530659475">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="268" key="GridCell.Tab.2.bottom/0.0.1536.864@0.0.1536.864" timestamp="1636530659475" />
+    <state width="1493" height="268" key="GridCell.Tab.2.center" timestamp="1636530659475">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="268" key="GridCell.Tab.2.center/0.0.1536.864@0.0.1536.864" timestamp="1636530659475" />
+    <state width="1493" height="268" key="GridCell.Tab.2.left" timestamp="1636530659474">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="268" key="GridCell.Tab.2.left/0.0.1536.864@0.0.1536.864" timestamp="1636530659474" />
+    <state width="1493" height="268" key="GridCell.Tab.2.right" timestamp="1636530659475">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="268" key="GridCell.Tab.2.right/0.0.1536.864@0.0.1536.864" timestamp="1636530659475" />
+    <state x="397" y="185" key="MultipleFileMergeDialog" timestamp="1636526342327">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="397" y="185" key="MultipleFileMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1636526342327" />
+    <state x="423" y="50" key="NewModule_or_Project.wizard" timestamp="1636527344253">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="423" y="50" key="NewModule_or_Project.wizard/0.0.1536.864@0.0.1536.864" timestamp="1636527344253" />
+    <state x="249" y="7" key="SettingsEditor" timestamp="1636527379959">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="249" y="7" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1636527379959" />
     <state x="361" y="161" key="Vcs.Push.Dialog.v2" timestamp="1636520349133">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="361" y="161" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1636520349133" />
-    <state x="590" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1636520341398">
+    <state x="590" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1636526326024">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="590" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1636520341398" />
+    <state x="590" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1636526326024" />
+    <state x="236" y="14" key="new project wizard" timestamp="1636528250400">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="236" y="14" key="new project wizard/0.0.1536.864@0.0.1536.864" timestamp="1636528250400" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -304,31 +352,31 @@
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/contoller/SysController.java</url>
-          <line>148</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java</url>
-          <line>284</line>
+          <line>286</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java</url>
-          <line>285</line>
+          <line>287</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java</url>
-          <line>286</line>
+          <line>288</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../sys-manager/src/main/java/com/zj/service/SysServiceImpl.java</url>
-          <line>293</line>
+          <line>295</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="roleName" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

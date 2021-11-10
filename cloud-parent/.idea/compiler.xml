@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="common-api" />
         <module name="sys-manager" />
-        <module name="item-manger" />
         <module name="alarm-manager" />
         <module name="model-manager" />
         <module name="asset-manager" />

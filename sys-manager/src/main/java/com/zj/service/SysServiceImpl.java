@@ -116,7 +116,9 @@ public class SysServiceImpl implements SysService {
      */
     @Override
     public List<Role> findRoleService(String roleName) {
-        return sysDao.roleSelect(roleName);
+        List<Role> roleList =  sysDao.roleSelect(roleName);
+        return roleList;
+
     }
 
     /**
