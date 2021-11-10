@@ -110,10 +110,9 @@ public class SysController {
      * @return 权限结果集
      */
     @GetMapping("perm")
-    public PageInfo<Perm> findPermController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
-                                             @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
-        PageHelper.startPage(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
-        return new PageInfo<Perm>(sysService.findPermService());
+    public Page<Perm> findPermController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
+                                   @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
+        return MyPageHelper.myPageHelper(new Page<Perm>(sysService.findPermService(),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
 
     }
 
