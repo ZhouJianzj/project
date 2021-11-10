@@ -117,14 +117,19 @@ public class SysController {
 
     /**
      * 角色分配权限
+     * 支持role权限的分配，permId可以是数组
      *
-     * @param roleId 角色id
-     * @param permId 权限id
      * @return 统一响应体
      */
     @PostMapping("role/perm")
-    public CommonResponse<Object> addRolePermController(String roleId, String permId) {
-        return sysService.addRolePermService(roleId, permId);
+    public CommonResponse<Object> addRolePermController(@RequestBody RolePerm rolePerm) {
+
+        if (sysService.addRolePermService(rolePerm)){
+            return new CommonResponse<>(200, "修改成功！", true);
+        }else {
+            return new CommonResponse<>(400, "修改失败！", false);
+        }
+
     }
 
 

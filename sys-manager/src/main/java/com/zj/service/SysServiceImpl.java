@@ -158,17 +158,26 @@ public class SysServiceImpl implements SysService {
      * 给角色添加权限
      */
     @Override
-    public CommonResponse<Object> addRolePermService(String roleId, String permId) {
-        CommonResponse<Object> response = new CommonResponse<>();
-        if (sysDao.rolePermInsert(roleId, permId)) {
-            response.setStatus(200);
-            response.setMsg("添加成功！");
-            return response;
-        } else {
-            response.setStatus(400);
-            response.setMsg("添加失败！");
-            return response;
+    @Transactional
+    public Boolean addRolePermService(RolePerm rolePerm) {
+
+        //先全部删除之前的 role_perm关系然后
+        Integer[] permIdArrays = rolePerm.getPermIdArrays();
+        Boolean b = false;
+        if (permIdArrays.length != 0){
+            //删除所有的对应关系
+            sysDao.deleteRolePerm(rolePerm.getRoleId());
+            //循环添加
+            for (int i = 0; i < permIdArrays.length; i++) {
+               b =  sysDao.rolePermInsert(rolePerm.getRoleId(),permIdArrays[i]);
+            }
+          return b;
+        }else {
+            //删除所有的对应关系
+            return sysDao.deleteRolePerm(rolePerm.getRoleId());
+
         }
+
     }
 
 

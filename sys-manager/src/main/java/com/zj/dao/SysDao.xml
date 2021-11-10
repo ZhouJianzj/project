@@ -129,11 +129,19 @@
 
 
     <!--    角色权限添加-->
-    <insert id="rolePermInsert">
+    <insert id="rolePermInsert" parameterType="com.zj.entity.RolePerm">
         insert into t_role_perms
             (role_id, perm_id)
         values (#{roleId}, #{permId})
     </insert>
+<!--        删除所有对应的角色权限-->
+    <delete id="deleteRolePerm" >
+        delete from t_role_perms where role_id = #{roleId}
+    </delete>
+
+
+
+
 
     <!--    删除角色-->
 
@@ -227,7 +235,7 @@
                r.name AS rolename,
                r.ext,
                p.id   as pid
-            p.name AS permname
+               p.name as permname
         FROM t_user u
                  LEFT JOIN organize o ON o.id = u.orga_id
                  LEFT JOIN t_user_role ur ON ur.userid = u.id
@@ -303,6 +311,8 @@
         set orga_id = #{orgaId}
         where id = #{id}
     </update>
+
+
 
 
     <!--    修改密码-->

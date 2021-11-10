@@ -14,4 +14,5 @@ public class RolePerm implements Serializable {
     int id;
     int roleId;
     int permId;
+    Integer[] permIdArrays;
 }
