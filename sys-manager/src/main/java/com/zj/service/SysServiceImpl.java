@@ -2,6 +2,7 @@ package com.zj.service;
 
 import com.zj.dao.SysDao;
 import com.zj.entity.*;
+import com.zj.util.ListToTree;
 import com.zj.util.MD5Util;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -146,6 +147,8 @@ public class SysServiceImpl implements SysService {
     @Override
     public List<Perm> findPermService() {
         List<Perm> perms = sysDao.permSelect();
+        ListToTree tree = new ListToTree(perms);
+        perms = tree.buildTree();
         return perms;
     }
 
