@@ -30,12 +30,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10883b94-3334-43b4-8354-51cf1c7374fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../model-manager/model-manager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../model-manager/model-manager.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/SysApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../sys-manager/target/classes/com/zj/SysApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="main" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
