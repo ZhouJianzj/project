@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
+
 /**
  * @author zhoujian
  * 方法名命名规范
@@ -54,9 +56,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("model")
 public class ModelController {
-    @Autowired
+    @Resource
     private ModelService modelService;
 
+    /**
+     * 前端文件上传保存到服务器
+     */
     @PostMapping("upLoad")
     public CommonResponse<String> fileUploadController(@RequestParam("file") MultipartFile file){
 
