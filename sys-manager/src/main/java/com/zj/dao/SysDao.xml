@@ -354,4 +354,16 @@
         insert into t_perms (name,parent_id,path,ext,icon)
         values (#{name},#{parentId},#{path},#{ext},#{icon})
     </insert>
+
+<!--    修改权限-->
+    <update id="permModify">
+        update t_perms
+            set
+                name = #{name},
+                parent_id = #{parentId},
+                path = #{path},
+                ext = #{ext},
+                icon = #{icon}
+            where id = #{id}
+    </update>
 </mapper>
