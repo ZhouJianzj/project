@@ -20,7 +20,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         };
 //        没有放行登录的path的时候会出现第一次正常拦截，再一次请求的时候会出现成功
         String[] excludePatterns = {
-                "/sys/login"
+                "/sys/login",
+                "*.html"
         };
         registry.addInterceptor(new CommoInterceptor()).
                 addPathPatterns(addPathPatterns)
