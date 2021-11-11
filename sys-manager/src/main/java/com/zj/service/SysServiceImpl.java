@@ -116,7 +116,9 @@ public class SysServiceImpl implements SysService {
      */
     @Override
     public List<Role> findRoleService(String roleName) {
-        return sysDao.roleSelect(roleName);
+        List<Role> roleList =  sysDao.roleSelect(roleName);
+        return roleList;
+
     }
 
     /**
@@ -285,6 +287,17 @@ public class SysServiceImpl implements SysService {
             response.setStatus(400);
         }
         return response;
+    }
+
+    @Override
+    public Boolean findUserNameService(String name) {
+        Boolean b = true;
+        if (sysDao.userNameSelect(name).size() == 0){
+            b = true;
+        }else {
+            b = false;
+        }
+        return b;
     }
 
     /**
