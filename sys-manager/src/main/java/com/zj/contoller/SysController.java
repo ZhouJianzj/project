@@ -222,9 +222,9 @@ public class SysController {
     /**
      * 修改密码
      */
-    @GetMapping("user/password")
-    public CommonResponse<Boolean> modifyPasswordController(int id, String password) {
-        return sysService.modifyPasswordService(id, password);
+    @PutMapping("user/password")
+    public CommonResponse<Boolean> modifyPasswordController(@RequestBody UserManager userManager) {
+        return sysService.modifyPasswordService(userManager);
     }
 
     /**

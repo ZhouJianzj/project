@@ -39,7 +39,7 @@ public interface SysService {
 
     Boolean modifyUserService(User user);
 
-    CommonResponse<Boolean> modifyPasswordService(int id, String password);
+    CommonResponse<Boolean> modifyPasswordService(UserManager userManager);
 
     Boolean findUserNameService(String name);
 

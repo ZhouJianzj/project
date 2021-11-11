@@ -276,10 +276,10 @@ public class SysServiceImpl implements SysService {
      * 修改密码，修改密码前的旧密码给前端校验
      */
     @Override
-    public CommonResponse<Boolean> modifyPasswordService(int id, String password) {
-        password = MD5Util.addMD5(password);
+    public CommonResponse<Boolean> modifyPasswordService(UserManager userManager) {
+        String password = MD5Util.addMD5(userManager.getPassword());
         CommonResponse<Boolean> response = new CommonResponse<>();
-        if (sysDao.passwordModify(id, password)) {
+        if (sysDao.passwordModify(userManager.getId(), password)) {
             response.setMsg("修改密码成功");
             response.setStatus(200);
         } else {
