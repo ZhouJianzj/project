@@ -46,4 +46,6 @@ public interface SysService {
     CommonResponse<Boolean> deletePermService(int id);
 
     CommonResponse<Boolean> insertPermService(Perm perm);
+
+    CommonResponse<Boolean> modifyPermService(Perm perm);
 }

@@ -159,4 +159,6 @@ public interface SysDao {
      * 权限新增
      * */
     boolean permInsert(Perm perm);
+
+    boolean permModify(Perm perm);
 }

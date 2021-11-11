@@ -332,6 +332,19 @@ public class SysServiceImpl implements SysService {
         return response;
     }
 
+    @Override
+    public CommonResponse<Boolean> modifyPermService(Perm perm) {
+        CommonResponse<Boolean> response = new CommonResponse<>();
+        if (sysDao.permModify(perm)){
+            response.setMsg("修改成功");
+            response.setStatus(200);
+        }else {
+            response.setStatus(400);
+            response.setMsg("修改失败");
+        }
+        return response;
+    }
+
     /**
      * 删除用户，首先删除用户表，然后根据user的id到user_role表中删除对应的关系
      */
