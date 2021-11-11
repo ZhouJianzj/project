@@ -155,5 +155,8 @@ public interface SysDao {
      * */
     boolean permDelete(int id);
 
+    /**
+     * 权限新增
+     * */
     boolean permInsert(Perm perm);
 }
