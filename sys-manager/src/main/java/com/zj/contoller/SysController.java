@@ -239,6 +239,8 @@ public class SysController {
 
     /**
      * 添加权限
+     * @param perm
+     * @return
      * */
     @PostMapping("perm")
     public CommonResponse<Boolean> insertPermController(@RequestBody Perm perm){
