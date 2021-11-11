@@ -6,9 +6,9 @@ import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.*;
 import com.zj.service.SysService;
 import com.zj.util.MyPageHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("sys")
 public class SysController {
-    @Autowired
+    @Resource
     private SysService sysService;
 
     /**
@@ -55,7 +55,7 @@ public class SysController {
                                                      @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
         PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
 
-        return new PageInfo<Organize>(sysService.findOrganzieService(orgName));
+        return new PageInfo<Organize>(sysService.findOrganizeService(orgName));
     }
 
     /**
@@ -78,10 +78,11 @@ public class SysController {
      * @return role结果集
      */
     @GetMapping("role")
-    public Page findRoleController(String roleName,
+    public PageInfo<Role> findRoleController(String roleName,
                                              @RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
                                              @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
-        return MyPageHelper.myPageHelper(new Page(sysService.findRoleService(roleName), Integer.parseInt(pageNo), Integer.parseInt(pageSize)));
+        PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
+        return new PageInfo<>(sysService.findRoleService(roleName));
     }
 
     /**
@@ -109,7 +110,7 @@ public class SysController {
      * @return 权限结果集
      */
     @GetMapping("perm")
-    public Page<Perm> findPermController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
+    public Page findPermController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
                                    @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
         return MyPageHelper.myPageHelper(new Page<Perm>(sysService.findPermService(),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
 
@@ -149,11 +150,11 @@ public class SysController {
      */
     @PutMapping("user/modify")
     public CommonResponse<Boolean> modifyUserController(@RequestBody User user) {
-        Boolean aBoolean = sysService.modifyUserService(user);
-        if (aBoolean) {
-            return new CommonResponse<>(200, "修改成功！", aBoolean);
+
+        if (sysService.modifyUserService(user)) {
+            return new CommonResponse<>(200, "修改成功！", true);
         }
-        return new CommonResponse<>(400, "修改失败！");
+        return new CommonResponse<>(400, "修改失败！",false);
     }
 
     /**
@@ -197,7 +198,7 @@ public class SysController {
      */
     @GetMapping("log")
     public PageInfo<Log> findLogController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo, @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
-        PageHelper.startPage(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
+        PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
         return new PageInfo<Log>(sysService.findLogService());
     }
 

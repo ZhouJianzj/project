@@ -20,7 +20,7 @@ public class MyPageHelper {
         if (start > size){
             return null;
         }else
-            //如果end 大于size就直接使用size
+            //如果end 大于size就直接使用size，注意subList的左闭右开原则，end可以为size + 1
             if (end > size) {
                 List list = page.getList().subList(start, size);
                 page.setList(list);

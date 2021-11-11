@@ -8,8 +8,10 @@ import java.io.Serializable;
 import java.util.List;
 
 
-
-
+/**
+ * 自定的分页插件工具类
+ * @param <T>
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

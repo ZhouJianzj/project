@@ -2,16 +2,12 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/../alarm-manager/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../alarm-manager/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../asset-manager/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../asset-manager/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../common-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../gateway/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../item-manager/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../item-manager/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../model-manager/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../model-manager/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../sys-manager/src/main/java" charset="UTF-8" />
   </component>
 </project>
