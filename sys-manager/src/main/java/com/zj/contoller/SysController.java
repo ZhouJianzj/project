@@ -6,7 +6,6 @@ import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.*;
 import com.zj.service.SysService;
 import com.zj.util.MyPageHelper;
-import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author zhoujian
  */
-@Api(value = "sys-manager")
 @RestController
 @RequestMapping("sys")
 public class SysController {
