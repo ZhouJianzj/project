@@ -748,3 +748,29 @@
 }
 ```
 
+##### 根据用户名查询用户是否存在
+      
+  - 地址：sys/user/name
+      
+  - 请求：GET
+      
+  - 请求参数：key
+      
+  - 返回参数类型：Boolean
+      
+ ##### 19.修改密码
+      
+  - sys/user/password
+      
+  - 请求：GET
+      
+  - 请求参数：id,password
+      
+  - 返回数据示例：
+```
+{
+    "status": 200,
+    "msg": "修改密码成功",
+    "data": null
+}
+```
