@@ -808,3 +808,26 @@
      "data": null
  }
  ```
+##### 22.修改权限
+ - 地址：sys/perm
+ - 请求：PUT
+ - 请求参数：perm
+ - 请求参数示例：
+ ```
+   {
+       "id":7,
+       "name":"zhoujian",
+       "parentId":4,
+       "path":"",
+       "ext":"真贱",
+       "icon":""
+   }
+   ```
+ - 返回参数示例：
+ ```
+    {
+        "status": 200,
+        "msg": "修改成功",
+        "data": null
+    }
+    ```
