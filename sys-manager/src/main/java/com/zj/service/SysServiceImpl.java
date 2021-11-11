@@ -289,14 +289,13 @@ public class SysServiceImpl implements SysService {
         return response;
     }
 
+    /**
+     * 查询user的name是否存在
+     */
     @Override
     public Boolean findUserNameService(String name) {
         Boolean b = true;
-        if (sysDao.userNameSelect(name).size() == 0){
-            b = true;
-        }else {
-            b = false;
-        }
+        b = sysDao.userNameSelect(name).size() == 0;
         return b;
     }
 
