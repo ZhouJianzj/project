@@ -1,0 +1,14 @@
+<changelist name="在进行Update之前于_2021_11_11_8_06_取消提交了变更_[Default_Changelist]" date="1636589259158" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/在进行Update之前于_2021_11_11_8_06_取消提交了变更_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="在进行Update之前于 2021/11/11 8:06 取消提交了变更 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="../sys-manager/target/classes/com/zj/contoller/SysController.class" />
+    <option name="AFTER_PATH" value="../sys-manager/target/classes/com/zj/contoller/SysController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行Update之前于_2021_11_11_8_06_取消提交了变更_[Default_Changelist]/SysController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../sys-manager/target/classes/com/zj/service/SysServiceImpl.class" />
+    <option name="AFTER_PATH" value="../sys-manager/target/classes/com/zj/service/SysServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行Update之前于_2021_11_11_8_06_取消提交了变更_[Default_Changelist]/SysServiceImpl.class" />
+  </binary>
+</changelist>

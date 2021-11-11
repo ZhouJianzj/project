@@ -748,3 +748,63 @@
 }
 ```
 
+##### 根据用户名查询用户是否存在
+      
+  - 地址：sys/user/name
+      
+  - 请求：GET
+      
+  - 请求参数：key
+      
+  - 返回参数类型：Boolean
+      
+ ##### 19.修改密码
+      
+  - 地址：sys/user/password
+      
+  - 请求：GET
+      
+  - 请求参数：id,password
+      
+  - 返回数据示例：
+```
+{
+    "status": 200,
+    "msg": "修改密码成功",
+    "data": null
+}
+```
+##### 20.删除权限
+ - 地址：sys/perm
+ - 请求：DELETE
+ - 请求参数：id
+ - 返回数据示例：
+ ```
+ {
+     "status": 200,
+     "msg": "删除成功",
+     "data": true
+ }
+ ```
+##### 21.新增权限
+ - 地址：sys/perm
+ - 请求：POST
+ - 请求参数：perm
+ - 请求参数示例：
+  ```
+  {
+      "name":"zhoujian",
+      "parentId":3,
+      "path":"",
+      "ext":"周健",
+      "icon":""
+  }
+  ```
+- 返回参数：
+ ```
+ {
+     "status": 200,
+     "msg": "新增成功",
+     "data": null
+ }
+ ```

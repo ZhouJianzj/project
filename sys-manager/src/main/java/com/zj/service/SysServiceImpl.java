@@ -50,7 +50,7 @@ public class SysServiceImpl implements SysService {
      * 机构查询
      */
     @Override
-    public List<Organize> findOrganzieService(String orgName) {
+    public List<Organize> findOrganizeService(String orgName) {
 
         return sysDao.organizeSelect(orgName);
     }
@@ -116,7 +116,9 @@ public class SysServiceImpl implements SysService {
      */
     @Override
     public List<Role> findRoleService(String roleName) {
-        return sysDao.roleSelect(roleName);
+        List<Role> roleList =  sysDao.roleSelect(roleName);
+        return roleList;
+
     }
 
     /**
@@ -166,8 +168,8 @@ public class SysServiceImpl implements SysService {
             //删除所有的对应关系
             sysDao.deleteRolePerm(rolePerm.getRoleId());
             //循环添加
-            for (int i = 0; i < permIdArrays.length; i++) {
-               b =  sysDao.rolePermInsert(rolePerm.getRoleId(),permIdArrays[i]);
+            for (Integer permId : permIdArrays) {
+                b = sysDao.rolePermInsert(rolePerm.getRoleId(), permId);
             }
           return b;
         }else {
@@ -180,12 +182,13 @@ public class SysServiceImpl implements SysService {
 
 
     /**
-     * 查询用户，支持模糊查询，查询关键字可以是手机号或者是用户名
+     * 查询用户
+     * 支持模糊查询查询关键字可以是手机号或者是用户名关键直段为空的时候表示查询所有
      */
     @Override
     public List<UserManager> finUserService(String Key) {
         List<UserManager> userManagers = null;
-        if (Key == null || Key == "") {
+        if (Key == null || "".equals(Key) ) {
             userManagers = sysDao.allUserSelect();
         } else {
             userManagers = sysDao.userKeySelect(Key);
@@ -196,8 +199,8 @@ public class SysServiceImpl implements SysService {
     /**
      * 根据id查询用户
      *
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return 查询到对应id的用户
      */
     @Override
     public UserManager findUserIdService(String id) {
@@ -210,7 +213,7 @@ public class SysServiceImpl implements SysService {
     @Override
     public CommonResponse<Boolean> addUserManagerService(User user) {
         CommonResponse<Boolean> response = new CommonResponse<>();
-//      对新增用户的密码进行加密操作
+        // 对新增用户的密码进行加密操作
         String s = MD5Util.addMD5(user.getPassword());
         //密码加密
         user.setPassword(s);
@@ -257,9 +260,9 @@ public class SysServiceImpl implements SysService {
             sysDao.userRoleDelete(user.getId());
             Boolean insert = false;
             //在依次的添加
-            for (int i = 0; i < roleId.length; i++) {
-                    //取决于sql操作
-                insert =  sysDao.userInsertRole(user.getId(), roleId[i]);
+            for (Integer role : roleId) {
+                //取决于sql操作
+                insert = sysDao.userInsertRole(user.getId(), role);
 
             }
             return insert;
@@ -267,13 +270,10 @@ public class SysServiceImpl implements SysService {
         }else {
            return sysDao.userRoleDelete(user.getId());
         }
-
-
-
     }
 
     /**
-     * 修改密码
+     * 修改密码，修改密码前的旧密码给前端校验
      */
     @Override
     public CommonResponse<Boolean> modifyPasswordService(int id, String password) {
@@ -285,6 +285,49 @@ public class SysServiceImpl implements SysService {
         } else {
             response.setMsg("修改密码失败");
             response.setStatus(400);
+        }
+        return response;
+    }
+
+    /**
+     * 查询user的name是否存在
+     */
+    @Override
+    public Boolean findUserNameService(String name) {
+        Boolean b = true;
+        b = sysDao.userNameSelect(name).size() == 0;
+        return b;
+    }
+
+    /**
+     * 删除权限
+     * */
+    @Override
+    public CommonResponse<Boolean> deletePermService(int id) {
+        CommonResponse<Boolean> response = new CommonResponse<>();
+        if (sysDao.permDelete(id)){
+            response.setMsg("删除成功");
+            response.setStatus(200);
+            response.setData(true);
+        }else {
+            response.setStatus(400);
+            response.setMsg("删除失败");
+        }
+        return response;
+    }
+
+    /**
+     * 新增权限
+     * */
+    @Override
+    public CommonResponse<Boolean> insertPermService(Perm perm) {
+        CommonResponse<Boolean> response = new CommonResponse<>();
+        if (sysDao.permInsert(perm)){
+            response.setMsg("新增成功");
+            response.setStatus(200);
+        }else {
+            response.setStatus(400);
+            response.setMsg("新增失败");
         }
         return response;
     }
@@ -311,7 +354,6 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 实现log分页查询
-     *
      * @return 结果集合
      */
     @Override
@@ -331,7 +373,7 @@ public class SysServiceImpl implements SysService {
             session.removeAttribute("user");
             return new CommonResponse<>(200, "用户退出登录！");
         }
-        return new CommonResponse<>(401, "退出登录失败！");
+        return new CommonResponse<>(400, "退出登录失败！");
     }
 
 

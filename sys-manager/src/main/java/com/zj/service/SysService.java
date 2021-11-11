@@ -11,7 +11,7 @@ import java.util.List;
 public interface SysService {
     UserManager userLoginService(User user, HttpServletRequest request);
 
-    List<Organize> findOrganzieService(String orgName);
+    List<Organize> findOrganizeService(String orgName);
 
     CommonResponse<Object> addOrganizeService(Organize organize);
 
@@ -40,4 +40,10 @@ public interface SysService {
     Boolean modifyUserService(User user);
 
     CommonResponse<Boolean> modifyPasswordService(int id, String password);
+
+    Boolean findUserNameService(String name);
+
+    CommonResponse<Boolean> deletePermService(int id);
+
+    CommonResponse<Boolean> insertPermService(Perm perm);
 }

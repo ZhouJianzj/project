@@ -147,4 +147,16 @@ public interface SysDao {
     Boolean userUpdateOrgaId(Integer id, Integer orgaId);
 
     Boolean deleteRolePerm(int roleId);
+
+    List<UserManager> userNameSelect(String username);
+
+    /**
+     * 删除权限
+     * */
+    boolean permDelete(int id);
+
+    /**
+     * 权限新增
+     * */
+    boolean permInsert(Perm perm);
 }
