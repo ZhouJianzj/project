@@ -230,8 +230,6 @@ public class SysController {
 
     /**
      * 删除权限
-     * @param id
-     * @return
      * */
     @DeleteMapping("perm")
     public CommonResponse<Boolean> deletePermController(@RequestParam("id") int id){
@@ -240,8 +238,6 @@ public class SysController {
 
     /**
      * 添加权限
-     * @param perm
-     * @return
      * */
     @PostMapping("perm")
     public CommonResponse<Boolean> insertPermController(@RequestBody Perm perm){
