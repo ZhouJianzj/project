@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author zhoujian
@@ -111,9 +112,8 @@ public class SysController {
      * @return 权限结果集
      */
     @GetMapping("perm")
-    public Page findPermController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
-                                   @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
-        return MyPageHelper.myPageHelper(new Page<Perm>(sysService.findPermService(),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
+    public List<Perm> findPermController() {
+        return sysService.findPermService();
 
     }
 
