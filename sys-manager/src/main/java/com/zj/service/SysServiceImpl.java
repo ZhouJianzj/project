@@ -332,6 +332,9 @@ public class SysServiceImpl implements SysService {
         return response;
     }
 
+    /**
+     * 修改权限
+     * */
     @Override
     public CommonResponse<Boolean> modifyPermService(Perm perm) {
         CommonResponse<Boolean> response = new CommonResponse<>();

@@ -247,4 +247,12 @@ public class SysController {
     public CommonResponse<Boolean> insertPermController(@RequestBody Perm perm){
         return sysService.insertPermService(perm);
     }
+
+    /**
+     * 修改权限
+     * */
+    @PutMapping
+    public CommonResponse<Boolean> modifyPermController(@RequestBody Perm perm){
+        return sysService.modifyPermService(perm);
+    }
 }
