@@ -34,6 +34,7 @@
                u.password,
                u.salt,
                u.phone,
+               o.id as orgaid,
                o.NAME AS organame,
                r.id   as rId,
                r.NAME AS rolename,
@@ -48,6 +49,27 @@
                  LEFT JOIN t_perms p ON p.id = rp.perm_id
         where u.username = #{username}
           and u.password = #{password}
+    </select>
+    <select id="userNameSelect" resultMap="user_map">
+        SELECT u.id,
+               u.username,
+               u.password,
+               u.salt,
+               u.phone,
+               o.id as orgaid,
+               o.NAME AS organame,
+               r.id   as rId,
+               r.NAME AS rolename,
+               r.ext,
+               p.id   as pId,
+               p.NAME AS permname
+        FROM t_user u
+                 LEFT JOIN organize o ON o.id = u.orga_id
+                 LEFT JOIN t_user_role ur ON ur.userid = u.id
+                 LEFT JOIN t_role r ON r.id = ur.roleid
+                 LEFT JOIN t_role_perms rp ON rp.role_id = r.id
+                 LEFT JOIN t_perms p ON p.id = rp.perm_id
+        where u.username = #{username}
     </select>
 
     <!--    机构查询根据机构名称模糊查询，支持分页，page-->

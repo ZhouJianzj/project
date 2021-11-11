@@ -289,6 +289,17 @@ public class SysServiceImpl implements SysService {
         return response;
     }
 
+    @Override
+    public Boolean findUserNameService(String name) {
+        Boolean b = true;
+        if (sysDao.userNameSelect(name).size() == 0){
+            b = true;
+        }else {
+            b = false;
+        }
+        return b;
+    }
+
     /**
      * 删除用户，首先删除用户表，然后根据user的id到user_role表中删除对应的关系
      */

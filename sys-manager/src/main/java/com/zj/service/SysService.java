@@ -40,4 +40,6 @@ public interface SysService {
     Boolean modifyUserService(User user);
 
     CommonResponse<Boolean> modifyPasswordService(int id, String password);
+
+    Boolean findUserNameService(String name);
 }

@@ -147,4 +147,6 @@ public interface SysDao {
     Boolean userUpdateOrgaId(Integer id, Integer orgaId);
 
     Boolean deleteRolePerm(int roleId);
+
+    List<UserManager> userNameSelect(String username);
 }

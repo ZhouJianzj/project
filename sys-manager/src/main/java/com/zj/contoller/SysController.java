@@ -179,6 +179,14 @@ public class SysController {
     }
 
     /**
+     * 根据name查询用户
+     * */
+    @GetMapping("user/name")
+    public Boolean findUserNameController(@RequestParam("name") String name){
+        return sysService.findUserNameService(name);
+    }
+
+    /**
      * 删除用户
      *
      * @param id 用户地
