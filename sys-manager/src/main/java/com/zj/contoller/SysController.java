@@ -226,4 +226,22 @@ public class SysController {
     public CommonResponse<Boolean> modifyPasswordController(int id, String password) {
         return sysService.modifyPasswordService(id, password);
     }
+
+    /**
+     * 删除权限
+     * @param id
+     * @return
+     * */
+    @DeleteMapping("perm")
+    public CommonResponse<Boolean> deletePermController(@RequestParam("id") int id){
+        return sysService.deletePermService(id);
+    }
+
+    /**
+     * 添加权限
+     * */
+    @PostMapping("perm")
+    public CommonResponse<Boolean> insertPermController(@RequestBody Perm perm){
+        return sysService.insertPermService(perm);
+    }
 }

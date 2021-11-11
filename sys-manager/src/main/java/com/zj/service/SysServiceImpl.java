@@ -300,6 +300,36 @@ public class SysServiceImpl implements SysService {
     }
 
     /**
+     * 删除权限
+     * */
+    @Override
+    public CommonResponse<Boolean> deletePermService(int id) {
+        CommonResponse<Boolean> response = new CommonResponse<>();
+        if (sysDao.permDelete(id)){
+            response.setMsg("删除成功");
+            response.setStatus(200);
+            response.setData(true);
+        }else {
+            response.setStatus(400);
+            response.setMsg("删除失败");
+        }
+        return response;
+    }
+
+    @Override
+    public CommonResponse<Boolean> insertPermService(Perm perm) {
+        CommonResponse<Boolean> response = new CommonResponse<>();
+        if (sysDao.permInsert(perm)){
+            response.setMsg("新增成功");
+            response.setStatus(200);
+        }else {
+            response.setStatus(400);
+            response.setMsg("新增失败");
+        }
+        return response;
+    }
+
+    /**
      * 删除用户，首先删除用户表，然后根据user的id到user_role表中删除对应的关系
      */
     @Override

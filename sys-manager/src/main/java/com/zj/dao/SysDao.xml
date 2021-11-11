@@ -343,4 +343,15 @@
         set password = #{password}
         where id = #{id}
     </update>
+
+<!--    删除权限-->
+    <delete id="permDelete">
+        delete from t_perms where id = #{id} or parent_id = #{id}
+    </delete>
+
+<!--    添加权限-->
+    <insert id="permInsert">
+        insert into t_perms (name,parent_id,path,ext,icon)
+        values (#{name},#{parentId},#{path},#{ext},#{icon})
+    </insert>
 </mapper>

@@ -42,4 +42,8 @@ public interface SysService {
     CommonResponse<Boolean> modifyPasswordService(int id, String password);
 
     Boolean findUserNameService(String name);
+
+    CommonResponse<Boolean> deletePermService(int id);
+
+    CommonResponse<Boolean> insertPermService(Perm perm);
 }

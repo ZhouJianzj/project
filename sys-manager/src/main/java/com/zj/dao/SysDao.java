@@ -149,4 +149,11 @@ public interface SysDao {
     Boolean deleteRolePerm(int roleId);
 
     List<UserManager> userNameSelect(String username);
+
+    /**
+     * 删除权限
+     * */
+    boolean permDelete(int id);
+
+    boolean permInsert(Perm perm);
 }
