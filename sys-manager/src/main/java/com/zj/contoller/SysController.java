@@ -80,11 +80,12 @@ public class SysController {
      * @return role结果集
      */
     @GetMapping("role")
-    public PageInfo<Role> findRoleController(String roleName,
+    public Page findRoleController(String roleName,
                                              @RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
                                              @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
-        PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
-        return new PageInfo<>(sysService.findRoleService(roleName));
+
+      return   MyPageHelper.myPageHelper(new Page(sysService.findRoleService(roleName),Integer.parseInt(pageNo), Integer.parseInt(pageSize)));
+
     }
 
     /**

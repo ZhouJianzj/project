@@ -33,13 +33,17 @@ public class SysServiceImpl implements SysService {
         user.setPassword(s);
         //查询
         UserManager userManager = sysDao.userSelect(user);
-        //正确的用户放入redissession
+        //正确的用户放入redis session
         if (null != userManager) {
             HttpSession session = request.getSession();
-            //获取查询到的用户对密码两次解密
-            String s1 = MD5Util.solveMD5(MD5Util.solveMD5(password));
-            userManager.setPassword(s1);
-            System.out.println(s1);
+            List<Role> roles = userManager.getRoles();
+            //去除子菜单
+            for (Role role : roles){
+                List<Perm> perms = role.getPerms();
+                perms.removeIf(perm -> perm.getParentId() != 0);
+            }
+            userManager.setRoles(roles);
+            userManager.setPassword(password);
             session.setAttribute("user", userManager);
         }
         return userManager;
@@ -57,8 +61,6 @@ public class SysServiceImpl implements SysService {
 
     /**
      * 添加机构
-     *
-     * @return
      */
     @Override
     public CommonResponse<Object> addOrganizeService(Organize organize) {
@@ -81,8 +83,6 @@ public class SysServiceImpl implements SysService {
      * 首先删除角色表中的角色，
      * 然后去role_perm表中删除对应关系
      * 然后再去user_role中删除对应的关系
-     * @param id
-     * @return
      */
     @Override
     @Transactional
