@@ -64,14 +64,8 @@ public class ModelController {
      */
     @PostMapping("upload")
     public CommonResponse<String> fileUploadController(@RequestParam("file") MultipartFile file){
-
         return modelService.fileUploadService(file);
     }
-
-    //管道模型管理
-
-
-    //传感器莫模型管理
 
 
 }
