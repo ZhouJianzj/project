@@ -4,6 +4,7 @@ import com.zj.dao.SysDao;
 import com.zj.entity.*;
 import com.zj.util.ListToTree;
 import com.zj.util.MD5Util;
+import com.zj.util.OrgaTree;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,7 @@ public class SysServiceImpl implements SysService {
         //md5加密
         //用户传输过来的是123
         String s = MD5Util.addMD5(password);
+        System.out.println(s);
         user.setPassword(s);
         //查询
         UserManager userManager = sysDao.userSelect(user);
@@ -55,8 +57,12 @@ public class SysServiceImpl implements SysService {
      */
     @Override
     public List<Organize> findOrganizeService(String orgName) {
-
-        return sysDao.organizeSelect(orgName);
+        List<Organize> organizes = sysDao.organizeSelect(orgName);
+        if (orgName == null){
+            OrgaTree orgaTree = new OrgaTree(organizes);
+            organizes=orgaTree.buildTree();
+        }
+        return organizes;
     }
 
     /**
