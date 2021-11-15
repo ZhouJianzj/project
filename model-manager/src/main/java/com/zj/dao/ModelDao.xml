@@ -4,5 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.dao.ModelDao">
 
-
+<insert id="pipeModelFilesInsert" parameterType="com.zj.entity.PipeModel">
+    update
+        t_pipe_model set
+        pipeIntroduce = #{pipeIntroduce},
+        pipePic = #{pipePic},
+        pipeManual =  #{pipeManual}
+    where id = #{id}
+</insert>
 </mapper>

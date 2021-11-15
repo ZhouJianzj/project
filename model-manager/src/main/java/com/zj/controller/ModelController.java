@@ -63,8 +63,18 @@ public class ModelController {
      * 前端文件上传保存到服务器
      */
     @PostMapping("upload")
-    public CommonResponse<String> fileUploadController(@RequestParam("file") MultipartFile file){
+    public CommonResponse<Boolean> fileUploadController(@RequestParam("file") MultipartFile file){
         return modelService.fileUploadService(file);
+    }
+
+    /**
+     * 多文件上传
+     */
+    @PostMapping("uploads")
+    public CommonResponse<Boolean> filesUploadController(@RequestParam("file")MultipartFile[] files){
+        modelService.filesUploadService(files);
+
+        return null;
     }
 
 

@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ModelDao {
 
+    Boolean pipeModelFilesInsert(String pipeIntroduce,String pipePic,String pipeManual );
 }

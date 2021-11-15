@@ -8,5 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 
 public interface ModelService {
-    CommonResponse<String> fileUploadService(MultipartFile file);
+    CommonResponse<Boolean> fileUploadService(MultipartFile file);
+
+    CommonResponse<Boolean> filesUploadService(MultipartFile[] files);
 }
