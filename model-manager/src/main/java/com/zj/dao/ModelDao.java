@@ -11,4 +11,10 @@ public interface ModelDao {
 
 
     Boolean pipeModelInsert(PipeModel pipeModel);
+
+    Boolean test(String test);
+
+    PipeModel findPipeModelDao(String id);
+
+    boolean updatePipeModel(PipeModel pipeModel);
 }

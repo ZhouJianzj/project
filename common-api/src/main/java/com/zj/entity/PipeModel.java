@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PipeModel {
-    private Integer id;
+    private String id;
 
     private String pipeName;
 

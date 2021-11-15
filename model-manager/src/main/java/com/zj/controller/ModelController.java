@@ -1,13 +1,23 @@
 package com.zj.controller;
 
+import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.CommonResponse;
 import com.zj.entity.PipeModel;
 import com.zj.service.ModelService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
+import java.io.File;
 
 /**
  * @author zhoujian
@@ -60,8 +70,13 @@ public class ModelController {
     @Resource
     private ModelService modelService;
 
+    @GetMapping("test")
+    public Boolean test(){
+        return modelService.test();
+    }
+
     /**
-     * 前端文件上传保存到服务器
+     * 单文件上传
      */
     @PostMapping("upload")
     public CommonResponse<Boolean> fileUploadController(@RequestParam("file") MultipartFile file){
@@ -69,10 +84,38 @@ public class ModelController {
     }
 
     /**
-     * 多文件上传
+     * 多文件上传 ---管道新增
      */
     @PostMapping("uploads")
-    public CommonResponse<Boolean> filesUploadController( PipeModel pipeModel){
+    public CommonResponse filesUploadController( PipeModel pipeModel){
         return modelService.filesUploadService(pipeModel);
+    }
+
+
+    /**
+     * 单文件下载
+     * @param id 模型id
+     * @param request 请求体
+     * @return 返回字节文件
+     */
+        @GetMapping("download")
+        @IgnoreResponseAdvice
+        public ResponseEntity<byte[]> fileDownload(String id, HttpServletRequest request) {
+            try {
+                return modelService.findPipeModelService(id,request);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+    /**
+     * 文件删除 ---管道修改
+     * @param pipeModel 前端传递来的修改对象
+     * @return 返回修改结果集
+     */
+    @PutMapping("model")
+    public CommonResponse<Boolean> fileDeleteController(@RequestBody PipeModel pipeModel){
+        return  modelService.fileDeleteService(pipeModel);
     }
 }

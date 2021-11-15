@@ -3,8 +3,43 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.dao.ModelDao">
-
+<!--pipeModel新增-->
     <insert id="pipeModelInsert" parameterType="com.zj.entity.PipeModel">
-        insert into t_pipe_model() values ()
+        insert into t_pipe_model(
+                    pipeName,
+                    pipeNumber,
+                    pipeType,
+                    pipeIntroduce,
+                    pipePic,
+                    pipeManual,
+                    createTime
+                   ) values (
+                   #{pipeName},
+                    #{pipeNumber},
+                    #{pipeType},
+                    #{pipeIntroduce},
+                    #{pipePic},
+                    #{pipeManual},
+                    #{createTime}
+                  )
     </insert>
+<!--    测试单文件上传-->
+    <insert id="test">
+        insert into t_pipe_model(pipeName)values (#{test})
+    </insert>
+<!--根据id查找pipeModel-->
+    <select id="findPipeModelDao"  resultType="com.zj.entity.PipeModel" >
+        select  *  from t_pipe_model where id  = #{id}
+    </select>
+
+    <update id="updatePipeModel" parameterType="com.zj.entity.PipeModel">
+        update t_pipe_model
+        set pipeName = #{pipeName},
+            pipeNumber = #{pipeNumber},
+            pipeType = #{pipeType},
+            pipeIntroduce = #{pipeIntroduce},
+            pipePic = #{pipePic},
+            pipeManual = #{pipeManual}
+        where id = #{id}
+    </update>
 </mapper>

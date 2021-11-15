@@ -7,6 +7,7 @@ import com.zj.entity.Log;
 import com.zj.entity.UserManager;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -81,7 +82,7 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
             response.setMsg("没有响应参数");
             response.setData(null);
 
-        } else if (o instanceof CommonResponse || o instanceof ResponseBody) {
+        } else if (o instanceof CommonResponse ) {
             response.setStatus(resp.getStatus());
             response.setMsg("success");
             response = (CommonResponse<Object>) o;
@@ -113,7 +114,6 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
         log.setOperTimer(new Date());
         //记录日志
         logDao.logInsert(log);
-
         return response;
     }
 
