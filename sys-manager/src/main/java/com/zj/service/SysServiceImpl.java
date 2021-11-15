@@ -214,7 +214,7 @@ public class SysServiceImpl implements SysService {
     public CommonResponse<Boolean> addUserManagerService(User user) {
         CommonResponse<Boolean> response = new CommonResponse<>();
         // 对新增用户的密码进行加密操作
-        String s = MD5Util.addMD5(user.getPassword());
+        String s = MD5Util.addMD5("123456");
         //密码加密
         user.setPassword(s);
         //获取角色id
