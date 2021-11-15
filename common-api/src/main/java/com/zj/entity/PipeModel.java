@@ -3,6 +3,7 @@ package com.zj.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -28,4 +29,6 @@ public class PipeModel {
     private String pipeManual;
 
     private Date createTime;
+
+    private MultipartFile[] files;
 }

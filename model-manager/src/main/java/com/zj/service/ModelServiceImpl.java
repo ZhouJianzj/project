@@ -3,6 +3,8 @@ package com.zj.service;
 import com.alibaba.druid.sql.visitor.functions.Concat;
 import com.zj.dao.ModelDao;
 import com.zj.entity.CommonResponse;
+import com.zj.entity.Perm;
+import com.zj.entity.PipeModel;
 import com.zj.util.FileNameUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -51,16 +53,17 @@ public class ModelServiceImpl implements ModelService {
 
     /**
      * 多文件上传,实现就是使用for循环一个一个保存
-     * @param files 多个文件形成的数据
+     * @param pipeModel 管道模型对象
      * */
     @Override
-    public CommonResponse<Boolean> filesUploadService(MultipartFile[] files) {
+    public CommonResponse<Boolean> filesUploadService(PipeModel pipeModel){
+
+
+        MultipartFile[] files = pipeModel.getFiles();
+        //没有对应的文件就不能新增
         if (files.length == 0){
             return new CommonResponse<Boolean>(400,"文件上传失败！",false);
         }
-        String pipeIntroduce = "";
-        String pipePic = "";
-        String pipeManual = "";
         int count = 1;
         for(MultipartFile file : files){
             File hostFile = new File(FileNameUtil.generateFileName(rootPath,file.getOriginalFilename()));
@@ -72,20 +75,21 @@ public class ModelServiceImpl implements ModelService {
             try {
                 file.transferTo(hostFile);
                 if (count == 1 ){
-                    pipeIntroduce = hostFile.getAbsolutePath();
+                      pipeModel.setPipeIntroduce(hostFile.getAbsolutePath());
                 }else if (count == 2){
-                    pipePic = hostFile.getAbsolutePath();;
+                      pipeModel.setPipePic(hostFile.getAbsolutePath());
                 }else if (count == 3){
-                    pipeManual = hostFile.getAbsolutePath();
+                      pipeModel.setPipeManual(hostFile.getAbsolutePath());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-//        if(!"".equals(pipeIntroduce) && !"".equals(pipePic) && !"".equals(pipeManual)){
-//            modelDao.pipeModelFilesInsert(pipeIntroduce,pipePic,pipeManual);
-//        }
-        return new CommonResponse<Boolean>(200,"文件上传成功！",true);
+        if (modelDao.pipeModelInsert(pipeModel)){
+            return new CommonResponse<Boolean>(200,"添加模型成功！",true);
+        }else {
+            return new CommonResponse<Boolean>(400,"添加模型失败！",false);
+        }
     }
 
 }

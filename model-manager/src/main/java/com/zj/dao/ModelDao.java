@@ -1,5 +1,6 @@
 package com.zj.dao;
 
+import com.zj.entity.PipeModel;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,5 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ModelDao {
 
-    Boolean pipeModelFilesInsert(String pipeIntroduce,String pipePic,String pipeManual );
+
+    Boolean pipeModelInsert(PipeModel pipeModel);
 }

@@ -1,6 +1,7 @@
 package com.zj.service;
 
 import com.zj.entity.CommonResponse;
+import com.zj.entity.PipeModel;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -10,5 +11,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface ModelService {
     CommonResponse<Boolean> fileUploadService(MultipartFile file);
 
-    CommonResponse<Boolean> filesUploadService(MultipartFile[] files);
+    CommonResponse<Boolean> filesUploadService(PipeModel pipeModel);
 }

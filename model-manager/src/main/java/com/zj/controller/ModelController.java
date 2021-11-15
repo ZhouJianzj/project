@@ -1,6 +1,7 @@
 package com.zj.controller;
 
 import com.zj.entity.CommonResponse;
+import com.zj.entity.PipeModel;
 import com.zj.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -71,11 +72,7 @@ public class ModelController {
      * 多文件上传
      */
     @PostMapping("uploads")
-    public CommonResponse<Boolean> filesUploadController(@RequestParam("file")MultipartFile[] files){
-        modelService.filesUploadService(files);
-
-        return null;
+    public CommonResponse<Boolean> filesUploadController( PipeModel pipeModel){
+        return modelService.filesUploadService(pipeModel);
     }
-
-
 }
