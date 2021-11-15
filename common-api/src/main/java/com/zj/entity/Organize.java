@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * (Organize)实体类
@@ -23,9 +24,7 @@ public class Organize implements Serializable {
 
     private Integer parentId;
 
-    private String parentName;
-
-    private Integer typeId;
+    private OrgaType type;
 
     private String location;
 
@@ -33,7 +32,5 @@ public class Organize implements Serializable {
 
     private String ext;
 
-    private OrgaType orgaType;
-
-
+    private List<Organize> children;
 }

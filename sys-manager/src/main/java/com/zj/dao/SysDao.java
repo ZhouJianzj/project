@@ -18,7 +18,7 @@ public interface SysDao {
     /**
      * 根据公司的名字模糊查询，使用到分页
      */
-    List<Organize> organizeSelect(String orgName);
+    List<Organize> organizeSelect(String name);
 
     /**
      * 机构插入

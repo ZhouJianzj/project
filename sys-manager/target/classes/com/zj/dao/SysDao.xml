@@ -104,31 +104,65 @@
     </select>
 
 <!--    机构查询根据机构名称模糊查询，支持分页，page-->
-    <resultMap id="orga_type_map" type="com.zj.entity.Organize">
+<!--    <resultMap id="orga_type_map" type="com.zj.entity.Organize">-->
+<!--        <id column="id" property="id"/>-->
+<!--        <result column="name" property="name"/>-->
+<!--        &lt;!&ndash;        公司的父公司&ndash;&gt;-->
+<!--        <result column="parentorganame" property="parentName"/>-->
+<!--        <result column="location" property="location"/>-->
+<!--        <result column="organum" property="orgaNumber"/>-->
+<!--        <result column="ext" property="ext"/>-->
+<!--        &lt;!&ndash;        公司的类型&ndash;&gt;-->
+<!--        <association property="orgaType" javaType="com.zj.entity.OrgaType">-->
+<!--            <result column="orgatypename" property="name"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+
+<!--    <select id="organizeSelect" resultMap="orga_type_map">-->
+<!--        SELECT o1.id,-->
+<!--               o1.name,-->
+<!--               o2.name        as parentorganame,-->
+<!--               ot.name        as orgatypename,-->
+<!--               o1.location,-->
+<!--               o1.orga_number as organum,-->
+<!--               o1.ext-->
+<!--        FROM organize o1-->
+<!--                 left JOIN orga_type ot ON ot.id = o1.id-->
+<!--                 left join organize o2 on o2.id = o1.parent_id-->
+<!--        where o1.name like concat(#{orgName}, '%')-->
+<!--    </select>-->
+
+    <resultMap id="orga_type" type="com.zj.entity.Organize">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
-        <!--        公司的父公司-->
-        <result column="parentorganame" property="parentName"/>
-        <result column="location" property="location"/>
-        <result column="organum" property="orgaNumber"/>
+        <result column="parentId" property="parentId"/>
+        <result property="location" column="location"/>
+        <result column="orgaNumber" property="orgaNumber"/>
         <result column="ext" property="ext"/>
-        <!--        公司的类型-->
-        <association property="orgaType" javaType="com.zj.entity.OrgaType">
-            <result column="orgatypename" property="name"/>
+<!--        <collection property="type" ofType="com.zj.entity.OrgaType">-->
+<!--            -->
+<!--        </collection>-->
+        <association property="type" javaType="com.zj.entity.OrgaType">
+            <id property="id" column="typeId"/>
+            <result column="typeName" property="name"/>
         </association>
     </resultMap>
-    <select id="organizeSelect" resultMap="orga_type_map">
-        SELECT o1.id,
-               o1.name,
-               o2.name        as parentorganame,
-               ot.name        as orgatypename,
-               o1.location,
-               o1.orga_number as organum,
-               o1.ext
-        FROM organize o1
-                 left JOIN orga_type ot ON ot.id = o1.id
-                 left join organize o2 on o2.id = o1.parent_id
-        where o1.name like concat(#{orgName}, '%')
+
+    <select id="organizeSelect" resultMap="orga_type">
+        select o.id,
+            o.name,
+            o.parent_id as parentId,
+            o.location,
+            o.orga_number as orgaNumber,
+            o.ext,
+            ot.id as typeId,
+            ot.name as typeName
+        from organize o
+            left join orga_type ot on ot.id = o.type_id
+        where o.name like "%"#{name}"%"
+<!--        <if test="_parameter != null and _parameter != ''">-->
+<!--            and o.name like concat(#{name},'%')-->
+<!--        </if>-->
     </select>
 
     <!--    机构插入-->
