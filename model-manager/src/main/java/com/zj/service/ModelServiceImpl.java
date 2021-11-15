@@ -161,12 +161,15 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public CommonResponse<Boolean> fileDeleteService(PipeModel pipeModel) {
         PipeModel pipeModelDao = modelDao.findPipeModelDao(pipeModel.getId());
-        String[] paths = {pipeModelDao.getPipeIntroduce(),pipeModelDao.getPipePic(),pipeModelDao.getPipeManual()};
+        //获取到数据库中的真实存在的地址
+        String[] pathsDao = {pipeModelDao.getPipeIntroduce(),pipeModelDao.getPipePic(),pipeModelDao.getPipeManual()};
+        //获取修改之后的文件地址
+        String[] paths = {pipeModel.getPipeIntroduce(),pipeModel.getPipePic(),pipeModel.getPipeManual()};
        //如果是传递来的三个文件属性是空的话就直接先删除文件后修改数据库
-        for (String path : paths){
-            if ("".equals(path) || path == null){
-                //下载文件路径,正则转\需要两次转译
-                File file = new File(pipeModel.getPipeIntroduce().replaceAll("\\\\","/"));
+        for (int i = 0;i < paths.length ;i++){
+            if ("".equals(paths[i]) || paths[i] == null){
+                // 如果修改之后地址为null就直接删除文件 ，下载文件路径,正则转\需要两次转译
+                File file = new File(pathsDao[i].replaceAll("\\\\","/"));
                 if (file.exists()) {
                     file.delete();
                 }
