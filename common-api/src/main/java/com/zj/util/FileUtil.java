@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * @author zhoujian
  */
-public class FileNameUtil {
+public class FileUtil {
     /**
      * 文件存放的动态地址
      * @param rootPath 磁盘位置
@@ -23,4 +23,5 @@ public class FileNameUtil {
                 .append(uuid).append("/")
                 .append(originalFileName).toString();
     }
+
 }

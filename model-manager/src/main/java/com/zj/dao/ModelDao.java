@@ -16,5 +16,7 @@ public interface ModelDao {
 
     PipeModel findPipeModelDao(String id);
 
-    boolean updatePipeModel(PipeModel pipeModel);
+    Boolean updatePipeModel(PipeModel pipeModel);
+
+    Boolean pipeModelDelete(String id);
 }

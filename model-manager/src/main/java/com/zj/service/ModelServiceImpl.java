@@ -1,11 +1,10 @@
 package com.zj.service;
 
-import com.alibaba.druid.sql.visitor.functions.Concat;
+import com.alibaba.druid.sql.visitor.functions.Nil;
 import com.zj.dao.ModelDao;
 import com.zj.entity.CommonResponse;
-import com.zj.entity.Perm;
 import com.zj.entity.PipeModel;
-import com.zj.util.FileNameUtil;
+import com.zj.util.FileUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +18,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 
 /**
  * @author zhoujian
@@ -44,7 +42,7 @@ public class ModelServiceImpl implements ModelService {
             return new CommonResponse<>(400,"上传文件失败！",false);
         }
         //本地文件地址
-        File hostFile = new File(FileNameUtil.generateFileName(rootPath,file.getOriginalFilename()));
+        File hostFile = new File(FileUtil.generateFileName(rootPath,file.getOriginalFilename()));
         if (!hostFile.exists()){
             hostFile.mkdirs();
         }
@@ -71,7 +69,7 @@ public class ModelServiceImpl implements ModelService {
         }
         int count = 0;
         for(MultipartFile file : files){
-            File hostFile = new File(FileNameUtil.generateFileName(rootPath,file.getOriginalFilename()));
+            File hostFile = new File(FileUtil.generateFileName(rootPath,file.getOriginalFilename()));
             //记录
             count ++;
             if (!hostFile.exists()){
@@ -107,12 +105,13 @@ public class ModelServiceImpl implements ModelService {
     /**
      * 满足文件下载的需要
      * @param id 管道模型的id
+     * @param num  1:introduce 2:pic 3:Manual
      * @param request 请求体
      * @return 返回值是一个responseEntity
      * @throws Exception 异常处理
      */
     @Override
-    public  ResponseEntity<byte[]> findPipeModelService(String id ,
+    public  ResponseEntity<byte[]> findPipeModelService(String id ,String num,
                                                         HttpServletRequest request)throws Exception {
         //优化，为了解决同一个用户查询三次的不必要的数据库操作
         String i = "";
@@ -122,17 +121,25 @@ public class ModelServiceImpl implements ModelService {
             i = pipeModel.getId();
             System.out.println(pipeModel.toString() + "============");
         }
-
-        //截取文件名字
-        String absPath =  pipeModel.getPipeIntroduce();
+        //指定下载哪一个文件
+        String absPath = null ;
+        if ("1".equals(num) ){
+            absPath = pipeModel.getPipeIntroduce();
+        }
+        if ("2".equals(num)){
+            absPath = pipeModel.getPipePic();
+        }
+        if ("3".equals(num)){
+            absPath = pipeModel.getPipeManual();
+        }
+        if (null == num){
+            return null;
+        }
         int lastIndexOf = absPath.lastIndexOf("\\");
         int lastIndexOf1 = absPath.lastIndexOf(".");
         String filename = absPath.substring(lastIndexOf + 1, lastIndexOf1);
-        System.out.println( "需要下载的文件名字：" + filename);
         //下载文件路径,正则转\需要两次转译
         File file = new File(absPath.replaceAll("\\\\","/"));
-        System.out.println("所需要下载文件的绝对路径：" + absPath.replaceAll("\\\\","/") );
-
 
         //开始设置http请求头
         HttpHeaders headers = new HttpHeaders();
@@ -154,33 +161,94 @@ public class ModelServiceImpl implements ModelService {
     }
 
     /**
-     * 文件删除 --- 修改管道模型
+     * 修改管道模型
      * @pipeModel  修改之后的挂到模型对象
      * @return 返回修改是否成功
      */
     @Override
     public CommonResponse<Boolean> fileDeleteService(PipeModel pipeModel) {
+        //获取数据库中的真实数据，给三个文件属性地址装载在一个数组中
         PipeModel pipeModelDao = modelDao.findPipeModelDao(pipeModel.getId());
-        //获取到数据库中的真实存在的地址
         String[] pathsDao = {pipeModelDao.getPipeIntroduce(),pipeModelDao.getPipePic(),pipeModelDao.getPipeManual()};
-        //获取修改之后的文件地址
-        String[] paths = {pipeModel.getPipeIntroduce(),pipeModel.getPipePic(),pipeModel.getPipeManual()};
-       //如果是传递来的三个文件属性是空的话就直接先删除文件后修改数据库
-        for (int i = 0;i < paths.length ;i++){
-            if ("".equals(paths[i]) || paths[i] == null){
-                // 如果修改之后地址为null就直接删除文件 ，下载文件路径,正则转\需要两次转译
-                File file = new File(pathsDao[i].replaceAll("\\\\","/"));
-                if (file.exists()) {
+        pipeModel.setPipeIntroduce(null);
+        pipeModel.setPipePic(null);
+        pipeModel.setPipeManual(null);
+        //前端修改之后的三个文件属性文件
+        MultipartFile[] files = pipeModel.getFiles();
+        int count = 0;
+        for (int i = 0;i < files.length;i++){
+            //为null的时候表示不修改，反之则为修改了，我们这里是先删除文件后修改数据库
+            if (files[i] != null){
+                String dirFile = pathsDao[i].replaceAll("\\\\", "/");
+                String dir = dirFile.substring(0, dirFile.lastIndexOf("/"));
+                //删除文件
+                File file = new File(dirFile);
+                if (file.exists()){
                     file.delete();
+                }
+                //删除目录，日期一下的目录
+                File file1 = new File(dir);
+                if (file1.list().length == 0){
+                    file1.delete();
+                }
+                //存放文件
+                File hostFile = new File(FileUtil.generateFileName(rootPath,files[i].getOriginalFilename()));
+                if (!hostFile.exists()){
+                    hostFile.mkdirs();
+                }
+                //计数为了给指定的文件属性赋值
+                count++;
+                try {
+                    files[i].transferTo(hostFile);
+                    if (count == 1){
+                        pipeModel.setPipeIntroduce(hostFile.getAbsolutePath());
+                    }
+                    if (count == 2){
+                        pipeModel.setPipePic(hostFile.getAbsolutePath());
+                    }
+                    if (count == 3){
+                        pipeModel.setPipeManual(hostFile.getAbsolutePath());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
-
+        //传递来的三个表示文件的属性为空的话表示不修改之前上传的文件只修改字段
        if (modelDao.updatePipeModel(pipeModel)){
            return new CommonResponse<>(200,"修改成功！",true);
        }else {
            return new CommonResponse<>(400,"修改失败！",false);
        }
+    }
+
+    /**
+     * 删除指定id的管道模型，先删除文件后删除数据库
+     * @param id 管道模型的id
+     * @return 返回删除是否成功
+     */
+    @Override
+    public Boolean pipeModelDelete(String id) {
+        PipeModel pipeModelDao = modelDao.findPipeModelDao(id);
+        //获取到数据库中的真实存在的地址
+        String[] pathsDao = {pipeModelDao.getPipeIntroduce(),pipeModelDao.getPipePic(),pipeModelDao.getPipeManual()};
+        //如果是传递来的三个文件属性是空的话就直接先删除文件后修改数据库
+        for (int i = 0;i < pathsDao.length ;i++){
+                // 下载文件路径,正则转\需要两次转译
+                String dirFile = pathsDao[i].replaceAll("\\\\", "/");
+                String dir = dirFile.substring(0, dirFile.lastIndexOf("/"));
+                //删除文件
+                File file = new File(dirFile);
+                if (file.exists()){
+                    file.delete();
+                }
+                //删除目录，日期下的目录
+                File file1 = new File(dir);
+                if (file1.list().length == 0){
+                    file1.delete();
+                }
+        }
+        return modelDao.pipeModelDelete(id);
     }
 
 }

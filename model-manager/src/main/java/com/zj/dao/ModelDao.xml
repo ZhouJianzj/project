@@ -24,22 +24,33 @@
                   )
     </insert>
 <!--    测试单文件上传-->
-    <insert id="test">
-        insert into t_pipe_model(pipeName)values (#{test})
-    </insert>
-<!--根据id查找pipeModel-->
-    <select id="findPipeModelDao"  resultType="com.zj.entity.PipeModel" >
-        select  *  from t_pipe_model where id  = #{id}
-    </select>
-
     <update id="updatePipeModel" parameterType="com.zj.entity.PipeModel">
         update t_pipe_model
         set pipeName = #{pipeName},
-            pipeNumber = #{pipeNumber},
-            pipeType = #{pipeType},
-            pipeIntroduce = #{pipeIntroduce},
-            pipePic = #{pipePic},
-            pipeManual = #{pipeManual}
+        pipeNumber = #{pipeNumber},
+        pipeType = #{pipeType}
+        <if test="null != pipeIntroduce ">
+            , pipeIntroduce = #{pipeIntroduce}
+        </if>
+        <if test="null != pipePic ">
+            ,pipePic = #{pipePic}
+        </if>
+        <if test="null != pipeManual ">
+           , pipeManual = #{pipeManual}
+        </if>
         where id = #{id}
     </update>
+    <!--根据id查找pipeModel-->
+    <insert id="test">
+        insert into t_pipe_model(pipeName)values (#{test})
+    </insert>
+
+<!--   修改管道模型-->
+    <select id="findPipeModelDao"  resultType="com.zj.entity.PipeModel" >
+        select  *  from t_pipe_model where id  = #{id}
+    </select>
+<!--删除管道模型-->
+    <delete id="pipeModelDelete" >
+        delete from t_pipe_model where  id = #{id}
+    </delete>
 </mapper>

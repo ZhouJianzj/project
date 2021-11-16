@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class ListToTree {
     private List<Perm> permList;
+
     public ListToTree(List<Perm> permList){
         this.permList = permList;
     }

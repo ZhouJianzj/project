@@ -1,10 +1,10 @@
 package com.zj;
 
-import com.zj.util.FileNameUtil;
+import com.zj.util.FileUtil;
 
 public class Test {
     public static void main(String[] args) {
-        System.out.println(FileNameUtil.generateFileName("D", "var"));
+        System.out.println(FileUtil.generateFileName("D", "var"));
 
         int i  = 1;
         int a = 1;

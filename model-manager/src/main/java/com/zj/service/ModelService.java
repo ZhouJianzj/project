@@ -18,7 +18,9 @@ public interface ModelService {
 
     Boolean test();
 
-    ResponseEntity<byte[]> findPipeModelService(String id, HttpServletRequest request) throws Exception;
+    ResponseEntity<byte[]> findPipeModelService(String id,String num, HttpServletRequest request) throws Exception;
 
     CommonResponse<Boolean> fileDeleteService(PipeModel pipeModel);
+
+    Boolean pipeModelDelete(String id);
 }

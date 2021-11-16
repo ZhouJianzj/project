@@ -85,24 +85,26 @@ public class ModelController {
 
     /**
      * 多文件上传 ---管道新增
+     * 必须满足上传三个文件，而且文件内容不允许为空
      */
-    @PostMapping("uploads")
+    @PostMapping("pipeModel")
     public CommonResponse filesUploadController( PipeModel pipeModel){
         return modelService.filesUploadService(pipeModel);
     }
 
 
     /**
-     * 单文件下载
+     * 单文件下载----满足查询所有管道模型时候查看三个说明书的
      * @param id 模型id
+     * @param num  1:introduce 2:pic 3:Manual
      * @param request 请求体
      * @return 返回字节文件
      */
         @GetMapping("download")
         @IgnoreResponseAdvice
-        public ResponseEntity<byte[]> fileDownload(String id, HttpServletRequest request) {
+        public ResponseEntity<byte[]> fileDownload(String id,String num, HttpServletRequest request) {
             try {
-                return modelService.findPipeModelService(id,request);
+                return modelService.findPipeModelService(id,num,request);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -110,12 +112,23 @@ public class ModelController {
         }
 
     /**
-     * 文件删除 ---管道修改
+     *  管道修改
      * @param pipeModel 前端传递来的修改对象
      * @return 返回修改结果集
      */
-    @PutMapping("model")
-    public CommonResponse<Boolean> fileDeleteController(@RequestBody PipeModel pipeModel){
+    @PutMapping("pipeModel")
+    public CommonResponse<Boolean> pipeModelModifyController(PipeModel pipeModel){
         return  modelService.fileDeleteService(pipeModel);
+    }
+
+
+    /**
+     * 管道模型的删除
+     * @param id 指定删除管道模型的id
+     * @return 操作时候成功
+     */
+    @DeleteMapping("pipeModel")
+    public Boolean pipeModelDelete(String id){
+        return  modelService.pipeModelDelete(id);
     }
 }
