@@ -56,7 +56,8 @@ public class ModelServiceImpl implements ModelService {
     }
 
     /**
-     * 多文件上传,实现就是使用for循环一个一个保存
+     * 多文件上传,实现管道添加
+     * 就是使用for循环一个一个保存
      * @param pipeModel 管道模型对象
      * */
     @Override
@@ -97,13 +98,10 @@ public class ModelServiceImpl implements ModelService {
         }
     }
 
-    @Override
-    public Boolean test() {
-        return modelDao.test("test");
-    }
 
     /**
-     * 满足文件下载的需要
+     * 满足查看指定文件功能需要
+     * 指定单文件文件下载
      * @param id 管道模型的id
      * @param num  1:introduce 2:pic 3:Manual
      * @param request 请求体

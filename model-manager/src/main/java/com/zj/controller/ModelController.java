@@ -70,11 +70,6 @@ public class ModelController {
     @Resource
     private ModelService modelService;
 
-    @GetMapping("test")
-    public Boolean test(){
-        return modelService.test();
-    }
-
     /**
      * 单文件上传
      */

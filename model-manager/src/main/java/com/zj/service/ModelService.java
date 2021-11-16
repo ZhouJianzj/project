@@ -16,7 +16,6 @@ public interface ModelService {
 
     CommonResponse<Boolean> filesUploadService(PipeModel pipeModel);
 
-    Boolean test();
 
     ResponseEntity<byte[]> findPipeModelService(String id,String num, HttpServletRequest request) throws Exception;
 
