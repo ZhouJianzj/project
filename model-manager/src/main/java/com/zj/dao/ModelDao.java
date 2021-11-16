@@ -3,6 +3,8 @@ package com.zj.dao;
 import com.zj.entity.PipeModel;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author zhoujian
  */
@@ -19,4 +21,6 @@ public interface ModelDao {
     Boolean updatePipeModel(PipeModel pipeModel);
 
     Boolean pipeModelDelete(String id);
+
+    List<PipeModel> PipeModelsSelect(String key);
 }

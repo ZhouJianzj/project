@@ -2,8 +2,10 @@ package com.zj.controller;
 
 import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.CommonResponse;
+import com.zj.entity.Page;
 import com.zj.entity.PipeModel;
 import com.zj.service.ModelService;
+import com.zj.util.MyPageHelper;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +20,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 import java.io.File;
+import java.util.List;
 
 /**
  * @author zhoujian
@@ -125,5 +128,20 @@ public class ModelController {
     @DeleteMapping("pipeModel")
     public Boolean pipeModelDelete(String id){
         return  modelService.pipeModelDelete(id);
+    }
+
+    /**
+     * 支持多字段查询和分页
+     * @param key 多字段
+     * @param pageNo 页码
+     * @param pageSize 数据量
+     * @return 返回的结果集
+     */
+    @GetMapping("pipeModel")
+    public Page<PipeModel> findPipeModelsController(@RequestParam(value = "key") String key,
+                                                    @RequestParam(value = "pageNo",defaultValue = "1") String pageNo,
+                                                    @RequestParam(value = "pageSize",defaultValue = "8") String pageSize){
+
+       return   MyPageHelper.myPageHelper(new Page(modelService.findPipeModelsService(key),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
     }
 }

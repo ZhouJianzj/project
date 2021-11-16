@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author zhoujian
@@ -247,6 +248,16 @@ public class ModelServiceImpl implements ModelService {
                 }
         }
         return modelDao.pipeModelDelete(id);
+    }
+
+    /**
+     * 多字段查询支持模糊查询
+     * @param key 关键字
+     * @return 返回的结果集
+     */
+    @Override
+    public List<PipeModel> findPipeModelsService(String key) {
+        return modelDao.PipeModelsSelect(key);
     }
 
 }

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author zhoujian
@@ -22,4 +23,6 @@ public interface ModelService {
     CommonResponse<Boolean> fileDeleteService(PipeModel pipeModel);
 
     Boolean pipeModelDelete(String id);
+
+    List<PipeModel> findPipeModelsService(String key);
 }
