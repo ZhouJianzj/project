@@ -251,4 +251,12 @@ public class SysController {
     public CommonResponse<Boolean> modifyPermController(@RequestBody Perm perm){
         return sysService.modifyPermService(perm);
     }
+
+    /**
+     * 根据orgaId查询用户
+     * */
+    @GetMapping("/user/orga")
+    public List<UserManager> selectUserByOrgaIdController(@RequestParam("orgaId") int orgaId){
+        return sysService.selectUserByOrgaIdService(orgaId);
+    }
 }
