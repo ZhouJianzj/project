@@ -1,0 +1,30 @@
+package com.zj.config;
+
+import com.zj.interceptor.CommoInterceptor;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+/**
+ * 1、@Configuration ：拦截器配置类的注解
+ * 2、需要实现WebMvcConfigurer接口,重写里面的方法
+ * public void addInterceptors(InterceptorRegistry registry) {}
+ */
+@Configuration
+public class InterceptorConfig implements WebMvcConfigurer {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+//        默认的没填写会拦截所有的，**表示的是当前目录下的所有以及之后的子路径，使用*表示的当前所有路径不包含子路径
+        String[] addPathPatterns = {
+                "/**/**"
+        };
+//        没有放行登录的path的时候会出现第一次正常拦截，再一次请求的时候会出现成功
+        String[] excludePatterns = {
+                "/sys/login",
+                "*.html"
+        };
+        registry.addInterceptor(new CommoInterceptor()).
+                addPathPatterns(addPathPatterns)
+                .excludePathPatterns(excludePatterns);
+    }
+}
