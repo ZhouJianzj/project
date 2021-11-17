@@ -383,4 +383,8 @@
                 icon = #{icon}
             where id = #{id}
     </update>
+<!--    查询所有组织类型-->
+    <select id="orgaTypeSelect" resultType="com.zj.entity.OrgaType">
+        select * from orga_type
+    </select>
 </mapper>

@@ -259,4 +259,12 @@ public class SysController {
     public List<UserManager> selectUserByOrgaIdController(@RequestParam("orgaId") int orgaId){
         return sysService.selectUserByOrgaIdService(orgaId);
     }
+
+    /**
+     * 查询所有组织类型
+     * */
+    @GetMapping("/orgaType")
+    public List<OrgaType> selectOrgaTypeController(){
+        return sysService.selectOrgaTypeService();
+    }
 }

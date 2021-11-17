@@ -13,15 +13,37 @@
 <!--        <result column="phone" property="phone" />-->
 <!--        <result column="createTime" property="createTime" />-->
 <!--    </resultMap>-->
+    <resultMap id="item_map" type="com.zj.entity.Item">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="number" property="number"/>
+        <result column="addr" property="addr"/>
+        <result column="phone" property="phone"/>
+        <result column="createTime" property="createTime"/>
+        <association property="organize" javaType="com.zj.entity.Organize">
+            <id column="oid" property="id"/>
+            <result column="oname" property="name"/>
+            <result column="parentId" property="parentId"/>
+            <result column="location" property="location"/>
+            <result column="orgaNumber" property="orgaNumber"/>
+            <result column="ext" property="ext"/>
+        </association>
+    </resultMap>
 <!--    查询项目-->
-    <select id="itemSelect" resultType="com.zj.entity.Item" >
-    select *
-        from t_item
-            join organize on organize.id = t_item.orga_id
-        where t_item.name like concat('%',#{key},'%')
-            or t_item.addr like concat('%',#{key},'%')
-            or organize.name like concat('%',#{key},'%')
-            or organize.location like concat('%',#{key},'%')
+    <select id="itemSelect" resultMap="item_map" >
+    select i.id,i.name,i.number,i.addr,i.phone,i.createTime,
+        o.id as oid,
+        o.name as oname,
+        o.parent_id as parentId,
+        o.location,
+        o.orga_number as orgaNumber,
+        o.ext
+        from t_item i
+            join organize o on o.id = i.orga_id
+        where i.name like concat('%',#{key},'%')
+            or i.addr like concat('%',#{key},'%')
+            or o.name like concat('%',#{key},'%')
+            or o.location like concat('%',#{key},'%')
     </select>
 
 <!--    删除项目-->
@@ -32,13 +54,13 @@
 <!--    新增项目-->
     <insert id="itemInsert">
         insert into t_item (name,number,orga_id,addr,phone)
-        values (#{name},#{number},#{orgaId},#{addr},#{phone})
+        values (#{name},#{number},#{organize.id},#{addr},#{phone})
     </insert>
 
 <!--    修改项目-->
     <update id="itemModify">
         update t_item
-        set name = #{name},number = #{number},orga_id = #{orgaId},addr = #{addr},phone = #{phone}
+        set name = #{name},number = #{number},orga_id = #{organize.id},addr = #{addr},phone = #{phone}
         where id = #{id}
     </update>
 

@@ -50,4 +50,6 @@ public interface SysService {
     CommonResponse<Boolean> modifyPermService(Perm perm);
 
     List<UserManager> selectUserByOrgaIdService(int orgaId);
+
+    List<OrgaType> selectOrgaTypeService();
 }

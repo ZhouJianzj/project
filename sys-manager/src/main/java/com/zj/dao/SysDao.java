@@ -163,4 +163,6 @@ public interface SysDao {
     boolean permModify(Perm perm);
 
     List<UserManager> userByOrgaIdSelect(int orgaId);
+
+    List<OrgaType> orgaTypeSelect();
 }
