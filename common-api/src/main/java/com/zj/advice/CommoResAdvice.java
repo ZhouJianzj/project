@@ -204,6 +204,9 @@ public class CommoResAdvice implements ResponseBodyAdvice<Object> {
             case "log":
                 content = "日志操作";
                 break;
+            case "pipeModel":
+                content = "管模操作";
+                break;
         }
         log.setOperContent(content);
 
