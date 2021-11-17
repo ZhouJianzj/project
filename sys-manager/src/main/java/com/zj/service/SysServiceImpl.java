@@ -31,7 +31,6 @@ public class SysServiceImpl implements SysService {
         //md5加密
         //用户传输过来的是123
         String s = MD5Util.addMD5(password);
-        System.out.println(s);
         user.setPassword(s);
         //查询
         UserManager userManager = sysDao.userSelect(user);
@@ -352,6 +351,14 @@ public class SysServiceImpl implements SysService {
             response.setMsg("修改失败");
         }
         return response;
+    }
+
+    /**
+     * 根据
+     * */
+    @Override
+    public List<UserManager> selectUserByOrgaIdService(int orgaId) {
+        return sysDao.userByOrgaIdSelect(orgaId);
     }
 
     /**
