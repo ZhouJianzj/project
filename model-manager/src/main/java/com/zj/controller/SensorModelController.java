@@ -1,9 +1,9 @@
-package sensorModel.web;
+package com.zj.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import sensorModel.service.SensorModelService;
+import com.zj.service.SensorModelService;
 import com.zj.entity.CommonResponse;
 import com.zj.entity.SensorModel;
 import org.springframework.beans.factory.annotation.Autowired;

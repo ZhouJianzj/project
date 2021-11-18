@@ -1,4 +1,4 @@
-package sensorModel.service;
+package com.zj.service;
 
 import com.zj.entity.CommonResponse;
 import com.zj.entity.SensorModel;

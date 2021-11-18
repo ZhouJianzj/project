@@ -1,4 +1,4 @@
-package sensorModel.dao;
+package com.zj.dao;
 
 import com.zj.entity.SensorModel;
 import org.apache.ibatis.annotations.Mapper;

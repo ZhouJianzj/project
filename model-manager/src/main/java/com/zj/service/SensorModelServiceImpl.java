@@ -1,10 +1,11 @@
-package sensorModel.service;
+package com.zj.service;
 
+import com.zj.service.SensorModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.zj.entity.CommonResponse;
 import com.zj.entity.SensorModel;
-import sensorModel.dao.SensorModelDao;
+import com.zj.dao.SensorModelDao;
 
 import java.util.List;
 
