@@ -1,15 +1,18 @@
 package com.zj.service;
 
-import com.zj.dao.AssetDao;
-import org.springframework.stereotype.Service;
+import com.zj.entity.Sensor;
 
-import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author zhoujian
  */
-@Service
-public class AssetService {
-    @Resource
-    private AssetDao assetDao;
+
+public interface AssetService {
+
+    Boolean addSensorService(Sensor sensor);
+
+    Boolean deleteSensorService(String id);
+
+    List<Sensor> findSensorService(String key);
 }
