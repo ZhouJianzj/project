@@ -36,6 +36,8 @@ public class ItemServiceImpl implements ItemService {
     public CommonResponse<Boolean> deleteItemService(int id) {
         CommonResponse<Boolean> response = new CommonResponse<>();
         if(itemDao.itemDelete(id)){
+            itemDao.itemPipeDelete(id);
+            itemDao.itemSensorDelete(id);
             response.setMsg("删除成功");
             response.setStatus(200);
         }else {
