@@ -28,4 +28,6 @@ public interface AssetService {
     Boolean deleteSensorService(String id);
 
     List<Sensor> findSensorService(String key);
+
+    Boolean modifySensorService(Sensor sensor);
 }

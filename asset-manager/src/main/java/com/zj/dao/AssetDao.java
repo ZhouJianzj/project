@@ -26,4 +26,5 @@ public interface AssetDao {
     List<Sensor> selectSensorDao(String key);
 
 
+    Boolean modifySensorDao(Sensor sensor);
 }

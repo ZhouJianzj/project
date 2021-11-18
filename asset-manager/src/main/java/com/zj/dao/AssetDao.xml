@@ -213,4 +213,29 @@
               s.protocal like concat('%',#{key},'%')
     </select>
 
+<!--    修改传感器-->
+    <update id="modifySensorDao" parameterType="com.zj.entity.Sensor">
+        update t_sensor
+        <set>
+            <if test="sensorName != null" >
+                sensorName = #{sensorName},
+            </if>
+            <if test="sensorCode != null">
+                sensorCode = #{sensorCode},
+            </if>
+            <if test="protocal != null">
+                protocal = #{protocal},
+            </if>
+            <if test="sensorModelId != null">
+                sensorModel_id = #{sensorModelId},
+            </if>
+            <if test="itemId != null">
+                item_id = #{itemId},
+            </if>
+            <if test="orgaId != null">
+                orga_id = #{orgaId}
+            </if>
+        </set>
+            where id = #{id}
+    </update>
 </mapper>

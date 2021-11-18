@@ -96,7 +96,13 @@ public class AssetController {
 
     }
 
-    public Boolean modifySensorController(Sensor sensor){
-        return null;
+    /**
+     * 修改传感器
+     * @param sensor 接受的修改传感器的参数对象
+     * @return 返回
+     */
+    @PutMapping("sensor")
+    public Boolean modifySensorController(@RequestBody Sensor sensor){
+        return assetService.modifySensorService(sensor);
     }
 }

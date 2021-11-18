@@ -98,6 +98,15 @@ public class AssetServiceImpl implements AssetService {
         return assetDao.selectSensorDao(key);
     }
 
+    /**
+     * 修改管道
+     * @param sensor 修改传感器的数据对象
+     * @return 操作结果
+     */
+    @Override
+    public Boolean modifySensorService(Sensor sensor) {
+        return assetDao.modifySensorDao(sensor);
+    }
 
 
 }
