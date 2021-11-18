@@ -65,4 +65,12 @@
         where id = #{id}
     </update>
 
+<!--    根据itemid将对应的pipe数据item——id滞空-->
+    <update id="itemPipeDelete">
+        update t_pipe set item_id = null where item_id = #{id}
+    </update>
+<!--    根据item_id删除sensor表中相关数据item——id滞空-->
+    <update id="itemSensorDelete">
+        update t_sensor set item_id = null where item_id = #{id}
+    </update>
 </mapper>

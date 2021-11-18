@@ -31,4 +31,8 @@ public interface ItemDao {
      * 修改项目
      * */
     boolean itemModify(Item item);
+
+    boolean itemPipeDelete(int id);
+
+    void itemSensorDelete(int id);
 }
