@@ -79,4 +79,10 @@
         delete from t_pipe_model where  id = #{id}
     </delete>
 
+<!--    修改对应的管道的管道模型id-->
+    <update id="pipeUpdateModelId">
+        update t_pipe set pipeModel_id = null
+        where pipeModel_id = #{id}
+    </update>
+
 </mapper>

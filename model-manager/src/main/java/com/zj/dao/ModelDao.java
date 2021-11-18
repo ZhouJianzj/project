@@ -23,4 +23,6 @@ public interface ModelDao {
     Boolean pipeModelDelete(String id);
 
     List<PipeModel> PipeModelsSelect(String key);
+
+    Boolean pipeUpdateModelId(String id);
 }
