@@ -60,7 +60,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("model")
-public class ModelController {
+public class PipeModelController {
     @Resource
     private ModelService modelService;
 
