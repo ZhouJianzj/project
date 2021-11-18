@@ -387,4 +387,12 @@
     <select id="orgaTypeSelect" resultType="com.zj.entity.OrgaType">
         select * from orga_type
     </select>
+
+<!--    给用户修改orga_id-->
+    <update id="userOrgaInsert">
+        update t_user
+            set
+                orga_id = #{orgaId}
+            where id = #{id}
+    </update>
 </mapper>

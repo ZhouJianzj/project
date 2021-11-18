@@ -165,4 +165,6 @@ public interface SysDao {
     List<UserManager> userByOrgaIdSelect(int orgaId);
 
     List<OrgaType> orgaTypeSelect();
+
+    boolean userOrgaInsert(Integer id,Integer orgaId);
 }

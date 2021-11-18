@@ -39,9 +39,10 @@
         o.orga_number as orgaNumber,
         o.ext
         from t_item i
-            join organize o on o.id = i.orga_id
+            left join organize o on o.id = i.orga_id
         where i.name like concat('%',#{key},'%')
             or i.addr like concat('%',#{key},'%')
+
             or o.name like concat('%',#{key},'%')
             or o.location like concat('%',#{key},'%')
     </select>
