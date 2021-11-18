@@ -7,19 +7,22 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * @author HuXinJie
- * @version 1.0
- * @date 2021/11/18 8:17
+ * 传感器
+ * @author zhoujian
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Sensor implements Serializable {
-    int id;
-    String sensorName;
-    String sensorCode;
-    String protocal;
-    SensorModel sensorModel;
-    Item item;
-    Organize organize;
+    private String id;
+    private String sensorName;
+    private String sensorCode;
+    private String protocal;
+    private String sensorModelId;
+    private String itemId;
+    private String orgaId;
+
+    private SensorModel sensorModel;
+    private Item item;
+
 }

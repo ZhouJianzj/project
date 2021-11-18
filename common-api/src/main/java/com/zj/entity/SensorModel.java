@@ -8,23 +8,36 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author HuXinJie
- * @version 1.0
- * @date 2021/11/18 8:20
+ * (TSensorModel)实体类
+ *
+ * @author makejava
+ * @since 2021-11-18 10:10:31
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class SensorModel implements Serializable {
-    int id;
-    String deviceName;
-    String deviceType;
-    String deviceNumber;
-    Date createTime;
-    int upInterval;
-    String protocol;
-    String dataPointName;
-    int lowThreshold;
-    int highThreshold;
-    String dataPointExtra;
+
+    private Integer id;
+
+    private String deviceName;
+
+    private String deviceType;
+
+    private String deviceNumber;
+
+    private Date createTime;
+
+    private Integer upInterval;
+
+    private String protocol;
+
+    private String dataPointName;
+
+    private Integer lowThreshold;
+
+    private Integer highThreshold;
+
+    private String dataPointExtra;
+
 }
