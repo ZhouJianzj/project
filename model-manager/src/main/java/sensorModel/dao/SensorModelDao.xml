@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sensorModel.dao.SensorModelDao">
+    <insert id="test">
+        insert into t_sensor_model(deviceName)values (#{test})
+    </insert>
+<!--查询传感器-->
+    <select id="sensorModelSelect" resultType="com.zj.entity.SensorModel">
+        select * from t_sensor_model
+        <where>
+<!--            <if test="key != null &amp;key != &quot; &quot;">-->
+                deviceName like '%' #{key} '%' or deviceType like '%' #{key} '%' or deviceNumber = #{key}
+<!--            </if>-->
+        </where>
+    </select>
+<!--    添加传感器模型-->
+    <insert id="sensorModelInsert">
+        insert into t_sensor_model (deviceNumber,deviceName,deviceType,upInterval,protocol,dataPointName,lowThreshold,highThreshold,dataPointExtra) VALUES
+            (#{deviceNumber},#{deviceName},#{deviceType},#{upInterval},#{protocol},#{dataPointName},#{lowThreshold},#{highThreshold},#{dataPointExtra})
+    </insert>
+<!--删除传感器模型-->
+    <delete id="sensorModelDelete">
+        delete from t_sensor_model where id=#{id}
+    </delete>
+<!-- 修改传感器模型-->
+    <update id="sensorModelUpdate">
+        update t_sensor_model set deviceNumber=#{deviceNumber},deviceName=#{deviceName},deviceType=#{deviceType},
+                                  upInterval=#{upInterval},protocol=#{protocol},dataPointName=#{dataPointName},
+                                  lowThreshold=#{lowThreshold},highThreshold=#{highThreshold},dataPointExtra=#{dataPointExtra}
+        WHERE id=#{id}
+    </update>
+</mapper>
