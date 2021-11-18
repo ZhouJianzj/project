@@ -291,4 +291,5 @@ public class SysController {
     public List<User> selectUserOtherController(@RequestParam("orgaId") int orgaId){
         return sysService.selectUserOtherService(orgaId);
     }
+
 }
