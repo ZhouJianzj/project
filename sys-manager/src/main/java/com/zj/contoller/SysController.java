@@ -256,8 +256,8 @@ public class SysController {
      * 根据orgaId查询用户
      * */
     @GetMapping("/user/orga")
-    public List<UserManager> selectUserByOrgaIdController(@RequestParam("orgaId") int orgaId){
-        return sysService.selectUserByOrgaIdService(orgaId);
+    public List<UserManager> selectUserByOrgaIdController(@RequestParam("orgaId") int orgaId,@RequestParam("username")String username){
+        return sysService.selectUserByOrgaIdService(orgaId,username);
     }
 
     /**
@@ -282,5 +282,13 @@ public class SysController {
     @PutMapping("user/orgaId")
     public CommonResponse<Boolean> insertUsersIntoOrgaController(@RequestBody User user){
         return sysService.insertUsersIntoOrgaService(user);
+    }
+
+    /**
+     * 查询除指定组织以外的所有员工
+     * */
+    @GetMapping("user/orgaId")
+    public List<User> selectUserOtherController(@RequestParam("orgaId") int orgaId){
+        return sysService.selectUserOtherService(orgaId);
     }
 }

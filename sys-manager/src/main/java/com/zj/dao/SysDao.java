@@ -162,9 +162,11 @@ public interface SysDao {
 
     boolean permModify(Perm perm);
 
-    List<UserManager> userByOrgaIdSelect(int orgaId);
+    List<UserManager> userByOrgaIdSelect(int orgaId,String username);
 
     List<OrgaType> orgaTypeSelect();
 
     boolean userOrgaInsert(Integer id,Integer orgaId);
+
+    List<User> otherUserSelect(int orgaId);
 }

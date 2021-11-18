@@ -49,11 +49,13 @@ public interface SysService {
 
     CommonResponse<Boolean> modifyPermService(Perm perm);
 
-    List<UserManager> selectUserByOrgaIdService(int orgaId);
+    List<UserManager> selectUserByOrgaIdService(int orgaId,String username);
 
     List<OrgaType> selectOrgaTypeService();
 
     CommonResponse<Boolean> deleteUserListService(int[] ids);
 
     CommonResponse<Boolean> insertUsersIntoOrgaService(User user);
+
+    List<User> selectUserOtherService(int orgaId);
 }
