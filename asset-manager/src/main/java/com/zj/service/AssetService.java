@@ -8,8 +8,6 @@ import javax.annotation.Resource;
 /**
  * @author zhoujian
  */
-@Service
-public class AssetService {
-    @Resource
-    private AssetDao assetDao;
+public interface AssetService {
+
 }
