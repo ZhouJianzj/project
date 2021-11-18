@@ -31,6 +31,7 @@ public class SysServiceImpl implements SysService {
         //md5加密
         //用户传输过来的是123
         String s = MD5Util.addMD5(password);
+        System.out.println(s);
         user.setPassword(s);
         //查询
         UserManager userManager = sysDao.userSelect(user);
@@ -364,6 +365,45 @@ public class SysServiceImpl implements SysService {
     @Override
     public List<OrgaType> selectOrgaTypeService() {
         return sysDao.orgaTypeSelect();
+    }
+
+    /**
+     * 批量删除用户
+     * */
+    @Override
+    public CommonResponse<Boolean> deleteUserListService(int[] ids) {
+        CommonResponse<Boolean> response = new CommonResponse<>();
+        for (int i = 0; i < ids.length; i++) {
+            if (sysDao.userDelete(ids[i])) {
+                sysDao.userRoleDelete(ids[i]);
+                response.setMsg("删除成功");
+                response.setStatus(200);
+            } else {
+                response.setStatus(400);
+                response.setMsg("删除失败");
+            }
+        }
+        return response;
+    }
+
+    /**
+     * 批量给orga添加用户
+     * */
+    @Override
+    public CommonResponse<Boolean> insertUsersIntoOrgaService(User user) {
+        CommonResponse<Boolean> response  = new CommonResponse<>();
+        int orgaId = user.getOrgaId();
+        Integer[] array = user.getIdArrays();
+        for (int i = 0; i < array.length; i++) {
+            if (sysDao.userOrgaInsert(array[i],orgaId)){
+                response.setMsg("成功");
+                response.setStatus(200);
+            }else {
+                response.setMsg("失败");
+                response.setStatus(400);
+            }
+        }
+        return response;
     }
 
     /**

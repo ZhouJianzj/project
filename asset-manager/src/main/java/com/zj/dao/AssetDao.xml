@@ -4,6 +4,111 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.dao.AssetDao">
 
+<!--    新增管道-->
+    <insert id="pipeInsert">
+        insert into t_pipe (productName,productCode,manuDate,productDate,pipeModel_id,sensor_id,item_id)
+        values (#{productName},#{productCode},#{manuDate},#{productDate},#{pipeModel.id},#{sensor.id},#{item.id})
+    </insert>
+
+<!--    删除管道-->
+    <delete id="pipeDelete">
+        delete from t_pipe where id = #{id}
+    </delete>
+
+<!--    修改管道-->
+    <update id="pipeModify">
+        update t_pipe
+            set
+                productName = #{productName},
+                productCode = #{productCode},
+                manuDate = #{manuDate},
+                productDate = #{productDate},
+                pipeModel_id = #{pipeModel.id},
+                sensor_id = #{sensor.id},
+                item_id = #{item.id}
+            where id = #{id}
+    </update>
+
+<!--    查询所有管道-->
+    <resultMap id="pipe" type="com.zj.entity.Pipe">
+        <id column="id" property="id"/>
+        <result property="productName" column="productName"/>
+        <result column="productCode" property="productCode"/>
+        <result column="manuDate" property="manuDate"/>
+        <result column="productDate" property="productDate"/>
+        <association property="pipeModel" javaType="com.zj.entity.PipeModel">
+            <id column="pmId" property="id"/>
+            <result column="pipeName" property="pipeName"/>
+            <result column="pipeNumber" property="pipeNumber"/>
+            <result column="pipeType" property="pipeType"/>
+            <result property="pipeIntroduce" column="pipeIntroduce"/>
+            <result column="pipePic" property="pipePic"/>
+            <result column="pipeManual" property="pipeManual"/>
+            <result column="createTime" property="createTime"/>
+        </association>
+        <association property="sensor" javaType="com.zj.entity.Sensor">
+            <id column="sid" property="id"/>
+            <result property="sensorName" column="sensorName"/>
+            <result property="sensorCode" column="sensorCode"/>
+            <result column="protocal" property="protocal"/>
+        </association>
+        <association property="item" javaType="com.zj.entity.Item">
+            <id column="iid" property="id"/>
+            <result column="iname" property="name"/>
+            <result property="number" column="number"/>
+            <result column="addr" property="addr"/>
+            <result column="phone" property="phone"/>
+            <result property="createTime" column="icreateTime"/>
+        </association>
+        <association property="organize" javaType="com.zj.entity.Organize">
+            <id column="oid" property="id"/>
+            <result column="oname" property="name"/>
+            <result column="parentId" property="parentId"/>
+            <result property="location" column="location"/>
+            <result column="orgaNumber" property="orgaNumber"/>
+            <result property="ext" column="ext"/>
+        </association>
+    </resultMap>
+    <select id="pipeSelect" resultMap="pipe">
+        select p.id,p.productName,
+            p.productCode,
+            p.manuDate,
+            p.productDate,
+            pm.id as pmId,
+            pm.pipeName,
+            pm.pipeNumber,
+            pm.pipeType,
+            pm.pipeIntroduce,
+            pm.pipePic,
+            pm.pipeManual,
+            pm.createTime,
+            s.id as sid,
+            s.sensorName,
+            s.sensorCode,
+            s.protocal,
+            i.id as iid,
+            i.name as iname,
+            i.number,
+            i.addr,
+            i.phone,
+            i.createTime as icreateTime,
+            o.id as oid,
+            o.name as oname,
+            o.parent_id as parentId,
+            o.location,
+            o.orga_number as orgaNumber,
+            o.ext
+        from t_pipe p
+        left join t_pipe_model pm on pm.id = p.pipeModel_id
+        left join t_sensor s on s.id = p.sensor_id
+        left join t_item i on i.id = p.item_id
+        left join organize o on o.id = p.orga_id
+        where p.productName like concat('%', #{key}, '%')
+            or pm.pipeName like concat('%', #{key}, '%')
+            or s.sensorName like concat('%', #{key}, '%')
+            or i.name like concat('%', #{key}, '%')
+            or o.name like concat('%', #{key}, '%')
+    </select>
 <!--    新增传感器-->
     <insert id="insertSensorDao" parameterType="com.zj.entity.Sensor">
         insert into  t_sensor (

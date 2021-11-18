@@ -19,25 +19,25 @@ import java.util.Date;
 public class SensorModel implements Serializable {
 
     private Integer id;
-    
+
     private String deviceName;
-    
+
     private String deviceType;
-    
+
     private String deviceNumber;
-    
+
     private Date createTime;
-    
+
     private Integer upInterval;
-    
+
     private String protocol;
-    
+
     private String dataPointName;
-    
+
     private Integer lowThreshold;
-    
+
     private Integer highThreshold;
-    
+
     private String dataPointExtra;
 
 }

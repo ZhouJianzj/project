@@ -34,5 +34,7 @@ public class User implements Serializable {
 
     private Integer[] roleIdArrays;
 
+    private Integer[] idArrays;
+
 
 }

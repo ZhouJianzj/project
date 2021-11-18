@@ -1,5 +1,6 @@
 package com.zj.dao;
 
+import com.zj.entity.Pipe;
 import com.zj.entity.Sensor;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,13 @@ import java.util.List;
 @Repository
 public interface AssetDao {
 
+    boolean pipeInsert(Pipe pipe);
+
+    boolean pipeDelete(int id);
+
+    boolean pipeModify(Pipe pipe);
+
+    List<Pipe> pipeSelect(String key);
     Boolean insertSensorDao(Sensor sensor);
 
     Boolean deleteSensorDao(String id);

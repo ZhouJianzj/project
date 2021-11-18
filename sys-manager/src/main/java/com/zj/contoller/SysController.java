@@ -267,4 +267,20 @@ public class SysController {
     public List<OrgaType> selectOrgaTypeController(){
         return sysService.selectOrgaTypeService();
     }
+
+    /**
+     * 根据id批量删除用户
+     * */
+    @DeleteMapping("user/ids")
+    public CommonResponse<Boolean> deleteUserListController(int[] ids){
+        return sysService.deleteUserListService(ids);
+    }
+
+    /**
+     * 给组织批量新增用户(就是将用户的orga_id修改为当前组织id)
+     * */
+    @PutMapping("user/orgaId")
+    public CommonResponse<Boolean> insertUsersIntoOrgaController(@RequestBody User user){
+        return sysService.insertUsersIntoOrgaService(user);
+    }
 }
