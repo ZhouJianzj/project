@@ -355,11 +355,11 @@ public class SysServiceImpl implements SysService {
     }
 
     /**
-     * 根据
+     * 根据组织id查询用户
      * */
     @Override
-    public List<UserManager> selectUserByOrgaIdService(int orgaId) {
-        return sysDao.userByOrgaIdSelect(orgaId);
+    public List<UserManager> selectUserByOrgaIdService(int orgaId,String username) {
+        return sysDao.userByOrgaIdSelect(orgaId,username);
     }
 
     @Override
@@ -404,6 +404,14 @@ public class SysServiceImpl implements SysService {
             }
         }
         return response;
+    }
+
+    /**
+     * 查询除指定组织以外的所有的用户
+     * */
+    @Override
+    public List<User> selectUserOtherService(int orgaId) {
+        return sysDao.otherUserSelect(orgaId);
     }
 
     /**
