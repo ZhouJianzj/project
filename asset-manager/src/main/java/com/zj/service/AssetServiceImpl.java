@@ -98,4 +98,6 @@ public class AssetServiceImpl implements AssetService {
         return assetDao.selectSensorDao(key);
     }
 
+
+
 }
