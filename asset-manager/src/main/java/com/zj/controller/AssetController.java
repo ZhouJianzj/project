@@ -89,10 +89,14 @@ public class AssetController {
      * @return 返回的结果集
      */
     @GetMapping("sensor")
-    public List<Sensor> findSensorController(@RequestParam("key") String key
+    public Page findSensorController(@RequestParam("key") String key
             ,@RequestParam(value = "pageNo",defaultValue = "1") String pageNo,
              @RequestParam(value = "pageSize",defaultValue = "8")                                String pageSize){
-        return assetService.findSensorService(key);
+        return MyPageHelper.myPageHelper(new Page(assetService.findSensorService(key),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
+
     }
 
+    public Boolean modifySensorController(Sensor sensor){
+        return null;
+    }
 }
