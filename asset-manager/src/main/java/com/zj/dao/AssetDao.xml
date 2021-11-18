@@ -117,9 +117,8 @@
                                protocal,
                                sensorModel_id ,
                                item_id  ,
-                               orga_id)
+                               orga_id  )
         values (
-
                 #{sensorName},
                 #{sensorCode},
                 #{protocal},
@@ -127,7 +126,6 @@
                 #{itemId},
                 #{orgaId}
                )
-
     </insert>
 
 <!--    删除传感器-->
@@ -208,6 +206,11 @@
         from t_sensor s join t_sensor_model sm on  sm.id = s.sensorModel_id
                         join t_item i on i.id = s.item_id
                         join organize o on o.id = i.orga_id
+        where
+              s.id like concat('%',#{key},'%') or
+              s.sensorName like concat('%',#{key},'%') or
+              s.sensorCode like concat('%',#{key},'%') or
+              s.protocal like concat('%',#{key},'%')
     </select>
 
 </mapper>
