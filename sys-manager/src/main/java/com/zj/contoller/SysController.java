@@ -6,6 +6,7 @@ import com.zj.annotation.IgnoreResponseAdvice;
 import com.zj.entity.*;
 import com.zj.service.SysService;
 import com.zj.util.MyPageHelper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -272,8 +273,8 @@ public class SysController {
      * 根据id批量删除用户
      * */
     @DeleteMapping("user/ids")
-    public CommonResponse<Boolean> deleteUserListController(int[] ids){
-        return sysService.deleteUserListService(ids);
+    public CommonResponse<Boolean> deleteUserListController(@RequestParam Integer[] idArrays){
+        return sysService.deleteUserListService(idArrays);
     }
 
     /**
@@ -288,8 +289,8 @@ public class SysController {
      * 查询除指定组织以外的所有员工
      * */
     @GetMapping("user/orgaId")
-    public List<User> selectUserOtherController(@RequestParam("orgaId") int orgaId){
-        return sysService.selectUserOtherService(orgaId);
+    public List<User> selectUserOtherController(@RequestParam("orgaId") int orgaId, @Param("key")String key){
+        return sysService.selectUserOtherService(orgaId,key);
     }
 
 }

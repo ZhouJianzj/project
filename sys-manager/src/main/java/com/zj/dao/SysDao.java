@@ -1,6 +1,7 @@
 package com.zj.dao;
 
 import com.zj.entity.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -168,5 +169,7 @@ public interface SysDao {
 
     boolean userOrgaInsert(Integer id,Integer orgaId);
 
-    List<User> otherUserSelect(int orgaId);
+    List<User> otherUserSelect(int orgaId,String key);
+
+    boolean userOrgaModify(@Param("idArrays") Integer[] idArrays);
 }

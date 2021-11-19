@@ -53,9 +53,9 @@ public interface SysService {
 
     List<OrgaType> selectOrgaTypeService();
 
-    CommonResponse<Boolean> deleteUserListService(int[] ids);
+    CommonResponse<Boolean> deleteUserListService(Integer[] idArrays);
 
     CommonResponse<Boolean> insertUsersIntoOrgaService(User user);
 
-    List<User> selectUserOtherService(int orgaId);
+    List<User> selectUserOtherService(int orgaId,String key);
 }

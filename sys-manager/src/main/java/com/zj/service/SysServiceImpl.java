@@ -371,18 +371,18 @@ public class SysServiceImpl implements SysService {
      * 批量删除用户
      * */
     @Override
-    public CommonResponse<Boolean> deleteUserListService(int[] ids) {
+    public CommonResponse<Boolean> deleteUserListService(Integer[] idArrays) {
         CommonResponse<Boolean> response = new CommonResponse<>();
-        for (int i = 0; i < ids.length; i++) {
-            if (sysDao.userDelete(ids[i])) {
-                sysDao.userRoleDelete(ids[i]);
+        System.out.println(idArrays + "===================================");
+        //for (int i = 0; i < ids.size(); i++) {
+            if (sysDao.userOrgaModify(idArrays)) {
                 response.setMsg("删除成功");
                 response.setStatus(200);
             } else {
                 response.setStatus(400);
                 response.setMsg("删除失败");
             }
-        }
+        //}
         return response;
     }
 
@@ -410,8 +410,8 @@ public class SysServiceImpl implements SysService {
      * 查询除指定组织以外的所有的用户
      * */
     @Override
-    public List<User> selectUserOtherService(int orgaId) {
-        return sysDao.otherUserSelect(orgaId);
+    public List<User> selectUserOtherService(int orgaId,String key) {
+        return sysDao.otherUserSelect(orgaId,key);
     }
 
     /**
