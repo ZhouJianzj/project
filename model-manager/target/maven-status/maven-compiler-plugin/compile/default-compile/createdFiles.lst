@@ -1,5 +1,0 @@
-com\zj\ModelApplication.class
-com\zj\controller\ModelController.class
-com\zj\dao\ModelDao.class
-com\zj\service\ModelService.class
-com\zj\service\ModelServiceImpl.class

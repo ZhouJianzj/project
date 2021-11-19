@@ -2,10 +2,9 @@ package com.zj.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
-import com.zj.service.SensorModelService;
 import com.zj.entity.CommonResponse;
 import com.zj.entity.SensorModel;
+import com.zj.service.SensorModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +41,6 @@ public class SensorModelController {
     public CommonResponse<Boolean> deleteSensorModelByIdController(int id) {
         return sensorModelService.deleteSensorModelService(id);
     }
-//
     /**
      * 添加传感器模型
      * @param sensorModel
