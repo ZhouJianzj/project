@@ -293,4 +293,11 @@ public class SysController {
         return sysService.selectUserOtherService(orgaId,key);
     }
 
+    /**
+     * 修改组织信息
+     * */
+    @PutMapping("orga")
+    public CommonResponse<Boolean> modifyOrganizeController(@RequestBody Organize organize){
+        return sysService.modifyOrgaService(organize);
+    }
 }

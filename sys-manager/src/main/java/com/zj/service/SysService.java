@@ -58,4 +58,6 @@ public interface SysService {
     CommonResponse<Boolean> insertUsersIntoOrgaService(User user);
 
     List<User> selectUserOtherService(int orgaId,String key);
+
+    CommonResponse<Boolean> modifyOrgaService(Organize organize);
 }
