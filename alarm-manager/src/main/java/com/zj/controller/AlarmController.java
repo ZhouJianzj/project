@@ -16,4 +16,8 @@ import javax.annotation.Resource;
 public class AlarmController {
     @Resource
     private AlarmService alarmService;
+
+    public Boolean modifyAlarm(){
+        return alarmService.modifyAlarm();
+    }
 }
