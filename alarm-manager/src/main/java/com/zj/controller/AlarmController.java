@@ -26,8 +26,8 @@ public class AlarmController {
 
     /**
      * 修改报警
-     * @param  alarm 修改的参数  使用到id
-     * @return
+     * @param  alarm 修改的参数  使用到id 和 isHandled
+     * @return 返回操作是否成功
      */
     @PutMapping("alarm")
     public Boolean modifyAlarmController(@RequestBody Alarm alarm){
