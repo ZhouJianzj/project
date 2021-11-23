@@ -1,6 +1,7 @@
 package com.zj.service;
 
 import com.zj.dao.AlarmDao;
+import com.zj.entity.Alarm;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ public class AlarmServiceImpl implements AlarmService {
     private AlarmDao alarmDao;
 
     @Override
-    public Boolean modifyAlarm() {
-        return alarmDao.modifyAlarm();
+    public Boolean modifyAlarm(Alarm alarm) {
+        return alarmDao.modifyAlarm(alarm);
     }
 }

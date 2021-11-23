@@ -1,5 +1,6 @@
 package com.zj.dao;
 
+import com.zj.entity.Alarm;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -7,5 +8,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface AlarmDao {
-    Boolean modifyAlarm();
+    Boolean modifyAlarm(Alarm alarm);
 }
