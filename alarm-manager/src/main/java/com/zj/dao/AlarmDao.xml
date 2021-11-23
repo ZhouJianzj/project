@@ -7,4 +7,17 @@
     <update id="modifyAlarm" parameterType="com.zj.entity.Alarm">
         update t_alarm set isHandled = #{isHandled} where id = #{id}
     </update>
+<!--   根据是否处理 和  开始时间和结束时间-->
+    <select id="selectAlarmDao" resultType="com.zj.entity.Alarm">
+        select id,sensor_id as sensor,currentValue, alarmMsg,isHandled,alarmTime
+        from t_alarm
+        <where>
+            <if test="key != null ">
+                 isHandled = #{key}
+            </if>
+            <if test="from != null and end != null">
+                and alarmTime between  #{from} and #{end}
+            </if>
+        </where>
+    </select>
 </mapper>

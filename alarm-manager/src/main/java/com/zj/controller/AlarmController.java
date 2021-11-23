@@ -2,10 +2,14 @@ package com.zj.controller;
 
 
 import com.zj.entity.Alarm;
+import com.zj.entity.Page;
 import com.zj.service.AlarmService;
+import com.zj.util.MyPageHelper;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * @author zhoujian
@@ -32,5 +36,27 @@ public class AlarmController {
     @PutMapping("alarm")
     public Boolean modifyAlarmController(@RequestBody Alarm alarm){
         return alarmService.modifyAlarm(alarm);
+    }
+
+    /**
+     * 查询报警
+     * @param key 是否处理
+     * @param from 开始时间
+     * @param end 结束时间
+     * @param pageNo 页面
+     * @param pageSize 数据量
+     * @return 返回的结果集
+     */
+    @GetMapping("alarm")
+    public Page<Alarm> findAlarmController(@RequestParam("key") Boolean key,
+                                           @RequestParam("from") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date from,
+                                           @RequestParam("end") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date end,
+                                       @RequestParam(value = "pageNo",defaultValue = "1") String pageNo,
+                                       @RequestParam(value = "pageSize",defaultValue = "8")String pageSize){
+
+        return MyPageHelper.myPageHelper(new Page(alarmService.findAlarmService(key,from,end)
+                ,Integer.parseInt(pageNo)
+                ,Integer.parseInt(pageSize)));
+
     }
 }
