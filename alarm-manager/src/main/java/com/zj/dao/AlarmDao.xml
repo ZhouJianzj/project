@@ -7,4 +7,18 @@
     <update id="modifyAlarm" parameterType="com.zj.entity.Alarm">
         update t_alarm set isHandled = #{isHandled} where id = #{id}
     </update>
+
+<!--    插入报警信息，如果sensor_id存在则变为修改-->
+    <insert id="alarmInsert" parameterType="com.zj.entity.Alarm">
+        insert into
+	        t_alarm(sensor_id, currentValue, alarmMsg,isHandled)
+        VALUES
+            (#{sensor.id},#{currentValue},#{alarmMsg},#{isHandled})
+        on duplicate key update
+ 	        currentValue=#{currentValue},alarmMsg=#{alarmMsg},alarmTime=now()
+    </insert>
+<!--    根据sensorId查询sensor表数据-->
+    <select id="sensorIdSelect" resultType="com.zj.entity.Sensor">
+        select * from t_sensor where id = #{sensorId}
+    </select>
 </mapper>
