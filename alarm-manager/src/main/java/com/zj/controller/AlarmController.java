@@ -2,6 +2,7 @@ package com.zj.controller;
 
 
 import com.zj.entity.Alarm;
+import com.zj.entity.CommonResponse;
 import com.zj.entity.Page;
 import com.zj.service.AlarmService;
 import com.zj.util.MyPageHelper;
@@ -22,10 +23,12 @@ public class AlarmController {
 
     /**
      * 添加报警信息
+     * @param alarm
+     * @return 返回新增是否成功
      * */
     @PostMapping("alarm")
-    public Boolean insertAlarmController(@RequestBody Alarm alarm){
-        return null;
+    public CommonResponse<Boolean> insertAlarmController(@RequestBody Alarm alarm){
+        return alarmService.insertAlarmService(alarm);
     }
 
     /**
