@@ -415,6 +415,22 @@ public class SysServiceImpl implements SysService {
     }
 
     /**
+     * 修改组织信息
+     * */
+    @Override
+    public CommonResponse<Boolean> modifyOrgaService(Organize organize) {
+        CommonResponse<Boolean> response = new CommonResponse<>();
+        if (sysDao.orgaModify(organize)){
+            response.setMsg("修改成功");
+            response.setStatus(200);
+        }else {
+            response.setStatus(400);
+            response.setMsg("修改失败");
+        }
+        return response;
+    }
+
+    /**
      * 删除用户，首先删除用户表，然后根据user的id到user_role表中删除对应的关系
      */
     @Override

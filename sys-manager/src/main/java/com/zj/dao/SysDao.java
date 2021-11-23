@@ -172,4 +172,6 @@ public interface SysDao {
     List<User> otherUserSelect(int orgaId,String key);
 
     boolean userOrgaModify(@Param("idArrays") Integer[] idArrays);
+
+    boolean orgaModify(Organize organize);
 }
