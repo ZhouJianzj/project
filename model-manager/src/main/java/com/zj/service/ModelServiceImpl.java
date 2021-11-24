@@ -53,7 +53,8 @@ public class ModelServiceImpl implements ModelService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new CommonResponse<>(200,"上传文件成功！",true);
+        return new CommonResponse(200,"上传文件成功！",
+                FileUtil.generateFileName(rootPath,file.getOriginalFilename()));
     }
 
     /**
@@ -63,36 +64,41 @@ public class ModelServiceImpl implements ModelService {
      * */
     @Override
     public CommonResponse<Boolean> filesUploadService(PipeModel pipeModel){
-        MultipartFile[] files = pipeModel.getFiles();
+//        MultipartFile[] files = pipeModel.getFiles();
         //没有对应的文件就不能新增
-        if (files.length < 3){
-            System.out.println(files.length);
-            return new CommonResponse<Boolean>(400,"上传材料不足！",false);
-        }
-        int count = 0;
-        for(MultipartFile file : files){
-            File hostFile = new File(FileUtil.generateFileName(rootPath,file.getOriginalFilename()));
-            //记录
-            count ++;
-            if (!hostFile.exists()){
-                hostFile.mkdirs();
-            }
-            try {
-                file.transferTo(hostFile);
-                //依次设值
-                if (count == 1 ){
-                      pipeModel.setPipeIntroduce(hostFile.getAbsolutePath());
-                    System.out.println(pipeModel.getPipeIntroduce());
-                }else if (count == 2){
-                      pipeModel.setPipePic(hostFile.getAbsolutePath());
-                }else if (count == 3){
-                      pipeModel.setPipeManual(hostFile.getAbsolutePath());
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        if (modelDao.pipeModelInsert(pipeModel)){
+//        if (files.length < 3){
+//            System.out.println(files.length);
+//            return new CommonResponse<Boolean>(400,"上传材料不足！",false);
+//        }
+//        int count = 0;
+//        for(MultipartFile file : files){
+//            File hostFile = new File(FileUtil.generateFileName(rootPath,file.getOriginalFilename()));
+//            //记录
+//            count ++;
+//            if (!hostFile.exists()){
+//                hostFile.mkdirs();
+//            }
+//            try {
+//                file.transferTo(hostFile);
+//                //依次设值
+//                if (count == 1 ){
+//                      pipeModel.setPipeIntroduce(hostFile.getAbsolutePath());
+//                    System.out.println(pipeModel.getPipeIntroduce());
+//                }else if (count == 2){
+//                      pipeModel.setPipePic(hostFile.getAbsolutePath());
+//                }else if (count == 3){
+//                      pipeModel.setPipeManual(hostFile.getAbsolutePath());
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        if (pipeModel.getPipePic() == null || "".equals(pipeModel.getPipePic()) ||
+                 pipeModel.getPipeManual() == null || "".equals(pipeModel.getPipeManual()) ||
+                pipeModel.getPipeIntroduce() == null || "".equals(pipeModel.getPipeIntroduce()))
+         {
+             return new CommonResponse<Boolean>(400,"添加模型失败！",false);
+        }else if (modelDao.pipeModelInsert(pipeModel)){
             return new CommonResponse<Boolean>(200,"添加模型成功！",true);
         }else {
             return new CommonResponse<Boolean>(400,"添加模型失败！",false);
