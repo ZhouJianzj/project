@@ -7,6 +7,7 @@
     <update id="modifyAlarm" parameterType="com.zj.entity.Alarm">
         update t_alarm set isHandled = #{isHandled} where id = #{id}
     </update>
+
 <!--   根据是否处理 和  开始时间和结束时间-->
     <select id="selectAlarmDao" resultType="com.zj.entity.Alarm">
         select id,sensor_id as sensor,currentValue, alarmMsg,isHandled,alarmTime
@@ -30,6 +31,7 @@
         on duplicate key update
  	        currentValue=#{currentValue},alarmMsg=#{alarmMsg},alarmTime=now()
     </insert>
+
 <!--    根据sensorId查询sensor表数据-->
     <select id="sensorIdSelect" resultType="com.zj.entity.Sensor">
         select * from t_sensor where id = #{sensorId}

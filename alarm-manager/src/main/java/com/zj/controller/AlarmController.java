@@ -23,7 +23,7 @@ public class AlarmController {
 
     /**
      * 添加报警信息
-     * @param alarm
+     * @param alarm 添加参数
      * @return 返回新增是否成功
      * */
     @PostMapping("alarm")
