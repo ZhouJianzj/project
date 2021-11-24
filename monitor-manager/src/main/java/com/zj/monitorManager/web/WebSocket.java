@@ -1,6 +1,7 @@
 package com.zj.monitorManager.web;
 
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -11,32 +12,34 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author zhoujian
  */
+@Component
 @ServerEndpoint("/webSocket")
 public class WebSocket {
     private static int onlineCount = 0;
-    private static Map<String, WebSocket> clients = new ConcurrentHashMap<String, WebSocket>();
+    private static Map<Integer, WebSocket> clients = new ConcurrentHashMap<Integer, WebSocket>();
     private Session session;
-    private String username;
 
+    /**
+     *建立连接的时候被调用
+     */
     @OnOpen
-    public void onOpen( String username, Session session) throws IOException {
-        this.username = username;
+    public void onOpen( Session session) throws IOException {
         this.session = session;
         addOnlineCount();
-        clients.put(username, this);
+        clients.put(WebSocket.onlineCount,this);
         System.out.println("已连接");
     }
 
-    @OnClose
-    public void onClose() throws IOException {
-        clients.remove(username);
-        subOnlineCount();
-    }
-
+    /**
+     * 接收到客户端数据的时候被调用
+     * @param message 客户端发送来的数据
+     */
     @OnMessage
     public void onMessage(String message) throws IOException {
         JSONObject jsonTo = JSONObject.parseObject(message);
+
         System.out.println(jsonTo.getString("to") +":"+ jsonTo.getString("msg"));
+
         if (!jsonTo.getString("to").toLowerCase().equals("all")){
             sendMessageTo(jsonTo.getString("msg"), jsonTo.getString("to"));
         }else{
@@ -44,18 +47,36 @@ public class WebSocket {
         }
     }
 
+    /**
+     * 连接关闭的时候被调用的
+     */
+    @OnClose
+    public void onClose() throws IOException {
+//        clients.remove(username);
+        subOnlineCount();
+    }
+
+
+    /**
+     * 发生错误的时候执行的
+     */
     @OnError
     public void onError(Session session, Throwable error) {
         error.printStackTrace();
     }
 
+
+
+
+
+
     public void sendMessageTo(String message, String To) throws IOException {
         //session.getBasicRemote().sendText(message);
         //session.getAsyncRemote().sendText(message);
         for (WebSocket item : clients.values()) {
-            if (item.username.equals(To) ){
+//            if (item.username.equals(To) ){
                 item.session.getAsyncRemote().sendText(message);
-            }
+//            }
 
         }
     }
@@ -78,7 +99,7 @@ public class WebSocket {
         WebSocket.onlineCount--;
     }
 
-    public static synchronized Map<String, WebSocket> getClients() {
+    public static synchronized Map<Integer, WebSocket> getClients() {
         return clients;
     }
 
