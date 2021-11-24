@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.dao.SysDao">
+    <!--   通用的sql片段-->
+    <sql id="user_common">
+        SELECT u.id,
+               u.username,
+               u.password,
+               u.salt,
+               u.phone,
+               o.id as orgaid,
+               o.NAME AS organame,
+               r.id   as rId,
+               r.NAME AS rolename,
+               r.ext,
+               p.id   as pId,
+               p.NAME AS permname
+        FROM t_user u
+                 LEFT JOIN organize o ON o.id = u.orga_id
+                 LEFT JOIN t_user_role ur ON ur.userid = u.id
+                 LEFT JOIN t_role r ON r.id = ur.roleid
+                 LEFT JOIN t_role_perms rp ON rp.role_id = r.id
+                 LEFT JOIN t_perms p ON p.id = rp.perm_id
+    </sql>
+    <!--    用户登录sql-->
+    <resultMap id="user_map" type="com.zj.entity.UserManager">
+        <!--        用户信息-->
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
+        <result column="phone" property="phone"/>
+        <!--        用户所在的公司-->
+        <association property="o" javaType="com.zj.entity.Organize">
+            <id column="orgaid" property="id" />
+            <result column="organame" property="name"/>
+        </association>
+        <!--       用户____> 角色表____>角色实体集 -->
+        <collection property="roles" ofType="com.zj.entity.Role">
+            <id column="rid" property="id"/>
+            <result column="rolename" property="name"/>
+            <result column="ext" property="ext"/>
+            <!--         角色表____>权限表_____>权限实体集-->
+            <collection property="perms" ofType="com.zj.entity.Perm">
+                <id column="pid" property="id"/>
+                <result column="permname" property="name"/>
+                <result column="parentId" property="parentId"/>
+                <result column="path" property="path"/>
+                <result column="pext" property="ext"/>
+                <result column="icon" property="icon"/>
+<!--                对应的二级菜单-->
+                <collection property="children" ofType="com.zj.entity.Perm">
+                    <id column="ppid" property="id"/>
+                    <result column="ppermname" property="name"/>
+                    <result column="pparentId" property="parentId"/>
+                    <result column="ppath" property="path"/>
+                    <result column="ppext" property="ext"/>
+                    <result column="picon" property="icon"/>
+                </collection>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="userSelect" resultMap="user_map">
+        SELECT u.id,
+               u.username,
+               u.password,
+               u.salt,
+               u.phone,
+               o.id as orgaid,
+               o.NAME AS organame,
+               r.id   as rId,
+               r.NAME AS rolename,
+               r.ext,
+               p.id   as pId,
+               p.NAME AS permname,
+               p.parent_id as parentId,
+               p.path as path,
+               p.ext as pext,
+               p.icon as icon,
+
+               p1.id   as ppId,
+               p1.NAME AS ppermname,
+               p1.parent_id as pparentId,
+               p1.path as ppath,
+               p1.ext as ppext,
+               p1.icon as picon
+        FROM t_user u
+                 LEFT JOIN organize o ON o.id = u.orga_id
+                 LEFT JOIN t_user_role ur ON ur.userid = u.id
+                 LEFT JOIN t_role r ON r.id = ur.roleid
+                 LEFT JOIN t_role_perms rp ON rp.role_id = r.id
+                 LEFT JOIN t_perms p ON p.id = rp.perm_id
+                 left join  t_perms p1 ON p1.parent_id = p.id
+        where u.username = #{username}
+          and u.password = #{password}
+    </select>
+
+
+    <select id="userNameSelect" resultMap="user_map" >
+       <include refid="user_common"/>
+        where u.username = #{username}
+    </select>
+
+<!--    机构查询根据机构名称模糊查询，支持分页，page-->
+    <resultMap id="orga_type" type="com.zj.entity.Organize">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="parentId" property="parentId"/>
+        <result property="location" column="location"/>
+        <result column="orgaNumber" property="orgaNumber"/>
+        <result column="ext" property="ext"/>
+<!--        <collection property="type" ofType="com.zj.entity.OrgaType">-->
+<!--            -->
+<!--        </collection>-->
+        <association property="type" javaType="com.zj.entity.OrgaType">
+            <id property="id" column="typeId"/>
+            <result column="typeName" property="name"/>
+        </association>
+    </resultMap>
+
+    <select id="organizeSelect" resultMap="orga_type">
+        select o.id,
+            o.name,
+            o.parent_id as parentId,
+            o.location,
+            o.orga_number as orgaNumber,
+            o.ext,
+            ot.id as typeId,
+            ot.name as typeName
+        from organize o
+            left join orga_type ot on ot.id = o.type_id
+        where o.name like "%"#{name}"%"
+    </select>
+
+    <!--    机构插入-->
+    <insert id="organizeInsert">
+        insert into organize
+            (name, parent_id, type_id, location, orga_number, ext)
+        values (#{name}, #{parentId}, #{type.id}, #{location}, #{orgaNumber}, #{ext})
+    </insert>
+<!--    根据orgaid查询用户-->
+    <select id="userByOrgaIdSelect" resultMap="user_map">
+        SELECT u.id,
+               u.username,
+               u.password,
+               u.salt,
+               u.phone,
+               o.id as orgaid,
+               o.NAME AS organame,
+               r.id   as rId,
+               r.NAME AS rolename,
+               r.ext,
+               p.id   as pId,
+               p.NAME AS permname,
+               p.parent_id as parentId,
+               p.path as path,
+               p.ext as pext,
+               p.icon as icon,
+
+               p1.id   as ppId,
+               p1.NAME AS ppermname,
+               p1.parent_id as pparentId,
+               p1.path as ppath,
+               p1.ext as ppext,
+               p1.icon as picon
+        FROM t_user u
+                 LEFT JOIN organize o ON o.id = u.orga_id
+                 LEFT JOIN t_user_role ur ON ur.userid = u.id
+                 LEFT JOIN t_role r ON r.id = ur.roleid
+                 LEFT JOIN t_role_perms rp ON rp.role_id = r.id
+                 LEFT JOIN t_perms p ON p.id = rp.perm_id
+                 left join  t_perms p1 ON p1.parent_id = p.id
+        where u.orga_id = #{orgaId} and u.username like concat('%', #{username}, '%')
+    </select>
+
+<!--    查询除指定组织以外的所有用户-->
+    <select id="otherUserSelect" resultMap="user_map">
+        SELECT u.id,
+               u.username,
+               u.password,
+               u.salt,
+               u.phone,
+               o.id as orgaid,
+               o.NAME AS organame,
+               r.id   as rId,
+               r.NAME AS rolename,
+               r.ext,
+               p.id   as pId,
+               p.NAME AS permname,
+               p.parent_id as parentId,
+               p.path as path,
+               p.ext as pext,
+               p.icon as icon,
+
+               p1.id   as ppId,
+               p1.NAME AS ppermname,
+               p1.parent_id as pparentId,
+               p1.path as ppath,
+               p1.ext as ppext,
+               p1.icon as picon
+        FROM t_user u
+                 LEFT JOIN organize o ON o.id = u.orga_id
+                 LEFT JOIN t_user_role ur ON ur.userid = u.id
+                 LEFT JOIN t_role r ON r.id = ur.roleid
+                 LEFT JOIN t_role_perms rp ON rp.role_id = r.id
+                 LEFT JOIN t_perms p ON p.id = rp.perm_id
+                 left join  t_perms p1 ON p1.parent_id = p.id
+        where u.orga_id != #{orgaId} or u.orga_id is null and u.username like concat('%', #{key}, '%')
+    </select>
+
+    <!--    查询角色-->
+    <resultMap id="roleFind" type="com.zj.entity.Role">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="ext" property="ext"/>
+        <collection property="perms" ofType="com.zj.entity.Perm">
+            <id column="pid" property="id"/>
+            <result column="permsName" property="name"/>
+            <result column="parentId" property="parentId"/>
+            <result column="path" property="path"/>
+            <result column="pext" property="ext"/>
+            <result column="icon" property="icon"/>
+        </collection>
+    </resultMap>
+    <select id="roleSelect" resultMap="roleFind">
+        select r.id,
+               r.name,
+               r.ext,
+               p.id as pid,
+               p.name as permsName,
+               p.parent_id as parentId,
+               p.path as path,
+               p.ext as pext,p.icon as icon
+        from t_role r
+        left join t_role_perms trp on trp.role_id = r.id
+        left join t_perms p on p.id = trp.perm_id
+        where r.name like concat('%', #{roleName}, '%')
+    </select>
+
+    <!--    新增角色-->
+    <insert id="roleInsert">
+        insert into t_role
+            (name, ext)
+        values (#{name}, #{ext})
+    </insert>
+
+    <!--    查询所用的权限-->
+    <select id="permSelect" resultType="com.zj.entity.Perm">
+        select id, name,parent_id as parentId,path,ext,icon
+        from t_perms
+    </select>
+
+
+    <!--    角色权限添加-->
+    <insert id="rolePermInsert" parameterType="com.zj.entity.RolePerm">
+        insert into t_role_perms
+            (role_id, perm_id)
+        values (#{roleId}, #{permId})
+    </insert>
+<!--        删除所有对应的角色权限-->
+    <delete id="deleteRolePerm" >
+        delete from t_role_perms where role_id = #{roleId}
+    </delete>
+
+
+
+
+
+    <!--    删除角色-->
+
+    <select id="rolePermSelect" resultType="com.zj.entity.RolePerm">
+        select role_id as roleId,perm_id as permId
+        from t_role_perms
+        where role_id = #{id}
+    </select>
+    <select id="roleUserSelect" resultType="com.zj.entity.UserRole">
+        select userid,roleid
+        from t_user_role
+        where roleid = #{id}
+    </select>
+    <!--删除role_perm表中对应的关系-->
+    <delete id="rolePermDelete">
+        delete
+        from t_role_perms
+        where role_id = #{id}
+    </delete>
+    <!--    删除role_user中对应的关系-->
+    <delete id="roleUserDelete">
+        delete
+        from t_user_role
+        where roleid = #{id}
+    </delete>
+    <delete id="roleDelete">
+        delete
+        from t_role
+        where id = #{id}
+    </delete>
+
+
+
+    <!--    根据手机号或者是用户name模糊查询用户，key为null的时候会查询所有-->
+    <select id="userKeySelect" resultMap="user_map">
+       <include refid="user_common"/>
+        where u.username like concat(concat('%', #{key}), '%')
+           or u.phone like concat(concat('%', #{key}), '%')
+    </select>
+
+    <!--    根据id查询用户-->
+    <select id="userIdSelect" resultMap="user_map">
+        <include refid="user_common"/>
+        where u.id = #{id}
+    </select>
+
+    <!--    查询所有的用户-->
+    <select id="allUserSelect" resultMap="user_map">
+       <include refid="user_common"/>
+    </select>
+
+
+    <!--    新增用户-->
+    <insert id="userManagerInsert">
+        insert into t_user (username, password, salt, phone, orga_id)
+        values (#{username}, #{password}, #{salt}, #{phone}, #{orgaId})
+    </insert>
+    <select id="useridGet" resultType="Integer">
+        SELECT @@IDENTITY
+    </select>
+    <insert id="userRoleInsert">
+        insert into t_user_role (userid, roleid)
+        values (#{userid}, #{roleid})
+    </insert>
+
+
+    <!--    删除用户-->
+    <delete id="userDelete">
+        delete
+        from t_user
+        where id = #{id}
+    </delete>
+    <!-- 删除用户（用户拥有角色）-->
+    <delete id="userRoleDelete">
+        delete
+        from t_user_role
+        where userid = #{id}
+    </delete>
+
+
+    <!--    日志查询-->
+    <select id="logSelect" resultType="com.zj.entity.Log">
+        select id,
+               username,
+               operType,
+               moduleName,
+               result,
+               operTimer,
+               operContent
+        from log
+    </select>
+
+
+    <!--    更新用户根据id-->
+    <update id="userUpdate" parameterType="com.zj.entity.User">
+        update t_user
+        set username = #{username},
+            phone    = #{phone}
+        where id = #{id}
+    </update>
+    <!--   往user_role表中插入数据-->
+    <insert id="userInsertRole" parameterType="com.zj.entity.User">
+        insert into t_user_role (userid, roleid)
+        values (#{id}, #{roleId})
+    </insert>
+    <!--   先查询user_role中是否已经存在关系-->
+    <select id="userSelectRole" parameterType="com.zj.entity.User" resultType="com.zj.entity.UserRole">
+        select *
+        from t_user_role
+        where userid = #{id}
+          and roleid = #{roleId}
+    </select>
+
+    <update id="userUpdateOrgaId">
+        update t_user
+        set orga_id = #{orgaId}
+        where id = #{id}
+    </update>
+
+
+
+
+    <!--    修改密码-->
+    <update id="passwordModify">
+        update t_user
+        set password = #{password}
+        where id = #{id}
+    </update>
+
+<!--    删除权限-->
+    <delete id="permDelete">
+        delete from t_perms where id = #{id} or parent_id = #{id}
+    </delete>
+
+<!--    添加权限-->
+    <insert id="permInsert">
+        insert into t_perms (name,parent_id,path,ext,icon)
+        values (#{name},#{parentId},#{path},#{ext},#{icon})
+    </insert>
+
+<!--    修改权限-->
+    <update id="permModify">
+        update t_perms
+            set
+                name = #{name},
+                parent_id = #{parentId},
+                path = #{path},
+                ext = #{ext},
+                icon = #{icon}
+            where id = #{id}
+    </update>
+<!--    查询所有组织类型-->
+    <select id="orgaTypeSelect" resultType="com.zj.entity.OrgaType">
+        select * from orga_type
+    </select>
+
+<!--    给用户修改orga_id-->
+    <update id="userOrgaInsert">
+        update t_user
+            set
+                orga_id = #{orgaId}
+            where id = #{id}
+    </update>
+
+    <update id="userOrgaModify" >
+        update t_user set orga_id = null where id in
+        <foreach collection="idArrays" item="id" open="(" separator="," close=")">
+             #{id}
+        </foreach>
+
+    </update>
+<!--    修改组织信息-->
+    <update id="orgaModify">
+        update orga
+            set name = #{name},
+                type_id = #{type.id},
+                location = #{location},
+                orga_number = #{orgaNumber},
+                ext = #{ext}
+            where id = #{id}
+    </update>
+</mapper>

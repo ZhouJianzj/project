@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.dao.AssetDao">
+
+<!--    新增管道-->
+    <insert id="pipeInsert">
+        insert into t_pipe (productName,productCode,manuDate,productDate,pipeModel_id,sensor_id,item_id)
+        values (#{productName},#{productCode},#{manuDate},#{productDate},#{pipeModel.id},#{sensor.id},#{item.id})
+    </insert>
+
+<!--    删除管道-->
+    <delete id="pipeDelete">
+        delete from t_pipe where id = #{id}
+    </delete>
+
+<!--    修改管道-->
+    <update id="pipeModify">
+        update t_pipe
+            set
+                productName = #{productName},
+                productCode = #{productCode},
+                manuDate = #{manuDate},
+                productDate = #{productDate},
+                pipeModel_id = #{pipeModel.id},
+                sensor_id = #{sensor.id},
+                item_id = #{item.id}
+            where id = #{id}
+    </update>
+
+<!--    查询所有管道-->
+    <resultMap id="pipe" type="com.zj.entity.Pipe">
+        <id column="id" property="id"/>
+        <result property="productName" column="productName"/>
+        <result column="productCode" property="productCode"/>
+        <result column="manuDate" property="manuDate"/>
+        <result column="productDate" property="productDate"/>
+        <association property="pipeModel" javaType="com.zj.entity.PipeModel">
+            <id column="pmId" property="id"/>
+            <result column="pipeName" property="pipeName"/>
+            <result column="pipeNumber" property="pipeNumber"/>
+            <result column="pipeType" property="pipeType"/>
+            <result property="pipeIntroduce" column="pipeIntroduce"/>
+            <result column="pipePic" property="pipePic"/>
+            <result column="pipeManual" property="pipeManual"/>
+            <result column="createTime" property="createTime"/>
+        </association>
+        <association property="sensor" javaType="com.zj.entity.Sensor">
+            <id column="sid" property="id"/>
+            <result property="sensorName" column="sensorName"/>
+            <result property="sensorCode" column="sensorCode"/>
+            <result column="protocal" property="protocal"/>
+        </association>
+        <association property="item" javaType="com.zj.entity.Item">
+            <id column="iid" property="id"/>
+            <result column="iname" property="name"/>
+            <result property="number" column="number"/>
+            <result column="addr" property="addr"/>
+            <result column="phone" property="phone"/>
+            <result property="createTime" column="icreateTime"/>
+        </association>
+        <association property="organize" javaType="com.zj.entity.Organize">
+            <id column="oid" property="id"/>
+            <result column="oname" property="name"/>
+            <result column="parentId" property="parentId"/>
+            <result property="location" column="location"/>
+            <result column="orgaNumber" property="orgaNumber"/>
+            <result property="ext" column="ext"/>
+        </association>
+    </resultMap>
+    <select id="pipeSelect" resultMap="pipe">
+        select p.id,p.productName,
+            p.productCode,
+            p.manuDate,
+            p.productDate,
+            pm.id as pmId,
+            pm.pipeName,
+            pm.pipeNumber,
+            pm.pipeType,
+            pm.pipeIntroduce,
+            pm.pipePic,
+            pm.pipeManual,
+            pm.createTime,
+            s.id as sid,
+            s.sensorName,
+            s.sensorCode,
+            s.protocal,
+            i.id as iid,
+            i.name as iname,
+            i.number,
+            i.addr,
+            i.phone,
+            i.createTime as icreateTime,
+            o.id as oid,
+            o.name as oname,
+            o.parent_id as parentId,
+            o.location,
+            o.orga_number as orgaNumber,
+            o.ext
+        from t_pipe p
+        left join t_pipe_model pm on pm.id = p.pipeModel_id
+        left join t_sensor s on s.id = p.sensor_id
+        left join t_item i on i.id = p.item_id
+        left join organize o on o.id = p.orga_id
+        where p.productName like concat('%', #{key}, '%')
+            or pm.pipeName like concat('%', #{key}, '%')
+            or s.sensorName like concat('%', #{key}, '%')
+            or i.name like concat('%', #{key}, '%')
+            or o.name like concat('%', #{key}, '%')
+    </select>
+<!--    新增传感器-->
+    <insert id="insertSensorDao" parameterType="com.zj.entity.Sensor">
+        insert into  t_sensor (
+                               sensorName,
+                               sensorCode,
+                               protocal,
+                               sensorModel_id ,
+                               item_id  ,
+                               orga_id  )
+        values (
+                #{sensorName},
+                #{sensorCode},
+                #{protocal},
+                #{sensorModelId},
+                #{itemId},
+                #{orgaId}
+               )
+    </insert>
+
+<!--    删除传感器-->
+    <delete id="deleteSensorDao" >
+        delete from t_sensor where id = #{id}
+    </delete>
+
+<!--    查询传感器的结果集映射-->
+    <resultMap id="selectSensor" type="com.zj.entity.Sensor">
+        <id column="id" property="id"/>
+        <result column="sensorName" property="sensorName"/>
+        <result column="sensorCode" property="sensorCode"/>
+        <result column="protocal" property="protocal"/>
+<!--       sensor___>sensorModel -->
+        <association property="sensorModel" javaType="com.zj.entity.SensorModel">
+            <id column="sensorModelId" property="id"/>
+            <result column="deviceName" property="deviceName"/>
+            <result column="deviceType" property="deviceType"/>
+            <result column="deviceNumber" property="deviceNumber"/>
+            <result column="createTime" property="createTime"/>
+            <result column="protocol" property="protocol"/>
+            <result column="dataPointName" property="dataPointName"/>
+            <result column="lowThreshold" property="lowThreshold"/>
+            <result column="highThreshold" property="highThreshold"/>
+            <result column="dataPointExtra" property="dataPointExtra"/>
+        </association>
+<!--        sensor__>item  -->
+        <association property="item" javaType="com.zj.entity.Item">
+            <id column="itemId" property="id"/>
+            <result column="name" property="name"/>
+            <result column="number" property="number"/>
+            <result column="addr" property="addr"/>
+            <result column="phone" property="phone"/>
+            <result column="ItemCreateTime" property="createTime"/>
+          <!--  item ___> organize -->
+            <association property="organize"  javaType="com.zj.entity.Organize">
+                <id column="orgaId" property="id"/>
+                <result column="OName" property="name"/>
+                <result column="parentId" property="parentId"/>
+                <result column="location" property="location"/>
+                <result column="orgaNum" property="orgaNumber"/>
+                <result column="ext" property="ext"/>
+            </association>
+        </association>
+    </resultMap>
+    <select id="selectSensorDao" resultMap="selectSensor">
+        select
+            s.id,
+            s.sensorName,
+            s.sensorCode,
+            s.protocal,
+#               sensor
+            s.sensorModel_id as  sensorModelId ,
+               sm.deviceName,
+               sm.deviceType,
+               sm.deviceNumber,
+               sm.createTime,
+               sm.protocol,
+               sm.dataPointName,
+               sm.lowThreshold,
+               sm.highThreshold,
+               sm.dataPointExtra,
+#               item
+            s.item_id as itemId,
+               i.name,
+               i.number,
+               i.addr,
+               i.phone,
+               i.createTime as ItemCreateTime,
+#               organize
+               i.orga_id as orgaId,
+               o.name as OName,
+               o.parent_id as parentId,
+               o.type_id as typeId,
+               o.location ,
+               o.orga_number as orgaNum,
+               o.ext
+        from t_sensor s join t_sensor_model sm on  sm.id = s.sensorModel_id
+                        join t_item i on i.id = s.item_id
+                        join organize o on o.id = i.orga_id
+        where
+              s.id like concat('%',#{key},'%') or
+              s.sensorName like concat('%',#{key},'%') or
+              s.sensorCode like concat('%',#{key},'%') or
+              s.protocal like concat('%',#{key},'%')
+    </select>
+
+<!--    修改传感器-->
+    <update id="modifySensorDao" parameterType="com.zj.entity.Sensor">
+        update t_sensor
+        <set>
+            <if test="sensorName != null" >
+                sensorName = #{sensorName},
+            </if>
+            <if test="sensorCode != null">
+                sensorCode = #{sensorCode},
+            </if>
+            <if test="protocal != null">
+                protocal = #{protocal},
+            </if>
+            <if test="sensorModelId != null">
+                sensorModel_id = #{sensorModelId},
+            </if>
+            <if test="itemId != null">
+                item_id = #{itemId},
+            </if>
+            <if test="orgaId != null">
+                orga_id = #{orgaId}
+            </if>
+        </set>
+            where id = #{id}
+    </update>
+</mapper>
