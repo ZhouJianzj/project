@@ -257,16 +257,16 @@ public class SysController {
      * 根据orgaId查询用户
      * */
     @GetMapping("/user/orga")
-    public List<UserManager> selectUserByOrgaIdController(@RequestParam("orgaId") int orgaId,@RequestParam("username")String username){
-        return sysService.selectUserByOrgaIdService(orgaId,username);
+    public Page selectUserByOrgaIdController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo, @RequestParam(value = "pageSize", defaultValue = "8") String pageSize,@RequestParam("orgaId") int orgaId,@RequestParam("username")String username){
+        return MyPageHelper.myPageHelper(new Page(sysService.selectUserByOrgaIdService(orgaId, username),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
     }
 
     /**
      * 查询所有组织类型
      * */
     @GetMapping("/orgaType")
-    public List<OrgaType> selectOrgaTypeController(){
-        return sysService.selectOrgaTypeService();
+    public Page selectOrgaTypeController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo, @RequestParam(value = "pageSize", defaultValue = "8") String pageSize){
+        return MyPageHelper.myPageHelper(new Page(sysService.selectOrgaTypeService(),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
     }
 
     /**
@@ -289,8 +289,8 @@ public class SysController {
      * 查询除指定组织以外的所有员工
      * */
     @GetMapping("user/orgaId")
-    public List<User> selectUserOtherController(@RequestParam("orgaId") int orgaId, @Param("key")String key){
-        return sysService.selectUserOtherService(orgaId,key);
+    public Page selectUserOtherController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo, @RequestParam(value = "pageSize", defaultValue = "8") String pageSize,@RequestParam("orgaId") int orgaId, @Param("key")String key){
+        return MyPageHelper.myPageHelper(new Page(sysService.selectUserOtherService(orgaId,key),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
     }
 
     /**
