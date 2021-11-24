@@ -1,4 +1,4 @@
-package com.zj.monitormanager.sender;
+package com.zj.monitorManager.sender;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;

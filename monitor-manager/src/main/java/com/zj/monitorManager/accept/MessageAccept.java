@@ -1,4 +1,4 @@
-package com.zj.monitormanager.accept;
+package com.zj.monitorManager.accept;
 
 import org.springframework.stereotype.Component;
 

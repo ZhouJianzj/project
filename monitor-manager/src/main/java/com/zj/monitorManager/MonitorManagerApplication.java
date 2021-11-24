@@ -1,4 +1,4 @@
-package com.zj.monitormanager;
+package com.zj.monitorManager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
