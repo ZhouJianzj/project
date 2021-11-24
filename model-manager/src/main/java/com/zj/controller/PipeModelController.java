@@ -77,7 +77,7 @@ public class PipeModelController {
      * 必须满足上传三个文件，而且文件内容不允许为空
      */
     @PostMapping("pipeModel")
-    public CommonResponse filesUploadController( PipeModel pipeModel){
+    public CommonResponse filesUploadController(@RequestBody PipeModel pipeModel){
         return modelService.filesUploadService(pipeModel);
     }
 

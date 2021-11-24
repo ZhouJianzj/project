@@ -78,7 +78,6 @@ public class WebSocket {
         WebSocket.onlineCount--;
     }
 
-
     public static synchronized Map<String, WebSocket> getClients() {
         return clients;
     }

@@ -20,7 +20,7 @@
                     #{pipeIntroduce},
                     #{pipePic},
                     #{pipeManual},
-                    #{createTime}
+                    now()
                   )
     </insert>
 
