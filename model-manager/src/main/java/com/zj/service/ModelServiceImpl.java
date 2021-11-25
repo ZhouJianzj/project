@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -269,7 +270,29 @@ public class ModelServiceImpl implements ModelService {
      */
     @Override
     public List<PipeModel> findPipeModelsService(String key) {
-        return modelDao.PipeModelsSelect(key);
+        List<PipeModel> pipeModels = modelDao.PipeModelsSelect(key);
+        //存放绝对地址
+        ArrayList<String> strings = new ArrayList<>(3);
+        //存放相对地址
+        ArrayList<String> fileName = new ArrayList<>(3);
+        //存放文件名
+        ArrayList<String> fileRelativePath = new ArrayList<>(3);
+        for (PipeModel  pipeModel : pipeModels){
+            strings.add(pipeModel.getPipeIntroduce());
+            strings.add(pipeModel.getPipePic());
+            strings.add(pipeModel.getPipeManual());
+            for (String item:strings){
+                int e = item.indexOf("e");
+                int lastIndexOf = item.lastIndexOf("/");
+                fileName.add(item.substring(e + 2));
+                fileRelativePath.add(item.substring(lastIndexOf + 1));
+            }
+            pipeModel.setFileName(fileName);
+            pipeModel.setFileRelativePath(fileRelativePath);
+            strings.clear();
+        }
+
+        return pipeModels ;
     }
 
 }

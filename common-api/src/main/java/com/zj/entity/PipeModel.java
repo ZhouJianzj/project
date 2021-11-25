@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -32,4 +33,14 @@ public class PipeModel {
     private Date createTime;
 
     private MultipartFile[] files;
+
+    /**
+     * 文件名字
+     */
+    private ArrayList<String> fileName;
+
+    /**
+     *相对地址
+     */
+    private ArrayList<String> fileRelativePath;
 }
