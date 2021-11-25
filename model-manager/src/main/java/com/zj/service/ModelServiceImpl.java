@@ -70,41 +70,11 @@ public class ModelServiceImpl implements ModelService {
     }
 
     /**
-     * 多文件上传,实现管道添加
-     * 就是使用for循环一个一个保存
+     * 实现管道添加
      * @param pipeModel 管道模型对象
      * */
     @Override
     public CommonResponse<Boolean> filesUploadService(PipeModel pipeModel){
-//        MultipartFile[] files = pipeModel.getFiles();
-        //没有对应的文件就不能新增
-//        if (files.length < 3){
-//            System.out.println(files.length);
-//            return new CommonResponse<Boolean>(400,"上传材料不足！",false);
-//        }
-//        int count = 0;
-//        for(MultipartFile file : files){
-//            File hostFile = new File(FileUtil.generateFileName(rootPath,file.getOriginalFilename()));
-//            //记录
-//            count ++;
-//            if (!hostFile.exists()){
-//                hostFile.mkdirs();
-//            }
-//            try {
-//                file.transferTo(hostFile);
-//                //依次设值
-//                if (count == 1 ){
-//                      pipeModel.setPipeIntroduce(hostFile.getAbsolutePath());
-//                    System.out.println(pipeModel.getPipeIntroduce());
-//                }else if (count == 2){
-//                      pipeModel.setPipePic(hostFile.getAbsolutePath());
-//                }else if (count == 3){
-//                      pipeModel.setPipeManual(hostFile.getAbsolutePath());
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
         if (pipeModel.getPipePic() == null || "".equals(pipeModel.getPipePic()) ||
                  pipeModel.getPipeManual() == null || "".equals(pipeModel.getPipeManual()) ||
                 pipeModel.getPipeIntroduce() == null || "".equals(pipeModel.getPipeIntroduce()))
@@ -275,6 +245,12 @@ public class ModelServiceImpl implements ModelService {
 
     }
 
+    //存放绝对地址
+    ArrayList<String> strings = new ArrayList<>(3);
+    //存放相对地址
+    ArrayList<String> fileName = new ArrayList<>(3);
+    //存放文件名
+    ArrayList<String> fileRelativePath = new ArrayList<>(3);
     /**
      * 多字段查询支持模糊查询
      * @param key 关键字
@@ -283,13 +259,11 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public List<PipeModel> findPipeModelsService(String key) {
         List<PipeModel> pipeModels = modelDao.PipeModelsSelect(key);
-        //存放绝对地址
-        ArrayList<String> strings = new ArrayList<>(3);
-        //存放相对地址
-        ArrayList<String> fileName = new ArrayList<>(3);
-        //存放文件名
-        ArrayList<String> fileRelativePath = new ArrayList<>(3);
+
         for (PipeModel  pipeModel : pipeModels){
+            strings.clear();
+            fileName.clear();
+            fileRelativePath.clear();
             strings.add(pipeModel.getPipeIntroduce());
             strings.add(pipeModel.getPipePic());
             strings.add(pipeModel.getPipeManual());
@@ -301,13 +275,10 @@ public class ModelServiceImpl implements ModelService {
             }
             pipeModel.setFileName(fileName);
             pipeModel.setFileRelativePath(fileRelativePath);
-            strings.clear();
+
         }
 
         return pipeModels ;
     }
-
-
-
 
 }
