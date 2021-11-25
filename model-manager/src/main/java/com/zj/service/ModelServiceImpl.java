@@ -52,7 +52,8 @@ public class ModelServiceImpl implements ModelService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new CommonResponse(200,"上传文件成功！",FileUtil.pathToPath(hostFile.getAbsolutePath()));
+        return new CommonResponse(200,"上传文件成功！",
+                FileUtil.pathToPath(hostFile.getAbsolutePath()));
     }
 
     /**
@@ -122,7 +123,7 @@ public class ModelServiceImpl implements ModelService {
         if (!i.equals(id)){
             pipeModel =  modelDao.findPipeModelDao(id);
             i = pipeModel.getId();
-            System.out.println(pipeModel.toString() + "============");
+
         }
         //指定下载哪一个文件
         String absPath = null ;
