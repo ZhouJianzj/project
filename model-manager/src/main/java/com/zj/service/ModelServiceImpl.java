@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -231,7 +230,6 @@ public class ModelServiceImpl implements ModelService {
      * @return 返回删除是否成功
      */
     @Override
-    @Transactional
     public Boolean pipeModelDelete(String id) {
         //查询指定id的管道模型
         PipeModel pipeModelDao = modelDao.findPipeModelDao(id);
@@ -254,7 +252,8 @@ public class ModelServiceImpl implements ModelService {
                 }
         }
         //删除对管道对应的管道模型id
-        if (modelDao.pipeUpdateModelId(id) && modelDao.pipeModelDelete(id)){
+        if (modelDao.pipeModelDelete(id)){
+            modelDao.pipeUpdateModelId(id);
             return true;
         }else {
             return false;
