@@ -4,13 +4,8 @@ import com.zj.util.FileUtil;
 
 public class Test {
     public static void main(String[] args) {
-        System.out.println(FileUtil.generateFileName("D", "var"));
+        String path  = "D:\\var\\pipe\\2021-11-25\\5c8f639c10cb4ad0976bcd4db97146e2\\readme.jpg";
+        System.out.println(FileUtil.pathToPath(path));
 
-        int i  = 1;
-        int a = 1;
-        ++a;
-        i++;
-        System.out.println(i);
-        System.out.println(a);
     }
 }

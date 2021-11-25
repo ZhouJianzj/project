@@ -440,7 +440,7 @@
     </update>
 <!--    修改组织信息-->
     <update id="orgaModify">
-        update orga
+        update organize
             set name = #{name},
                 type_id = #{type.id},
                 location = #{location},

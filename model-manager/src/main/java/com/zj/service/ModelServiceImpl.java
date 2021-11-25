@@ -53,8 +53,7 @@ public class ModelServiceImpl implements ModelService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new CommonResponse(200,"上传文件成功！",
-                FileUtil.generateFileName(rootPath,file.getOriginalFilename()));
+        return new CommonResponse(200,"上传文件成功！",FileUtil.pathToPath(hostFile.getAbsolutePath()));
     }
 
     /**
