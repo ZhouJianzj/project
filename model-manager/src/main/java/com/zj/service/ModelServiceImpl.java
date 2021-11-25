@@ -245,37 +245,36 @@ public class ModelServiceImpl implements ModelService {
 
     }
 
-    //存放绝对地址
-    ArrayList<String> strings = new ArrayList<>(3);
-    //存放相对地址
-    ArrayList<String> fileName = new ArrayList<>(3);
-    //存放文件名
-    ArrayList<String> fileRelativePath = new ArrayList<>(3);
+
+
     /**
      * 多字段查询支持模糊查询
+     * 先获取所有数据库中的管道模型
+     * 获取管道的三个文件参数
+     * 截取相对地址和文件名 存放对象的属性中
      * @param key 关键字
      * @return 返回的结果集
      */
     @Override
     public List<PipeModel> findPipeModelsService(String key) {
         List<PipeModel> pipeModels = modelDao.PipeModelsSelect(key);
+        //存放绝对地址
+        ArrayList<String> strings = new ArrayList<>(3);
+
 
         for (PipeModel  pipeModel : pipeModels){
             strings.clear();
-            fileName.clear();
-            fileRelativePath.clear();
             strings.add(pipeModel.getPipeIntroduce());
             strings.add(pipeModel.getPipePic());
             strings.add(pipeModel.getPipeManual());
-            for (String item:strings){
+
+            for (String item : strings){
+                //获取matter第一次出现的下标，也就是m下标
                 int e = item.indexOf("matter");
                 int lastIndexOf = item.lastIndexOf("/");
-                fileName.add(item.substring(e));
-                fileRelativePath.add(item.substring(lastIndexOf + 1));
+                pipeModel.getFileRelativePath().add(item.substring(e));
+                pipeModel.getFileName().add(item.substring(lastIndexOf + 1));
             }
-            pipeModel.setFileName(fileName);
-            pipeModel.setFileRelativePath(fileRelativePath);
-
         }
 
         return pipeModels ;

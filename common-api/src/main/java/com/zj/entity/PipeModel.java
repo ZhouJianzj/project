@@ -37,10 +37,10 @@ public class PipeModel {
     /**
      * 文件名字
      */
-    private ArrayList<String> fileName;
+    private ArrayList<String> fileName = new ArrayList<>(3);
 
     /**
      *相对地址
      */
-    private ArrayList<String> fileRelativePath;
+    private ArrayList<String> fileRelativePath =  new ArrayList<>(3);
 }
