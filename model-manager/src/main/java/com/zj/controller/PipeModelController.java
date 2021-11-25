@@ -6,12 +6,14 @@ import com.zj.entity.Page;
 import com.zj.entity.PipeModel;
 import com.zj.service.ModelService;
 import com.zj.util.MyPageHelper;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 
 /**
  * @author zhoujian
@@ -134,5 +136,31 @@ public class PipeModelController {
                                                     @RequestParam(value = "pageSize",defaultValue = "8") String pageSize){
 
        return   MyPageHelper.myPageHelper(new Page(modelService.findPipeModelsService(key),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
+    }
+
+
+
+    @PostMapping("test")
+    public String uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest req) {
+        String tmp= RandomStringUtils.randomAlphanumeric(9);
+        System.out.println("tmp:" + tmp);
+
+        String realPath = req.getServletContext().getRealPath("/upload");
+        System.out.println("realPath:" + realPath);
+
+        File folder = new File(realPath);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        try {
+            file.transferTo(new File(folder,tmp));
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+        String url = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/upload/" +tmp;
+        System.out.println(url);
+        return tmp;
     }
 }
