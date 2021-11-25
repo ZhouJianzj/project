@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 public interface ModelService {
-    CommonResponse<Boolean> fileUploadService(MultipartFile file);
+    CommonResponse<Boolean> fileUploadService(MultipartFile file, HttpServletRequest req);
 
     CommonResponse<Boolean> filesUploadService(PipeModel pipeModel);
 

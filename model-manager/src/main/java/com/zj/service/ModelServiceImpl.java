@@ -5,7 +5,7 @@ import com.zj.entity.CommonResponse;
 import com.zj.entity.PipeModel;
 import com.zj.util.FileUtil;
 import org.apache.commons.io.FileUtils;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,8 +28,6 @@ public class ModelServiceImpl implements ModelService {
     @Resource
     private ModelDao modelDao;
 
-    @Value("${rootPath}")
-    private String rootPath;
 
     /**
      * 单文件上传，地址为 磁盘地址 + 日期 + uuid + 文件名字
@@ -37,13 +35,23 @@ public class ModelServiceImpl implements ModelService {
      * @return 返回操作结果
      */
     @Override
-    public CommonResponse<Boolean> fileUploadService(MultipartFile file) {
+    public CommonResponse<Boolean> fileUploadService(MultipartFile file, HttpServletRequest req) {
 
         if (file.isEmpty()){
             return new CommonResponse<>(400,"上传文件失败！",false);
         }
-        //本地文件地址
-        File hostFile = new File(FileUtil.generateFileName(rootPath,file.getOriginalFilename()));
+        //随机字符串
+        String tmp= RandomStringUtils.randomAlphanumeric(9);
+        //实际路径
+        String realPath = req.getServletContext().getRealPath("/matter/" + tmp + "/" );
+        //文件名字
+        String originalFilename = file.getOriginalFilename();
+        //文件的绝对路径
+        String absolutePath = realPath + originalFilename;
+
+
+        System.out.println(absolutePath);
+        File hostFile = new File(absolutePath);
         if (!hostFile.exists()){
             hostFile.mkdirs();
         }
@@ -53,8 +61,12 @@ public class ModelServiceImpl implements ModelService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new CommonResponse(200,"上传文件成功！",
-                FileUtil.pathToPath(hostFile.getAbsolutePath()));
+        //返回给前端的可访问地址
+        String url = req.getScheme() + "://" + req.getServerName() +
+                ":" + req.getServerPort() + "/matter/"+ tmp + "/" + originalFilename;
+
+        String[] path  = {FileUtil.pathToPath(absolutePath),url};
+        return new CommonResponse(200,"上传文件成功！",path);
     }
 
     /**
@@ -196,7 +208,7 @@ public class ModelServiceImpl implements ModelService {
                     file1.delete();
                 }
                 //存放文件
-                File hostFile = new File(FileUtil.generateFileName(rootPath,files[i].getOriginalFilename()));
+                File hostFile = new File(FileUtil.generateFileName("",files[i].getOriginalFilename()));
                 if (!hostFile.exists()){
                     hostFile.mkdirs();
                 }
@@ -282,9 +294,9 @@ public class ModelServiceImpl implements ModelService {
             strings.add(pipeModel.getPipePic());
             strings.add(pipeModel.getPipeManual());
             for (String item:strings){
-                int e = item.indexOf("e");
+                int e = item.indexOf("matter");
                 int lastIndexOf = item.lastIndexOf("/");
-                fileName.add(item.substring(e + 2));
+                fileName.add(item.substring(e));
                 fileRelativePath.add(item.substring(lastIndexOf + 1));
             }
             pipeModel.setFileName(fileName);

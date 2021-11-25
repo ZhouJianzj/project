@@ -70,8 +70,8 @@ public class PipeModelController {
      * 单文件上传
      */
     @PostMapping("upload")
-    public CommonResponse<Boolean> fileUploadController(@RequestParam("file") MultipartFile file){
-        return modelService.fileUploadService(file);
+    public CommonResponse<Boolean> fileUploadController(@RequestParam("file") MultipartFile file, HttpServletRequest req){
+        return modelService.fileUploadService(file,req);
     }
 
     /**
@@ -143,7 +143,6 @@ public class PipeModelController {
     @PostMapping("test")
     public String uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest req) {
         String tmp= RandomStringUtils.randomAlphanumeric(9);
-        System.out.println("tmp:" + tmp);
 
         String realPath = req.getServletContext().getRealPath("/upload");
         System.out.println("realPath:" + realPath);
