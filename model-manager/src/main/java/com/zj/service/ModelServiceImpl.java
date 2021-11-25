@@ -261,7 +261,6 @@ public class ModelServiceImpl implements ModelService {
         //存放绝对地址
         ArrayList<String> strings = new ArrayList<>(3);
 
-
         for (PipeModel  pipeModel : pipeModels){
             strings.clear();
             strings.add(pipeModel.getPipeIntroduce());
@@ -278,6 +277,40 @@ public class ModelServiceImpl implements ModelService {
         }
 
         return pipeModels ;
+    }
+
+    /**
+     * 修改管道加强版
+     * 前端传递管道模型对象
+     *  1、当三个文件属性为空的时候表示不修改
+     *  2、当三个文件属性有参数就先删除文件，文件保存通过单文件上传实现，然后保存前端传递来的新地址保存数据库，
+     * @param pipeModel 前端参数
+     * @return 返回操作是否成功
+     */
+    @Override
+    public Boolean pipeModelModifyService(PipeModel pipeModel) {
+        //获取已经存在模型
+        String id = pipeModel.getId();
+        PipeModel pipeModelDao = modelDao.findPipeModelDao(id);
+        String[] matters = {pipeModelDao.getPipeIntroduce(),pipeModelDao.getPipePic(),pipeModelDao.getPipeManual()};
+        //获取前端传递来的
+        String[] mattersV = {pipeModel.getPipeIntroduce(),pipeModel.getPipePic(),pipeModel.getPipeManual()};
+        //判断前端传递来是否为空
+        for (int i = 0; i < mattersV.length; i++) {
+            //不是空就先删除然
+            if (mattersV[i] != null || !"".equals(mattersV[i])){
+                File file = new File(matters[i]);
+                if (file.exists()){
+                    file.delete();
+                }
+            }
+        }
+        //更新数据库，sql中判空更新
+        if (modelDao.updatePipeModel(pipeModel)){
+            return true;
+        }else {
+            return false;
+        }
     }
 
 }

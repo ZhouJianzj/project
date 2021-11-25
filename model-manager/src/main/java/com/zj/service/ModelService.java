@@ -25,4 +25,6 @@ public interface ModelService {
     Boolean pipeModelDelete(String id);
 
     List<PipeModel> findPipeModelsService(String key);
+
+    Boolean pipeModelModifyService(PipeModel pipeModel);
 }

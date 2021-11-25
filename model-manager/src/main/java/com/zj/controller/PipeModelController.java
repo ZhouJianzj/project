@@ -112,6 +112,12 @@ public class PipeModelController {
         return  modelService.fileDeleteService(pipeModel);
     }
 
+    @PutMapping("pipeModelSuper")
+    public Boolean pipeModelModifyControllerT(PipeModel pipeModel){
+        return modelService.pipeModelModifyService(pipeModel);
+    }
+
+
 
     /**
      * 管道模型的删除
