@@ -23,7 +23,9 @@ com\zj\entity\CommonResponse.class
 com\zj\entity\Sensor.class
 com\zj\entity\OrgaType.class
 com\zj\entity\SensorModel.class
+com\zj\entity\Alarm.class
 com\zj\entity\Role.class
 com\zj\entity\UserRole.class
 com\zj\Test.class
+com\zj\entity\AlarmMon.class
 com\zj\entity\Pipe.class

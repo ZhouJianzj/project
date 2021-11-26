@@ -1,4 +1,5 @@
 D:\workspace\pipe-project\cloud-parent\common-api\src\main\java\com\zj\entity\PipeModel.java
+D:\workspace\pipe-project\cloud-parent\common-api\src\main\java\com\zj\entity\Alarm.java
 D:\workspace\pipe-project\cloud-parent\common-api\src\main\java\com\zj\config\CorsConfig.java
 D:\workspace\pipe-project\cloud-parent\common-api\src\main\java\com\zj\entity\Perm.java
 D:\workspace\pipe-project\cloud-parent\common-api\src\main\java\com\zj\util\MyPageHelper.java
@@ -26,4 +27,5 @@ D:\workspace\pipe-project\cloud-parent\common-api\src\main\java\com\zj\entity\Ro
 D:\workspace\pipe-project\cloud-parent\common-api\src\main\java\com\zj\interceptor\CommoInterceptor.java
 D:\workspace\pipe-project\cloud-parent\common-api\src\main\java\com\zj\entity\SensorModel.java
 D:\workspace\pipe-project\cloud-parent\common-api\src\main\java\com\zj\util\FileUtil.java
+D:\workspace\pipe-project\cloud-parent\common-api\src\main\java\com\zj\entity\AlarmMon.java
 D:\workspace\pipe-project\cloud-parent\common-api\src\main\java\com\zj\dao\LogDao.java

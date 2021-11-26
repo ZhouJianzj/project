@@ -113,7 +113,7 @@ public class PipeModelController {
     }
 
     @PutMapping("pipeModelSuper")
-    public Boolean pipeModelModifyControllerT(PipeModel pipeModel){
+    public Boolean pipeModelModifyControllerT(@RequestBody PipeModel pipeModel){
         return modelService.pipeModelModifyService(pipeModel);
     }
 
