@@ -26,7 +26,7 @@ public class AssetServiceImpl implements AssetService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public CommonResponse<Boolean> insertPipeService(Pipe pipe) {
         CommonResponse<Boolean> response = new CommonResponse<>();
-        if (assetDao.selectPipeBySensor(pipe.getSensor().getId()).size() == 0 && assetDao.selectSensor(pipe.getSensor().getId()).size() != 0) {
+        if (assetDao.selectPipeBySensor(pipe.getId(),pipe.getSensor().getId()).size() == 0 && assetDao.selectSensor(pipe.getSensor().getId()).size() != 0) {
             if (assetDao.pipeInsert(pipe)){
                 response.setMsg("新增成功");
                 response.setStatus(200);
@@ -60,7 +60,7 @@ public class AssetServiceImpl implements AssetService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public CommonResponse<Boolean> modifyPipeService(Pipe pipe) {
         CommonResponse<Boolean> response = new CommonResponse<>();
-        if (assetDao.selectPipeBySensor(pipe.getSensor().getId()).size() == 0 && assetDao.selectSensor(pipe.getSensor().getId()).size() != 0) {
+        if (assetDao.selectPipeBySensor(pipe.getId(),pipe.getSensor().getId()).size() == 0 && assetDao.selectSensor(pipe.getSensor().getId()).size() != 0) {
             if (assetDao.pipeModify(pipe)){
                 response.setStatus(200);
                 response.setMsg("修改成功");
@@ -123,6 +123,14 @@ public class AssetServiceImpl implements AssetService {
     @Override
     public Boolean modifySensorService(Sensor sensor) {
         return assetDao.modifySensorDao(sensor);
+    }
+
+    /**
+     * 查询所有未被使用的sensor
+     * */
+    @Override
+    public List<Sensor> findSensorIdService() {
+        return assetDao.SensorIdSelect();
     }
 
 

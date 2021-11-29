@@ -30,4 +30,6 @@ public interface AssetService {
     List<Sensor> findSensorService(String key);
 
     Boolean modifySensorService(Sensor sensor);
+
+    List<Sensor> findSensorIdService();
 }

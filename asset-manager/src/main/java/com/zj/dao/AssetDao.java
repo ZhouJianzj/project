@@ -29,7 +29,9 @@ public interface AssetDao {
 
     Boolean modifySensorDao(Sensor sensor);
 
-    List<Pipe> selectPipeBySensor(String id);
+    List<Pipe> selectPipeBySensor(int id ,String sensorId);
 
     List<Sensor> selectSensor(String id);
+
+    List<Sensor> SensorIdSelect();
 }
