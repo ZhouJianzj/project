@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.monitorManager.dao.AlarmDao">
+
+<!--    插入报警信息，如果sensor_id存在则变为修改-->
+    <insert id="insertAlarm" parameterType="com.zj.monitorManager.entity.Alarm">
+        insert into
+	        t_alarm(sensor_id, currentValue, alarmMsg,isHandled)
+        VALUES
+            (#{sensorId},#{currentValue},#{alarmMsg},#{isHandled})
+        on duplicate key update
+ 	        currentValue=#{currentValue},alarmMsg=#{alarmMsg},alarmTime=now()
+    </insert>
+
+
+</mapper>
