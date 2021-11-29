@@ -6,8 +6,8 @@
 
 <!--    新增管道-->
     <insert id="pipeInsert">
-        insert into t_pipe (productName,productCode,manuDate,productDate,pipeModel_id,sensor_id,item_id)
-        values (#{productName},#{productCode},#{manuDate},#{productDate},#{pipeModel.id},#{sensor.id},#{item.id})
+        insert into t_pipe (productName,productCode,manuDate,productDate,pipeModel_id,sensor_id,item_id,orga_id)
+        values (#{productName},#{productCode},#{manuDate},#{productDate},#{pipeModel.id},#{sensor.id},#{item.id},#{organize.id})
     </insert>
 
 <!--    删除管道-->
@@ -25,7 +25,8 @@
                 productDate = #{productDate},
                 pipeModel_id = #{pipeModel.id},
                 sensor_id = #{sensor.id},
-                item_id = #{item.id}
+                item_id = #{item.id},
+                orga_id = #{organize.id}
             where id = #{id}
     </update>
 
