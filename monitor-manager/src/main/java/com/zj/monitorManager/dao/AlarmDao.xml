@@ -7,11 +7,12 @@
 <!--    插入报警信息，如果sensor_id存在则变为修改-->
     <insert id="insertAlarm" parameterType="com.zj.monitorManager.entity.Alarm">
         insert into
-	        t_alarm(sensor_id, currentValue, alarmMsg,isHandled)
+	        t_alarm(sensor_id, currentValue, alarmMsg,isHandled,alarmTime)
         VALUES
-            (#{sensorId},#{currentValue},#{alarmMsg},#{isHandled})
+            (#{sensorId},#{currentValue},#{alarmMsg},#{isHandled},#{alarmTime})
         on duplicate key update
- 	        currentValue=#{currentValue},alarmMsg=#{alarmMsg},alarmTime=now()
+ 	        currentValue=#{currentValue},isHandled=#{isHandled},
+                                alarmMsg=#{alarmMsg},alarmTime=now()
     </insert>
 
 

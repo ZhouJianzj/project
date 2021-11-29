@@ -27,11 +27,16 @@ public class MessageAccept {
         System.out.println("接收到的消息为--------->" +  message);
 
         //如果是温度传感器并且温度大于75°的时候就报警就写入到数据库
-//        if (message.getSensorId() == 1 &&
-//                Integer.parseInt(message.getCurrentValue()) > 75){
-//            message.setAlarmMsg("温度异常！当前温度:" + message.getCurrentValue() + "°");
-//            Boolean b =  alarmService.insertAlarm(message);
-//        }
+        if (message.getSensorModelId() == 1 &&
+                Integer.parseInt(message.getCurrentValue()) > 75){
+            message.setAlarmMsg("温度异常！当前温度:" + message.getCurrentValue() + "°");
+            Boolean b =  alarmService.insertAlarm(message);
+        }
+        if (message.getSensorModelId() == 2 &&
+                Integer.parseInt(message.getCurrentValue()) > 50){
+            message.setAlarmMsg("压力异常！当前压力:" + message.getCurrentValue() + "MPA");
+            Boolean b =  alarmService.insertAlarm(message);
+        }
 
     }
 

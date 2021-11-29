@@ -1,6 +1,5 @@
 package com.zj.monitorManager.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +20,8 @@ public class Alarm implements Serializable {
     int id;
 
     int sensorId;
+
+    int sensorModelId;
 
     String currentValue;
 
