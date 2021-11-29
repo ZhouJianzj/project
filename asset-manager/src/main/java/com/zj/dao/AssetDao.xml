@@ -29,7 +29,13 @@
                 orga_id = #{organize.id}
             where id = #{id}
     </update>
+    <select id="selectPipeBySensor" resultType="com.zj.entity.Pipe">
+        select * from t_pipe where sensor_id = #{sensor.id} and id &lt;&gt; #{id}
+    </select>
 
+    <select id="selectSensor" resultType="com.zj.entity.Sensor">
+        select * from t_sensor where id = #{sensor.id}
+    </select>
 <!--    查询所有管道-->
     <resultMap id="pipe" type="com.zj.entity.Pipe">
         <id column="id" property="id"/>

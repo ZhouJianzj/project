@@ -5,6 +5,8 @@ import com.zj.entity.CommonResponse;
 import com.zj.entity.Pipe;
 import com.zj.entity.Sensor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,15 +23,23 @@ public class AssetServiceImpl implements AssetService {
     private AssetDao assetDao;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public CommonResponse<Boolean> insertPipeService(Pipe pipe) {
         CommonResponse<Boolean> response = new CommonResponse<>();
-        if (assetDao.pipeInsert(pipe)){
-            response.setMsg("新增成功");
-            response.setStatus(200);
+        if (assetDao.selectPipeBySensor(pipe.getSensor().getId()).size() == 0 && assetDao.selectSensor(pipe.getSensor().getId()).size() != 0) {
+            if (assetDao.pipeInsert(pipe)){
+                response.setMsg("新增成功");
+                response.setStatus(200);
+            }else {
+                response.setMsg("新增失败");
+                response.setStatus(400);
+            }
         }else {
-            response.setMsg("新增失败");
             response.setStatus(400);
+            response.setMsg("传感器已被使用或传感器不存在");
         }
+
+
         return response;
     }
 
@@ -47,15 +57,22 @@ public class AssetServiceImpl implements AssetService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public CommonResponse<Boolean> modifyPipeService(Pipe pipe) {
         CommonResponse<Boolean> response = new CommonResponse<>();
-        if (assetDao.pipeModify(pipe)){
-            response.setStatus(200);
-            response.setMsg("修改成功");
+        if (assetDao.selectPipeBySensor(pipe.getSensor().getId()).size() == 0 && assetDao.selectSensor(pipe.getSensor().getId()).size() != 0) {
+            if (assetDao.pipeModify(pipe)){
+                response.setStatus(200);
+                response.setMsg("修改成功");
+            }else {
+                response.setStatus(400);
+                response.setMsg("修改失败");
+            }
         }else {
             response.setStatus(400);
-            response.setMsg("修改失败");
+            response.setMsg("传感器已被使用或传感器不存在");
         }
+
         return response;
     }
 
