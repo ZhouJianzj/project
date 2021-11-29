@@ -91,9 +91,16 @@ public class AssetController {
     @GetMapping("sensor")
     public Page findSensorController(@RequestParam("key") String key
             ,@RequestParam(value = "pageNo",defaultValue = "1") String pageNo,
-             @RequestParam(value = "pageSize",defaultValue = "8")                                String pageSize){
+             @RequestParam(value = "pageSize",defaultValue = "8") String pageSize){
         return MyPageHelper.myPageHelper(new Page(assetService.findSensorService(key),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
 
+    }
+    /**
+     * 查询为被使用的sensor
+     * */
+    @GetMapping("sensorId")
+    public List<Sensor> findSensorIdController(){
+        return assetService.findSensorIdService();
     }
 
     /**

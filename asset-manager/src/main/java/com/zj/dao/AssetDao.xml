@@ -30,11 +30,11 @@
             where id = #{id}
     </update>
     <select id="selectPipeBySensor" resultType="com.zj.entity.Pipe">
-        select * from t_pipe where sensor_id = #{sensor.id} and id &lt;&gt; #{id}
+        select * from t_pipe where sensor_id = #{sensorId} and id &lt;&gt; #{id}
     </select>
 
     <select id="selectSensor" resultType="com.zj.entity.Sensor">
-        select * from t_sensor where id = #{sensor.id}
+        select * from t_sensor where id = #{id}
     </select>
 <!--    查询所有管道-->
     <resultMap id="pipe" type="com.zj.entity.Pipe">
@@ -218,6 +218,11 @@
               s.sensorName like concat('%',#{key},'%') or
               s.sensorCode like concat('%',#{key},'%') or
               s.protocal like concat('%',#{key},'%')
+    </select>
+
+<!--    查询未被使用的sensor-->
+    <select id="SensorIdSelect" resultType="com.zj.entity.Sensor">
+        select * from t_sensor s where s.id not in (select p.sensor_id from t_pipe p)
     </select>
 
 <!--    修改传感器-->
