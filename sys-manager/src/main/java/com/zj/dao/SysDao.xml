@@ -207,7 +207,7 @@
                  LEFT JOIN t_role_perms rp ON rp.role_id = r.id
                  LEFT JOIN t_perms p ON p.id = rp.perm_id
                  left join  t_perms p1 ON p1.parent_id = p.id
-        where u.orga_id != #{orgaId} or u.orga_id is null and u.username like concat('%', #{key}, '%')
+        where u.username like concat('%', #{key}, '%') and (u.orga_id != #{orgaId} or u.orga_id is null )
     </select>
 
     <!--    查询角色-->
