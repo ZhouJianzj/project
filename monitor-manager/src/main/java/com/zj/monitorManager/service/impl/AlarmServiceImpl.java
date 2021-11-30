@@ -24,11 +24,6 @@ public class AlarmServiceImpl  implements AlarmService {
     }
 
     @Override
-    public List<SensorModel> selectSensorModel() {
-        return alarmDao.selectSensorModel();
-    }
-
-    @Override
     public List<Sensor> selectSensor() {
         return alarmDao.selectSensor();
     }
@@ -38,8 +33,4 @@ public class AlarmServiceImpl  implements AlarmService {
         return alarmDao.selectSensorModelById(sensorModelId);
     }
 
-    @Override
-    public Sensor selectSensorById(int sensorId) {
-        return alarmDao.selectSensorById(sensorId);
-    }
 }

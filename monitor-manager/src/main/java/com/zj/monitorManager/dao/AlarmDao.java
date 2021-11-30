@@ -17,11 +17,7 @@ public interface AlarmDao {
 
     Boolean insertAlarm(Alarm message);
 
-    List<SensorModel> selectSensorModel();
-
     List<Sensor> selectSensor();
 
     SensorModel selectSensorModelById(int sensorModelId);
-
-    Sensor selectSensorById(int sensorId);
 }

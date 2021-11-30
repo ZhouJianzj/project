@@ -15,10 +15,6 @@
                                 alarmMsg=#{alarmMsg},alarmTime=now()
     </insert>
 
-
-    <select id="selectSensorModel" resultType="com.zj.monitorManager.entity.SensorModel">
-        select * from t_sensor_model
-    </select>
     <resultMap id="sensor" type="com.zj.monitorManager.entity.Sensor">
         <id column="id" property="id"/>
         <result column="sensorName" property="sensorName"/>
@@ -44,8 +40,5 @@
     </select>
     <select id="selectSensorModelById" resultType="com.zj.monitorManager.entity.SensorModel">
         select * from t_sensor_model where id = #{sensorModelId}
-    </select>
-    <select id="selectSensorById" resultType="com.zj.monitorManager.entity.Sensor">
-        select sensorModel_id from t_sensor where id = #{sensorId}
     </select>
 </mapper>

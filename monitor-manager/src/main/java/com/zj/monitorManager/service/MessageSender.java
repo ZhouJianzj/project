@@ -36,7 +36,6 @@ public class MessageSender {
      *           温度传感器模型 id = 1、压力传感器模型  id = 2
      *       2、需要生产currentValue、alarmMsg、alarmTime
      */
-//    @Transactional
     public  void sendMessage(String topicName, Alarm message){
         //创建定时任务线程池
         ScheduledExecutorService pool = Executors.newScheduledThreadPool(5);
