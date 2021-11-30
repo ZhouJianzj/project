@@ -30,4 +30,6 @@ public class Alarm implements Serializable {
     Boolean isHandled;
 
     Date alarmTime;
+
+
 }

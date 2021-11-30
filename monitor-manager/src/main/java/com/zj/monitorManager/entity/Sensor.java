@@ -24,6 +24,6 @@ public class Sensor implements Serializable {
     private String orgaId;
 
     private SensorModel sensorModel;
-    private Item item;
+
 
 }

@@ -47,6 +47,7 @@ public class MessageSender {
 
                 //随机获取一个传感器
                 Sensor sensor = sensors.get((int) (Math.random()*sensorCount));
+                //随机生产一个报警信息
                 message.setSensorId(Integer.parseInt(sensor.getId()));
                 message.setSensorModelId(sensor.getSensorModel().getId());
                 message.setIsHandled(false);

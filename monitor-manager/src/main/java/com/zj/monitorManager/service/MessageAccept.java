@@ -25,8 +25,8 @@ public class MessageAccept {
     public void acceptMessage(ConsumerRecord msg){
         //获取value强转为目标对象
         Alarm message = (Alarm) msg.value();
-
         System.out.println("接收到的消息为--------->" +  message);
+
         //根据传感器模型id查询传感器模型
         SensorModel sensorModel = alarmService.
                 selectSensorModelById(message.getSensorModelId());
