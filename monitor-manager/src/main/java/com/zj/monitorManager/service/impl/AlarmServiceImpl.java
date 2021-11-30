@@ -2,10 +2,13 @@ package com.zj.monitorManager.service.impl;
 
 import com.zj.monitorManager.dao.AlarmDao;
 import com.zj.monitorManager.entity.Alarm;
+import com.zj.monitorManager.entity.Sensor;
+import com.zj.monitorManager.entity.SensorModel;
 import com.zj.monitorManager.service.AlarmService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author zhoujian
@@ -18,5 +21,25 @@ public class AlarmServiceImpl  implements AlarmService {
     @Override
     public Boolean insertAlarm(Alarm message) {
         return alarmDao.insertAlarm(message);
+    }
+
+    @Override
+    public List<SensorModel> selectSensorModel() {
+        return alarmDao.selectSensorModel();
+    }
+
+    @Override
+    public List<Sensor> selectSensor() {
+        return alarmDao.selectSensor();
+    }
+
+    @Override
+    public SensorModel selectSensorModelById(int sensorModelId) {
+        return alarmDao.selectSensorModelById(sensorModelId);
+    }
+
+    @Override
+    public Sensor selectSensorById(int sensorId) {
+        return alarmDao.selectSensorById(sensorId);
     }
 }

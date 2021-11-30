@@ -1,11 +1,15 @@
 package com.zj.monitorManager.service;
 
 import com.zj.monitorManager.entity.Alarm;
+import com.zj.monitorManager.entity.Sensor;
+import com.zj.monitorManager.entity.SensorModel;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author zhoujian
@@ -24,18 +28,13 @@ public class MessageAccept {
     public void acceptMessage(ConsumerRecord msg){
         //获取value强转为目标对象
         Alarm message = (Alarm) msg.value();
-        System.out.println("接收到的消息为--------->" +  message);
 
-        //如果是温度传感器并且温度大于75°的时候就报警就写入到数据库
-        if (message.getSensorModelId() == 1 &&
-                Integer.parseInt(message.getCurrentValue()) > 75){
-            message.setAlarmMsg("温度异常！当前温度:" + message.getCurrentValue() + "°");
-            Boolean b =  alarmService.insertAlarm(message);
-        }
-        if (message.getSensorModelId() == 2 &&
-                Integer.parseInt(message.getCurrentValue()) > 50){
-            message.setAlarmMsg("压力异常！当前压力:" + message.getCurrentValue() + "MPA");
-            Boolean b =  alarmService.insertAlarm(message);
+        System.out.println("接收到的消息为--------->" +  message);
+        //根据传感器模型id查询传感器模型
+        SensorModel sensorModel = alarmService.selectSensorModelById(message.getSensorModelId());
+        if (Integer.parseInt(message.getCurrentValue()) > sensorModel.getHighThreshold() || Integer.parseInt(message.getCurrentValue()) < sensorModel.getLowThreshold()){
+            message.setAlarmMsg(sensorModel.getDataPointName() + "异常！当前" + sensorModel.getDataPointName() + "：" + message.getCurrentValue());
+            Boolean insertAlarm = alarmService.insertAlarm(message);
         }
 
     }
