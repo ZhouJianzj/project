@@ -19,17 +19,19 @@ public class Alarm implements Serializable {
 
 //    int id;
 
-    int sensorId;
+    private int sensorId;
 
-    int sensorModelId;
+    private int sensorModelId;
 
-    String currentValue;
+    private String currentValue;
 
-    String alarmMsg;
+    private String alarmMsg;
 
-    Boolean isHandled;
+    private Boolean isHandled;
 
-    Date alarmTime;
+    private Date alarmTime;
+
+    private Sensor sensor;
 
 
 }

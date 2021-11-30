@@ -15,12 +15,19 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Sensor implements Serializable {
-    private String id;
+
+    private int id;
+
     private String sensorName;
+
     private String sensorCode;
+
     private String protocal;
+
     private String sensorModelId;
+
     private String itemId;
+
     private String orgaId;
 
     private SensorModel sensorModel;
