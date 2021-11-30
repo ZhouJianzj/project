@@ -6,6 +6,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 /**
  * @author zhoujian
@@ -16,6 +17,9 @@ public class MessageAccept {
     @Resource
     private AlarmService alarmService;
 
+    @Resource
+    private WebSocketService webSocketService;
+
     /**
      * 消费消息
      * @param msg 根据控制台发现的kafka给消费者的对象，这里转换
@@ -24,8 +28,16 @@ public class MessageAccept {
     public void acceptMessage(ConsumerRecord msg){
         //获取value强转为目标对象
         Alarm message = (Alarm) msg.value();
-        System.out.println("接收到的消息为--------->" +  message);
-
+        System.out.println("接收到的消息为--------->" +  message.getSensorId());
+        System.out.println(WebSocketService.isConnected);
+        //webSocket推送
+        if (WebSocketService.isConnected){
+            try {
+                webSocketService.sendMessage(message.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if (Integer.parseInt(message.getCurrentValue()) >
         //获取报警信息中的传感器中的传感器模型报警值的最高指标
                 message.getSensor().getSensorModel().getHighThreshold()

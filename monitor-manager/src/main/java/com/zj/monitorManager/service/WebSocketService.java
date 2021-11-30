@@ -1,0 +1,65 @@
+package com.zj.monitorManager.service;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.websocket.OnClose;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
+import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
+
+/**
+ * @author zhoujian
+ */
+
+
+@ServerEndpoint("/alarm")
+@RestController
+public class WebSocketService {
+    public static Boolean isConnected = false;
+
+    public static Session session = null;
+
+
+    /**
+     * 建立连接。
+     * 建立连接时入参为session
+     */
+    @OnOpen
+    public void onOpen(Session s){
+        session = s;
+        isConnected = true;
+        System.out.println("建立了连接"+ session.getId());
+    }
+
+    /**
+     * 关闭连接
+     */
+    @OnClose
+    public void onClose(){
+        System.out.println("连接关闭"+ session.getId());
+    }
+
+    /**
+     * 接收前端传过来的数据。
+     * 虽然在实现推送逻辑中并不需要接收前端数据，但是作为一个webSocket的教程或叫备忘，还是将接收数据的逻辑加上了。
+     */
+    @OnMessage
+    public void onMessage( String message){
+        System.out.println(message + "------from------" + session.getId());
+//        测试是否可以想客户端发送消息
+//        try {
+//            sendMessage();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    /**
+     * 服务器主动的发送消息到客户端
+     */
+    public void sendMessage(String alarm) throws IOException {
+            session.getBasicRemote().sendText(alarm);
+    }
+}

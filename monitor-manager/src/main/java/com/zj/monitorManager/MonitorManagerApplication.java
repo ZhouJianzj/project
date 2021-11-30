@@ -15,4 +15,5 @@ public class MonitorManagerApplication {
         SpringApplication.run(MonitorManagerApplication.class, args);
     }
 
+
 }
