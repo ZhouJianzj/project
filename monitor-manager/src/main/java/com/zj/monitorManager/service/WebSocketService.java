@@ -17,6 +17,7 @@ import java.io.IOException;
 @ServerEndpoint("/alarm")
 @RestController
 public class WebSocketService {
+
     public static Boolean isConnected = false;
 
     public static Session session = null;
@@ -39,6 +40,9 @@ public class WebSocketService {
     @OnClose
     public void onClose(){
         System.out.println("连接关闭"+ session.getId());
+        isConnected = false;
+        session = null;
+
     }
 
     /**

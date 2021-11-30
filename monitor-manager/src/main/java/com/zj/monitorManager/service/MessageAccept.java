@@ -28,9 +28,9 @@ public class MessageAccept {
     public void acceptMessage(ConsumerRecord msg){
         //获取value强转为目标对象
         Alarm message = (Alarm) msg.value();
-        System.out.println("接收到的消息为--------->" +  message.getSensorId());
-        System.out.println(WebSocketService.isConnected);
-        //webSocket推送
+        System.out.println("接收到的消息为--------->" +  message.getAlarmTime());
+
+        //webSocket推送,模拟的所有消息
         if (WebSocketService.isConnected){
             try {
                 webSocketService.sendMessage(message.toString());
