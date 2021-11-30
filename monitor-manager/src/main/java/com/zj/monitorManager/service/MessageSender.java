@@ -41,9 +41,7 @@ public class MessageSender {
         pool.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                //生产不同传感器的不同报警消息，根据传感器的model区分
-                //随机生成传感器模型id
-                //根据传感器个数进行随机生成
+
 
                 //随机获取一个传感器
                 Sensor sensor = sensors.get((int) (Math.random()*sensorCount));

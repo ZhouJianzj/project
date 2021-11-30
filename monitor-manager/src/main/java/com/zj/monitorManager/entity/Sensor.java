@@ -25,5 +25,4 @@ public class Sensor implements Serializable {
 
     private SensorModel sensorModel;
 
-
 }

@@ -35,7 +35,14 @@
         </collection>
     </resultMap>
     <select id="selectSensor" resultMap="sensor">
-        select s.id,s.sensorName,s.sensorModel_id,sm.id as mid,sm.deviceType,sm.dataPointName,sm.lowThreshold,sm.highThreshold
+        select s.id,
+               s.sensorName,
+               s.sensorModel_id,
+               sm.id as mid,
+               sm.deviceType,
+               sm.dataPointName,
+               sm.lowThreshold,
+               sm.highThreshold
         from t_sensor s left join t_sensor_model sm on sm.id = s.sensorModel_id
     </select>
 
