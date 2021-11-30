@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Alarm implements Serializable {
 
-    int id;
+//    int id;
 
     int sensorId;
 
