@@ -19,4 +19,6 @@ public interface ItemService {
     CommonResponse<Boolean> insertItemService(Item item);
 
     CommonResponse<Item> modifyItemService(Item item);
+
+    List<Item> selectItemByOrgaIdService(String orgaId);
 }

@@ -8,6 +8,8 @@ import com.zj.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author HuXinJie
  * @version 1.0
@@ -35,6 +37,15 @@ public class ItemController {
         return new PageInfo<Item>(itemService.selectItemSelect(key));
     }
 
+    /**
+     * 根据orga——id查询项目
+     * @param orgaId 组织id
+     * @return 返回项目列表对象
+     * */
+    @GetMapping("item/orgaId")
+    public List<Item> selectItemByOrgaIdController(@RequestParam(value = "orgaId") String orgaId){
+        return itemService.selectItemByOrgaIdService(orgaId);
+    }
     /**
      * 删除项目
      * @param id 项目id

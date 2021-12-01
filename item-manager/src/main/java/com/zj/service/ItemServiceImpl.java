@@ -76,4 +76,13 @@ public class ItemServiceImpl implements ItemService {
         }
         return response;
     }
+
+    /**
+     * 根据orga_id查询项目
+     * @param orgaId
+     * */
+    @Override
+    public List<Item> selectItemByOrgaIdService(String orgaId) {
+        return itemDao.itemByOrgaIdSelect(orgaId);
+    }
 }
