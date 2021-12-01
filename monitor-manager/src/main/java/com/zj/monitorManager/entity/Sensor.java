@@ -24,12 +24,16 @@ public class Sensor implements Serializable {
 
     private String protocal;
 
-    private String sensorModelId;
+//    private String sensorModelId;
 
-    private String itemId;
+//    private String itemId;
 
-    private String orgaId;
+//    private String orgaId;
 
     private SensorModel sensorModel;
+
+    private Item item;
+
+
 
 }

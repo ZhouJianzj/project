@@ -21,7 +21,7 @@ public class Alarm implements Serializable {
 
     private int sensorId;
 
-    private int sensorModelId;
+//    private int sensorModelId;
 
     private String currentValue;
 

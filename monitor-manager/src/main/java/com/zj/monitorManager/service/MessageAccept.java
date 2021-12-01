@@ -28,29 +28,31 @@ public class MessageAccept {
     public void acceptMessage(ConsumerRecord msg){
         //获取value强转为目标对象
         Alarm message = (Alarm) msg.value();
-        System.out.println("接收到的消息为--------->" +  message.getAlarmTime());
+        System.out.println("接收到的消息为--------->" +  message);
 
-        //webSocket推送,模拟的所有消息
-        if (WebSocketService.isConnected){
-            try {
-                webSocketService.sendMessage(message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        if (Integer.parseInt(message.getCurrentValue()) >
-        //获取报警信息中的传感器中的传感器模型报警值的最高指标
-                message.getSensor().getSensorModel().getHighThreshold()
-                ||
-            Integer.parseInt(message.getCurrentValue()) <
-        //获取报警信息中的传感器中的传感器模型报警值的最低指标
-                message.getSensor().getSensorModel().getLowThreshold()){
+
+        if (
+            //获取报警信息中的传感器中的传感器模型报警值的最高指标
+            Integer.parseInt(message.getCurrentValue()) > message.getSensor().getSensorModel().getHighThreshold()
+            ||
+            //获取报警信息中的传感器中的传感器模型报警值的最低指标
+            Integer.parseInt(message.getCurrentValue()) < message.getSensor().getSensorModel().getLowThreshold())
+        {
             String dataPointName = message.getSensor().getSensorModel().getDataPointName();
             message.setAlarmMsg(
                     dataPointName + "异常!当前" + dataPointName + ":" +
                     message.getCurrentValue());
             message.setSensorId(message.getSensor().getId());
-        //异常数据插入数据库
+
+            //webSocket推送有问题的数据
+            if (WebSocketService.isConnected){
+                try {
+                    webSocketService.sendMessage(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            //异常数据插入数据库
             alarmService.insertAlarm(message);
         }
     }

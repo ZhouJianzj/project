@@ -33,7 +33,7 @@ public class MessageSender {
         //创建定时任务线程池
         ScheduledExecutorService pool = Executors.newScheduledThreadPool(5);
 
-        //查询数据现有的传感器，并且获取传感器个数
+        //查询数据现有的传感器，携带传感器的item organize
         List<Sensor> sensors = alarmService.selectSensor();
         int sensorCount = sensors.size();
 
@@ -53,7 +53,7 @@ public class MessageSender {
                 kafkaTemplate.send(topicName,message);
                 System.out.println("success");
             }
-        },0,2, TimeUnit.SECONDS);
+        },0,5, TimeUnit.SECONDS);
 
     }
 
