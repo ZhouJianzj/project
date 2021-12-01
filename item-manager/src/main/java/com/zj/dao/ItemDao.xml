@@ -47,6 +47,20 @@
             or o.location like concat('%',#{key},'%')
     </select>
 
+<!--    根据orga_id查询项目-->
+    <select id="itemByOrgaIdSelect" resultMap="item_map">
+        select i.id,i.name,i.number,i.addr,i.phone,i.createTime,
+        o.id as oid,
+        o.name as oname,
+        o.parent_id as parentId,
+        o.location,
+        o.orga_number as orgaNumber,
+        o.ext
+        from t_item i
+            left join organize o on o.id = i.orga_id
+        where o.id = #{orgaId}
+    </select>
+
 <!--    删除项目-->
     <delete id="itemDelete">
         delete from t_item where id = #{id}

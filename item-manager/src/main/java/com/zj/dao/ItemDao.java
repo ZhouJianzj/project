@@ -35,4 +35,9 @@ public interface ItemDao {
     boolean itemPipeDelete(int id);
 
     void itemSensorDelete(int id);
+
+    /**
+     * 根据orga_id查询项目
+     * */
+    List<Item> itemByOrgaIdSelect(String orgaId);
 }
