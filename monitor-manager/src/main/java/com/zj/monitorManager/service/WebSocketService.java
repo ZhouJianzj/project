@@ -1,11 +1,10 @@
 package com.zj.monitorManager.service;
 
+import com.zj.monitorManager.config.ServerEncoder;
+import com.zj.monitorManager.entity.Alarm;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 
@@ -14,7 +13,7 @@ import java.io.IOException;
  */
 
 
-@ServerEndpoint("/alarm")
+@ServerEndpoint(value = "/alarm",encoders = {ServerEncoder.class})
 @RestController
 public class WebSocketService {
 
@@ -63,7 +62,12 @@ public class WebSocketService {
     /**
      * 服务器主动的发送消息到客户端
      */
-    public void sendMessage(String alarm) throws IOException {
-            session.getBasicRemote().sendText(alarm);
+    public void sendMessage(Alarm alarm) throws IOException {
+//            session.getBasicRemote().sendText(alarm);
+        try {
+            session.getBasicRemote().sendObject(alarm);
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
     }
 }

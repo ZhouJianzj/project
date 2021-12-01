@@ -33,7 +33,7 @@ public class MessageAccept {
         //webSocket推送,模拟的所有消息
         if (WebSocketService.isConnected){
             try {
-                webSocketService.sendMessage(message.toString());
+                webSocketService.sendMessage(message);
             } catch (IOException e) {
                 e.printStackTrace();
             }
