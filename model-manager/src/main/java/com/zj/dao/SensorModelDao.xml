@@ -18,7 +18,7 @@
 <!--    添加传感器模型-->
     <insert id="sensorModelInsert">
         insert into t_sensor_model (deviceNumber,deviceName,deviceType,createTime,upInterval,protocol,dataPointName,lowThreshold,highThreshold,dataPointExtra) VALUES
-            (#{deviceNumber},#{deviceName},#{deviceType},#{createTime},#{upInterval},#{protocol},#{dataPointName},#{lowThreshold},#{highThreshold},#{dataPointExtra})
+            (#{deviceNumber},#{deviceName},#{deviceType},now(),#{upInterval},#{protocol},#{dataPointName},#{lowThreshold},#{highThreshold},#{dataPointExtra})
     </insert>
 <!--删除传感器模型-->
     <delete id="sensorModelDelete">
@@ -26,7 +26,7 @@
     </delete>
 <!-- 修改传感器模型-->
     <update id="sensorModelUpdate">
-        update t_sensor_model set deviceNumber=#{deviceNumber},deviceName=#{deviceName},deviceType=#{deviceType},createTime=#{createTime},
+        update t_sensor_model set deviceNumber=#{deviceNumber},deviceName=#{deviceName},deviceType=#{deviceType},createTime=now(),
                                   upInterval=#{upInterval},protocol=#{protocol},dataPointName=#{dataPointName},
                                   lowThreshold=#{lowThreshold},highThreshold=#{highThreshold},dataPointExtra=#{dataPointExtra}
         WHERE id=#{id}
