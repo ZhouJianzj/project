@@ -88,11 +88,12 @@ public class AssetServiceImpl implements AssetService {
      */
     @Override
     public Boolean addSensorService(Sensor sensor) {
-        if (sensor != null){
-            return assetDao.insertSensorDao(sensor);
-        }else {
-            return false;
-        }
+//        if (sensor != null){
+//            return assetDao.insertSensorDao(sensor);
+//        }else {
+//            return false;
+//        }
+        return assetDao.insertSensorDao(sensor);
     }
 
     /**

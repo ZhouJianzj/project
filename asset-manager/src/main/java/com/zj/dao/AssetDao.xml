@@ -129,9 +129,9 @@
                 #{sensorName},
                 #{sensorCode},
                 #{protocal},
-                #{sensorModelId},
-                #{itemId},
-                #{orgaId}
+                #{sensorModel.id},
+                #{item.id},
+                #{organize.id}
                )
     </insert>
 
