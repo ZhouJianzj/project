@@ -51,6 +51,9 @@ public class AssetController {
 
     /**
      * 查询管道
+     * @param key
+     * @param pageNo
+     * @param pageSize
      * */
     @GetMapping("pipe")
     public Page selectPipeController( @RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
@@ -59,6 +62,13 @@ public class AssetController {
         return MyPageHelper.myPageHelper(new Page(assetService.selectPipeService(key),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
     }
 
+    /**
+     * 根据项目id查询管道
+     * */
+    @GetMapping("pipe/itemId")
+    public List<Pipe> selectPipeByItemIdController(String itemId){
+        return assetService.selectPipeByItemIdService(itemId);
+    }
 
     /**
      * 新增传感器

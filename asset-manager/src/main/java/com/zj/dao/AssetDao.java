@@ -34,4 +34,6 @@ public interface AssetDao {
     List<Sensor> selectSensor(String id);
 
     List<Sensor> SensorIdSelect();
+
+    List<Pipe> PipeByItemIdSelect(String itemId);
 }

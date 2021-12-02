@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -131,6 +132,29 @@ public class AssetServiceImpl implements AssetService {
     @Override
     public List<Sensor> findSensorIdService() {
         return assetDao.SensorIdSelect();
+    }
+
+    /**
+     * 根据项目id查询管道
+     * @param itemId
+     * */
+    @Override
+    public List<Pipe> selectPipeByItemIdService(String itemId) {
+        List<Pipe> pipes = assetDao.PipeByItemIdSelect(itemId);
+        ArrayList<String> strings = new ArrayList<>(3);
+        for (Pipe pipe : pipes){
+            strings.clear();
+            strings.add(pipe.getPipeModel().getPipeIntroduce());
+            strings.add(pipe.getPipeModel().getPipePic());
+            strings.add(pipe.getPipeModel().getPipeManual());
+            for (String item : strings){
+                int e = item.indexOf("matter");
+                int lastIndexOf = item.lastIndexOf("/");
+                pipe.getPipeModel().getFileRelativePath().add(item.substring(e));
+                pipe.getPipeModel().getFileName().add(item.substring(lastIndexOf + 1));
+            }
+        }
+        return pipes;
     }
 
 
