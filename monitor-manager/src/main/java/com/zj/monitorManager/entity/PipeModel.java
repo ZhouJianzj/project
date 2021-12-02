@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PipeModel implements Serializable {
-    private String id;
+    private int id;
 
     private String pipeName;
 
@@ -32,9 +31,6 @@ public class PipeModel implements Serializable {
     private String pipeManual;
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
-
-    private MultipartFile[] files;
-
     /**
      * 文件名字
      */

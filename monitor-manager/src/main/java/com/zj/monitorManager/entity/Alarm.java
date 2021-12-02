@@ -17,11 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Alarm implements Serializable {
 
-//    int id;
-
     private int sensorId;
-
-//    private int sensorModelId;
 
     private String currentValue;
 
@@ -30,8 +26,5 @@ public class Alarm implements Serializable {
     private Boolean isHandled;
 
     private Date alarmTime;
-
-    private Sensor sensor;
-
 
 }

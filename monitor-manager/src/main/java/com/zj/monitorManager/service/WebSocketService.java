@@ -2,11 +2,14 @@ package com.zj.monitorManager.service;
 
 import com.zj.monitorManager.config.ServerEncoder;
 import com.zj.monitorManager.entity.Alarm;
+import com.zj.monitorManager.utils.ListMapUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * @author zhoujian
@@ -17,11 +20,22 @@ import java.io.IOException;
 @RestController
 public class WebSocketService {
 
-    private static String itemId;
-
     public static Boolean isConnected = false;
 
     public static Session session = null;
+
+    /**
+     * 引入自己的接口类，注意要加上static 静态修饰
+     */
+    private static AlarmService alarmService;
+
+    /**
+     * mobileUserService的set方法
+     */
+    @Autowired
+    public  void setApplicationContext( AlarmService alarmService) {
+        WebSocketService.alarmService= alarmService;
+    }
 
 
     /**
@@ -32,7 +46,7 @@ public class WebSocketService {
     public void onOpen(Session s){
         session = s;
         isConnected = true;
-        System.out.println("建立了连接"+ session.getId());
+        System.out.println("建立了连接"+ session.getId() );
     }
 
     /**
@@ -47,21 +61,38 @@ public class WebSocketService {
     }
 
     /**
-     * 接收前端传过来的数据。
-     * 虽然在实现推送逻辑中并不需要接收前端数据，但是作为一个webSocket的教程或叫备忘，还是将接收数据的逻辑加上了。
+     * 接收前端传过来的数据,发送事实的数据给前端
      */
     @OnMessage
-    public void onMessage( String message){
-        System.out.println("itemId----------" + message);
-        itemId = message;
+    public void onMessage(String message){
+        try {
+           while (isConnected){
+               sendMessage(message);
+           }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+
+    /**
+     * 服务器主动的发送消息到客户端，获取指定itemId的item
+     */
+    public void sendMessage(String itemId) throws IOException {
+        try {
+            //直接在共享的hashMap中查询
+            HashMap<String, HashMap<String, Object>> stringHashMapHashMap = ListMapUtil.hashMapA.get(itemId);
+            session.getBasicRemote().sendObject(stringHashMapHashMap);
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     * 服务器主动的发送消息到客户端
+     * 摒弃了
+     * 服务器主动的发送消息到客户端，一个一个的发
      */
     public void sendMessage(Alarm alarm) throws IOException {
-
         try {
             session.getBasicRemote().sendObject(alarm);
         } catch (EncodeException e) {

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 /**
  * @author HuXinJie
@@ -21,13 +21,5 @@ public class Item implements Serializable {
 
     private String name;
 
-    private String number;
-
-    private Organize organize;
-
-    private String addr;
-
-    private String phone;
-
-    private Date createTime;
+    private List<Pipe> pipes;
 }

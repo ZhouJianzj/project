@@ -2,7 +2,6 @@ package com.zj.monitorManager.config;
 
 
 import com.alibaba.fastjson.JSONArray;
-import com.zj.monitorManager.entity.Alarm;
 
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
@@ -13,7 +12,7 @@ import javax.websocket.EndpointConfig;
  * 如果你写了一个名叫Student的类，需要通过sendObject()方法发送，那么这里就是Text<Student>
  * @author zhoujian
  */
-public class ServerEncoder implements Encoder.Text<Alarm> {
+public class ServerEncoder implements Encoder.Text<Object> {
 
     @Override
     public void destroy() {
@@ -27,12 +26,11 @@ public class ServerEncoder implements Encoder.Text<Alarm> {
         // 这里也不重要
 
     }
-
     /**
      *  encode()方法里的参数和Text<T>里的T一致，如果你是Student，这里就是encode（Student student）
      */
     @Override
-    public String encode(Alarm responseMessage) throws EncodeException {
+    public String encode(Object responseMessage) throws EncodeException {
             return JSONArray.toJSONString(responseMessage);
     }
 }

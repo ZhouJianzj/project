@@ -1,6 +1,5 @@
 package com.zj.monitorManager;
 
-import com.zj.monitorManager.entity.Alarm;
 import com.zj.monitorManager.service.MessageSender;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -20,6 +19,6 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("+++++++++++++++++在springboot启动之后，执行++++++++++++++++");
-        messageSender.sendMessage("test",new Alarm());
+        messageSender.sendMessage("pipe");
     }
 }
