@@ -227,28 +227,8 @@
 
 <!--    修改传感器-->
     <update id="modifySensorDao" parameterType="com.zj.entity.Sensor">
-        update t_sensor
-        <set>
-            <if test="sensorName != null" >
-                sensorName = #{sensorName},
-            </if>
-            <if test="sensorCode != null">
-                sensorCode = #{sensorCode},
-            </if>
-            <if test="protocal != null">
-                protocal = #{protocal},
-            </if>
-            <if test="sensorModelId != null">
-                sensorModel_id = #{sensorModelId},
-            </if>
-            <if test="itemId != null">
-                item_id = #{itemId},
-            </if>
-            <if test="orgaId != null">
-                orga_id = #{orgaId}
-            </if>
-        </set>
-            where id = #{id}
+        update t_sensor set sensorName = #{sensorName},sensorCode = #{sensorCode},protocal = #{protocal},sensorModel_id = #{sensorModel.id},
+        item_id = #{item.id},orga_id = #{organize.id} where id = #{id}
     </update>
     <resultMap id="pipe_itemId" type="com.zj.entity.Pipe">
         <id column="id" property="id"/>
