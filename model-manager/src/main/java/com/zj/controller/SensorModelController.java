@@ -3,8 +3,10 @@ package com.zj.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zj.entity.CommonResponse;
+import com.zj.entity.Page;
 import com.zj.entity.SensorModel;
 import com.zj.service.SensorModelService;
+import com.zj.util.MyPageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,12 +27,13 @@ public class SensorModelController {
      * @return item
      * */
     @GetMapping("sensorModel")
-    public PageInfo<SensorModel> findSensorModelController(@RequestParam(value ="pageNo",defaultValue = "1") String pageNo,
-                                                           @RequestParam(value = "pagesize",defaultValue = "8") String pageSize,
-                                                           @RequestParam(value = "key") String key){
+    public Page<SensorModel> findSensorModelController(@RequestParam(value ="pageNo",defaultValue = "1") String pageNo,
+                                          @RequestParam(value = "pageSize",defaultValue = "8") String pageSize,
+                                          @RequestParam(value = "key") String key){
 
-        PageHelper.startPage(Integer.parseInt(pageNo),Integer.parseInt(pageSize));
-        return new PageInfo<SensorModel>(sensorModelService.findSensorModelListService(key));
+        //PageHelper.startPage(Integer.parseInt(pageNo),Integer.parseInt(pageSize));
+        return MyPageHelper.myPageHelper(new Page(sensorModelService.findSensorModelListService(key),Integer.parseInt(pageNo),Integer.parseInt(pageSize)));
+                //new PageInfo<SensorModel>(sensorModelService.findSensorModelListService(key));
     }
     /**
      * 删除传感器模型
