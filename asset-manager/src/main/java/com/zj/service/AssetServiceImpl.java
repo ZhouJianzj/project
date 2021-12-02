@@ -133,5 +133,14 @@ public class AssetServiceImpl implements AssetService {
         return assetDao.SensorIdSelect();
     }
 
+    /**
+     * 根据项目id查询管道
+     * @param itemId
+     * */
+    @Override
+    public List<Pipe> selectPipeByItemIdService(String itemId) {
+        return assetDao.PipeByItemIdSelect(itemId);
+    }
+
 
 }

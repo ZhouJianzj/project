@@ -32,4 +32,6 @@ public interface AssetService {
     Boolean modifySensorService(Sensor sensor);
 
     List<Sensor> findSensorIdService();
+
+    List<Pipe> selectPipeByItemIdService(String itemId);
 }
