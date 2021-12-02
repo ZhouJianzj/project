@@ -17,6 +17,8 @@ import java.io.IOException;
 @RestController
 public class WebSocketService {
 
+    private static String itemId;
+
     public static Boolean isConnected = false;
 
     public static Session session = null;
@@ -50,24 +52,21 @@ public class WebSocketService {
      */
     @OnMessage
     public void onMessage( String message){
-        System.out.println(message + "------from------" + session.getId());
-//        测试是否可以想客户端发送消息
-//        try {
-//            sendMessage();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        System.out.println("itemId----------" + message);
+        itemId = message;
+
     }
 
     /**
      * 服务器主动的发送消息到客户端
      */
     public void sendMessage(Alarm alarm) throws IOException {
-//            session.getBasicRemote().sendText(alarm);
+
         try {
             session.getBasicRemote().sendObject(alarm);
         } catch (EncodeException e) {
             e.printStackTrace();
         }
     }
+
 }

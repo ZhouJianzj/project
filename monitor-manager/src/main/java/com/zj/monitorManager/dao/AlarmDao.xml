@@ -15,32 +15,69 @@
                                 alarmMsg=#{alarmMsg},alarmTime=now()
     </insert>
 <!--查询传感器以及对应的传感器模型-->
-    <resultMap id="sensorResultMap" type="com.zj.monitorManager.entity.Sensor">
-        <id column="id" property="id"/>
-        <result column="sensorName" property="sensorName"/>
-        <result column="protocal" property="protocal"/>
-        <result column="sensorCode" property="sensorCode"/>
-<!--        项目-->
-        <association property="item" javaType="com.zj.monitorManager.entity.Item">
-            <id column="itemId" property="id"/>
-            <result column="itemName" property="name"/>
-<!--            项目所属的组织-->
-            <association property="organize" javaType="com.zj.monitorManager.entity.Organize">
-                <id column="orgaId" property="id"/>
-                <result column="orgaName" property="name"/>
+    <resultMap id="PipeResultMap" type="com.zj.monitorManager.entity.Pipe">
+        <id column="pipeId" property="id"/>
+        <result column="productName" property="productName"/>
+        <result column="productCode" property="productCode"/>
+        <result column="manuDate" property="manuDate"/>
+        <result column="productDate" property="productDate"/>
+        <association property="pipeModel" javaType="com.zj.monitorManager.entity.PipeModel">
+            <id column="pipeModelId" property="id"/>
+            <result column="pipeName" property="pipeName"/>
+            <result column="pipeNumber"  property="pipeNumber"/>
+            <result column="pipeType" property="pipeType"/>
+            <result column="pipeIntroduce" property="pipeIntroduce"/>
+            <result column="pipePic" property="pipePic"/>
+            <result column="pipeManual" property="pipeManual"/>
+            <result column="createTime" property="createTime"/>
+        </association>
+        <association property="sensor" javaType="com.zj.monitorManager.entity.Sensor">
+            <id column="id" property="id"/>
+            <result column="sensorName" property="sensorName"/>
+            <result column="protocal" property="protocal"/>
+            <result column="sensorCode" property="sensorCode"/>
+            <!--        项目-->
+            <association property="item" javaType="com.zj.monitorManager.entity.Item">
+                <id column="itemId" property="id"/>
+                <result column="itemName" property="name"/>
+                <!--            项目所属的组织-->
+                <association property="organize" javaType="com.zj.monitorManager.entity.Organize">
+                    <id column="orgaId" property="id"/>
+                    <result column="orgaName" property="name"/>
+                </association>
+            </association>
+            <!--        传感器模型对象-->
+            <association property="sensorModel" javaType="com.zj.monitorManager.entity.SensorModel">
+                <id column="mid" property="id"/>
+                <result column="deviceType" property="deviceType"/>
+                <result column="dataPointName" property="dataPointName"/>
+                <result column="lowThreshold" property="lowThreshold"/>
+                <result column="highThreshold" property="highThreshold"/>
             </association>
         </association>
-<!--        传感器模型对象-->
-        <association property="sensorModel" javaType="com.zj.monitorManager.entity.SensorModel">
-            <id column="mid" property="id"/>
-            <result column="deviceType" property="deviceType"/>
-            <result column="dataPointName" property="dataPointName"/>
-            <result column="lowThreshold" property="lowThreshold"/>
-            <result column="highThreshold" property="highThreshold"/>
-        </association>
+
+
+
     </resultMap>
-    <select id="selectSensor" resultMap="sensorResultMap">
-        select s.id,
+    <select id="selectPipeMoreMessage" resultMap="PipeResultMap">
+        select
+               p.id as pipeId,
+               p.productName,
+               p.productCode,
+               p.manuDate,
+               p.productDate,
+
+               pm.id as pipeModelId,
+               pm.pipeName,
+               pm.pipeNumber,
+               pm.pipeType,
+               pm.pipeIntroduce,
+               pm.pipePic,
+               pm.pipeManual,
+               pm.createTime,
+
+
+               s.id,
                s.sensorName,
                s.protocal,
                s.sensorCode,
@@ -56,10 +93,13 @@
                sm.dataPointName,
                sm.lowThreshold,
                sm.highThreshold
-        from t_sensor s
+        from t_pipe p
+            left join t_sensor s on s.id = p.sensor_id
+            left join t_pipe_model pm on pm.id = p.pipeModel_id
             left join t_sensor_model sm on sm.id = s.sensorModel_id
             left join t_item it on s.item_id = it.id
             left join organize o on  o.id = it.orga_id
+where it.id = #{itemId}
     </select>
 
     <select id="selectSensorModelById" resultType="com.zj.monitorManager.entity.SensorModel">

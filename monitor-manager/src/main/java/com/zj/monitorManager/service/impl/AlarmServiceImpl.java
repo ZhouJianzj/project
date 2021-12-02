@@ -2,7 +2,7 @@ package com.zj.monitorManager.service.impl;
 
 import com.zj.monitorManager.dao.AlarmDao;
 import com.zj.monitorManager.entity.Alarm;
-import com.zj.monitorManager.entity.Sensor;
+import com.zj.monitorManager.entity.Pipe;
 import com.zj.monitorManager.entity.SensorModel;
 import com.zj.monitorManager.service.AlarmService;
 import org.springframework.stereotype.Service;
@@ -24,8 +24,8 @@ public class AlarmServiceImpl  implements AlarmService {
     }
 
     @Override
-    public List<Sensor> selectSensor() {
-        return alarmDao.selectSensor();
+    public List<Pipe> selectPipeMoreMessage(String itemId) {
+        return alarmDao.selectPipeMoreMessage(itemId);
     }
 
     @Override

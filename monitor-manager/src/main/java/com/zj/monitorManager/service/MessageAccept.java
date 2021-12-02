@@ -29,32 +29,39 @@ public class MessageAccept {
         //获取value强转为目标对象
         Alarm message = (Alarm) msg.value();
         System.out.println("接收到的消息为--------->" +  message);
-
-
-        if (
-            //获取报警信息中的传感器中的传感器模型报警值的最高指标
-            Integer.parseInt(message.getCurrentValue()) > message.getSensor().getSensorModel().getHighThreshold()
-            ||
-            //获取报警信息中的传感器中的传感器模型报警值的最低指标
-            Integer.parseInt(message.getCurrentValue()) < message.getSensor().getSensorModel().getLowThreshold())
-        {
-            String dataPointName = message.getSensor().getSensorModel().getDataPointName();
-            message.setAlarmMsg(
-                    dataPointName + "异常!当前" + dataPointName + ":" +
-                    message.getCurrentValue());
-            message.setSensorId(message.getSensor().getId());
-
-            //webSocket推送有问题的数据
-            if (WebSocketService.isConnected){
-                try {
-                    webSocketService.sendMessage(message);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        //webSocket推送有问题的数据
+        if (WebSocketService.isConnected){
+            try {
+                webSocketService.sendMessage(message);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            //异常数据插入数据库
-            alarmService.insertAlarm(message);
         }
+
+//        if (
+//            //获取报警信息中的传感器中的传感器模型报警值的最高指标
+//            Integer.parseInt(message.getCurrentValue()) > message.getSensor().getSensorModel().getHighThreshold()
+//            ||
+//            //获取报警信息中的传感器中的传感器模型报警值的最低指标
+//            Integer.parseInt(message.getCurrentValue()) < message.getSensor().getSensorModel().getLowThreshold())
+//        {
+//            String dataPointName = message.getSensor().getSensorModel().getDataPointName();
+//            message.setAlarmMsg(
+//                    dataPointName + "异常!当前" + dataPointName + ":" +
+//                    message.getCurrentValue());
+//            message.setSensorId(message.getSensor().getId());
+//
+//            //webSocket推送有问题的数据
+//            if (WebSocketService.isConnected){
+//                try {
+//                    webSocketService.sendMessage(message);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            //异常数据插入数据库
+//            alarmService.insertAlarm(message);
+//        }
     }
 
 }

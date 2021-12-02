@@ -1,9 +1,8 @@
 package com.zj.monitorManager.dao;
 
 
-
 import com.zj.monitorManager.entity.Alarm;
-import com.zj.monitorManager.entity.Sensor;
+import com.zj.monitorManager.entity.Pipe;
 import com.zj.monitorManager.entity.SensorModel;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +16,7 @@ public interface AlarmDao {
 
     Boolean insertAlarm(Alarm message);
 
-    List<Sensor> selectSensor();
+    List<Pipe> selectPipeMoreMessage(String itemID);
 
     SensorModel selectSensorModelById(int sensorModelId);
 }
