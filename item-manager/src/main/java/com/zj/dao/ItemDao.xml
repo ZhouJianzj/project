@@ -89,22 +89,18 @@
     </update>
 
     <resultMap id="itemCount" type="com.zj.entity.ItemCount">
-        <result column="row" property="row"/>
+        <result column="id" property="id"/>
+        <result property="name" column="name"/>
         <result column="count" property="count"/>
-        <association property="organize" javaType="com.zj.entity.Organize">
-            <id column="oid" property="id"/>
-            <result property="name" column="name"/>
-        </association>
     </resultMap>
 <!--    查询组织下的项目数量-->
     <select id="itemCountSelect" resultMap="itemCount">
         SELECT
-            @row:=@row+1 as row,
 	        count(*) AS count,
-	        o.id as oid,
+	        i.orga_id as id,
 	        o.name
         FROM
-	        (SELECT @row:=0) a,t_item i
+	        t_item i
 	    LEFT JOIN organize o ON o.id = i.orga_id
         GROUP BY
 	        i.orga_id

@@ -16,9 +16,11 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class ItemCount implements Serializable {
-    private int row;
+//    private int row;
 
-    private Organize organize;
+    private int id;
+
+    private String name;
 
     private int count;
 }
