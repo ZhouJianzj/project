@@ -6,6 +6,7 @@ import com.zj.monitorManager.entity.Sensor;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author zhoujian
@@ -135,5 +136,57 @@ public class ListMapUtil {
         }
 
         return hashMapA;
+    }
+
+
+    /**
+     * 遍历数据，获取到key为sensorId的value
+     * @param hashMapA
+     */
+    public static void forShareHashMap(HashMap<String, HashMap<String,HashMap<String, Object>>> hashMapA,Sensor sensor){
+        String id = String.valueOf(sensor.getId());
+
+        //遍历共享数据容器，
+        //获取所有的item的key
+        Set<String> itemsKeySets = hashMapA.keySet();
+        for (String itemsKeySet:itemsKeySets ){
+            HashMap<String, HashMap<String, Object>> ItemHashMap = hashMapA.get(itemsKeySet);
+            //获取所有pipe的key
+            Set<String> pipeKeySets = ItemHashMap.keySet();
+            for (String pipeKeySet :pipeKeySets){
+                HashMap<String, Object> PipeHashMap = ItemHashMap.get(pipeKeySet);
+                //包含sensorId的key
+                Set<String> fieldKeySets = PipeHashMap.keySet();
+                for (String fieldKeySet:fieldKeySets){
+                    //获取sensorMap的key
+                        //如果key相等了就赋值
+                        if (fieldKeySet.equals(id)){
+                            System.out.println( "新添加的传感器抱紧数据：");
+                            PipeHashMap.put(id,sensor);
+                        }
+
+
+                }
+
+            }
+        }
+    }
+
+    /**
+     * Sensor(id=1, sensorName=压力传感器, sensorCode=1202, protocal=123,
+     *
+     *        sensorModel=SensorModel(id=1, deviceName=1234设备道, deviceType=压力传感器,
+     *                  deviceNumber=1234, createTime=Wed Dec 01 17:24:01 CST 2021, upInterval=10, protocol=MQTT,
+     *                  dataPointName=压力, lowThreshold=5, highThreshold=20, dataPointExtra=泄露),
+     *
+     *        alarm=Alarm(sensorId=1, currentValue=87, alarmMsg=压力异常！当前压力:87, isHandled=false,
+     *                      alarmTime=Fri Dec 03 14:35:35 CST 2021))
+     * @return
+     */
+    public static  HashMap<String, Sensor> sensorToMap(Sensor sensor){
+        int id = sensor.getId();
+        HashMap<String, Sensor> sensorHashMap = new HashMap<>();
+        sensorHashMap.put(String.valueOf(id),sensor);
+        return sensorHashMap;
     }
 }

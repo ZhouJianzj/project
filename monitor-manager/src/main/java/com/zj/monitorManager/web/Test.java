@@ -6,6 +6,8 @@ import com.zj.monitorManager.entity.Sensor;
 import com.zj.monitorManager.service.AlarmService;
 import com.zj.monitorManager.utils.ListMapUtil;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -37,17 +39,20 @@ public class Test {
     public HashMap testGetSensorMap(){
         List<Item> items = alarmService.selectIPSMAAService();
         HashMap<String, HashMap<String, HashMap<String, Object>>> listToMap = ListMapUtil.listToMap(items);
-
+        //获取所有的item的key
         Set<String> listToMapKeySet = listToMap.keySet();
         for (String listToMapKey:listToMapKeySet ){
             HashMap<String, HashMap<String, Object>> ItemHashMap = listToMap.get(listToMapKey);
+            //获取所有pipe的key
             Set<String> pipeKeySets = ItemHashMap.keySet();
             for (String pipeKeySet :pipeKeySets){
-                HashMap<String, Object> fieldHashMaps = ItemHashMap.get(pipeKeySet);
-                Set<String> fieldKeySets= fieldHashMaps.keySet();
-                for (String fieldKeySet: fieldKeySets ){
-                    System.out.println(ItemHashMap.get(fieldKeySet));
+                HashMap<String, Object> PipeHashMap = ItemHashMap.get(pipeKeySet);
+                //包含sensorId的key
+                Set<String> fieldKeySets = PipeHashMap.keySet();
+                for (String fieldKeySet:fieldKeySets){
+                    System.out.println(fieldKeySet);
                 }
+
             }
         }
 
@@ -64,6 +69,29 @@ public class Test {
     @GetMapping("testSensorAll")
     public List<Sensor> testSensorAll(){
         return alarmService.selectSensorAll();
+    }
+
+    @GetMapping("testSensorToMap")
+    public HashMap testSensorToMap(){
+        List<Sensor> sensors = alarmService.selectSensorAll();
+        return ListMapUtil.sensorToMap(sensors.get(0));
+    }
+
+    @GetMapping("testGetShareHashMap")
+    public HashMap testGetShareHashMap(){
+        return ListMapUtil.hashMapA;
+    }
+
+    /**
+     * 添加一个传感器的报警数据，获取共享hashMap
+     * @param sensor
+     * @return
+     */
+    @PostMapping("postSensorToHashMap")
+    public HashMap postSensorToHashMap(@RequestBody  Sensor sensor){
+        System.out.println("前端给的sensor报警数据" +  sensor.toString());
+        ListMapUtil.forShareHashMap(ListMapUtil.hashMapA,sensor);
+        return ListMapUtil.hashMapA;
     }
 
 }

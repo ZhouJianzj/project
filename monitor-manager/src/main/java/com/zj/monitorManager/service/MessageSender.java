@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -40,20 +41,19 @@ public class MessageSender {
         List<Sensor> sensors =  alarmService.selectSensorAll();
         int size = sensors.size();
 
-        //创建定时任务线程池
         ScheduledExecutorService pool = Executors.newScheduledThreadPool(5);
         //延时0秒之后每隔2秒重复执行一次
         pool.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                //随机获取一个传感器
-                Sensor sensor = sensors.get((int) (Math.random()*size));
+               //随机获取一个传感器模拟报警信息
+                Sensor sensor = sensors.get(2);
                 Alarm alarm = sensor.getAlarm();
-                //随机生成传感器检测的值0-100
-                alarm.setCurrentValue(String.valueOf((int) ((Math.random()*101))));
+                alarm.setCurrentValue(String.valueOf(new Random().nextInt(100)));
                 alarm.setIsHandled(false);
                 alarm.setAlarmTime(new Date());
                 alarm.setSensorId(sensor.getId());
+
                 //获取传感器模型根据属性来判断随机生成的数据是否操作规定阈值
                 SensorModel sensorModel = sensor.getSensorModel();
                 int CurrentValue =  Integer.parseInt(alarm.getCurrentValue());
@@ -63,12 +63,15 @@ public class MessageSender {
                 }else {
                     alarm.setAlarmMsg(dataPointName + "正常！当前" + dataPointName + ":"+ CurrentValue);
                 }
-
+                sensor.setAlarm(alarm);
                 System.out.println("开始send消息....");
                 kafkaTemplate.send(topicName,sensor);
                 System.out.println("success");
+//                System.out.println("开始send消息....");
+//                kafkaTemplate.send(topicName,"tests");
+//                System.out.println("success");
             }
-        },0,2, TimeUnit.SECONDS);
+        },2,3, TimeUnit.SECONDS);
 
     }
 
