@@ -87,4 +87,22 @@
     <update id="itemSensorDelete">
         update t_sensor set item_id = null where item_id = #{id}
     </update>
+
+    <resultMap id="itemCount" type="com.zj.entity.ItemCount">
+        <result column="id" property="id"/>
+        <result property="name" column="name"/>
+        <result column="count" property="count"/>
+    </resultMap>
+<!--    查询组织下的项目数量-->
+    <select id="itemCountSelect" resultMap="itemCount">
+        SELECT
+	        count(*) AS count,
+	        i.orga_id as id,
+	        o.name
+        FROM
+	        t_item i
+	    LEFT JOIN organize o ON o.id = i.orga_id
+        GROUP BY
+	        i.orga_id
+    </select>
 </mapper>

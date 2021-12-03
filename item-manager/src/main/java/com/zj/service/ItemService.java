@@ -2,6 +2,7 @@ package com.zj.service;
 
 import com.zj.entity.CommonResponse;
 import com.zj.entity.Item;
+import com.zj.entity.ItemCount;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface ItemService {
     CommonResponse<Item> modifyItemService(Item item);
 
     List<Item> selectItemByOrgaIdService(String orgaId);
+
+    List<ItemCount> selectItemCountService();
 }

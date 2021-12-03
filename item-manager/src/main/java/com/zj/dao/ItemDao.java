@@ -1,6 +1,7 @@
 package com.zj.dao;
 
 import com.zj.entity.Item;
+import com.zj.entity.ItemCount;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -40,4 +41,6 @@ public interface ItemDao {
      * 根据orga_id查询项目
      * */
     List<Item> itemByOrgaIdSelect(String orgaId);
+
+    List<ItemCount> itemCountSelect();
 }
