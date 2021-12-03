@@ -49,20 +49,20 @@ public class MessageSender {
                 //随机获取一个传感器
                 Sensor sensor = sensors.get((int) (Math.random()*size));
                 Alarm alarm = sensor.getAlarm();
-                //随机生成传感器检测的值0-100
+//                //随机生成传感器检测的值0-100
                 alarm.setCurrentValue(String.valueOf((int) ((Math.random()*101))));
-                alarm.setIsHandled(false);
-                alarm.setAlarmTime(new Date());
-                alarm.setSensorId(sensor.getId());
-                //获取传感器模型根据属性来判断随机生成的数据是否操作规定阈值
-                SensorModel sensorModel = sensor.getSensorModel();
-                int CurrentValue =  Integer.parseInt(alarm.getCurrentValue());
-                String dataPointName = sensorModel.getDataPointName();
-                if (sensorModel.getLowThreshold() < CurrentValue || sensorModel.getHighThreshold() > CurrentValue ){
-                    alarm.setAlarmMsg(dataPointName + "异常！当前" + dataPointName + ":"+ CurrentValue);
-                }else {
-                    alarm.setAlarmMsg(dataPointName + "正常！当前" + dataPointName + ":"+ CurrentValue);
-                }
+//                alarm.setIsHandled(false);
+//                alarm.setAlarmTime(new Date());
+//                alarm.setSensorId(sensor.getId());
+//                //获取传感器模型根据属性来判断随机生成的数据是否操作规定阈值
+//                SensorModel sensorModel = sensor.getSensorModel();
+//                int CurrentValue =  Integer.parseInt(alarm.getCurrentValue());
+//                String dataPointName = sensorModel.getDataPointName();
+//                if (sensorModel.getLowThreshold() < CurrentValue || sensorModel.getHighThreshold() > CurrentValue ){
+//                    alarm.setAlarmMsg(dataPointName + "异常！当前" + dataPointName + ":"+ CurrentValue);
+//                }else {
+//                    alarm.setAlarmMsg(dataPointName + "正常！当前" + dataPointName + ":"+ CurrentValue);
+//                }
 
                 System.out.println("开始send消息....");
                 kafkaTemplate.send(topicName,sensor);

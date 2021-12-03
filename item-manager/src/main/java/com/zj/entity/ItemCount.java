@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class ItemCount implements Serializable {
-    private int id;
+    private int row;
 
     private Organize organize;
 

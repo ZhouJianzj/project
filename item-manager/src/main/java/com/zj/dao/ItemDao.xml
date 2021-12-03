@@ -88,14 +88,23 @@
         update t_sensor set item_id = null where item_id = #{id}
     </update>
 
+    <resultMap id="itemCount" type="com.zj.entity.ItemCount">
+        <result column="row" property="row"/>
+        <result column="count" property="count"/>
+        <association property="organize" javaType="com.zj.entity.Organize">
+            <id column="oid" property="id"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
 <!--    查询组织下的项目数量-->
-    <select id="itemCountSelect" resultType="com.zj.entity.ItemCount">
+    <select id="itemCountSelect" resultMap="itemCount">
         SELECT
+            @row:=@row+1 as row,
 	        count(*) AS count,
-	        o.id,
-	        o.NAME
+	        o.id as oid,
+	        o.name
         FROM
-	        t_item i
+	        (SELECT @row:=0) a,t_item i
 	    LEFT JOIN organize o ON o.id = i.orga_id
         GROUP BY
 	        i.orga_id
