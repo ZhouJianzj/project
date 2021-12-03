@@ -3,6 +3,7 @@ package com.zj.service;
 import com.zj.dao.ItemDao;
 import com.zj.entity.CommonResponse;
 import com.zj.entity.Item;
+import com.zj.entity.ItemCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,5 +85,13 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> selectItemByOrgaIdService(String orgaId) {
         return itemDao.itemByOrgaIdSelect(orgaId);
+    }
+
+    /**
+     * 查询组织下的项目数量
+     * */
+    @Override
+    public List<ItemCount> selectItemCountService() {
+        return itemDao.itemCountSelect();
     }
 }

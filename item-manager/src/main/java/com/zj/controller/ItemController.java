@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zj.entity.CommonResponse;
 import com.zj.entity.Item;
+import com.zj.entity.ItemCount;
 import com.zj.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ public class ItemController {
     }
 
     /**
-     * 根据orga——id查询项目
+     * 根据orga_id查询项目
      * @param orgaId 组织id
      * @return 返回项目列表对象
      * */
@@ -75,4 +76,14 @@ public class ItemController {
     public CommonResponse<Item> modifyItemController(@RequestBody Item item){
         return itemService.modifyItemService(item);
     }
+
+    /**
+     * 查询组织下的项目数
+     * @return
+     * */
+    @GetMapping("item/count")
+    public List<ItemCount> selectItemCountController(){
+        return itemService.selectItemCountService();
+    }
+
 }
