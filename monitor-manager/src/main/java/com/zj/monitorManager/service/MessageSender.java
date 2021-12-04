@@ -41,7 +41,7 @@ public class MessageSender {
         List<Sensor> sensors =  alarmService.selectSensorAll();
         int size = sensors.size();
 
-        ScheduledExecutorService pool = Executors.newScheduledThreadPool(5);
+        ScheduledExecutorService pool = Executors.newScheduledThreadPool(4);
         //延时0秒之后每隔2秒重复执行一次
         pool.scheduleAtFixedRate(new Runnable() {
             @Override
@@ -62,7 +62,7 @@ public class MessageSender {
                     if (sensorModel.getLowThreshold() < CurrentValue || sensorModel.getHighThreshold() > CurrentValue ){
                         alarm.setAlarmMsg(dataPointName + "异常！当前" + dataPointName + ":"+ CurrentValue);
                     }else {
-                        alarm.setAlarmMsg(dataPointName + "正常！当前" + dataPointName + ":"+ CurrentValue);
+                        alarm.setAlarmMsg(dataPointName + "正常！" + dataPointName + ":"+ CurrentValue);
                     }
                     sensor.setAlarm(alarm);
                     System.out.println("开始send消息....");

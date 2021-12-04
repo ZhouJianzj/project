@@ -106,6 +106,7 @@ public class WebSocketService {
                 @Override
                 public void run() {
                     HashMap<String, HashMap<String, Object>> stringHashMapHashMap = ListMapUtil.hashMapA.get(itemId);
+
                     try {
                         session.getBasicRemote().sendObject(stringHashMapHashMap);
                     } catch (IOException e) {
