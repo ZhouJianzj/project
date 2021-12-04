@@ -96,7 +96,7 @@ public class WebSocketService {
 
 
     /**
-     * 服务器主动的发送消息到客户端，获取指定itemId的item
+     * 服务器主动的发送消息到建立item连接的客户端，获取指定itemId的item
      */
     public void sendMessage(String itemId) throws IOException {
 
@@ -119,7 +119,7 @@ public class WebSocketService {
     }
 
     /**
-     * 服务器主动的发送消息到客户端，一个一个的发
+     * 服务器主动的发送消息到建立alarms连接的客户端，一个一个的发事实的报警消息
      */
     public void sendMessage(Sensor sensor) throws IOException {
         try {

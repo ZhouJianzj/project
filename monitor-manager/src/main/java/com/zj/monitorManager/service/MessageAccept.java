@@ -30,7 +30,7 @@ public class MessageAccept {
 
         //前端发所用警报
         WebSocketService alarmConnection = WebSocketService.concurrentHashMap.get("alarms");
-        System.out.println("==============是否建立了alarms连接==============" +alarmConnection + "==========");
+        System.out.println("==============alarms连接对象=======" +alarmConnection + "==========");
         if (alarmConnection != null) {
             Boolean sendAllAlarm = alarmConnection.sendAllAlarm;
             System.out.println( "==========alarms是否发送=======" + sendAllAlarm + "==========");
@@ -47,7 +47,7 @@ public class MessageAccept {
         //获取共享haspMap
         HashMap<String, HashMap<String, HashMap<String, Object>>> hashMapA = ListMapUtil.hashMapA;
 
-        System.out.println("sensor---------------->" );
+        System.out.println("消费的sensor---------------->" + sensor );
 
         //往共享hashMap中存随机生成的sensor报警信息
         ListMapUtil.forShareHashMap(hashMapA,sensor);
