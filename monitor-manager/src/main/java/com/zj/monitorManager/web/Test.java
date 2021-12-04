@@ -71,19 +71,27 @@ public class Test {
         return alarmService.selectSensorAll();
     }
 
+    /**
+     * 测试传感器转换成
+     * @return
+     */
     @GetMapping("testSensorToMap")
     public HashMap testSensorToMap(){
         List<Sensor> sensors = alarmService.selectSensorAll();
         return ListMapUtil.sensorToMap(sensors.get(0));
     }
 
+    /**
+     * 测试获取共享hashMap
+     * @return
+     */
     @GetMapping("testGetShareHashMap")
     public HashMap testGetShareHashMap(){
         return ListMapUtil.hashMapA;
     }
 
     /**
-     * 添加一个传感器的报警数据，获取共享hashMap
+     * 模拟生成一个传感器的报警数据，获取共享hashMap查看有咩有变化
      * @param sensor
      * @return
      */

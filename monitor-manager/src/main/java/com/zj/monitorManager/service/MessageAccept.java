@@ -7,6 +7,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -18,9 +19,6 @@ public class MessageAccept {
     @Resource
     private AlarmService alarmService;
 
-    @Resource
-    private WebSocketService webSocketService;
-
     /**
      * 消费消息
      * @param msg 根据控制台发现的kafka给消费者的对象，这里转换
@@ -30,23 +28,30 @@ public class MessageAccept {
         //获取value强转为目标对象
         Sensor sensor = (Sensor) msg.value();
 
+        //前端发所用警报
+        WebSocketService alarmConnection = WebSocketService.concurrentHashMap.get("alarms");
+        System.out.println("==============是否建立了alarms连接==============" +alarmConnection + "==========");
+        if (alarmConnection != null) {
+            Boolean sendAllAlarm = alarmConnection.sendAllAlarm;
+            System.out.println( "==========alarms是否发送=======" + sendAllAlarm + "==========");
+            if (sendAllAlarm){
+                try {
+                    alarmConnection.sendMessage(sensor);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
         //获取共享haspMap
         HashMap<String, HashMap<String, HashMap<String, Object>>> hashMapA = ListMapUtil.hashMapA;
 
-        System.out.println("sensor---------------->" + sensor);
+        System.out.println("sensor---------------->" );
 
         //往共享hashMap中存随机生成的sensor报警信息
         ListMapUtil.forShareHashMap(hashMapA,sensor);
 
-
-        //webSocket推送有问题的数据
-//            if (WebSocketService.isConnected){
-//                try {
-//                    webSocketService.sendMessage(message);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
 
         //异常数据插入数据库
         sensor.getAlarm().setSensorId(sensor.getId());

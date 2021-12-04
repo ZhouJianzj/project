@@ -1,41 +1,55 @@
 package com.zj.monitorManager.service;
 
 import com.zj.monitorManager.config.ServerEncoder;
-import com.zj.monitorManager.entity.Alarm;
+import com.zj.monitorManager.entity.Sensor;
 import com.zj.monitorManager.utils.ListMapUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.websocket.*;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zhoujian
  */
 
 
-@ServerEndpoint(value = "/alarm",encoders = {ServerEncoder.class})
+@ServerEndpoint(value = "/alarm/{type}",encoders = {ServerEncoder.class})
 @RestController
 public class WebSocketService {
 
-    public static Boolean isConnected = false;
 
-    public static Session session = null;
+
+    public  Session session = null;
+
+    private String type = null;
+
+    public  Boolean sendAllAlarm = false;
 
     /**
-     * 引入自己的接口类，注意要加上static 静态修饰
+     * 保存多个连接的实现，前端多个连接的展示
      */
-    private static AlarmService alarmService;
+    public static ConcurrentHashMap<String, WebSocketService> concurrentHashMap = new ConcurrentHashMap<>();
 
-    /**
-     * mobileUserService的set方法
-     */
-    @Autowired
-    public  void setApplicationContext( AlarmService alarmService) {
-        WebSocketService.alarmService= alarmService;
-    }
+
+//    /**
+//     * 引入自己的接口类，注意要加上static 静态修饰
+//     */
+//    private static AlarmService alarmService;
+//
+//    /**
+//     * mobileUserService的set方法
+//     */
+//    @Autowired
+//    public  void setApplicationContext( AlarmService alarmService) {
+//        WebSocketService.alarmService= alarmService;
+//    }
 
 
     /**
@@ -43,10 +57,16 @@ public class WebSocketService {
      * 建立连接时入参为session
      */
     @OnOpen
-    public void onOpen(Session s){
-        session = s;
-        isConnected = true;
-        System.out.println("建立了连接"+ session.getId() );
+    public void onOpen( @PathParam("type") String type, Session session){
+
+        //建立一次连接保存一个对象
+        this.session = session;
+        this.type = type;
+        if (type.equals("alarms")){
+            sendAllAlarm = true;
+        }
+        concurrentHashMap.put(this.type,this);
+        System.out.println("连接连接type为：==============="+ type );
     }
 
     /**
@@ -54,23 +74,23 @@ public class WebSocketService {
      */
     @OnClose
     public void onClose(){
-        System.out.println("连接关闭"+ session.getId());
-        isConnected = false;
-        session = null;
 
+        //如果关闭了就移除当前的连接对象
+        concurrentHashMap.remove(this.type);
+        System.out.println("连接关闭"+ session.getId());
     }
 
     /**
-     * 接收前端传过来的数据,发送事实的数据给前端
+     * 接收前端传过来的数据,发送实时的数据给前端
      */
     @OnMessage
-    public void onMessage(String message){
-        try {
-           while (isConnected){
-               sendMessage(message);
-           }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void onMessage(String ItemId){
+        if (type.equals("item")){
+            try {
+                sendMessage(ItemId);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -79,22 +99,31 @@ public class WebSocketService {
      * 服务器主动的发送消息到客户端，获取指定itemId的item
      */
     public void sendMessage(String itemId) throws IOException {
-        try {
+
             //直接在共享的hashMap中查询
-            HashMap<String, HashMap<String, Object>> stringHashMapHashMap = ListMapUtil.hashMapA.get(itemId);
-            session.getBasicRemote().sendObject(stringHashMapHashMap);
-        } catch (EncodeException e) {
-            e.printStackTrace();
-        }
+            ScheduledExecutorService pool = Executors.newScheduledThreadPool(1);
+            pool.scheduleAtFixedRate(new Runnable() {
+                @Override
+                public void run() {
+                    HashMap<String, HashMap<String, Object>> stringHashMapHashMap = ListMapUtil.hashMapA.get(itemId);
+                    try {
+                        session.getBasicRemote().sendObject(stringHashMapHashMap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (EncodeException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, 2, 3, TimeUnit.SECONDS);
+
     }
 
     /**
-     * 摒弃了
      * 服务器主动的发送消息到客户端，一个一个的发
      */
-    public void sendMessage(Alarm alarm) throws IOException {
+    public void sendMessage(Sensor sensor) throws IOException {
         try {
-            session.getBasicRemote().sendObject(alarm);
+            session.getBasicRemote().sendObject(sensor);
         } catch (EncodeException e) {
             e.printStackTrace();
         }

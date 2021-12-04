@@ -108,6 +108,11 @@ public class ListMapUtil {
     public static HashMap<String, HashMap<String,HashMap<String, Object>>> hashMapA = new HashMap<>();
 
 
+    /**
+     * List 转换成 Map
+     * @param items item List
+     * @return item Map
+     */
     public static HashMap<String, HashMap<String,HashMap<String, Object>>> listToMap(List<Item> items){
         for (Item item:items){
             int id = item.getId();
