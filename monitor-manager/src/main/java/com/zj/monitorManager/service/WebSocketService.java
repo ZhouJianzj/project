@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
  * @author zhoujian
  */
 
-
 @ServerEndpoint(value = "/alarm/{type}",encoders = {ServerEncoder.class})
 @RestController
 public class WebSocketService {
@@ -28,29 +27,19 @@ public class WebSocketService {
 
     public  Session session = null;
 
+    /**
+     * type = alarms 为报警信息连接
+     * type = item 为项目下所有管道报警信息连接
+     */
+
     private String type = null;
 
-    public  Boolean sendAllAlarm = false;
+
 
     /**
      * 保存多个连接的实现，前端多个连接的展示
      */
     public static ConcurrentHashMap<String, WebSocketService> concurrentHashMap = new ConcurrentHashMap<>();
-
-
-//    /**
-//     * 引入自己的接口类，注意要加上static 静态修饰
-//     */
-//    private static AlarmService alarmService;
-//
-//    /**
-//     * mobileUserService的set方法
-//     */
-//    @Autowired
-//    public  void setApplicationContext( AlarmService alarmService) {
-//        WebSocketService.alarmService= alarmService;
-//    }
-
 
     /**
      * 建立连接。
@@ -58,13 +47,9 @@ public class WebSocketService {
      */
     @OnOpen
     public void onOpen( @PathParam("type") String type, Session session){
-
         //建立一次连接保存一个对象
         this.session = session;
         this.type = type;
-        if (type.equals("alarms")){
-            sendAllAlarm = true;
-        }
         concurrentHashMap.put(this.type,this);
         System.out.println("连接连接type为：==============="+ type );
     }
@@ -74,7 +59,6 @@ public class WebSocketService {
      */
     @OnClose
     public void onClose(){
-
         //如果关闭了就移除当前的连接对象
         concurrentHashMap.remove(this.type);
         System.out.println("连接关闭"+ session.getId());

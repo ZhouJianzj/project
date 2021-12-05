@@ -19,6 +19,7 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("+++++++++++++++++在springboot启动之后 启动线程池模拟kafka生产报警信息++++++++++++++++");
-        messageSender.sendMessage("pipe");
+//      使用for循环使用多个线程
+        messageSender.produceMessage("pipe");
     }
 }

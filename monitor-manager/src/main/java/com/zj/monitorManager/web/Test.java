@@ -98,7 +98,7 @@ public class Test {
     @PostMapping("postSensorToHashMap")
     public HashMap postSensorToHashMap(@RequestBody  Sensor sensor){
         System.out.println("前端给的sensor报警数据" +  sensor.toString());
-        ListMapUtil.forShareHashMap(ListMapUtil.hashMapA,sensor);
+        ListMapUtil.updateShareHashMap(ListMapUtil.hashMapA,sensor);
         return ListMapUtil.hashMapA;
     }
 
