@@ -92,7 +92,7 @@ public class AssetController {
     }
 
     /**
-     *
+     *查询传感器
      * @param key 查询关键字
      * @param pageNo 页码
      * @param pageSize 一页数据量
@@ -106,7 +106,7 @@ public class AssetController {
 
     }
     /**
-     * 查询为被使用的sensor
+     * 查询未被使用的sensor
      * */
     @GetMapping("sensorId")
     public List<Sensor> findSensorIdController(){

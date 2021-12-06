@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 
@@ -455,9 +456,9 @@ public class SysServiceImpl implements SysService {
      * @return 结果集合
      */
     @Override
-    public List<Log> findLogService() {
+    public List<Log> findLogService(Date from,Date end) {
 
-        return sysDao.logSelect();
+        return sysDao.logSelect(from,end);
 
     }
 

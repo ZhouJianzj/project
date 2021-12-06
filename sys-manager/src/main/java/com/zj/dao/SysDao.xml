@@ -357,6 +357,11 @@
                operTimer,
                operContent
         from log
+        <where>
+            <if test="from != null and end != null">
+                operTimer between #{from} and #{end}
+            </if>
+        </where>
     </select>
 
 
