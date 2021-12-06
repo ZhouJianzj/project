@@ -207,7 +207,8 @@ public class SysController {
      * @return 数据
      */
     @GetMapping("log")
-    public PageInfo<Log> findLogController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo, @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
+    public PageInfo<Log> findLogController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
+                                           @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
         PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
         return new PageInfo<Log>(sysService.findLogService());
     }
