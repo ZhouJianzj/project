@@ -19,4 +19,6 @@ public interface AlarmService {
      List<Item> selectIPSMAAService();
 
      List<Sensor> selectSensorAll();
+
+
 }
