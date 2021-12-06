@@ -4,6 +4,7 @@ import com.zj.entity.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -100,7 +101,7 @@ public interface SysDao {
      *
      * @return 返回log list
      */
-    List<Log> logSelect();
+    List<Log> logSelect(Date from, Date end);
 
     /**
      * 查询所有用户

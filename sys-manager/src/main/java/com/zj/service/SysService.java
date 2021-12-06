@@ -3,6 +3,7 @@ package com.zj.service;
 import com.zj.entity.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public interface SysService {
 
     CommonResponse<Boolean> deleteUserManagerService(int id);
 
-    List<Log> findLogService();
+    List<Log> findLogService(Date from,Date end);
 
     CommonResponse<Object> signOutService(HttpServletRequest request);
 

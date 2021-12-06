@@ -7,10 +7,12 @@ import com.zj.entity.*;
 import com.zj.service.SysService;
 import com.zj.util.MyPageHelper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -207,10 +209,12 @@ public class SysController {
      * @return 数据
      */
     @GetMapping("log")
-    public PageInfo<Log> findLogController(@RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
+    public PageInfo<Log> findLogController(@RequestParam("from") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date from,
+                                           @RequestParam("end") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date end,
+                                            @RequestParam(value = "pageNo", defaultValue = "1") String pageNo,
                                            @RequestParam(value = "pageSize", defaultValue = "8") String pageSize) {
         PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
-        return new PageInfo<Log>(sysService.findLogService());
+        return new PageInfo<Log>(sysService.findLogService(from,end));
     }
 
     /**
