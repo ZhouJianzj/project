@@ -31,6 +31,7 @@ public class MessageSender {
 
     public static ScheduledExecutorService pool = Executors.newScheduledThreadPool(5);
 
+
     /**
      * 发送消息，指定主题和消息
      * @param topicName 主题
@@ -47,9 +48,8 @@ public class MessageSender {
             public void run() {
                 //随机获取一个传感器生产报警信息
                 Sensor sensor = sensors.get(new Random().nextInt(size));
-//                Sensor sensor = sensors.get(0);
-                Alarm alarm = sensor.getAlarm();
-                    alarm.setCurrentValue(String.valueOf(new Random().nextInt(101)));
+                Alarm alarm = new Alarm();
+                alarm.setCurrentValue(String.valueOf(new Random().nextInt(101)));
                     alarm.setIsHandled(false);
                     alarm.setAlarmTime(new Date());
                     alarm.setSensorId(sensor.getId());
@@ -57,7 +57,7 @@ public class MessageSender {
                     SensorModel sensorModel = sensor.getSensorModel();
                     int CurrentValue =  Integer.parseInt(alarm.getCurrentValue());
                     String dataPointName = sensorModel.getDataPointName();
-                    if (sensorModel.getLowThreshold() < CurrentValue || sensorModel.getHighThreshold() > CurrentValue ){
+                    if (CurrentValue < sensorModel.getLowThreshold() || CurrentValue > sensorModel.getHighThreshold() ){
                         alarm.setAlarmMsg(dataPointName + "异常！当前" + dataPointName + ":"+ CurrentValue);
                     }else {
                         alarm.setAlarmMsg(dataPointName + "正常！当前" + dataPointName + ":"+ CurrentValue);

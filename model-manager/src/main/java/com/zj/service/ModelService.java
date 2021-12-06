@@ -27,4 +27,6 @@ public interface ModelService {
     List<PipeModel> findPipeModelsService(String key);
 
     Boolean pipeModelModifyService(PipeModel pipeModel);
+
+    CommonResponse<Boolean> fileUploadServiceNginx(MultipartFile file, HttpServletRequest req);
 }

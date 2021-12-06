@@ -168,4 +168,9 @@ public class PipeModelController {
         System.out.println(url);
         return tmp;
     }
+
+    @PostMapping("testNginx")
+    public CommonResponse<Boolean> uploadFileNginx(@RequestParam("file") MultipartFile file, HttpServletRequest req) {
+        return modelService.fileUploadServiceNginx(file,req);
+    }
 }

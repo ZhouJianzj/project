@@ -69,6 +69,51 @@ public class ModelServiceImpl implements ModelService {
         return new CommonResponse(200,"上传文件成功！",path);
     }
 
+
+    /**
+     *  "C:/Users/zhoujian/AppData/Local/Temp/tomcat-docbase.7742394984620775162.8003/matter/udtuAx8sY/readme.jpg",
+     *         "http://localhost:8003/matter/udtuAx8sY/readme.jpg"
+     * @param file
+     * @param req
+     * @return
+     */
+    @Override
+    public CommonResponse<Boolean> fileUploadServiceNginx(MultipartFile file, HttpServletRequest req) {
+
+        if (file.isEmpty()){
+            return new CommonResponse<>(400,"上传文件失败！",false);
+        }
+        //随机字符串
+        String tmp= RandomStringUtils.randomAlphanumeric(9);
+        //实际路径
+        String realPath = ("/matter/" + tmp + "/" );
+        //文件名字
+        String originalFilename = file.getOriginalFilename();
+        //文件的绝对路径
+        String absolutePath = realPath + originalFilename;
+
+
+        System.out.println(absolutePath);
+        File hostFile = new File(absolutePath);
+        if (!hostFile.exists()){
+            hostFile.mkdirs();
+        }
+        //转换
+        try {
+            file.transferTo(hostFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //返回给前端的可访问地址
+        String url = "http://8.142.74.249" + "/matter/"+ tmp + "/" + originalFilename;
+
+        String[] path  = {FileUtil.pathToPath(absolutePath),url};
+        return new CommonResponse(200,"上传文件成功！",path);
+    }
+
+
+
+
     /**
      * 实现管道添加
      * @param pipeModel 管道模型对象
