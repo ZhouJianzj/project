@@ -8,7 +8,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -31,6 +33,7 @@ public class MessageSender {
 
     public static ScheduledExecutorService pool = Executors.newScheduledThreadPool(5);
 
+    WebSocketService alarmConnection = WebSocketService.concurrentHashMap.get("alarms");
 
     /**
      * 发送消息，指定主题和消息
@@ -59,10 +62,28 @@ public class MessageSender {
                     String dataPointName = sensorModel.getDataPointName();
                     if (CurrentValue < sensorModel.getLowThreshold() || CurrentValue > sensorModel.getHighThreshold() ){
                         alarm.setAlarmMsg(dataPointName + "异常！当前" + dataPointName + ":"+ CurrentValue);
+                        alarmService.insertAlarm(alarm);
                     }else {
                         alarm.setAlarmMsg(dataPointName + "正常！当前" + dataPointName + ":"+ CurrentValue);
                     }
                     sensor.setAlarm(alarm);
+
+                    //获取webSocket连接对象
+                    WebSocketService alarmConnection = WebSocketService.concurrentHashMap.get("alarms");
+                    System.out.println("==============alarms连接=======" +alarmConnection + "==========");
+                    if (alarmConnection != null) {
+                        try {
+                            alarmConnection.sendMessage(sensor);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                   //获取共享haspMap
+                   HashMap<String, HashMap<String, HashMap<String, Object>>> hashMapA = ListMapUtil.hashMapA;
+                   //往共享hashMap中存随机生成的sensor报警信息
+                   ListMapUtil.updateShareHashMap(hashMapA,sensor);
+
                     System.out.println("开始send消息....");
                     kafkaTemplate.send(topicName,sensor);
                     System.out.println("success");

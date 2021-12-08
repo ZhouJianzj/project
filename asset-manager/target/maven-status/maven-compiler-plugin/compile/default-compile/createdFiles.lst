@@ -1,5 +1,0 @@
-com\zj\AssetApplication.class
-com\zj\dao\AssetDao.class
-com\zj\controller\AssetController.class
-com\zj\service\AssetService.class
-com\zj\service\AssetServiceImpl.class

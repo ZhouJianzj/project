@@ -70,5 +70,15 @@ public class AlarmServiceImpl  implements AlarmService {
         return sensors;
     }
 
+    /**
+     * 所有报警数据插入数据
+     * @param alarm
+     * @return
+     */
+    @Override
+    public boolean insertAlarmHistory(List alarms) {
+        return alarmDao.insertAlarmHistory(alarms);
+    }
+
 
 }

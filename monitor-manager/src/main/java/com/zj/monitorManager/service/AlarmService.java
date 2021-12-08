@@ -21,4 +21,5 @@ public interface AlarmService {
      List<Sensor> selectSensorAll();
 
 
+    boolean insertAlarmHistory(List alarms);
 }

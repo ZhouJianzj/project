@@ -5,6 +5,7 @@ import com.zj.monitorManager.entity.Alarm;
 import com.zj.monitorManager.entity.Item;
 import com.zj.monitorManager.entity.Sensor;
 import com.zj.monitorManager.entity.SensorModel;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface AlarmDao {
     List<Item> selectIPSMAADao();
 
     List<Sensor> selectSensorAll();
+
+    boolean insertAlarmHistory(@Param("alarms") List alarms);
 }

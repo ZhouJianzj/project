@@ -15,6 +15,15 @@
                                 alarmMsg=#{alarmMsg},alarmTime=now()
     </insert>
 
+<!-- 插入历史数据-->
+    <insert id="insertAlarmHistory" parameterType="com.zj.monitorManager.entity.Alarm">
+        insert into history(sensor_id, currentvalue, alarmmsg, ishandled, alarmtime)
+        values
+        <foreach collection="alarms" item="alarm"  separator=",">
+            (#{alarm.sensorId},#{alarm.currentValue},#{alarm.alarmMsg},#{alarm.isHandled},#{alarm.alarmTime})
+        </foreach>
+    </insert>
+
     <select id="selectSensorModelById" resultType="com.zj.monitorManager.entity.SensorModel">
         select * from t_sensor_model where id = #{sensorModelId}
     </select>
