@@ -3,6 +3,7 @@ package com.zj.controller;
 
 import com.zj.entity.Alarm;
 import com.zj.entity.CommonResponse;
+import com.zj.entity.History;
 import com.zj.entity.Page;
 import com.zj.service.AlarmService;
 import com.zj.util.MyPageHelper;
@@ -20,16 +21,6 @@ import java.util.Date;
 public class AlarmController {
     @Resource
     private AlarmService alarmService;
-
-    /**
-     * 添加报警信息
-     * @param alarm 添加参数
-     * @return 返回新增是否成功
-     * */
-    @PostMapping("alarm")
-    public CommonResponse<Boolean> insertAlarmController(@RequestBody Alarm alarm){
-        return alarmService.insertAlarmService(alarm);
-    }
 
     /**
      * 修改报警
@@ -62,4 +53,20 @@ public class AlarmController {
                 ,Integer.parseInt(pageSize)));
 
     }
+
+    /**
+     * 查询历史报警记录
+     * */
+    @GetMapping("history")
+    public Page<History> selectHistoryController(@RequestParam("key") Boolean key,
+                                                 @RequestParam("from") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date from,
+                                                 @RequestParam("end") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date end,
+                                                 @RequestParam(value = "pageNo",defaultValue = "1") String pageNo,
+                                                 @RequestParam(value = "pageSize",defaultValue = "8")String pageSize){
+        return MyPageHelper.myPageHelper(new Page(alarmService.findHistoryService(key,from,end)
+                ,Integer.parseInt(pageNo)
+                ,Integer.parseInt(pageSize)));
+
+    }
+
 }

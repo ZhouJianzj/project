@@ -14,9 +14,9 @@ import java.util.List;
 public interface AlarmService{
 
 
-    public Boolean modifyAlarm(Alarm alarm);
-
-    CommonResponse<Boolean> insertAlarmService(Alarm alarm);
+    Boolean modifyAlarm(Alarm alarm);
 
     List<Alarm> findAlarmService(Boolean key, Date from, Date end);
+
+    List findHistoryService(Boolean key, Date from, Date end);
 }

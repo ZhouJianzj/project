@@ -40,30 +40,9 @@ public class AlarmServiceImpl implements AlarmService {
         return alarmDao.selectAlarmDao(key,from,end);
     }
 
-
-
-    /**
-     * 添加报警信息
-     * @param alarm
-     * @return 新增是否成功
-     * */
     @Override
-    public CommonResponse<Boolean> insertAlarmService(Alarm alarm) {
-        CommonResponse<Boolean> response = new CommonResponse<>();
-        String sensorId = alarm.getSensor().getId();
-        if (alarmDao.sensorIdSelect(sensorId) != null && alarmDao.sensorIdSelect(sensorId).size() != 0){
-            if (alarmDao.alarmInsert(alarm)){
-                response.setMsg("插入成功");
-                response.setStatus(200);
-            }else {
-                response.setMsg("插入失败");
-                response.setStatus(400);
-            }
-        }else {
-            response.setMsg("不存在sensor_id为：" + sensorId + " 的数据");
-            response.setStatus(400);
-        }
-
-        return response;
+    public List findHistoryService(Boolean key, Date from, Date end) {
+        return alarmDao.historySelect(key,from,end);
     }
+
 }

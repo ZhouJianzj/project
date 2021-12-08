@@ -16,9 +16,9 @@ import java.util.List;
 public interface AlarmDao {
     Boolean modifyAlarm(Alarm alarm);
 
-    Boolean alarmInsert(Alarm alarm);
-
     List<Sensor> sensorIdSelect(String sensorId);
 
     List<Alarm> selectAlarmDao(Boolean key, Date from,Date end);
+
+    List historySelect(Boolean key, Date from, Date end);
 }

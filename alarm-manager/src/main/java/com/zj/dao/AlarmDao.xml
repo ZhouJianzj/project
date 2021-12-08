@@ -68,16 +68,66 @@
         </where>
     </select>
 
-<!--    插入报警信息，如果sensor_id存在则变为修改-->
-    <insert id="alarmInsert" parameterType="com.zj.entity.Alarm">
-        insert into
-	        t_alarm(sensor_id, currentValue, alarmMsg,isHandled)
-        VALUES
-            (#{sensor.id},#{currentValue},#{alarmMsg},#{isHandled})
-        on duplicate key update
- 	        currentValue=#{currentValue},alarmMsg=#{alarmMsg},alarmTime=now()
-    </insert>
-
+    <resultMap id="history" type="com.zj.entity.History">
+        <id column="id" property="id"/>
+        <result property="currentValue" column="currentValue"/>
+        <result property="alarmMsg" column="alarmMsg"/>
+        <result property="isHandled" column="isHandled"/>
+        <result property="alarmTime" column="alarmTime"/>
+        <collection property="sensor" ofType="com.zj.entity.Sensor">
+            <id column="sid" property="id"/>
+            <result property="sensorName" column="sensorName"/>
+            <result property="sensorCode" column="sensorCode"/>
+            <result property="protocal" column="protocal"/>
+            <collection property="sensorModel" ofType="com.zj.entity.SensorModel">
+                <id column="mid" property="id"/>
+                <result property="deviceName" column="deviceName"/>
+                <result property="deviceType" column="deviceType"/>
+                <result property="deviceNumber" column="deviceNumber"/>
+                <result property="createTime" column="createTime"/>
+                <result property="upInterval" column="upInterval"/>
+                <result property="protocol" column="protocol"/>
+                <result property="dataPointName" column="dataPointName"/>
+                <result property="lowThreshold" column="lowThreshold"/>
+                <result property="highThreshold" column="highThreshold"/>
+                <result property="dataPointExtra" column="dataPointExtra"/>
+            </collection>
+        </collection>
+    </resultMap>
+<!--    查询历史记录-->
+    <select id="historySelect" resultMap="history">
+        select a.id,
+        s.id as sid,
+        s.sensorName,
+        s.sensorCode,
+        s.protocal,
+        sm.id as mid,
+        sm.deviceName,
+        sm.deviceType,
+        sm.deviceNumber,
+        sm.createTime,
+        sm.upInterval,
+        sm.protocol,
+        sm.dataPointName,
+        sm.lowThreshold,
+        sm.highThreshold,
+        sm.dataPointExtra,
+        a.currentValue,
+        a.alarmMsg,
+        a.isHandled,
+        a.alarmTime
+        from history a
+        left join t_sensor s on s.id = a.sensor_id
+        left join t_sensor_model sm on sm.id = s.sensorModel_id
+        <where>
+            <if test="key != null ">
+                a.isHandled = #{key}
+            </if>
+            <if test="from != null and end != null">
+                and a.alarmTime between  #{from} and #{end}
+            </if>
+        </where>
+    </select>
 <!--    根据sensorId查询sensor表数据-->
     <select id="sensorIdSelect" resultType="com.zj.entity.Sensor">
         select * from t_sensor where id = #{sensorId}
