@@ -2,7 +2,6 @@ package com.zj.controller;
 
 
 import com.zj.entity.Alarm;
-import com.zj.entity.CommonResponse;
 import com.zj.entity.History;
 import com.zj.entity.Page;
 import com.zj.service.AlarmService;

@@ -41,7 +41,7 @@ public class MessageSender {
      */
     public  void produceMessage(String topicName){
         //初始化共享的hashMap
-        ListMapUtil.listToMap(alarmService.selectIPSMAAService());
+       ListMapUtil.listToMap(alarmService.selectIPSMAAService());
         //获取数据中有哪些传感器
         List<Sensor> sensors =  alarmService.selectSensorAll();
         int size = sensors.size();
@@ -80,7 +80,7 @@ public class MessageSender {
                     }
 
                    //获取共享haspMap
-                   HashMap<String, HashMap<String, HashMap<String, Object>>> hashMapA = ListMapUtil.hashMapA;
+                    HashMap<String, HashMap<String, HashMap<String, Object>>> hashMapA = ListMapUtil.hashMapA;
                    //往共享hashMap中存随机生成的sensor报警信息
                    ListMapUtil.updateShareHashMap(hashMapA,sensor);
 
