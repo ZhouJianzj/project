@@ -1,6 +1,8 @@
 package com.zj.controller;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zj.entity.Alarm;
 import com.zj.entity.History;
 import com.zj.entity.Page;
@@ -57,14 +59,13 @@ public class AlarmController {
      * 查询历史报警记录
      * */
     @GetMapping("history")
-    public Page<History> selectHistoryController(@RequestParam("key") Boolean key,
-                                                 @RequestParam("from") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date from,
-                                                 @RequestParam("end") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date end,
-                                                 @RequestParam(value = "pageNo",defaultValue = "1") String pageNo,
-                                                 @RequestParam(value = "pageSize",defaultValue = "8")String pageSize){
-        return MyPageHelper.myPageHelper(new Page(alarmService.findHistoryService(key,from,end)
-                ,Integer.parseInt(pageNo)
-                ,Integer.parseInt(pageSize)));
+    public PageInfo<History> selectHistoryController(@RequestParam("key") Boolean key,
+                                                     @RequestParam("from") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date from,
+                                                     @RequestParam("end") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date end,
+                                                     @RequestParam(value = "pageNo",defaultValue = "1") String pageNo,
+                                                     @RequestParam(value = "pageSize",defaultValue = "8")String pageSize){
+        PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
+        return new PageInfo<History>(alarmService.findHistoryService(key, from, end));
 
     }
 
