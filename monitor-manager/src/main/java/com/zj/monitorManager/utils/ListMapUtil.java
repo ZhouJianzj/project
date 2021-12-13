@@ -223,11 +223,12 @@ public class ListMapUtil {
                    hashMapC.put("manuDate",pipe.getManuDate());
                    hashMapC.put("productDate",pipe.getProductDate());
                    hashMapC.put("pipeModel",pipe.getPipeModel());
-                   hashMapC.put("sensorId",pipe.getSensor().getId());
+
                    //设置一个key为sensorId的键值对
                    Sensor sensor = pipe.getSensor();
                    if (sensor != null) {
                        int sensorId = sensor.getId();
+                       hashMapC.put("sensorId",pipe.getSensor().getId());
                        hashMapC.put( String.valueOf(sensorId),pipe.getSensor());
                    }
                     hashMapB.put(String.valueOf(pipe.getId()),hashMapC);

@@ -99,7 +99,7 @@ public class WebSocketService {
                         e.printStackTrace();
                     }
                 }
-            }, 2, 3, TimeUnit.SECONDS);
+            }, 0, 0, TimeUnit.SECONDS);
 
     }
 
