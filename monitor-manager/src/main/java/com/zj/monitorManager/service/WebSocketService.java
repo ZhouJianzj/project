@@ -11,9 +11,6 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author zhoujian
@@ -23,8 +20,6 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class WebSocketService {
 
-
-
     public  Session session = null;
 
     /**
@@ -33,8 +28,6 @@ public class WebSocketService {
      */
 
     private String type = null;
-
-
 
     /**
      * 保存多个连接的实现，前端多个连接的展示
@@ -70,11 +63,7 @@ public class WebSocketService {
     @OnMessage
     public void onMessage(String ItemId){
         if (type.equals("item")){
-            try {
                 sendMessage(ItemId);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -82,25 +71,26 @@ public class WebSocketService {
     /**
      * 服务器主动的发送消息到建立item连接的客户端，获取指定itemId的item
      */
-    public void sendMessage(String itemId) throws IOException {
-
-            //直接在共享的hashMap中查询
-            ScheduledExecutorService pool = Executors.newScheduledThreadPool(1);
-            pool.scheduleAtFixedRate(new Runnable() {
-                @Override
-                public void run() {
+    public void sendMessage(String itemId) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while (true){
                     HashMap<String, HashMap<String, Object>> stringHashMapHashMap = ListMapUtil.hashMapA.get(itemId);
-
                     try {
+                        Thread.sleep(1000);
                         session.getBasicRemote().sendObject(stringHashMapHashMap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (EncodeException e) {
                         e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
-            }, 0, 0, TimeUnit.SECONDS);
-
+            }
+        };
+        new Thread(runnable).start();
     }
 
     /**

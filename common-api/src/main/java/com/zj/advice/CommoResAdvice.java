@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * 设置统一的响应对象
+ * 设置统一的响应对象，加日志
  */
 @RestControllerAdvice
 public class CommoResAdvice implements ResponseBodyAdvice<Object> {
